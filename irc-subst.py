@@ -52,6 +52,6 @@ import hexchat
 def inputHook(word, word_eol, userdata):
     hexchat.command(outLine(word_eol))
     
-    return EAT_ALL
+    return hexchat.EAT_ALL
 
 hexchat.hook_command('', inputHook)
