@@ -50,7 +50,7 @@ def outLine(inString):
 import hexchat
 
 def inputHook(word, word_eol, userdata):
-    hexchat.command(outLine(word_eol))
+    hexchat.command(outLine(word_eol[0]))
     
     return hexchat.EAT_ALL
 
