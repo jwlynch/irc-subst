@@ -9,7 +9,7 @@ lookup["[[bar]]"] = "world"
 
 instring = '[[foo]], the message is "[[foo]] [[bar]]"'
 
-sub outLine(inString):
+def outLine(inString):
     # split string, using [[ and ]] as delims
     linelist = re.split(r'(\[{2}|\]{2})', instring)
 
