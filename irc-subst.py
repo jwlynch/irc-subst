@@ -43,4 +43,4 @@ def outLine(inString):
     
     return outStr
 
-print("final out line: " + outLine(inString))
+print("final out line: " + outLine(instring))
