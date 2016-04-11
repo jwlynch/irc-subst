@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 
-import re
+__module_name__ = "Jim's IRC substituter"
+__module_version__ = "1.0.0"
+__module_description__ = "IRC substituter by Jim"
 
-instring = '[[foo]], the message is "[[foo]] [[bar]]"'
+print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
+
+import re
 
 def outLine(inString):
     # set up the lookup table
@@ -43,4 +47,11 @@ def outLine(inString):
     
     return outStr
 
-print("final out line: " + outLine(instring))
+import xchat
+
+def inputHook(word, word_eol, userdata):
+    command(outLine(word_eol))
+    
+    return EAT_ALL
+
+hook_command('', inputHook)
