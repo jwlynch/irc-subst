@@ -47,11 +47,11 @@ def outLine(inString):
     
     return outStr
 
-import xchat
+import hexchat
 
 def inputHook(word, word_eol, userdata):
-    command(outLine(word_eol))
+    hexchat.command(outLine(word_eol))
     
     return EAT_ALL
 
-hook_command('', inputHook)
+hexchat.hook_command('', inputHook)
