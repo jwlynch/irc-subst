@@ -15,7 +15,7 @@ def outLine(inString):
     lookup["[[bar]]"] = "world"
     
     # split string, using [[ and ]] as delims
-    linelist = re.split(r'(\[{2}|\]{2})', instring)
+    linelist = re.split(r'(\[{2}|\]{2})', inString)
 
     long = len(linelist)
 
