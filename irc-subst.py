@@ -33,11 +33,14 @@ def outLine(inString):
         else: # in the middle of forming lookup key?
             lookupKey += linelist[item]
             in_lookup -= 1
-        
-        # we have the whole lookup key?
-        if in_lookup == 0:
-            # here, we would actually do the lookup and append the result
-            outStr += lookup.get(lookupKey)
-            lookupKey = ""
+            
+            # we have the whole lookup key?
+            if in_lookup == 0:
+                # here, we would actually do the lookup and append the result
+                lookupResult = lookup.get(lookupKey)
+                outStr += lookupResult
+                lookupKey = ""
+    
+    return outStr
 
 print("final out line: " + outLine(inString))
