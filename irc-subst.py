@@ -38,6 +38,6 @@ for item in range(long):
       print("key: " + lookupKey)
       # here, we would actually do the lookup and append the result
       outStr += lookup.get(lookupKey)
-      lookup = ""
+      lookupKey = ""
 
 print("final out: " + outStr)
