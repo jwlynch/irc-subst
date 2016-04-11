@@ -2,14 +2,14 @@
 
 import re
 
-# set up the lookup table
-lookup = dict()
-lookup["[[foo]]"] = "hello"
-lookup["[[bar]]"] = "world"
-
 instring = '[[foo]], the message is "[[foo]] [[bar]]"'
 
 def outLine(inString):
+    # set up the lookup table
+    lookup = dict()
+    lookup["[[foo]]"] = "hello"
+    lookup["[[bar]]"] = "world"
+    
     # split string, using [[ and ]] as delims
     linelist = re.split(r'(\[{2}|\]{2})', instring)
 
