@@ -8,7 +8,14 @@ print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
 
+# takes the string to be sent (which could be altereed inside the func)
+# returns a list,
+#   first item is True if the string is altered, False otherwise
+#   second item is the string
+
 def outLine(inString):
+    modified = False
+
     # set up the lookup table
     lookup = dict()
     lookup["[[foo]]"] = "hello"
@@ -41,11 +48,16 @@ def outLine(inString):
             # we have the whole lookup key?
             if in_lookup == 0:
                 # here, we would actually do the lookup and append the result
-                lookupResult = lookup.get(lookupKey)
+                if lookup.__contains__(lookupKey):
+                    modified = True
+                    lookupResult = lookup.get(lookupKey)
+                else:
+                    lookupResult = lookupKey
+ 
                 outStr += lookupResult
                 lookupKey = ""
     
-    return outStr
+    return [modified, outStr]
 
 import hexchat
 
@@ -54,11 +66,16 @@ sent = False
 def inputHook(word, word_eol, userdata):
     global sent
     
+    result = hexchat.EAT_NONE
+    
     if not sent:
         sent = True
-        hexchat.command(outLine("say " + word_eol[0]))
+        outLineResult = outLine("say " + word_eol[0])
+        if outLineResult[0]:
+            hexchat.command(outLineResult[1])
+            result = hexchat.EAT_ALL
         sent = False
     
-    return hexchat.EAT_ALL
+    return result
 
 hexchat.hook_command('', inputHook)
