@@ -49,8 +49,15 @@ def outLine(inString):
 
 import hexchat
 
+sent = False
+
 def inputHook(word, word_eol, userdata):
-    hexchat.command(outLine(word_eol[0]))
+    global sent
+    
+    if not sent:
+        sent = True
+        hexchat.command(outLine("say " + word_eol[0]))
+        sent = False
     
     return hexchat.EAT_ALL
 
