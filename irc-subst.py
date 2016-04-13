@@ -33,7 +33,7 @@ def keyList(outStr):
             if linelist[item] == "[[":
                 lookupKey = "[["
                 in_lookup = 2
-            else: # symbol is not part of lookup key?
+            #else: # symbol is not part of lookup key?
                 # nothing
 
         else: # in the middle of forming lookup key?
@@ -44,7 +44,7 @@ def keyList(outStr):
             if in_lookup == 0:
                 if linelist[item] == "]]":
                     keyList += lookupKey
-                else:
+                #else:
                     # nothing
 
                 lookupKey = ""
