@@ -91,14 +91,18 @@ def outLine(inString, lookup):
             
             # we have the whole lookup key?
             if in_lookup == 0:
-                # here, we would actually do the lookup and append the result
-                if lookup.__contains__(lookupKey):
-                    modified = True
-                    lookupResult = lookup.get(lookupKey)
-                else:
-                    lookupResult = lookupKey
+                if linelist[item] == "]]":
+                    # here, we would actually do the lookup and append the result
+                    if lookup.__contains__(lookupKey):
+                        modified = True
+                        lookupResult = lookup.get(lookupKey)
+                    else:
+                        lookupResult = lookupKey
  
-                outStr += lookupResult
+                    outStr += lookupResult
+                else:
+                    outStr += lookupKey
+
                 lookupKey = ""
     
     return [modified, outStr]
