@@ -68,13 +68,13 @@ def outLine(inString, lookup):
     # split string, using [[ and ]] as delims
     linelist = re.split(r'(\[{2}|\]{2})', inString)
 
-    long = len(linelist)
+    numItems = len(linelist)
 
     in_lookup = 0
     lookupKey = ""
     outStr = ""
 
-    for item in range(long):
+    for item in range(numItems):
         # not forming the lookup key?
         if in_lookup == 0:
         
