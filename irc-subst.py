@@ -43,7 +43,7 @@ def keyList(outStr):
             # we have the whole lookup key?
             if in_lookup == 0:
                 if linelist[item] == "]]":
-                    keyList += lookupKey
+                    keyList.append(lookupKey)
                 #else:
                     # nothing
 
