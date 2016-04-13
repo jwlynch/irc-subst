@@ -7,6 +7,16 @@ __module_description__ = "IRC substituter by Jim"
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
+import psycopg2
+
+def opendb():
+    result = psycopg2.connect("dbname=jim user=jim")
+    
+    return result
+
+def closedb(conn):
+    conn.close()
+
 
 # takes 
 #   the string to be sent (which could be altereed inside the func)
