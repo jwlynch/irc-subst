@@ -61,7 +61,7 @@ def outLine(inString, lookup):
     modified = False
 
     # split string, using [[ and ]] as delims
-    linelist = re.split(r'(\[{2}|\]{2})', inString)
+    linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
     numItems = len(linelist)
 
