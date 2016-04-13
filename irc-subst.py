@@ -8,7 +8,9 @@ print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
 
-# takes the string to be sent (which could be altereed inside the func)
+# takes 
+#   the string to be sent (which could be altereed inside the func)
+#   the lookup table
 # returns a list,
 #   first item is True if the string is altered, False otherwise
 #   second item is the string
