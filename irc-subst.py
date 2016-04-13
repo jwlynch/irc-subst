@@ -57,7 +57,7 @@ def keyList(outStr):
 #   first item is True if the string is altered, False otherwise
 #   second item is the string
 
-def outLine(inString):
+def outLine(inString, lookup):
     modified = False
 
     # set up the lookup table
