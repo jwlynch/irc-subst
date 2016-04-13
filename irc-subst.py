@@ -119,6 +119,10 @@ def inputHook(word, word_eol, userdata):
         lookup["[[foo]]"] = "hello"
         lookup["[[bar]]"] = "world"
         
+        #debug
+        print("the key list is:")
+        print(keyList("say " + word_eol[0]))
+    
         outLineResult = outLine("say " + word_eol[0], lookup)
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
