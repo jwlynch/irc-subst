@@ -65,41 +65,11 @@ def outLine(inString, lookup):
 
     numItems = len(linelist)
 
-    in_lookup = 0
-    lookupKey = ""
     outStr = ""
 
     for item in range(numItems):
-        # not forming the lookup key?
-        if in_lookup == 0:
-        
-            # beginning of lookup key?
-            if linelist[item] == "[[":
-                lookupKey = "[["
-                in_lookup = 2
-            else: # symbol is not part of lookup key?
-                outStr += linelist[item]
+        outStr += "L" +  linelist[item] +"R"
 
-        else: # in the middle of forming lookup key?
-            lookupKey += linelist[item]
-            in_lookup -= 1
-            
-            # we have the whole lookup key?
-            if in_lookup == 0:
-                if linelist[item] == "]]":
-                    # here, we would actually do the lookup and append the result
-                    if lookup.__contains__(lookupKey):
-                        modified = True
-                        lookupResult = lookup.get(lookupKey)
-                    else:
-                        lookupResult = lookupKey
- 
-                    outStr += lookupResult
-                else:
-                    outStr += lookupKey
-
-                lookupKey = ""
-    
     return [modified, outStr]
 
 import hexchat
