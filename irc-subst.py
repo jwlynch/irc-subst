@@ -60,11 +60,6 @@ def keyList(outStr):
 def outLine(inString, lookup):
     modified = False
 
-    # set up the lookup table
-    lookup = dict()
-    lookup["[[foo]]"] = "hello"
-    lookup["[[bar]]"] = "world"
-    
     # split string, using [[ and ]] as delims
     linelist = re.split(r'(\[{2}|\]{2})', inString)
 
@@ -119,6 +114,11 @@ def inputHook(word, word_eol, userdata):
     if not sent:
         sent = True
 
+        # set up the lookup table
+        lookup = dict()
+        lookup["[[foo]]"] = "hello"
+        lookup["[[bar]]"] = "world"
+        
         outLineResult = outLine("say " + word_eol[0], lookup)
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
