@@ -68,7 +68,11 @@ def outLine(inString, lookup):
     outStr = ""
 
     for item in range(numItems):
-        outStr += linelist[item]
+        if lookup.__contains__(linelist[item]):
+            outStr += lookup[linelist[item]]
+            modified = True
+        else:
+            outStr += linelist[item]
 
     return [modified, outStr]
 
