@@ -68,7 +68,7 @@ def outLine(inString, lookup):
     outStr = ""
 
     for item in range(numItems):
-        outStr += "L" +  linelist[item] +"R"
+        outStr += linelist[item]
 
     return [modified, outStr]
 
