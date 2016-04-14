@@ -45,6 +45,12 @@ def outLine(inString):
     print("result list:")
     print(result_list)
 
+    # go through results, forming a lookup table
+    lookup = dict()
+
+    for row in result_list:
+        lookup[row[0]] = row[1]
+
     numItems = len(linelist)
 
     outStr = ""
