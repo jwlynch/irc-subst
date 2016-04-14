@@ -17,39 +17,6 @@ def opendb():
 def closedb(conn):
     conn.close()
 
-def keyList(outStr):
-    linelist = re.split(r'(\[{2}|\]{2})', outStr)
-    numItems = len(linelist)
-    
-    in_lookup = 0
-    lookupKey = ""
-    keyList = []
-
-    for item in range(numItems):
-        # not forming the lookup key?
-        if in_lookup == 0:
-        
-            # beginning of lookup key?
-            if linelist[item] == "[[":
-                lookupKey = "[["
-                in_lookup = 2
-            #else: # symbol is not part of lookup key?
-                # nothing
-
-        else: # in the middle of forming lookup key?
-            lookupKey += linelist[item]
-            in_lookup -= 1
-            
-            # we have the whole lookup key?
-            if in_lookup == 0:
-                if linelist[item] == "]]":
-                    keyList.append(lookupKey)
-                #else:
-                    # nothing
-
-                lookupKey = ""
-    return keyList
-
 # takes 
 #   the string to be sent (which could be altereed inside the func)
 #   the lookup table
@@ -62,6 +29,9 @@ def outLine(inString, lookup):
 
     # split string, using [[ and ]] as delims
     linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
+
+    key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
+    key_list = list(filter(key_re.match, linelist))
 
     numItems = len(linelist)
 
