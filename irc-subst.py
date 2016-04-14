@@ -24,7 +24,7 @@ def closedb(conn):
 #   first item is True if the string is altered, False otherwise
 #   second item is the string
 
-def outLine(inString, lookup):
+def outLine(inString):
     modified = False
 
     # split string, using [[ and ]] as delims
@@ -69,13 +69,8 @@ def inputHook(word, word_eol, userdata):
     
     if not sent:
         sent = True
-
-        # set up the lookup table
-        lookup = dict()
-        lookup["[[foo]]"] = "hello"
-        lookup["[[bar]]"] = "world"
         
-        outLineResult = outLine("say " + word_eol[0], lookup)
+        outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
             result = hexchat.EAT_ALL
