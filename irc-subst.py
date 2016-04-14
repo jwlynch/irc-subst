@@ -33,6 +33,13 @@ def outLine(inString, lookup):
     key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
     key_list = list(filter(key_re.match, linelist))
 
+    # now query the db
+    conn = opendb()
+    cur = conn.cursor()
+    cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list))
+    result_list = cur.fetchall()
+    closedb(conn)
+
     numItems = len(linelist)
 
     outStr = ""
