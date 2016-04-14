@@ -36,7 +36,7 @@ def outLine(inString, lookup):
     # now query the db
     conn = opendb()
     cur = conn.cursor()
-    cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list))
+    cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list,))
     result_list = cur.fetchall()
     closedb(conn)
     #debug
