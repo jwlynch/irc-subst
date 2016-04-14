@@ -39,6 +39,11 @@ def outLine(inString, lookup):
     cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list))
     result_list = cur.fetchall()
     closedb(conn)
+    #debug
+    print("key list:")
+    print(key_list)
+    print("result list:")
+    print(result_list)
 
     numItems = len(linelist)
 
