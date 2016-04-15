@@ -82,9 +82,10 @@ def inputHook(word, word_eol, userdata):
                 closedb(conn)
 
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
-                for item in result_list:
-                    comm_result = column.communicate(item[0].encode('utf-8'))
-                    print(comm_result)
+                to_col = column.stdin
+                for item in buf_list:
+                    #comm_result = column.communicate(item[0].encode('utf-8'))
+                    print(item, file=to_col)
 
                 # this is the original way I printed the keys
                 for item in result_list:
