@@ -75,6 +75,8 @@ def inputHook(word, word_eol, userdata):
 
         if len(word) == 1:
             if word[0] == "lskeys":
+                result = hexchat.EAT_ALL
+        
                 conn = opendb()
                 cur = conn.cursor()
                 cur.execute("select i.key from irc_subst i order by i.key;")
@@ -91,8 +93,6 @@ def inputHook(word, word_eol, userdata):
                 #for item in result_list:
                 #    print(item[0])
 
-                result = hexchat.EAT_ALL
-        
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
