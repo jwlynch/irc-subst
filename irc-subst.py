@@ -91,9 +91,8 @@ def inputHook(word, word_eol, userdata):
 
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
                 to_col = column.stdin
-                for item in buf_list:
-                    #comm_result = column.communicate(item[0].encode('utf-8'))
-                    print(item, file=to_col)
+                for item in result_list:
+                    to_col.write(item)
 
                 ## this is the original way I printed the keys
                 #for item in result_list:
