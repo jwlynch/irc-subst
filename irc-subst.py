@@ -60,7 +60,8 @@ def outLine(inString):
     return [modified, outStr]
 
 import hexchat
-#import subprocess
+import subprocess
+from subprocess import PIPE
 
 sent = False
 
