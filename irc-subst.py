@@ -94,10 +94,6 @@ def inputHook(word, word_eol, userdata):
                 for item in result_list:
                     to_col.write(item)
 
-                ## this is the original way I printed the keys
-                #for item in result_list:
-                #    print(item[0])
-
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
