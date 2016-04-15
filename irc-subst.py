@@ -87,9 +87,9 @@ def inputHook(word, word_eol, userdata):
                     #comm_result = column.communicate(item[0].encode('utf-8'))
                     print(item, file=to_col)
 
-                # this is the original way I printed the keys
-                for item in result_list:
-                    print(item[0])
+                ## this is the original way I printed the keys
+                #for item in result_list:
+                #    print(item[0])
 
                 result = hexchat.EAT_ALL
         
