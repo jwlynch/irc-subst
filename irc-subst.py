@@ -83,6 +83,10 @@ def inputHook(word, word_eol, userdata):
                 result_list = cur.fetchall()
                 closedb(conn)
 
+                buf_list = []
+                for key in result_list:
+                    buf_list.append(bytes(key[0], 'utf_8'))
+
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
                 to_col = column.stdin
                 for item in buf_list:
