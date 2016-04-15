@@ -60,6 +60,7 @@ def outLine(inString):
     return [modified, outStr]
 
 import hexchat
+#import subprocess
 
 sent = False
 
@@ -70,6 +71,25 @@ def inputHook(word, word_eol, userdata):
     
     if not sent:
         sent = True
+
+        if len(word) == 1:
+            if word[0] == "lskeys":
+                conn = opendb()
+                cur = conn.cursor()
+                cur.execute("select i.key from irc_subst i order by i.key;")
+                result_list = cur.fetchall()
+                closedb(conn)
+
+                #column = subprocess.Popen(executable="/usr/bin/column", stdin=PIPE, stdout=PIPE)
+                #for item in result_list:
+                #    comm_result = column.communicate(item[0])
+                #    print(comm_result)
+
+                # this is the original way I printed the keys
+                for item in result_list:
+                    print(item[0])
+
+                result = hexchat.EAT_ALL
         
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
