@@ -75,6 +75,7 @@ def inputHook(word, word_eol, userdata):
 
         if len(word) == 1:
             if word[0] == "lskeys":
+                print("in lskeys")
                 result = hexchat.EAT_ALL
         
                 conn = opendb()
