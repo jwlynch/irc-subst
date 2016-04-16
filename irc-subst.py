@@ -84,6 +84,10 @@ def inputHook(word, word_eol, userdata):
                 result_list = cur.fetchall()
                 closedb(conn)
 
+                result_string = ""
+                for row in result_list:
+                    result_string += row[0]
+
                 # in Python 3, no strings support the buffer interface, because they don't contain bytes.
                 # Before, I was using print. print only writes strings. I shouldn't use print to try and 
                 # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
