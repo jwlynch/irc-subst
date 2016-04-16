@@ -95,8 +95,12 @@ def inputHook(word, word_eol, userdata):
                 # the write() method of to_col, which itself is a pipe.
 
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
-                comm_result = column.communicate(result_string)
-                sys.stdout.write(comm_result[0])
+
+                # note, encoding a str object, you get a bytes object,
+                # and, decoding a bytes object, you get a str obhect
+
+                comm_result = column.communicate(result_string.encode())
+                sys.stdout.write(comm_result[0].decode())
 
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
