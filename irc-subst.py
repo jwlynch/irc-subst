@@ -94,10 +94,6 @@ def inputHook(word, word_eol, userdata):
                 # the write() method of to_col, which itself is a pipe.
 
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
-                to_col = column.stdin
-                for item in result_list:
-                    to_col.write(item[0])
-
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
