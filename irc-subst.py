@@ -86,7 +86,7 @@ def inputHook(word, word_eol, userdata):
 
                 result_string = ""
                 for row in result_list:
-                    result_string += row[0]
+                    result_string += row[0] + "\n"
 
                 # in Python 3, no strings support the buffer interface, because they don't contain bytes.
                 # Before, I was using print. print only writes strings. I shouldn't use print to try and 
