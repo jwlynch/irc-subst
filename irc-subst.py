@@ -60,6 +60,7 @@ def outLine(inString):
     return [modified, outStr]
 
 import hexchat
+import sys
 import subprocess
 from subprocess import PIPE
 
@@ -95,6 +96,8 @@ def inputHook(word, word_eol, userdata):
 
                 column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
                 comm_result = column.communicate(result_string)
+                sys.stdout.write(comm_result[0])
+
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
             hexchat.command(outLineResult[1])
