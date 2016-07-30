@@ -99,8 +99,8 @@ def inputHook(word, word_eol, userdata):
                 # note, encoding a str object, you get a bytes object,
                 # and, decoding a bytes object, you get a str obhect
 
-                comm_result = column.communicate(result_string.encode())
-                sys.stdout.write(comm_result[0].decode())
+                comm_stdout, comm_sterr = column.communicate(result_string.encode())
+                #sys.stdout.write(comm_stdout.decode())
 
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
