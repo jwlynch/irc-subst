@@ -100,6 +100,11 @@ def inputHook(word, word_eol, userdata):
                 # and, decoding a bytes object, you get a str obhect
 
                 comm_stdout, comm_sterr = column.communicate(result_string.encode())
+                # here, split the stdout to lines
+
+                lineList = comm_stdout.splitlines()
+                for line in lineList:
+                    print(line.decode())
                 #sys.stdout.write(comm_stdout.decode())
 
         outLineResult = outLine("say " + word_eol[0])
