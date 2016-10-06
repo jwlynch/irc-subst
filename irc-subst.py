@@ -11,13 +11,13 @@ import psycopg2
 
 def opendb():
     result = psycopg2.connect("dbname=jim user=jim")
-    
+
     return result
 
 def closedb(conn):
     conn.close()
 
-# takes 
+# takes
 #   the string to be sent (which could be altereed inside the func)
 #   the lookup table
 # returns a list,
@@ -99,9 +99,9 @@ sent = False
 
 def inputHook(word, word_eol, userdata):
     global sent
-    
+
     result = hexchat.EAT_NONE
-    
+
     if not sent:
         sent = True
 
@@ -114,7 +114,7 @@ def inputHook(word, word_eol, userdata):
             hexchat.command(outLineResult[1])
             result = hexchat.EAT_ALL
         sent = False
-    
+
     return result
 
 hexchat.hook_command('', inputHook)
