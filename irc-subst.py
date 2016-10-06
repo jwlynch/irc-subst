@@ -64,6 +64,37 @@ import sys
 import subprocess
 from subprocess import PIPE
 
+def list_keys():
+    result = hexchat.EAT_ALL
+
+    conn = opendb()
+    cur = conn.cursor()
+    cur.execute("select i.key from irc_subst i order by i.key;")
+    result_list = cur.fetchall()
+    closedb(conn)
+
+    result_string = ""
+    for row in result_list:
+        result_string += row[0] + "\n"
+
+    # in Python 3, no strings support the buffer interface, because they don't contain bytes.
+    # Before, I was using print. print only writes strings. I shouldn't use print to try and
+    # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
+    # the write() method of to_col, which itself is a pipe.
+
+    column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
+
+    # note, encoding a str object, you get a bytes object,
+    # and, decoding a bytes object, you get a str obhect
+
+    comm_stdout, comm_sterr = column.communicate(result_string.encode())
+    # here, split the stdout to lines
+
+    lineList = comm_stdout.splitlines()
+    for line in lineList:
+    print(line.decode())
+    #sys.stdout.write(comm_stdout.decode())
+
 sent = False
 
 def inputHook(word, word_eol, userdata):
@@ -76,35 +107,7 @@ def inputHook(word, word_eol, userdata):
 
         if len(word) == 1:
             if word[0] == "lskeys":
-                result = hexchat.EAT_ALL
-        
-                conn = opendb()
-                cur = conn.cursor()
-                cur.execute("select i.key from irc_subst i order by i.key;")
-                result_list = cur.fetchall()
-                closedb(conn)
-
-                result_string = ""
-                for row in result_list:
-                    result_string += row[0] + "\n"
-
-                # in Python 3, no strings support the buffer interface, because they don't contain bytes.
-                # Before, I was using print. print only writes strings. I shouldn't use print to try and 
-                # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
-                # the write() method of to_col, which itself is a pipe.
-
-                column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
-
-                # note, encoding a str object, you get a bytes object,
-                # and, decoding a bytes object, you get a str obhect
-
-                comm_stdout, comm_sterr = column.communicate(result_string.encode())
-                # here, split the stdout to lines
-
-                lineList = comm_stdout.splitlines()
-                for line in lineList:
-                    print(line.decode())
-                #sys.stdout.write(comm_stdout.decode())
+                list_keys()
 
         outLineResult = outLine("say " + word_eol[0])
         if outLineResult[0]:
