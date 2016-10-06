@@ -92,8 +92,8 @@ def list_keys():
 
     lineList = comm_stdout.splitlines()
     for line in lineList:
-    print(line.decode())
-    #sys.stdout.write(comm_stdout.decode())
+        print(line.decode())
+        #sys.stdout.write(comm_stdout.decode())
 
 sent = False
 
