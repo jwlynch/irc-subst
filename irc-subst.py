@@ -9,6 +9,8 @@ print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 import re
 import psycopg2
 
+from utils import commandtarget
+
 def opendb():
     result = psycopg2.connect("dbname=jim user=jim")
 
