@@ -9,6 +9,11 @@ print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 import re
 import psycopg2
 
+import hexchat
+import sys
+import subprocess
+from subprocess import PIPE
+
 from utils import commandtarget
 
 class irc_subst(commandtarget.commandTarget):
@@ -61,11 +66,6 @@ class irc_subst(commandtarget.commandTarget):
                 outStr += linelist[item]
 
         return [modified, outStr]
-
-import hexchat
-import sys
-import subprocess
-from subprocess import PIPE
 
     def list_keys():
         result = hexchat.EAT_ALL
