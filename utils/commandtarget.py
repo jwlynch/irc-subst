@@ -51,6 +51,11 @@ class CommandTarget(object):
         # pass the buck
         if self._itsNextTarget is not None:
             result = self._itsNextTarget.doCommandStr(cmdString, *args, **kwargs)
+        else:
+            result = 1
+
+        if result == 1:
+            print cmdString + ": command not found"
 
         return result
 

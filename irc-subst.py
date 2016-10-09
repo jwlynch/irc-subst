@@ -37,6 +37,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if cmdString == self.cmdLskeys:
             self.list_keys()
+            result = 0 # success
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
