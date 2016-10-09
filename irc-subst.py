@@ -110,7 +110,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             if len(word) == 1:
                 if word[0] == "lskeys":
-                    list_keys()
+                    self.list_keys()
 
             outLineResult = outLine("say " + word_eol[0])
             if outLineResult[0]:
