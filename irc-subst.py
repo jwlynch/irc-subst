@@ -125,7 +125,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             if len(word) == 1:
                 if word[0] == "lskeys":
-                    self.list_keys()
+                    self.doCommandStr("lskeys", None, None)
                     result = hexchat.EAT_ALL
 
             outLineResult = self.outLine("say " + word_eol[0])
