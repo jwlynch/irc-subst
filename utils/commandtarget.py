@@ -51,7 +51,8 @@ class CommandTarget(object):
 # def doCommandStr(self, cmdString, *args, **kwargs)
 #     result = None
 #
-#     (extract from args whatever might be needed for running the command)
+#     # (extract from args whatever might be needed
+#     #  for running the command)
 #
 #     if cmdString = self.cmdFoo:
 #         (code for the command gies here, set result to success (0) or raise exception)
