@@ -19,6 +19,23 @@ from utils import commandtarget
 class irc_subst(commandtarget.CommandTarget):
     def __init__(self):
         self.sent = False
+        self.cmdLskeys = "lskeys"
+
+    # override from commandtarget
+    def doCommandStr(self, cmdString, *args, **kwargs)
+        result = None
+
+        # (extract from args whatever might be needed
+        #   #  for running the command)
+
+        if cmdString = self.cmdLskeys:
+            self.list_keys()
+        else:
+            # pass buck to superclass
+            result = super(FooClass, self).doCommandStr(cmdString, *args, **kwargs)
+
+        # return success/fail exit status
+        return result
 
     def opendb(self):
         result = psycopg2.connect("dbname=jim user=jim")
