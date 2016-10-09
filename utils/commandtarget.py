@@ -54,9 +54,9 @@ class CommandTarget(object):
 #     # (extract from args whatever might be needed
 #     #  for running the command)
 #
-#     if cmdString = self.cmdFoo:
+#     if cmdString == self.cmdFoo:
 #         (code for the command gies here, set result to success (0) or raise exception)
-#     elif cmdString = self.cmdBar:
+#     elif cmdString == self.cmdBar:
 #         (code for cmdBar goes here, set result or raise excepton)
 #     else:
 #         # pass buck to superclass

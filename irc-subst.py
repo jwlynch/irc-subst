@@ -28,7 +28,7 @@ class irc_subst(commandtarget.CommandTarget):
         # (extract from args whatever might be needed
         #   #  for running the command)
 
-        if cmdString = self.cmdLskeys:
+        if cmdString == self.cmdLskeys:
             self.list_keys()
         else:
             # pass buck to superclass
