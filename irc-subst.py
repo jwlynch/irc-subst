@@ -127,6 +127,12 @@ class irc_subst(commandtarget.CommandTarget):
         if not self.sent:
             self.sent = True
 
+            if len(word) > 0:
+                if word[0].startswith(self.cmdPrefix):
+                    cmd = word[0][1:]
+                    cmdResult = self.doCommandStr(cmd, word[1:], None)
+                    result = hexchat.EAT_ALL
+
             if len(word) == 1:
                 if word[0] == "lskeys":
                     self.doCommandStr("lskeys", None, None)
