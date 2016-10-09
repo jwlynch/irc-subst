@@ -5,6 +5,15 @@ class CommandTarget(object):
         super(CommandTarget, self).__init__()
         self._itsNextTarget = None
 
+# in your subclass's __init__(), you must call
+# the inherited __init__() above, like this:
+#
+# def __init__(self, other, params):
+#     (do whatever initialization your subclass needs)
+#
+#     # initialize superclass
+#     super().__init__()
+
     def imYourNextTarget(self, aCommandTarget):
         if not isinstance(aCommandTarget, CommandTarget):
             raise Exception(

@@ -25,6 +25,9 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdLskeys = "lskeys"
         self.cmdPrefix = cmdPre
 
+        # initialize superclass
+        super(irc_subst, self).__init__()
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
