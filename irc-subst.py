@@ -16,7 +16,7 @@ from subprocess import PIPE
 
 from utils import commandtarget
 
-class irc_subst(commandtarget.commandTarget):
+class irc_subst(commandtarget.CommandTarget):
     def opendb():
         result = psycopg2.connect("dbname=jim user=jim")
 
