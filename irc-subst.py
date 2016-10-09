@@ -17,12 +17,12 @@ from subprocess import PIPE
 from utils import commandtarget
 
 class irc_subst(commandtarget.CommandTarget):
-    def opendb():
+    def opendb(self):
         result = psycopg2.connect("dbname=jim user=jim")
 
         return result
 
-    def closedb(conn):
+    def closedb(self, conn):
         conn.close()
 
     # takes
@@ -32,7 +32,7 @@ class irc_subst(commandtarget.CommandTarget):
     #   first item is True if the string is altered, False otherwise
     #   second item is the string
 
-    def outLine(inString):
+    def outLine(self, inString):
         modified = False
 
         # split string, using [[ and ]] as delims
@@ -67,7 +67,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         return [modified, outStr]
 
-    def list_keys():
+    def list_keys(self):
         result = hexchat.EAT_ALL
 
         conn = opendb()
@@ -100,7 +100,7 @@ class irc_subst(commandtarget.CommandTarget):
 
     sent = False
 
-    def inputHook(word, word_eol, userdata):
+    def inputHook(self, word, word_eol, userdata):
         global sent
 
         result = hexchat.EAT_NONE
