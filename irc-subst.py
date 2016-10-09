@@ -137,11 +137,6 @@ class irc_subst(commandtarget.CommandTarget):
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
                     result = hexchat.EAT_ALL
 
-            if len(word) == 1:
-                if word[0] == "lskeys":
-                    self.doCommandStr("lskeys", None, None)
-                    result = hexchat.EAT_ALL
-
             outLineResult = self.outLine("say " + word_eol[0])
             if outLineResult[0]:
                 hexchat.command(outLineResult[1])
