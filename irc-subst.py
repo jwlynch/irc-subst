@@ -22,7 +22,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdLskeys = "lskeys"
 
     # override from commandtarget
-    def doCommandStr(self, cmdString, *args, **kwargs)
+    def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
 
         # (extract from args whatever might be needed

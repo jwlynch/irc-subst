@@ -48,7 +48,7 @@ class CommandTarget(object):
 #
 # doCommandStr suggestion for override
 #
-# def doCommandStr(self, cmdString, *args, **kwargs)
+# def doCommandStr(self, cmdString, *args, **kwargs):
 #     result = None
 #
 #     # (extract from args whatever might be needed
