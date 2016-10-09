@@ -45,11 +45,11 @@ class irc_subst(commandtarget.CommandTarget):
         key_list = list(filter(key_re.match, linelist))
 
         # now query the db
-        conn = opendb()
+        conn = self.opendb()
         cur = conn.cursor()
         cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list,))
         result_list = cur.fetchall()
-        closedb(conn)
+        self.closedb(conn)
 
         # go through results, forming a lookup table
         lookup = dict()
@@ -71,11 +71,11 @@ class irc_subst(commandtarget.CommandTarget):
         return [modified, outStr]
 
     def list_keys(self):
-        conn = opendb()
+        conn = self.opendb()
         cur = conn.cursor()
         cur.execute("select i.key from irc_subst i order by i.key;")
         result_list = cur.fetchall()
-        closedb(conn)
+        self.closedb(conn)
 
         result_string = ""
         for row in result_list:
@@ -111,7 +111,7 @@ class irc_subst(commandtarget.CommandTarget):
                     self.list_keys()
                     result = hexchat.EAT_ALL
 
-            outLineResult = outLine("say " + word_eol[0])
+            outLineResult = self.outLine("say " + word_eol[0])
             if outLineResult[0]:
                 hexchat.command(outLineResult[1])
                 result = hexchat.EAT_ALL
