@@ -101,15 +101,12 @@ class irc_subst(commandtarget.CommandTarget):
             print(line.decode())
             #sys.stdout.write(comm_stdout.decode())
 
-    sent = False
 
     def inputHook(self, word, word_eol, userdata):
-        global sent
-
         result = hexchat.EAT_NONE
 
-        if not sent:
-            sent = True
+        if not self.sent:
+            self.sent = True
 
             if len(word) == 1:
                 if word[0] == "lskeys":
@@ -120,7 +117,7 @@ class irc_subst(commandtarget.CommandTarget):
                 hexchat.command(outLineResult[1])
                 result = hexchat.EAT_ALL
 
-            sent = False
+            self.sent = False
 
         return result
 
