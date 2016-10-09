@@ -60,7 +60,7 @@ class CommandTarget(object):
 #         (code for cmdBar goes here, set result or raise excepton)
 #     else:
 #         # pass buck to superclass
-#         result = super(FooClass, self).doCommandStr(cmdString, *args, **kwargs)
+#         result = super(ReplaceWithThisClass, self).doCommandStr(cmdString, *args, **kwargs)
 #
 #     # return success/fail exit status
 #     return result

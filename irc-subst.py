@@ -36,7 +36,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.list_keys()
         else:
             # pass buck to superclass
-            result = super(FooClass, self).doCommandStr(cmdString, *args, **kwargs)
+            result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
 
         # return success/fail exit status
         return result
