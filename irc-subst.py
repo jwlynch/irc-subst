@@ -71,8 +71,6 @@ class irc_subst(commandtarget.CommandTarget):
         return [modified, outStr]
 
     def list_keys(self):
-        result = hexchat.EAT_ALL
-
         conn = opendb()
         cur = conn.cursor()
         cur.execute("select i.key from irc_subst i order by i.key;")
@@ -111,6 +109,7 @@ class irc_subst(commandtarget.CommandTarget):
             if len(word) == 1:
                 if word[0] == "lskeys":
                     self.list_keys()
+                    result = hexchat.EAT_ALL
 
             outLineResult = outLine("say " + word_eol[0])
             if outLineResult[0]:
