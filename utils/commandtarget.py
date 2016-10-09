@@ -22,6 +22,20 @@ class CommandTarget(object):
 # cmdBar = "bar"
 #
 
+    # func doCommandStr
+    # takes:
+    #   self - object this msg was sent to
+    #   cmdString - the command to run
+    #   args - positional parameters
+    #   kwargs - keyword args
+    # returns:
+    #    0 on success
+    #
+    # runs one of the commands provided by the object, returns
+    # a success indication or None (if no indicator was set)
+    #
+    # at this level, simply passes the buck to itsNextTarget (if set)
+
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
         # pass the buck
