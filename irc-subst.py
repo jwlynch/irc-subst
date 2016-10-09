@@ -4,6 +4,9 @@ __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
 
+# configuration
+commandPrefix = '.'
+
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
@@ -17,9 +20,10 @@ from subprocess import PIPE
 from utils import commandtarget
 
 class irc_subst(commandtarget.CommandTarget):
-    def __init__(self):
+    def __init__(self, cmdPre):
         self.sent = False
         self.cmdLskeys = "lskeys"
+        self.cmdPrefix = cmdPre
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
@@ -137,5 +141,5 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
-irc_subst_obj = irc_subst()
+irc_subst_obj = irc_subst(commandPrefix)
 hexchat.hook_command('', irc_subst_obj.inputHook)
