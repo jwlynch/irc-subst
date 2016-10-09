@@ -121,4 +121,5 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
-hexchat.hook_command('', inputHook)
+irc_subst_obj = irc_subst()
+hexchat.hook_command('', irc_subst_obj.inputHook)
