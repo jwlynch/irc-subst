@@ -38,8 +38,8 @@ class CommandTarget(object):
 
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
-        # pass the buck
 
+        # pass the buck
         if self._itsNextTarget is not None:
             result = self._itsNextTarget.doCommandStr(cmdString, *args, **kwargs)
 
