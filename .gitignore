@@ -1,0 +1,3 @@
+ircsubst-env/
+*.pyc
+__pycache__/
