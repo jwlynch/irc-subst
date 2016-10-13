@@ -135,6 +135,10 @@ class irc_subst(commandtarget.CommandTarget):
                 if word[0].startswith(self.cmdPrefix):
                     cmd = word[0][1:]
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
+
+                    if cmdResult == 1:
+                        print("command not found")
+
                     result = hexchat.EAT_ALL
 
             outLineResult = self.outLine("say " + word_eol[0])

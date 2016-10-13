@@ -54,9 +54,6 @@ class CommandTarget(object):
         else:
             result = 1
 
-        if result == 1:
-            print(cmdString + ": command not found")
-
         return result
 
 #
