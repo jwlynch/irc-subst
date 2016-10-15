@@ -53,6 +53,22 @@ class irc_subst(commandtarget.CommandTarget):
     def closedb(self, conn):
         conn.close()
 
+    def lookupKeyList(self, key_list):
+        # now query the db
+        conn = self.opendb()
+        cur = conn.cursor()
+        cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list,))
+        result_list = cur.fetchall()
+        self.closedb(conn)
+
+        # go through results, forming a lookup table
+        lookup = dict()
+
+        for row in result_list:
+            lookup[row[0]] = row[1]
+
+        return lookup
+
     # takes
     #   the string to be sent (which could be altereed inside the func)
     #   the lookup table
@@ -69,18 +85,7 @@ class irc_subst(commandtarget.CommandTarget):
         key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         key_list = list(filter(key_re.match, linelist))
 
-        # now query the db
-        conn = self.opendb()
-        cur = conn.cursor()
-        cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list,))
-        result_list = cur.fetchall()
-        self.closedb(conn)
-
-        # go through results, forming a lookup table
-        lookup = dict()
-
-        for row in result_list:
-            lookup[row[0]] = row[1]
+        lookup = self.lookupKeyList(key_list)
 
         numItems = len(linelist)
 
