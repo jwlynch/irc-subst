@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+# this listens to the outgoing irc lines (ones the client would send to irc) for
+# keys that look like [[key]] and substitutes a value looked up in a pg database.
+# Right now, this is specific to hexchat.
+
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
@@ -45,13 +49,19 @@ class irc_subst(commandtarget.CommandTarget):
         # return success/fail exit status
         return result
 
+    # opens connection to db, returns that connection object
     def opendb(self):
         result = psycopg2.connect("dbname=jim user=jim")
 
         return result
 
+    # takes database connection object, closes connection
     def closedb(self, conn):
         conn.close()
+
+    # accepts list of keys (strings of the form "[[somekey]]") and
+    # returns a dictionary with those keys as keys, and values that
+    # come from the db
 
     def lookupKeyList(self, key_list):
         # now query the db
@@ -71,10 +81,13 @@ class irc_subst(commandtarget.CommandTarget):
 
     # takes
     #   the string to be sent (which could be altereed inside the func)
-    #   the lookup table
     # returns a list,
     #   first item is True if the string is altered, False otherwise
     #   second item is the string
+    #
+    # extracts any strings it finds that match [[something]]
+    # looks up those keys
+    # substitutes the values for the keys
 
     def outLine(self, inString):
         modified = False
@@ -100,6 +113,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         return [modified, outStr]
 
+    # prints to the irc client the list of keys available in the db
     def list_keys(self):
         conn = self.opendb()
         cur = conn.cursor()
@@ -129,6 +143,13 @@ class irc_subst(commandtarget.CommandTarget):
             print(line.decode())
             #sys.stdout.write(comm_stdout.decode())
 
+    # this function interfaces with hexchat when it is set as the input hook
+    #
+    # if the input starts with self.cmdPrefix (a char), it is considered a command
+    # and is sent to be processed to doCommmandStr().
+    #
+    # if not, it's a regular irc line, which is searched for keys which will be
+    # substituted by the values from the db
 
     def inputHook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
@@ -155,5 +176,8 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+# make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix)
+
+# establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
