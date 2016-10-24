@@ -168,7 +168,7 @@ class irc_subst(commandtarget.CommandTarget):
                     result = hexchat.EAT_ALL
 
             outLineResult = self.outLine("say " + word_eol[0])
-            if outLineResult[0]:
+            if not outLineResult[0]:
                 hexchat.command(outLineResult[1])
                 result = hexchat.EAT_ALL
 
