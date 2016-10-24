@@ -173,6 +173,8 @@ class irc_subst(commandtarget.CommandTarget):
                     result = hexchat.EAT_ALL
 
             outLineResult = self.outLine("say " + word_eol[0])
+
+            # TODO: review this
             if not outLineResult[0]:
                 hexchat.command(outLineResult[1])
                 result = hexchat.EAT_ALL
