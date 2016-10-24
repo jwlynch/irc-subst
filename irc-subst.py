@@ -158,7 +158,12 @@ class irc_subst(commandtarget.CommandTarget):
             self.sent = True
 
             if len(word) > 0:
-                if word[0].startswith(self.cmdPrefix):
+                # if line starts with a \ then send the rest of the line
+                if word[0].startswith("\\"):
+                    word[0] = word[0][1:]
+
+                    word_eol[0] = word_eol[0][1:]
+                elif word[0].startswith(self.cmdPrefix):
                     cmd = word[0][1:]
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
 
