@@ -158,12 +158,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.sent = True
 
             if len(word) > 0:
-                # if line starts with a \ then send the rest of the line
-                if word[0].startswith("\\"):
-                    word[0] = word[0][1:]
-
-                    word_eol[0] = word_eol[0][1:]
-                elif word[0].startswith(self.cmdPrefix):
+                if word[0].startswith(self.cmdPrefix):
                     cmd = word[0][1:]
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
 
@@ -173,9 +168,7 @@ class irc_subst(commandtarget.CommandTarget):
                     result = hexchat.EAT_ALL
 
             outLineResult = self.outLine("say " + word_eol[0])
-
-            # TODO: review this
-            if not outLineResult[0]:
+            if outLineResult[0]:
                 hexchat.command(outLineResult[1])
                 result = hexchat.EAT_ALL
 
