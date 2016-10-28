@@ -220,7 +220,7 @@ class irc_subst(commandtarget.CommandTarget):
         return result
 
 # make an object of the class which contains all of the above funcs as methods
-irc_subst_obj = irc_subst(commandPrefix)
+irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
