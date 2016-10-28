@@ -28,6 +28,8 @@ def dex(item, lst):
 
 commandPrefix = '.' # get this from general section of config file
 
+dbSpecs = {}
+
 if dex("db", parser.sections()) == -1:
     print("config file has no section 'db'")
     sys.exit(0)
