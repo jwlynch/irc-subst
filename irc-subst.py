@@ -19,6 +19,14 @@ if conffiles[0] != 'irc-subst.cfg':
     print("config file 'irc-subst.cfg' cannot be found")
     sys.exit(0)
 
+def dex(item, lst):
+    result = -1
+
+    try:
+        result = lst.index(item)
+    finally:
+        return result
+
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
