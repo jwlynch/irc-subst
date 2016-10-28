@@ -26,7 +26,19 @@ def dex(item, lst):
     finally:
         return result
 
-commandPrefix = '.' # get this from general section of config file
+commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
+
+if dex('general', parser.sections()) != -1:
+    print("there is a general section")
+    print("...and the options in that section are %s" % (parser.options('general')))
+    if dex('command-prefix', parser.options('general')) != -1:
+        print("...and a command-prefix option")
+        commandPrefix = parser.get('general', 'command-prefix')
+        print("value of commaPrefix from the config file is |%s|" % (commandPrefix))
+    else:
+        print("there's no command-prefix in the general section")
+else:
+    print("there's no general section")
 
 dbSpecs = {}
 
