@@ -94,7 +94,7 @@ class irc_subst(commandtarget.CommandTarget):
 
     # opens connection to db, returns that connection object
     def opendb(self):
-        result = psycopg2.connect("dbname=jim user=jim")
+        result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
 
         return result
 
