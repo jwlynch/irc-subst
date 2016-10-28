@@ -27,6 +27,14 @@ def dex(item, lst):
         return result
 
 commandPrefix = '.' # get this from general section of config file
+
+if dex("db", parser.sections()) == -1:
+    print("config file has no section 'db'")
+    sys.exit(0)
+
+for option in parser.options('db'):
+    dbSpecs[option] = parser.get('db', option)
+
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
