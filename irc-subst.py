@@ -9,7 +9,6 @@ __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
 
 # configuration
-commandPrefix = '.'
 
 from configparser import ConfigParser
 parser = ConfigParser()
@@ -27,6 +26,7 @@ def dex(item, lst):
     finally:
         return result
 
+commandPrefix = '.' # get this from general section of config file
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
