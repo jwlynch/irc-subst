@@ -15,6 +15,10 @@ from configparser import ConfigParser
 parser = ConfigParser()
 conffiles = parser.read('irc-subst.cfg')
 
+if conffiles[0] != 'irc-subst.cfg':
+    print("config file 'irc-subst.cfg' cannot be found")
+    sys.exit(0)
+
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 import re
