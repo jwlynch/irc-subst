@@ -66,10 +66,11 @@ class KeywordList(object):
         self.properties[prop] = value
                                                                                    
 class irc_subst(commandtarget.CommandTarget):
-    def __init__(self, cmdPre):
+    def __init__(self, cmdPre, dbSpecs):
         self.sent = False
         self.cmdLskeys = "lskeys"
         self.cmdPrefix = cmdPre
+        self.dbSpecs = dbSpecs
 
         # initialize superclass
         super(irc_subst, self).__init__()
