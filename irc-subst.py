@@ -102,17 +102,16 @@ class irc_subst(commandtarget.CommandTarget):
             self.list_keys()
             result = 0 # success
         elif cmdString == self.cmdRemove:
-            print("repr(args) is " + repr(args))
-            #channel = args[0]
-            #nick = args[1]
-            #reason = args[2]
-            #
-            #removeCommand = "remove " + channel + " " + nick
-            #if reason is not None:
-            #    removeCommand += " :" + reason
+            channel = argList[0]
+            nick = argList[1]
+            reason = argList[2]
+
+            removeCommand = "remove " + channel + " " + nick
+            if reason is not None:
+                removeCommand += " :" + reason
 
             # (uncomment when it looks good) hexchat.command(removeCommand)
-            #print("removeCommand is " + removeCommand) # ...and delete this line
+            print("removeCommand is " + removeCommand) # ...and delete this line
 
             result = 0 # success
         else:
