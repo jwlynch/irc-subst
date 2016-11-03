@@ -93,6 +93,8 @@ class irc_subst(commandtarget.CommandTarget):
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
 
+        argList = args[0]
+
         # (extract from args whatever might be needed
         #   #  for running the command)
 
