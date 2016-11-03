@@ -18,6 +18,7 @@ if conffiles[0] != 'irc-subst.cfg':
     print("config file 'irc-subst.cfg' cannot be found")
     sys.exit(0)
 
+# index of item in list, or -1 if ValueError
 def dex(item, lst):
     result = -1
 
