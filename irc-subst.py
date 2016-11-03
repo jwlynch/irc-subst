@@ -225,6 +225,8 @@ class irc_subst(commandtarget.CommandTarget):
     def inputHook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
 
+        print("repr(word) is " + repr(word))
+
         if not self.sent:
             self.sent = True
 
