@@ -82,6 +82,7 @@ class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
         self.cmdLskeys = "lskeys"
+        self.cmdRemove = "remove"
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
 
@@ -97,6 +98,18 @@ class irc_subst(commandtarget.CommandTarget):
 
         if cmdString == self.cmdLskeys:
             self.list_keys()
+            result = 0 # success
+        elif cmdString == self.cmdRemove:
+            channel == args[0]
+            nick == args[1]
+            reason == args[2]
+
+            removeCommand = "remove " + channel + " " + nick
+            if reason is not None:
+                removeCommand += " :" + reason
+
+            hexchat.command(removeCommand)
+
             result = 0 # success
         else:
             # pass buck to superclass
