@@ -100,6 +100,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.list_keys()
             result = 0 # success
         elif cmdString == self.cmdRemove:
+            print("repr(args) is " + repr(args))
             #channel = args[0]
             #nick = args[1]
             #reason = args[2]
