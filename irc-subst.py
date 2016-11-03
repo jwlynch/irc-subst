@@ -118,7 +118,7 @@ class irc_subst(commandtarget.CommandTarget):
             if len(argList) == 1:
                 # command is 'remove nick', get channel
                 nick = argList[0]
-                channel = "unspecifiedChannel"
+                channel = hexchat.get_info("channel")
 
             removeCommand = "remove " + channel + " " + nick
             if reason is not None:
