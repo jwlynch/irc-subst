@@ -124,8 +124,7 @@ class irc_subst(commandtarget.CommandTarget):
             if reason is not None:
                 removeCommand += " :" + reason
 
-            # (uncomment when it looks good) hexchat.command(removeCommand)
-            print("removeCommand is " + removeCommand) # ...and delete this line
+            hexchat.command(removeCommand)
 
             result = 0 # success
         else:
