@@ -115,6 +115,11 @@ class irc_subst(commandtarget.CommandTarget):
             if len(argList) >= 1:
                 channel = argList[0]
 
+            if len(argList) == 1:
+                # command is 'remove nick', get channel
+                nick = argList[0]
+                channel = "unspecifiedChannel"
+
             removeCommand = "remove " + channel + " " + nick
             if reason is not None:
                 removeCommand += " :" + reason
