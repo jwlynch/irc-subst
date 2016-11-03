@@ -102,9 +102,18 @@ class irc_subst(commandtarget.CommandTarget):
             self.list_keys()
             result = 0 # success
         elif cmdString == self.cmdRemove:
-            channel = argList[0]
-            nick = argList[1]
-            reason = argList[2]
+            channel = None
+            nick = None
+            reason = None
+
+            if len(argList) >= 3:
+                reason = " ".join(argList[2:])
+
+            if len(argList) >= 2:
+                nick = argList[1]
+
+            if len(argList) >= 1:
+                channel = argList[0]
 
             removeCommand = "remove " + channel + " " + nick
             if reason is not None:
