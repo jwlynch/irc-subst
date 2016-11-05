@@ -83,6 +83,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.sent = False
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
+        self.cmdAddFact = "addfact"
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
 
@@ -127,6 +128,11 @@ class irc_subst(commandtarget.CommandTarget):
             hexchat.command(removeCommand)
 
             result = 0 # success
+
+        elif cmdString == self.cmdAddFact:
+            print("factoid add: name %s, value %s" % (args[0], args[1]))
+
+            result = 0
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
