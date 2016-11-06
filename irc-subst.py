@@ -242,8 +242,8 @@ class irc_subst(commandtarget.CommandTarget):
         li = iter(lst)
         result = []
 
-        while True:
-            break
+        for w in li:
+            result.append(li)
 
         return result
 
