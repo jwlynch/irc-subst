@@ -154,6 +154,13 @@ class irc_subst(commandtarget.CommandTarget):
                     bad = True
 
             if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if lookupTable:
+                    # key is already in db
+                    print("key %s is already in db" % (key))
+                    bad = True
+
+            if not bad:
                 # do query and insert here
                 print("factoid add: key %s, value %s" % (key, value))
 
