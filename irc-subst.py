@@ -204,8 +204,8 @@ class irc_subst(commandtarget.CommandTarget):
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
-        key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
-        key_list = list(filter(key_re.match, linelist))
+        self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
+        key_list = list(filter(self.key_re.match, linelist))
 
         lookup = self.lookupKeyList(key_list)
 
