@@ -1,0 +1,40 @@
+# connect to remote with passwd:
+conn = psycopg2.connect("dbname=jim user=jim host=orie password=.X1iplay")
+
+class KeywordList(Object):
+    def __init__(self, properties):
+        self.string = ""
+        self.properties = properties
+
+    def __repr__(self):
+        reslist = []
+
+        for key in self.properties:
+            reslist.append(key + "=" + self.properties[key]
+
+        return " ".join(reslist)
+
+    def attachProp(self, prop, value):
+        self.properties[prop] = value
+
+# refactored db opener
+    def opendb(self):
+        self.db = {}
+        self.db["dbname"] = "jim"
+        self.db["user"] = "jim"
+        self.db["host"] = "orie"
+        self.db["password"] = ".X1iplay"
+
+
+
+def connectString(db):
+    result = ""
+
+    if db.__contains__("dbname") and db.__contains__("user"):
+        dbname = attachProp(db, "dbname")
+        user =  attachProp(db, "user")
+
+        if db.
+    else:
+        # error, malformed db
+    
