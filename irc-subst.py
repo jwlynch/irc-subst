@@ -81,9 +81,11 @@ class KeywordList(object):
 class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
+
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
         self.cmdAddFact = "addfact"
+
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
 
