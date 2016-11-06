@@ -148,6 +148,10 @@ class irc_subst(commandtarget.CommandTarget):
                 key = argList[0]
                 value = argList[1]
 
+            if not bad:
+                if not self.key_re.match(key):
+                    print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                    bad = True
 
             if not bad:
                 # do query and insert here
