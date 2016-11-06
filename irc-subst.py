@@ -164,6 +164,20 @@ class irc_subst(commandtarget.CommandTarget):
             if not bad:
                 # do query and insert here
                 print("factoid add: key %s, value %s" % (key, value))
+                conn = self.opendb()
+
+                try:
+                    self.cur = conn.cursor()
+                    self.cur.execute("insert into irc_subst(key, value) values (%s, %s)", (key, value))
+                except psycopg2.Error as pe:
+                    conn.rollback()
+                    print("factoid add: db insert error: " + str(pe))
+                finally:
+                    self.cur.close()
+                    conn.commit()
+
+                self.cur = None
+                self.closedb(conn)
 
             result = 0
         else:
