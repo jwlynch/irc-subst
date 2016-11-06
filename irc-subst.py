@@ -85,6 +85,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
         self.cmdAddFact = "addfact"
+        self.cmdRmFact = "rmfact"
 
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
@@ -180,6 +181,8 @@ class irc_subst(commandtarget.CommandTarget):
                 self.closedb(conn)
 
             result = 0
+        elif cmdString == self.cmdRmFact:
+            pass
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
