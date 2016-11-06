@@ -130,7 +130,7 @@ class irc_subst(commandtarget.CommandTarget):
             result = 0 # success
 
         elif cmdString == self.cmdAddFact:
-            print("factoid add: name %s, value %s" % (args[0], args[1]))
+            print("factoid add: name %s, value %s" % (argList[0], argList[1]))
 
             result = 0
         else:
