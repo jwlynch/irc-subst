@@ -264,7 +264,7 @@ class irc_subst(commandtarget.CommandTarget):
             if len(word) > 0:
                 if word[0].startswith(self.cmdPrefix):
                     cmd = word[0][1:]
-                    cmdResult = self.doCommandStr(cmd, word[1:], None)
+                    cmdResult = self.doCommandStr(cmd, quotizeWordList(word[1:]), None)
 
                     if cmdResult == 1:
                         print("command not found")
