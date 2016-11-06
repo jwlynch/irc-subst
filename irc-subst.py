@@ -148,11 +148,10 @@ class irc_subst(commandtarget.CommandTarget):
                 key = argList[0]
                 value = argList[1]
 
-                print("factoid add: key %s, value %s" % (key, value))
 
             if not bad:
-                pass
                 # do query and insert here
+                print("factoid add: key %s, value %s" % (key, value))
 
             result = 0
         else:
