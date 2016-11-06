@@ -238,7 +238,7 @@ class irc_subst(commandtarget.CommandTarget):
     # consolidates the quoted arguments into a single list item
     # returns the list of quoted and not-quoted args
 
-    def quotizeWordList(lst):
+    def quotizeWordList(self, lst):
         li = iter(lst)
         result = []
 
