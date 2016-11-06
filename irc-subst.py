@@ -243,7 +243,7 @@ class irc_subst(commandtarget.CommandTarget):
         result = []
 
         for w in li:
-            result.append(li)
+            result.append(w)
 
         return result
 
