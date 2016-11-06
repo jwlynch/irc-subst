@@ -301,11 +301,11 @@ class irc_subst(commandtarget.CommandTarget):
 
                     if cmdResult == 1:
                         print("command not found")
-
-            outLineResult = self.outLine("say " + word_eol[0])
-            if outLineResult[0]:
-                hexchat.command(outLineResult[1])
-                result = hexchat.EAT_ALL
+                else:
+                    outLineResult = self.outLine("say " + word_eol[0])
+                    if outLineResult[0]:
+                        hexchat.command(outLineResult[1])
+                        result = hexchat.EAT_ALL
 
             self.sent = False
 
