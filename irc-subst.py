@@ -87,6 +87,8 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
 
+        self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
+
         # initialize superclass
         super(irc_subst, self).__init__()
 
@@ -204,7 +206,6 @@ class irc_subst(commandtarget.CommandTarget):
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
-        self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         key_list = list(filter(self.key_re.match, linelist))
 
         lookup = self.lookupKeyList(key_list)
