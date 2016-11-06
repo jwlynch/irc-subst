@@ -134,6 +134,7 @@ class irc_subst(commandtarget.CommandTarget):
             result = 0 # success
 
         elif cmdString == self.cmdAddFact:
+            result = 0 # success/command is found
             bad = True
             key = ""
             value = ""
