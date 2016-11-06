@@ -300,7 +300,7 @@ class irc_subst(commandtarget.CommandTarget):
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
 
                     if cmdResult == 1:
-                        print("command not found")
+                        print("command '%s' not found" % (cmd))
                 else:
                     outLineResult = self.outLine("say " + word_eol[0])
                     if outLineResult[0]:
