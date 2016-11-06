@@ -234,6 +234,19 @@ class irc_subst(commandtarget.CommandTarget):
             print(line.decode())
             #sys.stdout.write(comm_stdout.decode())
 
+    # accepts an irc line as a list of words, which is the arguments to a command
+    # consolidates the quoted arguments into a single list item
+    # returns the list of quoted and not-quoted args
+
+    def quotizeWordList(lst):
+        li = iter(lst)
+        result = []
+
+        while True:
+            break
+
+        return result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
