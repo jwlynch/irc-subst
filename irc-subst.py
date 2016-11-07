@@ -215,7 +215,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                 try:
                     self.cur = conn.cursor()
-                    self.cur.execute("delete from irc_subst where key = '%s'", (key))
+                    self.cur.execute("delete from irc_subst where key = %s", (key,))
                 except psycopg2.Error as pe:
                     conn.rollback()
                     print("factoid remove: db insert error: " + str(pe))
