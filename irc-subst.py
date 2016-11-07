@@ -188,9 +188,9 @@ class irc_subst(commandtarget.CommandTarget):
             value = ""
 
             if len(argList) < 1:
-                print("factoid add: too few args")
+                print("factoid remove: too few args")
             elif len(argList) > 1:
-                print("factoid add: too many args")
+                print("factoid remove: too many args")
             else:
                 # correct number of args
                 bad = False
@@ -205,7 +205,7 @@ class irc_subst(commandtarget.CommandTarget):
                 lookupTable = self.lookupKeyList([key])
                 if not lookupTable:
                     # key is not in db
-                    print("key %s is not in db" % (key))
+                    print("factoid remove: key %s is not in db" % (key))
                     bad = True
 
             if not bad:
