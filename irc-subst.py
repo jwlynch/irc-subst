@@ -182,7 +182,49 @@ class irc_subst(commandtarget.CommandTarget):
 
             result = 0
         elif cmdString == self.cmdRmFact:
-            pass
+            result = 0 # success/command is found
+            bad = True
+            key = ""
+            value = ""
+
+            if len(argList) < 1:
+                print("factoid add: too few args")
+            elif len(argList) > 1:
+                print("factoid add: too many args")
+            else:
+                # correct number of args
+                bad = False
+                key = argList[0]
+
+            if not bad:
+                if not self.key_re.match(key):
+                    print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                    bad = True
+
+            if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if not lookupTable:
+                    # key is not in db
+                    print("key %s is not in db" % (key))
+                    bad = True
+
+            if not bad:
+                # do delete query here
+                print("factoid remove: key %s" % (key))
+                #conn = self.opendb()
+
+                #try:
+                #    self.cur = conn.cursor()
+                #    self.cur.execute("delete from irc_subst where key = '%s'", (key))
+                #except psycopg2.Error as pe:
+                #    conn.rollback()
+                #    print("factoid remove: db insert error: " + str(pe))
+                #finally:
+                #    self.cur.close()
+                #    conn.commit()
+
+                #self.cur = None
+                #self.closedb(conn)
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
