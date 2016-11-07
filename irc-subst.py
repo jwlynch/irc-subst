@@ -211,20 +211,20 @@ class irc_subst(commandtarget.CommandTarget):
             if not bad:
                 # do delete query here
                 print("factoid remove: key %s" % (key))
-                #conn = self.opendb()
+                conn = self.opendb()
 
-                #try:
-                #    self.cur = conn.cursor()
-                #    self.cur.execute("delete from irc_subst where key = '%s'", (key))
-                #except psycopg2.Error as pe:
-                #    conn.rollback()
-                #    print("factoid remove: db insert error: " + str(pe))
-                #finally:
-                #    self.cur.close()
-                #    conn.commit()
+                try:
+                    self.cur = conn.cursor()
+                    self.cur.execute("delete from irc_subst where key = '%s'", (key))
+                except psycopg2.Error as pe:
+                    conn.rollback()
+                    print("factoid remove: db insert error: " + str(pe))
+                finally:
+                    self.cur.close()
+                    conn.commit()
 
-                #self.cur = None
-                #self.closedb(conn)
+                self.cur = None
+                self.closedb(conn)
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
