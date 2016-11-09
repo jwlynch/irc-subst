@@ -353,7 +353,10 @@ class irc_subst(commandtarget.CommandTarget):
             self.sent = True
 
             if len(word) > 0:
-                if word[0].startswith(self.cmdPrefix):
+                if word[0].startswith("\\"):
+                    hexchat.command("say " + word_eol[0][1:])
+                    result = hexchat.EAT_ALL
+                elif word[0].startswith(self.cmdPrefix):
                     result = hexchat.EAT_ALL
                     cmd = word[0][1:]
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
