@@ -1,0 +1,24 @@
+This documents the existing commands in irc_subst::doCommandStr()
+
+lskeys
+------
+
+lists the existing keys in the database
+
+addfact key "value"
+-------------------
+
+insert factoid into db
+
+rmfact str
+----------
+
+remove the factoid key matching str
+
+remove user
+-----------
+remove user channel
+-------------------
+remove user channel reason
+--------------------------
+remove user from channel
