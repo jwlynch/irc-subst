@@ -1,5 +1,15 @@
 This documents the existing commands in irc_subst::doCommandStr()
 
+To enter a command, you must put the command prefix (by defalt, the command prefix
+is '.') at the start of the line... After the command prefix, put the command to run,
+and then any arguments to the commands. Then to run the command, hit enter.
+
+if you prefix the line with \, it will output the line as though you "say"ed it. Also, any
+keys in the line would not be expanded to their value in the db.
+
+The commands:
+-------------
+
 lskeys
 ------
 
