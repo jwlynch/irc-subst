@@ -4,6 +4,16 @@
 # keys that look like [[key]] and substitutes a value looked up in a pg database.
 # Right now, this is specific to hexchat.
 
+import re
+import psycopg2
+
+import hexchat
+
+import sys, os
+
+import subprocess
+from subprocess import PIPE
+
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
@@ -51,16 +61,6 @@ for option in parser.options('db'):
     dbSpecs[option] = parser.get('db', option)
 
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
-
-import re
-import psycopg2
-
-import hexchat
-import sys
-import subprocess
-from subprocess import PIPE
-
-from utils import commandtarget
 
 class KeywordList(object):
     def __init__(self, properties):
