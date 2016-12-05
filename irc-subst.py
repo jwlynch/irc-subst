@@ -33,7 +33,7 @@ from configparser import ConfigParser
 parser = ConfigParser()
 conffiles = parser.read(pathname + '/' + 'irc-subst.cfg')
 
-if conffiles[0] != 'irc-subst.cfg':
+if len(conffiles) >= 1 and conffiles[0] != 'irc-subst.cfg':
     print("config file 'irc-subst.cfg' cannot be found")
     sys.exit(0)
 
