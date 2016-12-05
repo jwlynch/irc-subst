@@ -249,6 +249,7 @@ class irc_subst(commandtarget.CommandTarget):
             elif type == 2:
                 # channel tab
                 print("channel tab, channel is", front_tab.channel)
+                users = top_context.get_list("users")
             elif type == 3:
                 # dialog/query tab
                 print("query tab, nick is", front_tab.channel)
