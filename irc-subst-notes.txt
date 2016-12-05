@@ -1,5 +1,5 @@
 # connect to remote with passwd:
-conn = psycopg2.connect("dbname=jim user=jim host=orie password=.X1iplay")
+conn = psycopg2.connect("dbname=jim user=jim host=orie password=pass")
 
 class KeywordList(Object):
     def __init__(self, properties):
