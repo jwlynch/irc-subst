@@ -95,6 +95,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdRemove = "remove"
         self.cmdAddFact = "addfact"
         self.cmdRmFact = "rmfact"
+        self.cmdInfo = "info"
 
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
@@ -234,6 +235,8 @@ class irc_subst(commandtarget.CommandTarget):
 
                 self.cur = None
                 self.closedb(conn)
+        elif cmdString == self.cmdInfo:
+            print("command " + self.cmdInfo)
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
