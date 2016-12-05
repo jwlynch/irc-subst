@@ -18,6 +18,15 @@ __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
 
+# script and config file dir
+
+pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
+sys.path.append(pathname)
+
+print("this script should be in " + pathname)
+
+from utils import commandtarget
+
 # configuration
 
 from configparser import ConfigParser
