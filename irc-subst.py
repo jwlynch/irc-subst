@@ -407,8 +407,15 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    # privmsg hook
+
+    def privmsg_hook(self, word, word_eol, userdata):
+        print word_eol[1]
+        return hexchat.EAT_NONE
+
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
+hexchat.hook_server('PRIVMSG', privmsg_hook)
