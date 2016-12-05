@@ -238,7 +238,26 @@ class irc_subst(commandtarget.CommandTarget):
                 self.cur = None
                 self.closedb(conn)
         elif cmdString == self.cmdInfo:
-            print("command " + self.cmdInfo)
+            top_context = hexchat.find_context()
+            channel_list = hexchat.get_list('channels')
+            front_tab = [c for c in hexchat.get_list('channels') if c.context == top_context][0]
+            type = front_tab.type
+
+            if type == 1:
+                # server tab
+                print("server tab, server is", front_tab.server)
+            elif type == 2:
+                # channel tab
+                print("channel tab, channel is", front_tab.channel)
+            elif type == 3:
+                # dialog/query tab
+                print("query tab, nick is", front_tab.channel)
+            elif type == 4:
+                # notices tab
+                print("notices tab")
+            elif type == 5:
+                # SNotices tab
+                print("SNotices tab")
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
