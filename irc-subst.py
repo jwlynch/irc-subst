@@ -418,4 +418,4 @@ irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
-hexchat.hook_server('PRIVMSG', privmsg_hook)
+hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
