@@ -410,7 +410,13 @@ class irc_subst(commandtarget.CommandTarget):
     # privmsg hook
 
     def privmsg_hook(self, word, word_eol, userdata):
-        print(word_eol[1])
+
+        # TODO - differentiate between private messages and messages to channels,
+        #      - store hostmask and nick somewhere (db?)
+        #      - get user's account name (where is this stored already?
+        #                                 would like to get it from that
+        #                                 rather than bother the server about it
+
         return hexchat.EAT_NONE
 
 # make an object of the class which contains all of the above funcs as methods
@@ -418,4 +424,6 @@ irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
-hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
+
+# don't hook this yet, will need to develop the callback more
+# hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
