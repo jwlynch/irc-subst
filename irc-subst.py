@@ -37,7 +37,7 @@ conffiles = parser.read(pathname + '/' + 'irc-subst.cfg')
 
 if len(conffiles) >= 1 and conffiles[0] != 'irc-subst.cfg':
     print("config file 'irc-subst.cfg' cannot be found")
-    sys.exit(0)
+    #sys.exit(0)
 
 # index of item in list, or -1 if ValueError
 def dex(item, lst):
@@ -66,7 +66,7 @@ dbSpecs = {}
 
 if dex("db", parser.sections()) == -1:
     print("config file has no section 'db'")
-    sys.exit(0)
+    #sys.exit(0)
 
 for option in parser.options('db'):
     dbSpecs[option] = parser.get('db', option)
