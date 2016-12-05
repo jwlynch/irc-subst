@@ -22,7 +22,7 @@ __module_description__ = "IRC substituter by Jim"
 
 # pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
 # hardwire the path until TODO: I find out how to do this right
-pathname = "/home/jim/.config/addons/"
+pathname = "/home/jim/.config/hexchat/addons/"
 sys.path.append(pathname)
 
 print("this script should be in " + pathname)
