@@ -93,7 +93,7 @@ class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
 
-        # add a tab for debugging
+        # add the tab for debugging
         hexchat.command("query server1")
 
         # put the channel list entry for it in the object so I can get at it
