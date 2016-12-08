@@ -248,7 +248,7 @@ class irc_subst(commandtarget.CommandTarget):
                 print("server tab, server is", front_tab.server)
             elif type == 2:
                 # channel tab
-                print("channel tab, channel is %s, modes are %s" % (front_tab.channel, "front_tab.chanmodes"))
+                print("channel tab, channel is %s, modes are %s" % (front_tab.channel, front_tab.chanmodes))
                 users = top_context.get_list("users")
             elif type == 3:
                 # dialog/query tab
