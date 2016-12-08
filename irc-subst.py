@@ -119,6 +119,10 @@ class irc_subst(commandtarget.CommandTarget):
         # initialize superclass
         super(irc_subst, self).__init__()
 
+    def debugPrint(self, *args, **kwargs):
+        if self.debugP:
+            self.debug_tab.context.prnt(*args, **kwargs)
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
