@@ -98,7 +98,9 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdAddFact = "addfact"
         self.cmdRmFact = "rmfact"
         self.cmdInfo = "info"
+
         self.cmdDebugTab = "debugtab"
+        self.cmdDebugHi = "debughi"
 
         self.cmdPrefix = cmdPre
         self.dbSpecs = dbSpecs
@@ -265,6 +267,9 @@ class irc_subst(commandtarget.CommandTarget):
 
             # put the channel list entry for it in the object so I can get at it
             self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == "server1"][0]
+
+        elif cmdString == self.cmdDebugHi:
+            self.debug_tab.context.prnt("hi")
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
