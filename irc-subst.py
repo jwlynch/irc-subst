@@ -92,6 +92,7 @@ class KeywordList(object):
 class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
+        self.debug_tab = None
 
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
@@ -269,7 +270,11 @@ class irc_subst(commandtarget.CommandTarget):
             self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == "server1"][0]
 
         elif cmdString == self.cmdDebugHi:
-            self.debug_tab.context.prnt("hi")
+            if self.debug_tab is not None:
+                self.debug_tab.context.prnt("hi")
+            else:
+                print("debug_tab is None")
+
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
