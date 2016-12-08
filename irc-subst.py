@@ -276,7 +276,7 @@ class irc_subst(commandtarget.CommandTarget):
                 # SNotices tab
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
-            self.debug_tab.context.prnt("hi")
+            self.debugPrint("hi")
         elif cmdString == self.cmdDebug:
             if len(argList) < 1:
                 print("debug print: too few args")
