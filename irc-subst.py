@@ -97,11 +97,11 @@ class irc_subst(commandtarget.CommandTarget):
         self.debugP = False
 
         # add the tab for debugging
-        hexchat.command("query server1")
         self.debugtab_nick = "DebugTab"
+        hexchat.command("query " + self.debugtab_nick)
 
         # put the channel list entry for it in the object so I can get at it
-        self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == "server1"][0]
+        self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
 
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
