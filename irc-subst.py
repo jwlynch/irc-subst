@@ -96,12 +96,10 @@ class irc_subst(commandtarget.CommandTarget):
         # whether to print debugging info to debug tab
         self.debugP = False
 
-        # add the tab for debugging
+        # the debug tab name, which will show up in the client
         self.debugtab_nick = "DebugTab"
-        hexchat.command("query " + self.debugtab_nick)
 
-        # put the channel list entry for it in the object so I can get at it
-        self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
+        self.makeDebugTab()
 
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
@@ -119,6 +117,13 @@ class irc_subst(commandtarget.CommandTarget):
 
         # initialize superclass
         super(irc_subst, self).__init__()
+
+    def makeDebugTab(self):
+        # add the tab for debugging
+        hexchat.command("query " + self.debugtab_nick)
+
+        # put the channel list entry for it in the object so I can get at it
+        self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
 
     def debugPrint(self, *args, **kwargs):
         if self.debugP:
