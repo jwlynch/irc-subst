@@ -293,6 +293,7 @@ class irc_subst(commandtarget.CommandTarget):
                 if argList[0] == "on":
                     print("set debug print on")
                     self.debugP = True
+                    self.makeDebugTab()
                 elif argList[0] == "off":
                     print("set debug print off")
                     self.debugP = False
