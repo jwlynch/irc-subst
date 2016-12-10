@@ -98,6 +98,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         # add the tab for debugging
         hexchat.command("query server1")
+        self.debugtab_nick = "DebugTab"
 
         # put the channel list entry for it in the object so I can get at it
         self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == "server1"][0]
