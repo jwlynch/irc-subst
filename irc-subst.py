@@ -458,6 +458,8 @@ class irc_subst(commandtarget.CommandTarget):
         #                                 would like to get it from that
         #                                 rather than bother the server about it
 
+        self.debugPrint(word_eol[0])
+
         return hexchat.EAT_NONE
 
 # make an object of the class which contains all of the above funcs as methods
