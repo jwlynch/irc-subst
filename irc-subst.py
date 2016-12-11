@@ -93,8 +93,6 @@ class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
 
-        # whether to print debugging info to debug tab
-        self.debugP = False
 
         # the debug tab name, which will show up in the client
         self.debugtab_nick = "DebugTab"
@@ -106,7 +104,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdAddFact = "addfact"
         self.cmdRmFact = "rmfact"
         self.cmdInfo = "info"
-        self.cmdDebug = "debug"
 
         self.cmdDebugHi = "debughi"
 
@@ -283,22 +280,6 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
-        elif cmdString == self.cmdDebug:
-            if len(argList) < 1:
-                print("debug print: too few args")
-            elif len(argList) > 1:
-                print("debug print: too many args")
-            else:
-                # correct number of args
-                if argList[0] == "on":
-                    print("set debug print on")
-                    self.debugP = True
-                    self.makeDebugTab()
-                elif argList[0] == "off":
-                    print("set debug print off")
-                    self.debugP = False
-                else:
-                    print("set debug print: unrecognized argument")
 
         else:
             # pass buck to superclass
