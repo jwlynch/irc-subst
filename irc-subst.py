@@ -447,8 +447,6 @@ class irc_subst(commandtarget.CommandTarget):
         #                                 would like to get it from that
         #                                 rather than bother the server about it
 
-        self.debugPrint(word_eol[0])
-
         # if the word "privmsg" is in the list debugSects, print debug message
         if dex(self.debugSects, "privmsg") != -1:
         return hexchat.EAT_NONE
