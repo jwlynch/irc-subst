@@ -449,6 +449,14 @@ class irc_subst(commandtarget.CommandTarget):
 
         # if the word "privmsg" is in the list debugSects, print debug message
         if dex(self.debugSects, "privmsg") != -1:
+            self.debugPrint(word_eol[0])
+
+            self.debugPrint("word length: " + str(len(word)))
+            self.debugPrint("word 0: " + word[0])
+            self.debugPrint("word 1: " + word[1])
+            self.debugPrint("word 2: " + word[2])
+            self.debugPrint("word 3: " + word[3])
+                                    
         return hexchat.EAT_NONE
 
 # make an object of the class which contains all of the above funcs as methods
