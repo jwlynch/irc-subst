@@ -127,8 +127,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
 
     def debugPrint(self, *args, **kwargs):
-        if self.debugP:
-            self.debug_tab.context.prnt(*args, **kwargs)
+        self.debug_tab.context.prnt(*args, **kwargs)
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
