@@ -93,6 +93,9 @@ class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
         self.sent = False
 
+        # a list of words, which if present specify a section to print debugging about.
+        # at first, this will be each hook
+        self.debugSects = []
 
         # the debug tab name, which will show up in the client
         self.debugtab_nick = "DebugTab"
@@ -104,6 +107,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdAddFact = "addfact"
         self.cmdRmFact = "rmfact"
         self.cmdInfo = "info"
+        self.cmdDebugSects = "debugsects"
 
         self.cmdDebugHi = "debughi"
 
@@ -280,6 +284,11 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
+        elif cmdString == self.cmdDebugSects:
+            if len(argList) == 0:
+                self.debugPrint("debug sections: " + repr(self.debugSects))
+            else:
+                self.debugPrint("debug sections: more than one arg not implemented")
 
         else:
             # pass buck to superclass
