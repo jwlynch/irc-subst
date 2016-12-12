@@ -448,7 +448,7 @@ class irc_subst(commandtarget.CommandTarget):
         #                                 rather than bother the server about it
 
         # if the word "privmsg" is in the list debugSects, print debug message
-        if dex(self.debugSects, "privmsg") != -1:
+        if dex("privmsg", self.debugSects) != -1:
             self.debugPrint(word_eol[0])
 
             self.debugPrint("word length: " + str(len(word)))
