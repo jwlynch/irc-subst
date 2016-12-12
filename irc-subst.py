@@ -115,6 +115,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.dbSpecs = dbSpecs
 
         self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
+        self.channel_re = re.compile("^[#&~].*$")
 
         # initialize superclass
         super(irc_subst, self).__init__()
