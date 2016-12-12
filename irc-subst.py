@@ -452,6 +452,19 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    # splits hostmask (string of form nick!email@site) into its parts
+    # returns a dict with keys nick, emailname, site 
+    def split_hostmask(self, hostmask):
+        (nick, email) = hostmask.split(sep="!")
+        (emailname,site) = email.split(sep="@")
+
+        result = {}
+        result["nick"] = nick
+        result["emailname"] = emailname
+        result["site"] = site
+
+        return result
+
     # privmsg hook
 
     def privmsg_hook(self, word, word_eol, userdata):
