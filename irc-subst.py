@@ -479,6 +479,16 @@ class irc_subst(commandtarget.CommandTarget):
         # if the word "privmsg" is in the list debugSects, print debug message
         if dex("privmsg", self.debugSects) != -1:
             self.debugPrint(word_eol[0])
+        src_hostmask = word[0][1:]
+        dest = word[2]
+        message = word[3][1:] + " " + " ".join(word[4:])
+
+        hostmaskdict = self.split_hostmask(src_hostmask)
+
+        src_nick = hostmaskdict["nick"]
+        src_emailname = hostmaskdict["emailname"]
+        src_host = hostmaskdict["site"]
+
 
             self.debugPrint("word length: " + str(len(word)))
             self.debugPrint("word 0: " + word[0])
