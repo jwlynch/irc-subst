@@ -470,7 +470,8 @@ class irc_subst(commandtarget.CommandTarget):
 
     def privmsg_hook(self, word, word_eol, userdata):
 
-        # TODO - differentiate between private messages and messages to channels,
+        # TODO
+        #      - 
         #      - store hostmask and nick somewhere (db?)
         #      - get user's account name (where is this stored already?
         #                                 would like to get it from that
@@ -502,6 +503,19 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("source nick:      " + src_nick)
             self.debugPrint("source emailname: " + src_emailname)
             self.debugPrint("source host:      " + src_host)
+
+        # differentiate between private messages and messages to channels
+        if re.match(self.channel_re, dest):
+            channel = dest
+
+            if debugBasicP:
+                self.debugPrint("destination channel: " + channel)
+
+        else:
+            nick = dest
+
+            if debugBasicP:
+                self.debugPrint("destination nick: " + nick)
 
         if debugBasicP:
             self.debugPrint("message: " + message)
