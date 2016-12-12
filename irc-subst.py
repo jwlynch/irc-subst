@@ -498,6 +498,14 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             debugSQLP = False
 
+        if debugBasicP:
+            self.debugPrint("source nick:      " + src_nick)
+            self.debugPrint("source emailname: " + src_emailname)
+            self.debugPrint("source host:      " + src_host)
+
+        if debugBasicP:
+            self.debugPrint("message: " + message)
+
         return hexchat.EAT_NONE
 
 # make an object of the class which contains all of the above funcs as methods
