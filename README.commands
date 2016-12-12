@@ -32,3 +32,9 @@ remove user channel
 remove user channel reason
 --------------------------
 remove user from channel
+
+debugsects [ add sect | rm sect ]
+---------------------------------
+
+list (no args), add or remove the section names that are printed to the debug tab
+
