@@ -476,9 +476,6 @@ class irc_subst(commandtarget.CommandTarget):
         #                                 would like to get it from that
         #                                 rather than bother the server about it
 
-        # if the word "privmsg" is in the list debugSects, print debug message
-        if dex("privmsg", self.debugSects) != -1:
-            self.debugPrint(word_eol[0])
         src_hostmask = word[0][1:]
         dest = word[2]
         message = word[3][1:] + " " + " ".join(word[4:])
@@ -490,12 +487,6 @@ class irc_subst(commandtarget.CommandTarget):
         src_host = hostmaskdict["site"]
 
 
-            self.debugPrint("word length: " + str(len(word)))
-            self.debugPrint("word 0: " + word[0])
-            self.debugPrint("word 1: " + word[1])
-            self.debugPrint("word 2: " + word[2])
-            self.debugPrint("word 3: " + word[3])
-                                    
         return hexchat.EAT_NONE
 
 # make an object of the class which contains all of the above funcs as methods
