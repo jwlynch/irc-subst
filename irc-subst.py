@@ -538,7 +538,7 @@ class irc_subst(commandtarget.CommandTarget):
             debugNoticeP = False
 
         if debugNoticeP:
-            self.debugPrint("notice: %s" % (word_eol[0]))
+            self.debugPrint("notice: %s" % (detailList(word)))
 
         return hexchat.EAT_NONE
 
