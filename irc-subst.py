@@ -55,7 +55,7 @@ def detailList(l):
     for i in range(len(l)):
         reslst.append("[%s]: %s" % (str(i), str(l[i])))
 
-        return " ".join(reslst)
+    return " ".join(reslst)
 
 commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
 
