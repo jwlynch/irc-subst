@@ -490,7 +490,7 @@ class irc_subst(commandtarget.CommandTarget):
         dest = word[2]
         message = word[3][1:] + " " + " ".join(word[4:])
 
-        hostmaskdict = self.split_hostmask(src_hostmask)
+        hostmaskdict = split_hostmask(src_hostmask)
 
         src_nick = hostmaskdict["nick"]
         src_emailname = hostmaskdict["emailname"]
