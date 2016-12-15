@@ -48,6 +48,15 @@ def dex(item, lst):
     finally:
         return result
 
+# return a string detailing a list (its items togeter with each index)
+def detailList(l):
+    reslst = []
+
+    for i in range(len(l)):
+        reslst.append("[%s]: %s" % (str(i), str(l[i])))
+
+        return " ".join(reslst)
+
 commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
 
 if dex('general', parser.sections()) != -1:
