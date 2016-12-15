@@ -522,6 +522,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
+    def notice_hook(self, word, word_eol, userdata):
+        pass
+
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
 
@@ -530,3 +533,6 @@ hexchat.hook_command('', irc_subst_obj.inputHook)
 
 # establish the hook to the privmsg method of irc_subst, above
 hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
+
+# establish the hook to the notice method of irc_subst, above
+hexchat.hook_server('NOTICE', irc_subst_obj.notice_hook)
