@@ -57,6 +57,19 @@ def detailList(l):
 
     return " ".join(reslst)
 
+# splits hostmask (string of form nick!email@site) into its parts
+# returns a dict with keys nick, emailname, site
+def split_hostmask(hostmask):
+    (nick, email) = hostmask.split(sep="!")
+    (emailname,site) = email.split(sep="@")
+
+    result = {}
+    result["nick"] = nick
+    result["emailname"] = emailname
+    result["site"] = site
+
+    return result
+
 commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
 
 if dex('general', parser.sections()) != -1:
@@ -459,19 +472,6 @@ class irc_subst(commandtarget.CommandTarget):
                         result = hexchat.EAT_ALL
 
             self.sent = False
-
-        return result
-
-    # splits hostmask (string of form nick!email@site) into its parts
-    # returns a dict with keys nick, emailname, site
-    def split_hostmask(self, hostmask):
-        (nick, email) = hostmask.split(sep="!")
-        (emailname,site) = email.split(sep="@")
-
-        result = {}
-        result["nick"] = nick
-        result["emailname"] = emailname
-        result["site"] = site
 
         return result
 
