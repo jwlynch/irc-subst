@@ -523,7 +523,16 @@ class irc_subst(commandtarget.CommandTarget):
         return hexchat.EAT_NONE
 
     def notice_hook(self, word, word_eol, userdata):
-        pass
+        if dex("notice", self.debugSects) != -1:
+            debugNoticeP = True
+        else:
+            debugNoticeP = False
+
+        if debugNoticeP:
+            self.debugPrint("notice: %s" % (word_eol[0]))
+
+        return hexchat.EAT_NONE
+
 
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
