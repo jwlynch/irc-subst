@@ -549,6 +549,15 @@ class irc_subst(commandtarget.CommandTarget):
         # less typing
         w = word
         
+        src_hostmask = w[0][1:]
+
+        # is it from saslserv?
+        if src_hostmask =  "SaslServ!SaslServ@services.":
+        else:
+            # from someone else
+            pass
+
+
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
 
