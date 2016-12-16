@@ -546,6 +546,9 @@ class irc_subst(commandtarget.CommandTarget):
         # [12]: There [13]: have [14]: been [15]: 228 [16]: failed [17]: login [18]: attempts
         # [19]: since [20]: your [21]: last [22]: successful [23]: login.
 
+        # less typing
+        w = word
+        
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
 
