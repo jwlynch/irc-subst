@@ -558,24 +558,30 @@ class irc_subst(commandtarget.CommandTarget):
 
         # is it from saslserv?
         if src_hostmask == "SaslServ!SaslServ@services.":
-            print("from saslserv")
+            if debugNoticeTestsP:
+                self.debugPrint("notice was from saslserv")
+
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[7] == "failed" and w[9] == "login")
             unknownUserP = (w[3][3:] == "Unknown" and w[4] == "user")
             viaSASLP = (w[5] == "(via" and w[6].startswith("SASL):"))
 
             if justToMeP and failedLoginP and unknownUserP and ViaSASLP:
-                print("justToMeP and failedLoginP and unknownUserP and ViaSASLP")
+                if debugNoticeTestsP:
+                    self.debugPrint("justToMeP and failedLoginP and unknownUserP and ViaSASLP")
+
                 ipAddr = w[6][5:-1]
                 print("failed sasl login from %s" % (ipAddr))
                 # TODO: insert into database
                 result = hexchat.EAT_ALL
             else:
-                print("!justToMeP or !failedLoginP or !unknownUserP or !ViaSASLP")
+                if debugNoticeTestsP:
+                    self.debugPrint("!justToMeP or !failedLoginP or !unknownUserP or !ViaSASLP")
+
         else:
             # from someone else
-            print("not from saslserv")
-
+            if debugNoticeTestsP:
+                self.debugPrint("notice was not from saslserv")
 
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
