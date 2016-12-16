@@ -552,7 +552,7 @@ class irc_subst(commandtarget.CommandTarget):
         src_hostmask = w[0][1:]
 
         # is it from saslserv?
-        if src_hostmask =  "SaslServ!SaslServ@services.":
+        if src_hostmask == "SaslServ!SaslServ@services.":
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[7] == "failed" and w[9] == "login")
             unknownUserViaSASLP = (w[3][2:] == "Unknown" and w[4] == "user" and w[5] == "(via" w[6].startswith("SASL:"))
