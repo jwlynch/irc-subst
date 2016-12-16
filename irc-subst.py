@@ -555,13 +555,15 @@ class irc_subst(commandtarget.CommandTarget):
         if src_hostmask == "SaslServ!SaslServ@services.":
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[7] == "failed" and w[9] == "login")
-            unknownUserViaSASLP = (w[3][3:] == "Unknown" and w[4] == "user" and w[5] == "(via" and w[6].startswith("SASL):"))
+            unknownUserP = (w[3][3:] == "Unknown" and w[4] == "user")
+            viaSASLP = (w[5] == "(via" and w[6].startswith("SASL):"))
 
-            if justToMeP and failedLoginP and unknownUserViaSASLP:
+            if justToMeP and failedLoginP and unknownUserP and ViaSASLP:
                 ipAddr = w[6][5:-1]
                 print("failed sasl login from %s" % (ipAddr))
                 # TODO: insert into database
                 result = hexchat.EAT_ALL
+            else:
         else:
             # from someone else
             pass
