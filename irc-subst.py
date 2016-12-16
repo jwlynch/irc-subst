@@ -555,7 +555,7 @@ class irc_subst(commandtarget.CommandTarget):
         if src_hostmask == "SaslServ!SaslServ@services.":
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[7] == "failed" and w[9] == "login")
-            unknownUserViaSASLP = (w[3][2:] == "Unknown" and w[4] == "user" and w[5] == "(via" and w[6].startswith("SASL:"))
+            unknownUserViaSASLP = (w[3][3:] == "Unknown" and w[4] == "user" and w[5] == "(via" and w[6].startswith("SASL):"))
 
             if justToMeP and failedLoginP and unknownUserViaSASLP:
                 ipAddr = w[6][5:-1]
