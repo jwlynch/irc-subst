@@ -539,6 +539,11 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             debugNoticeP = False
 
+        if dex("noticetests", self.debugSects) != -1:
+            debugNoticeTestsP = True
+        else:
+            debugNoticeTestsP = False
+
         # example line: notice: [0]: :SaslServ!SaslServ@services. [1]: NOTICE [2]: jim
         # [3]: :+<Unknown [4]: user [5]: (via
         # [6]: SASL):wnklmb0121w-ad03-247-234.dynamic.mtsallstream.net>
