@@ -532,6 +532,8 @@ class irc_subst(commandtarget.CommandTarget):
         return hexchat.EAT_NONE
 
     def notice_hook(self, word, word_eol, userdata):
+        result = hexchat.EAT_NONE
+
         if dex("notice", self.debugSects) != -1:
             debugNoticeP = True
         else:
@@ -540,7 +542,7 @@ class irc_subst(commandtarget.CommandTarget):
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
 
-        return hexchat.EAT_NONE
+        return result
 
 
 # make an object of the class which contains all of the above funcs as methods
