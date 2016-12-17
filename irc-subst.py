@@ -563,7 +563,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[7] == "failed" and w[9] == "login")
-            unknownUserP = (w[3][3:] == "Unknown" and w[4] == "user")
+            unknownUserP = (w[3][4:] == "Unknown" and w[4] == "user")
             viaSASLP = (w[5] == "(via" and w[6].startswith("SASL):"))
 
             if debugNoticeTestsP:
