@@ -577,7 +577,7 @@ class irc_subst(commandtarget.CommandTarget):
                 if debugNoticeTestsP:
                     self.debugPrint("justToMeP and failedLoginP and unknownUserP and viaSASLP")
 
-                ipAddr = w[6][5:-1]
+                ipAddr = w[6][6:-2]
                 print("failed sasl login from %s" % (ipAddr))
                 # TODO: insert into database
                 result = hexchat.EAT_ALL
