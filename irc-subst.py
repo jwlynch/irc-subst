@@ -566,9 +566,9 @@ class irc_subst(commandtarget.CommandTarget):
             unknownUserP = (w[3][3:] == "Unknown" and w[4] == "user")
             viaSASLP = (w[5] == "(via" and w[6].startswith("SASL):"))
 
-            if justToMeP and failedLoginP and unknownUserP and ViaSASLP:
+            if justToMeP and failedLoginP and unknownUserP and viaSASLP:
                 if debugNoticeTestsP:
-                    self.debugPrint("justToMeP and failedLoginP and unknownUserP and ViaSASLP")
+                    self.debugPrint("justToMeP and failedLoginP and unknownUserP and viaSASLP")
 
                 ipAddr = w[6][5:-1]
                 print("failed sasl login from %s" % (ipAddr))
@@ -576,8 +576,8 @@ class irc_subst(commandtarget.CommandTarget):
                 result = hexchat.EAT_ALL
             else:
                 if debugNoticeTestsP:
-                    self.debugPrint("!justToMeP or !failedLoginP or !unknownUserP or !ViaSASLP")
-                    self.debugPrint("justToMeP: %s, failedLoginP: %s, unknownUserP: %s, ViaSASLP: %s" % (str(justToMeP), str(failedLoginP), str(unknownUserP), str(ViaSASLP)))
+                    self.debugPrint("!justToMeP or !failedLoginP or !unknownUserP or !viaSASLP")
+                    self.debugPrint("justToMeP: %s, failedLoginP: %s, unknownUserP: %s, viaSASLP: %s" % (str(justToMeP), str(failedLoginP), str(unknownUserP), str(viaSASLP)))
 
         else:
             # from someone else
