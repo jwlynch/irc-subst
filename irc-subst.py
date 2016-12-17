@@ -566,13 +566,6 @@ class irc_subst(commandtarget.CommandTarget):
             unknownUserP = (w[3][4:] == "Unknown" and w[4] == "user")
             viaSASLP = (w[5] == "(via" and w[6].startswith("SASL):"))
 
-            if debugNoticeTestsP:
-                # debugging the test
-                debUnknownP = (w[3][3:] == "Unknown")
-                debUserP = (w[4] == "user")
-
-                self.debugPrint("debUnknownP: %s, debUserP: %s" % (str(debUnknownP), str(debUserP)))
-
             if justToMeP and failedLoginP and unknownUserP and viaSASLP:
                 if debugNoticeTestsP:
                     self.debugPrint("justToMeP and failedLoginP and unknownUserP and viaSASLP")
