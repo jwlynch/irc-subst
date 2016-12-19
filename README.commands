@@ -20,10 +20,10 @@ addfact key "value"
 
 insert factoid into db
 
-rmfact str
+rmfact key
 ----------
 
-remove the factoid key matching str
+remove the factoid whose key matches key
 
 remove user
 -----------
