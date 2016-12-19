@@ -6,6 +6,7 @@
 
 import re
 import psycopg2
+import arrow # for timestamps
 
 import hexchat
 
