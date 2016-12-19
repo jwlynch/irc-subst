@@ -589,7 +589,7 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("w[6][6:-2] aka the IP: %s" % (w[6][6:-2]))
 
                 print("failed sasl login from %s" % (ipAddr))
-                # TODO: insert into database
+                self.insertFailedLogin(None, ipAddr, None)
                 result = hexchat.EAT_ALL
             else:
                 if debugNoticeTestsP:
