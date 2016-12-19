@@ -1,0 +1,73 @@
+This script was written by Jim Lynch (with lots of support by the folks on #python,
+#hexchat and #postgresql in the freenode irc net), email jim@jam.sessionsnet.org .
+
+DESCRIPTION
+
+When loaded onto a hexchat instance, this script arranges for the storage, retrieval and
+output of "factoids", which are textual key/value pairs stored in a postgresql database.
+When a key is found in an outgoing irc line, the value attached to it is substuted in the
+line before the line goes out. Newer additions to the script include parsing of incoming
+irc notices to determine whether someone tried and failed to log into the user's irc nick
+account, and if so, to capture the IP address from the notice, and store it, together with
+the current date and time, into the database. Planned enhancements include an analysis of
+that data to determine whether someone is attempting to learn the user's password by "brute
+force" methods.
+
+Also planned is a general irc log facility, where the log is also stored in the database.
+
+REQUIREMENTS
+
+To run this script, you need:
+
+ - python version 3
+ - a postgresql database, running locally or remotely
+ - the python arrow module, which is a dropin replacement for datetime (and others)
+ - the python dateutil module, which arrow also depends on.
+
+SETUP
+
+In order to get this working, you need to place the main script, irc-subst.py, in the dir
+/home/you/.config/hexchat/addons dir. Also needed in that dir are: the utils dir (with the
+two enclosed files) as well as a config file, which should be called irc-subst.cfg.
+
+This last file is one you would create, and it needs to have two sections in it; a sample
+config file looks like this:
+
+
+-- cut -- here --
+
+[general]
+command-prefix = .
+[db]
+dbname = myircsubstdb
+user = you
+
+-- cut -- here --
+
+LOADING THE DATA MODEL
+
+First, you need to be in the sql dir for this to work, so:
+
+cd sql
+
+Then, you need to create the empty database, which you can name anything you want, so we will
+assume you're calling it myircsubstdb . Remember to adjust the config file so that the dbname
+is set properly to tyhat name.
+
+Next, you would load the initial infrastructure, by running this command:
+
+psql myircsubstdb -f irc-subst-create.sql
+
+Note, if you ever need to remove it, you can run:
+
+psql myircsubstdb -f irc-subst-drop.sql
+
+This will destroy all the data in the database, including your factoids. I'm planning to write
+a script which will back up, and another which will restore, the database should a disaster
+happen.
+
+LOADING THE SCRIPT FOR THE FIRST TIME
+
+Once you have the database created and the initial data model loaded, it's ready to run. Here's
+how:
+
