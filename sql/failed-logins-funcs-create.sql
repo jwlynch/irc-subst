@@ -22,7 +22,9 @@ $$
     hoi := host_or_ip;
 
     if creation_date is null then
+      select now() into cd;
     else
+      cd := creation_date;
     end if;
 
     insert into
