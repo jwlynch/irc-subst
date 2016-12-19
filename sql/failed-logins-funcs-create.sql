@@ -26,7 +26,7 @@ $$
     end if;
 
     insert into
-      failed_logins
+      failed_logins_sasl
       (
         failed_login_id,
 	host_or_ip_addr,
