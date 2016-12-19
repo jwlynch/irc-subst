@@ -227,7 +227,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                 try:
                     self.cur = conn.cursor()
-                    self.cur.execute("insert into irc_subst(key, value) values (%s, %s)", (key, value))
+                    self.cur.execute("insert into factoids(key, value) values (%s, %s)", (key, value))
                 except psycopg2.Error as pe:
                     conn.rollback()
                     print("factoid add: db insert error: " + str(pe))
@@ -273,7 +273,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                 try:
                     self.cur = conn.cursor()
-                    self.cur.execute("delete from irc_subst where key = %s", (key,))
+                    self.cur.execute("delete from factoids where key = %s", (key,))
                 except psycopg2.Error as pe:
                     conn.rollback()
                     print("factoid remove: db insert error: " + str(pe))
@@ -353,7 +353,7 @@ class irc_subst(commandtarget.CommandTarget):
         # now query the db
         conn = self.opendb()
         cur = conn.cursor()
-        cur.execute("""select i.key,i.value from irc_subst i where i.key = any (%s)""", (key_list,))
+        cur.execute("""select i.key,i.value from factoids f where f.key = any (%s)""", (key_list,))
         result_list = cur.fetchall()
         self.closedb(conn)
 
@@ -402,7 +402,7 @@ class irc_subst(commandtarget.CommandTarget):
     def list_keys(self):
         conn = self.opendb()
         cur = conn.cursor()
-        cur.execute("select i.key from irc_subst i order by i.key;")
+        cur.execute("select i.key from factoids i order by i.key;")
         result_list = cur.fetchall()
         self.closedb(conn)
 

@@ -1,7 +1,7 @@
-create table irc_subst
+create table factoids
 (
   key varchar
-    constraint irc_subst_pk
+    constraint factoids_pk
       primary key,
 
   value varchar
