@@ -353,7 +353,7 @@ class irc_subst(commandtarget.CommandTarget):
         # now query the db
         conn = self.opendb()
         cur = conn.cursor()
-        cur.execute("""select i.key,i.value from factoids f where f.key = any (%s)""", (key_list,))
+        cur.execute("""select f.key,f.value from factoids f where f.key = any (%s)""", (key_list,))
         result_list = cur.fetchall()
         self.closedb(conn)
 
