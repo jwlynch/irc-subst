@@ -628,6 +628,17 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
+    def partreas_hook(self, word, word_eol, userdata):
+        if dex("partreas", self.debugSects) != -1:
+            debugPartReasP = True
+        else:
+            debugPartReasP = False
+
+        if debugPartReasP:
+            self.debugPrint("debugPartReasP: " + word_eol[0])
+
+        return hexchat.EAT_NONE
+
 
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
@@ -646,3 +657,4 @@ hexchat.hook_print('Join', irc_subst_obj.join_hook)
 
 # establish the hooks to the part_hook and partreas_hook methods of irc_subst, above
 hexchat.hook_print('Part', irc_subst_obj.part_hook)
+hexchat.hook_print('Part with Reason', irc_subst_obj.partreas_hook)
