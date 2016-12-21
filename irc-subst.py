@@ -606,6 +606,17 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def join_hook(self, word, word_eol, userdata):
+        if dex("join", self.debugSects) != -1:
+            debugJoinP = True
+        else:
+            debugJoinP = False
+
+        if debugJoinP:
+            self.debugPrint("debugJoinP: " + word_eol[0])
+
+        return hexchat.EAT_NONE
+
 
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
@@ -618,3 +629,6 @@ hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
 
 # establish the hook to the notice method of irc_subst, above
 hexchat.hook_server('NOTICE', irc_subst_obj.notice_hook)
+
+# establish the hook to the join_hook method of irc_subst, above
+hexchat.hook_print('Join', irc_subst_obj.join_hook)
