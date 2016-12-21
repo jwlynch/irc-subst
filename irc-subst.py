@@ -617,14 +617,14 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
-    def leave_hook(self, word, word_eol, userdata):
-        if dex("leave", self.debugSects) != -1:
-            debugLeaveP = True
+    def part_hook(self, word, word_eol, userdata):
+        if dex("part", self.debugSects) != -1:
+            debugPartP = True
         else:
-            debugLeaveP = False
+            debugPartP = False
 
-        if debugLeaveP:
-            self.debugPrint("debugLeaveP: " + word_eol[0])
+        if debugPartP:
+            self.debugPrint("debugPartP: " + word_eol[0])
 
         return hexchat.EAT_NONE
 
@@ -644,5 +644,5 @@ hexchat.hook_server('NOTICE', irc_subst_obj.notice_hook)
 # establish the hook to the join_hook method of irc_subst, above
 hexchat.hook_print('Join', irc_subst_obj.join_hook)
 
-# establish the hook to the leave_hook method of irc_subst, above
-hexchat.hook_print('Leave', irc_subst_obj.leave_hook)
+# establish the hooks to the part_hook and partreas_hook methods of irc_subst, above
+hexchat.hook_print('Part', irc_subst_obj.part_hook)
