@@ -119,6 +119,8 @@ class irc_subst(commandtarget.CommandTarget):
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
         self.debugSects = []
+        # the list of all such sections
+        self.allDebugSects = []
 
         # the debug tab name, which will show up in the client
         self.debugtab_nick = "DebugTab"
@@ -131,6 +133,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdRmFact = "rmfact"
         self.cmdInfo = "info"
         self.cmdDebugSects = "debugsects"
+        self.cmdLSDebugSects = "lsdebugsects"
 
         self.cmdDebugHi = "debughi"
 
@@ -307,6 +310,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
+        elif cmdString == self.cmdLSDebugSects:
+            self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
         elif cmdString == self.cmdDebugSects:
             if len(argList) == 0:
                 self.debugPrint("debug sections: " + repr(self.debugSects))
