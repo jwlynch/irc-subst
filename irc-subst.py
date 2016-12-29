@@ -122,6 +122,8 @@ class irc_subst(commandtarget.CommandTarget):
         # the list of all such sections
         self.allDebugSects = []
 
+        self.allDebugSects = ["privmsgbasic", "privmsgsql", "notice", "noticetests", "join", "part", "partreas"]
+
         # the debug tab name, which will show up in the client
         self.debugtab_nick = "DebugTab"
 
