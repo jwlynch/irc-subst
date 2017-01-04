@@ -1,6 +1,4 @@
 
-create sequence object_id_seq;
-
 create table object
 (
   object_id bigint
