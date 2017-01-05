@@ -8,7 +8,7 @@ create table object
     constraint object_type_nn
       not null
     constraint object_type_fk_ob_type
-      references object_type.object_type,
+      references object_type(object_type),
   creation_date timestamptz
 );
 
