@@ -4,6 +4,9 @@
 # keys that look like [[key]] and substitutes a value looked up in a pg database.
 # Right now, this is specific to hexchat.
 
+# whether to print the config file when first loading the script
+printConfigP = True
+
 import pathlib
 import re
 import psycopg2
@@ -71,6 +74,15 @@ def split_hostmask(hostmask):
     return result
 
 commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
+
+if printConfigP:
+    print("config file: ")
+
+    for sect in parser.sections():
+        print("section %s:" % sect)
+        for opt in parser.options(sect):
+            val = parser.get(sect, opt)
+            print("  %s = %s" % (opt, val))
 
 if dex('general', parser.sections()) != -1:
     print("there is a general section")
