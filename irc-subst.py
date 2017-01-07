@@ -4,6 +4,7 @@
 # keys that look like [[key]] and substitutes a value looked up in a pg database.
 # Right now, this is specific to hexchat.
 
+import pathlib
 import re
 import psycopg2
 import arrow # for timestamps
@@ -21,9 +22,7 @@ __module_description__ = "IRC substituter by Jim"
 
 # script and config file dir
 
-# pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
-# hardwire the path until TODO: I find out how to do this right
-pathname = "/home/jim/.config/hexchat/addons/"
+pathname = pathlib.Path(__file__).parent.__str__()
 sys.path.append(pathname)
 
 print("this script should be in " + pathname)
