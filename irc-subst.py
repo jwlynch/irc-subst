@@ -92,14 +92,13 @@ if dex('general', parser.sections()) != -1:
 else:
     pass # no general sect
 
-dbSpecs = {}
-
 if dex("db", parser.sections()) == -1:
     dbOK = False
 else:
     dbOK = True
 
 if dbOK:
+    dbSpecs = {}
     for option in parser.options('db'):
         dbSpecs[option] = parser.get('db', option)
 
@@ -212,95 +211,106 @@ class irc_subst(commandtarget.CommandTarget):
 
         elif cmdString == self.cmdAddFact:
             result = 0 # success/command is found
-            bad = True
-            key = ""
-            value = ""
 
-            if len(argList) < 2:
-                print("factoid add: too few args")
-            elif len(argList) > 2:
-                print("factoid add: too many args")
+            if dbOK:
+                bad = True
+                key = ""
+                value = ""
+
+                if len(argList) < 2:
+                    print("factoid add: too few args")
+                elif len(argList) > 2:
+                    print("factoid add: too many args")
+                else:
+                    # correct number of args
+                    bad = False
+                    key = argList[0]
+                    value = argList[1]
+
+                if not bad:
+                    if not self.key_re.match(key):
+                        print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                        bad = True
+
+                if not bad:
+                    lookupTable = self.lookupKeyList([key])
+                    if lookupTable:
+                        # key is already in db
+                        print("key %s is already in db" % (key))
+                        bad = True
+
+                if not bad:
+                    # do query and insert here
+                    print("factoid add: key %s, value %s" % (key, value))
+                    conn = self.opendb()
+
+                    try:
+                        self.cur = conn.cursor()
+                        self.cur.execute("insert into factoids(key, value) values (%s, %s)", (key, value))
+                    except psycopg2.Error as pe:
+                        conn.rollback()
+                        print("factoid add: db insert error: " + str(pe))
+                    finally:
+                        self.cur.close()
+                        conn.commit()
+
+                    self.cur = None
+                    self.closedb(conn)
+
+                result = 0
+
             else:
-                # correct number of args
-                bad = False
-                key = argList[0]
-                value = argList[1]
+                print("no db")
 
-            if not bad:
-                if not self.key_re.match(key):
-                    print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
-                    bad = True
-
-            if not bad:
-                lookupTable = self.lookupKeyList([key])
-                if lookupTable:
-                    # key is already in db
-                    print("key %s is already in db" % (key))
-                    bad = True
-
-            if not bad:
-                # do query and insert here
-                print("factoid add: key %s, value %s" % (key, value))
-                conn = self.opendb()
-
-                try:
-                    self.cur = conn.cursor()
-                    self.cur.execute("insert into factoids(key, value) values (%s, %s)", (key, value))
-                except psycopg2.Error as pe:
-                    conn.rollback()
-                    print("factoid add: db insert error: " + str(pe))
-                finally:
-                    self.cur.close()
-                    conn.commit()
-
-                self.cur = None
-                self.closedb(conn)
-
-            result = 0
         elif cmdString == self.cmdRmFact:
             result = 0 # success/command is found
-            bad = True
-            key = ""
-            value = ""
 
-            if len(argList) < 1:
-                print("factoid remove: too few args")
-            elif len(argList) > 1:
-                print("factoid remove: too many args")
+            if dbOK:
+                bad = True
+                key = ""
+                value = ""
+
+                if len(argList) < 1:
+                    print("factoid remove: too few args")
+                elif len(argList) > 1:
+                    print("factoid remove: too many args")
+                else:
+                    # correct number of args
+                    bad = False
+                    key = argList[0]
+
+                if not bad:
+                    if not self.key_re.match(key):
+                        print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                        bad = True
+
+                if not bad:
+                    lookupTable = self.lookupKeyList([key])
+                    if not lookupTable:
+                        # key is not in db
+                        print("factoid remove: key %s is not in db" % (key))
+                        bad = True
+
+                if not bad:
+                    # do delete query here
+                    print("factoid remove: key %s" % (key))
+                    conn = self.opendb()
+
+                    try:
+                        self.cur = conn.cursor()
+                        self.cur.execute("delete from factoids where key = %s", (key,))
+                    except psycopg2.Error as pe:
+                        conn.rollback()
+                        print("factoid remove: db insert error: " + str(pe))
+                    finally:
+                        self.cur.close()
+                        conn.commit()
+
+                    self.cur = None
+                    self.closedb(conn)
             else:
-                # correct number of args
-                bad = False
-                key = argList[0]
+                print("no db")
 
-            if not bad:
-                if not self.key_re.match(key):
-                    print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
-                    bad = True
-
-            if not bad:
-                lookupTable = self.lookupKeyList([key])
-                if not lookupTable:
-                    # key is not in db
-                    print("factoid remove: key %s is not in db" % (key))
-                    bad = True
-
-            if not bad:
-                # do delete query here
-                print("factoid remove: key %s" % (key))
-                conn = self.opendb()
-
-                try:
-                    self.cur = conn.cursor()
-                    self.cur.execute("delete from factoids where key = %s", (key,))
-                except psycopg2.Error as pe:
-                    conn.rollback()
-                    print("factoid remove: db insert error: " + str(pe))
-                finally:
-                    self.cur.close()
-                    conn.commit()
-
-                self.cur = None
-                self.closedb(conn)
         elif cmdString == self.cmdInfo:
             top_context = hexchat.find_context()
             channel_list = hexchat.get_list('channels')
