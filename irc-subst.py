@@ -176,8 +176,12 @@ class irc_subst(commandtarget.CommandTarget):
         #   #  for running the command)
 
         if cmdString == self.cmdLskeys:
-            self.list_keys()
-            result = 0 # success
+            if dbOK:
+                self.list_keys()
+                result = 0 # success
+            else:
+                print("no db")
+
         elif cmdString == self.cmdRemove:
             channel = None
             nick = None
