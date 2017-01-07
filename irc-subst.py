@@ -95,8 +95,9 @@ else:
 dbSpecs = {}
 
 if dex("db", parser.sections()) == -1:
-    print("config file has no section 'db'")
-    #sys.exit(0)
+    dbOK = False
+else:
+    dbOK = True
 
 for option in parser.options('db'):
     dbSpecs[option] = parser.get('db', option)
