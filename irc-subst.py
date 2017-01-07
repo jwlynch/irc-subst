@@ -99,8 +99,9 @@ if dex("db", parser.sections()) == -1:
 else:
     dbOK = True
 
-for option in parser.options('db'):
-    dbSpecs[option] = parser.get('db', option)
+if dbOK:
+    for option in parser.options('db'):
+        dbSpecs[option] = parser.get('db', option)
 
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
