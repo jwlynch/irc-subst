@@ -28,8 +28,6 @@ __module_description__ = "IRC substituter by Jim"
 pathname = pathlib.Path(__file__).parent.__str__()
 sys.path.append(pathname)
 
-print("this script should be in " + pathname)
-
 from utils import commandtarget
 
 # configuration
