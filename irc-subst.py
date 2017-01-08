@@ -97,8 +97,6 @@ if dex("db", parser.sections()) == -1:
 else:
     dbOK = True
 
-dbSpecs = None
-
 if dbOK:
     dbSpecs = {}
     for option in parser.options('db'):
