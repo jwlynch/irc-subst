@@ -23,6 +23,15 @@ __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
 
+# index of item in list, or -1 if ValueError
+def dex(item, lst):
+    result = -1
+
+    try:
+        result = lst.index(item)
+    finally:
+        return result
+
 # script and config file dir
 
 pathname = pathlib.Path(__file__).parent.__str__()
@@ -39,15 +48,6 @@ conffiles = parser.read(pathname + '/' + 'irc-subst.cfg')
 if len(conffiles) >= 1 and conffiles[0] != 'irc-subst.cfg':
     print("config file 'irc-subst.cfg' cannot be found")
     #sys.exit(0)
-
-# index of item in list, or -1 if ValueError
-def dex(item, lst):
-    result = -1
-
-    try:
-        result = lst.index(item)
-    finally:
-        return result
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
