@@ -381,11 +381,12 @@ class irc_subst(commandtarget.CommandTarget):
 
     def lookupKeyList(self, key_list):
         # now query the db
-        conn = self.opendb()
-        cur = conn.cursor()
-        cur.execute("""select f.key,f.value from factoids f where f.key = any (%s)""", (key_list,))
-        result_list = cur.fetchall()
-        self.closedb(conn)
+        if dbOK:
+            conn = self.opendb()
+            cur = conn.cursor()
+            cur.execute("""select f.key,f.value from factoids f where f.key = any (%s)""", (key_list,))
+            result_list = cur.fetchall()
+            self.closedb(conn)
 
         # go through results, forming a lookup table
         lookup = dict()
