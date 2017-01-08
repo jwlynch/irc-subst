@@ -92,14 +92,13 @@ if dex('general', parser.sections()) != -1:
 else:
     pass # no general sect
 
-dbSpecs = {}
-
 if dex("db", parser.sections()) == -1:
     dbOK = False
 else:
     dbOK = True
 
 if dbOK:
+    dbSpecs = {}
     for option in parser.options('db'):
         dbSpecs[option] = parser.get('db', option)
 
