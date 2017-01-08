@@ -624,8 +624,16 @@ class irc_subst(commandtarget.CommandTarget):
                 if debugNoticeTestsP:
                     self.debugPrint("w[6][6:-2] aka the IP: %s" % (w[6][6:-2]))
 
-                print("failed sasl login from %s" % (ipAddr))
-                self.insertFailedLogin(None, ipAddr, None)
+                if dbOK:
+                    strDbOk = ""
+                else:
+                    strDbOk = " (no db)"
+
+                print("failed sasl login from %s%s" % (ipAddr, strDbOk))
+
+                if dbOK:
+                    self.insertFailedLogin(None, ipAddr, None)
+
                 result = hexchat.EAT_ALL
             else:
                 if debugNoticeTestsP:
