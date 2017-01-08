@@ -213,51 +213,57 @@ class irc_subst(commandtarget.CommandTarget):
 
         elif cmdString == self.cmdAddFact:
             result = 0 # success/command is found
-            bad = True
-            key = ""
-            value = ""
 
-            if len(argList) < 2:
-                print("factoid add: too few args")
-            elif len(argList) > 2:
-                print("factoid add: too many args")
+            if dbOK:
+                bad = True
+                key = ""
+                value = ""
+
+                if len(argList) < 2:
+                    print("factoid add: too few args")
+                elif len(argList) > 2:
+                    print("factoid add: too many args")
+                else:
+                    # correct number of args
+                    bad = False
+                    key = argList[0]
+                    value = argList[1]
+
+                if not bad:
+                    if not self.key_re.match(key):
+                        print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                        bad = True
+
+                if not bad:
+                    lookupTable = self.lookupKeyList([key])
+                    if lookupTable:
+                        # key is already in db
+                        print("key %s is already in db" % (key))
+                        bad = True
+
+                if not bad:
+                    # do query and insert here
+                    print("factoid add: key %s, value %s" % (key, value))
+                    conn = self.opendb()
+
+                    try:
+                        self.cur = conn.cursor()
+                        self.cur.execute("insert into factoids(key, value) values (%s, %s)", (key, value))
+                    except psycopg2.Error as pe:
+                        conn.rollback()
+                        print("factoid add: db insert error: " + str(pe))
+                    finally:
+                        self.cur.close()
+                        conn.commit()
+
+                    self.cur = None
+                    self.closedb(conn)
+
+                result = 0
+
             else:
-                # correct number of args
-                bad = False
-                key = argList[0]
-                value = argList[1]
+                print("no db")
 
-            if not bad:
-                if not self.key_re.match(key):
-                    print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
-                    bad = True
-
-            if not bad:
-                lookupTable = self.lookupKeyList([key])
-                if lookupTable:
-                    # key is already in db
-                    print("key %s is already in db" % (key))
-                    bad = True
-
-            if not bad:
-                # do query and insert here
-                print("factoid add: key %s, value %s" % (key, value))
-                conn = self.opendb()
-
-                try:
-                    self.cur = conn.cursor()
-                    self.cur.execute("insert into factoids(key, value) values (%s, %s)", (key, value))
-                except psycopg2.Error as pe:
-                    conn.rollback()
-                    print("factoid add: db insert error: " + str(pe))
-                finally:
-                    self.cur.close()
-                    conn.commit()
-
-                self.cur = None
-                self.closedb(conn)
-
-            result = 0
         elif cmdString == self.cmdRmFact:
             result = 0 # success/command is found
             bad = True
