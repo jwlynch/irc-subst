@@ -99,7 +99,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.commandPrefix = '.'
 
         # print the config file (if desired)
-        if printConfigP:
+        if self.printConfigP:
             print("config file: ")
 
             for sect in parser.sections():
