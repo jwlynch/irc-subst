@@ -18,6 +18,7 @@ import sys, os
 
 import subprocess
 from subprocess import PIPE
+from configparser import ConfigParser
 
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
@@ -41,7 +42,6 @@ from utils import commandtarget
 
 # configuration
 
-from configparser import ConfigParser
 parser = ConfigParser()
 conffiles = parser.read(pathname + '/' + 'irc-subst.cfg')
 
