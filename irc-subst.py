@@ -95,9 +95,6 @@ class irc_subst(commandtarget.CommandTarget):
         if dex(scriptPath + '/' + 'irc-subst.cfg', conffiles) == -1:
             print("config file '" + scriptPath + "/irc-subst.cfg' cannot be found")
 
-        # default in case there's not a general/commandPrefix in the config file
-        self.commandPrefix = '.'
-
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
             if dex('command-prefix', parser.options('general')) != -1:
