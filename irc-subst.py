@@ -146,6 +146,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.makeDebugTab()
 
+        self.cmdReload = "reload"
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
         self.cmdAddFact = "addfact"
@@ -181,7 +182,9 @@ class irc_subst(commandtarget.CommandTarget):
         # (extract from args whatever might be needed
         #   #  for running the command)
 
-        if cmdString == self.cmdLskeys:
+        if cmdString == self.cmdReload:
+            print("reload")
+        elif cmdString == self.cmdLskeys:
             if self.dbOK:
                 self.list_keys()
                 result = 0 # success
