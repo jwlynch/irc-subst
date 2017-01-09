@@ -103,7 +103,8 @@ class irc_subst(commandtarget.CommandTarget):
             if dex('command-prefix', parser.options('general')) != -1:
                 self.cmdPrefix = parser.get('general', 'command-prefix')
             else:
-                pass # no command-prefix in general sect
+                # no command-prefix in general sect
+                self.cmdPrefix = '.' # default
 
             if dex('print-config', parser.options('general')) != -1:
                 self.printConfigP = parser.get('general', 'print-config')
@@ -119,7 +120,8 @@ class irc_subst(commandtarget.CommandTarget):
                 self.printConfigP = True # default
                        
         else:
-            pass # no general sect
+            # no general sect
+            self.cmdPrefix = '.' # default
 
         if dex("db", parser.sections()) == -1:
             self.dbOK = False
