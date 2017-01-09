@@ -81,7 +81,6 @@ class KeywordList(object):
         self.properties[prop] = value
                                                                                    
 class irc_subst(commandtarget.CommandTarget):
-    def __init__(self, cmdPre, dbSpecs):
     def reload(self, scriptPath):
         parser = ConfigParser()
         conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
@@ -123,6 +122,9 @@ class irc_subst(commandtarget.CommandTarget):
             for option in parser.options('db'):
                 self.dbSpecs[option] = parser.get('db', option)
 
+    def __init__(self, scriptPath):
+        self.scriptPath = scriptPath
+        self.reload(self.scriptPath)
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
@@ -686,7 +688,7 @@ class irc_subst(commandtarget.CommandTarget):
 
 
 # make an object of the class which contains all of the above funcs as methods
-irc_subst_obj = irc_subst(commandPrefix, dbSpecs)
+irc_subst_obj = irc_subst(pathname)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
