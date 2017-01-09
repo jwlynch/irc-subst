@@ -63,14 +63,6 @@ def split_hostmask(hostmask):
     return result
 
 
-if dex('general', parser.sections()) != -1:
-    if dex('command-prefix', parser.options('general')) != -1:
-        commandPrefix = parser.get('general', 'command-prefix')
-    else:
-        pass # no command-prefix in general sect
-else:
-    pass # no general sect
-
 if dex("db", parser.sections()) == -1:
     dbOK = False
 else:
@@ -122,6 +114,15 @@ class irc_subst(commandtarget.CommandTarget):
                 for opt in parser.options(sect):
                     val = parser.get(sect, opt)
                     print("  %s = %s" % (opt, val))
+
+        # pull stuff from general section of config file
+        if dex('general', parser.sections()) != -1:
+            if dex('command-prefix', parser.options('general')) != -1:
+                self.cmdPrefix = parser.get('general', 'command-prefix')
+            else:
+                pass # no command-prefix in general sect
+        else:
+            pass # no general sect
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
