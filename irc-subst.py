@@ -122,6 +122,7 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             # no general sect
             self.cmdPrefix = '.' # default
+            self.printConfigP = True # default
 
         if dex("db", parser.sections()) == -1:
             self.dbOK = False
