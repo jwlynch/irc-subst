@@ -62,14 +62,6 @@ def split_hostmask(hostmask):
 
     return result
 
-
-dbSpecs = None
-
-if dbOK:
-    dbSpecs = {}
-    for option in parser.options('db'):
-        dbSpecs[option] = parser.get('db', option)
-
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
 class KeywordList(object):
@@ -123,6 +115,13 @@ class irc_subst(commandtarget.CommandTarget):
             self.dbOK = False
         else:
             self.dbOK = True
+
+        self.dbSpecs = None
+
+        if self.dbOK:
+            self.dbSpecs = {}
+            for option in parser.options('db'):
+                self.dbSpecs[option] = parser.get('db', option)
 
         self.sent = False
 
