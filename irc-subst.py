@@ -63,11 +63,6 @@ def split_hostmask(hostmask):
     return result
 
 
-if dex("db", parser.sections()) == -1:
-    dbOK = False
-else:
-    dbOK = True
-
 dbSpecs = None
 
 if dbOK:
@@ -123,6 +118,12 @@ class irc_subst(commandtarget.CommandTarget):
                 pass # no command-prefix in general sect
         else:
             pass # no general sect
+
+        if dex("db", parser.sections()) == -1:
+            self.dbOK = False
+        else:
+            self.dbOK = True
+
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
