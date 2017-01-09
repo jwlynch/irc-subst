@@ -182,7 +182,7 @@ class irc_subst(commandtarget.CommandTarget):
         #   #  for running the command)
 
         if cmdString == self.cmdLskeys:
-            if dbOK:
+            if self.dbOK:
                 self.list_keys()
                 result = 0 # success
             else:
@@ -218,7 +218,7 @@ class irc_subst(commandtarget.CommandTarget):
         elif cmdString == self.cmdAddFact:
             result = 0 # success/command is found
 
-            if dbOK:
+            if self.dbOK:
                 bad = True
                 key = ""
                 value = ""
@@ -271,7 +271,7 @@ class irc_subst(commandtarget.CommandTarget):
         elif cmdString == self.cmdRmFact:
             result = 0 # success/command is found
 
-            if dbOK:
+            if self.dbOK:
                 bad = True
                 key = ""
                 value = ""
@@ -387,7 +387,7 @@ class irc_subst(commandtarget.CommandTarget):
 
     def lookupKeyList(self, key_list):
         # now query the db
-        if dbOK:
+        if self.dbOK:
             conn = self.opendb()
             cur = conn.cursor()
             cur.execute("""select f.key,f.value from factoids f where f.key = any (%s)""", (key_list,))
@@ -397,7 +397,7 @@ class irc_subst(commandtarget.CommandTarget):
         # go through results, forming a lookup table
         lookup = dict()
 
-        if dbOK:
+        if self.dbOK:
             for row in result_list:
                 lookup[row[0]] = row[1]
         else:
@@ -630,14 +630,14 @@ class irc_subst(commandtarget.CommandTarget):
                 if debugNoticeTestsP:
                     self.debugPrint("w[6][6:-2] aka the IP: %s" % (w[6][6:-2]))
 
-                if dbOK:
+                if self.dbOK:
                     strDbOk = ""
                 else:
                     strDbOk = " (no db)"
 
                 print("failed sasl login from %s%s" % (ipAddr, strDbOk))
 
-                if dbOK:
+                if self.dbOK:
                     self.insertFailedLogin(None, ipAddr, None)
 
                 result = hexchat.EAT_ALL
