@@ -81,6 +81,12 @@ class KeywordList(object):
         self.properties[prop] = value
                                                                                    
 class irc_subst(commandtarget.CommandTarget):
+    # reload config file
+    #
+    # vars that get set as a result of this call:
+    # - self.cmdPrefix (the char to signal 'this is a command to the script')
+    # - self.dbSpecs (the dict with the database settings, to be give to psycopg2.open()
+    # - self.dbOK (boolean telling whether database is reachable and openable)
     def reload(self, scriptPath):
         parser = ConfigParser()
         conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
