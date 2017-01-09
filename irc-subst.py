@@ -183,7 +183,8 @@ class irc_subst(commandtarget.CommandTarget):
         #   #  for running the command)
 
         if cmdString == self.cmdReload:
-            print("reload")
+            print("reloading config file...")
+            self.reload(self.scriptPath)
         elif cmdString == self.cmdLskeys:
             if self.dbOK:
                 self.list_keys()
