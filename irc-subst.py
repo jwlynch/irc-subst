@@ -62,7 +62,6 @@ def split_hostmask(hostmask):
 
     return result
 
-commandPrefix = '.' # default in case there's not a general/commandPrefix in the config file
 
 if printConfigP:
     print("config file: ")
@@ -119,6 +118,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         if dex(scriptPath + '/' + 'irc-subst.cfg', conffiles) == -1:
             print("config file '" + scriptPath + "/irc-subst.cfg' cannot be found")
+
+        # default in case there's not a general/commandPrefix in the config file
+        self.commandPrefix = '.'
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
