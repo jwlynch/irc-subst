@@ -40,15 +40,6 @@ sys.path.append(pathname)
 
 from utils import commandtarget
 
-# configuration
-
-parser = ConfigParser()
-conffiles = parser.read(pathname + '/' + 'irc-subst.cfg')
-
-if dex(pathname + '/' + 'irc-subst.cfg', conffiles) == -1:
-    print("config file 'irc-subst.cfg' cannot be found")
-    #sys.exit(0)
-
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
     reslst = []
@@ -122,6 +113,12 @@ class KeywordList(object):
                                                                                    
 class irc_subst(commandtarget.CommandTarget):
     def __init__(self, cmdPre, dbSpecs):
+    def reload(self, scriptPath):
+        parser = ConfigParser()
+        conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
+
+        if dex(scriptPath + '/' + 'irc-subst.cfg', conffiles) == -1:
+            print("config file '" + scriptPath + "/irc-subst.cfg' cannot be found")
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
