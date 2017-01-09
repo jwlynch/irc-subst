@@ -98,16 +98,6 @@ class irc_subst(commandtarget.CommandTarget):
         # default in case there's not a general/commandPrefix in the config file
         self.commandPrefix = '.'
 
-        # print the config file (if desired)
-        if self.printConfigP:
-            print("config file: ")
-
-            for sect in parser.sections():
-                print("section %s:" % sect)
-                for opt in parser.options(sect):
-                    val = parser.get(sect, opt)
-                    print("  %s = %s" % (opt, val))
-
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
             if dex('command-prefix', parser.options('general')) != -1:
@@ -142,6 +132,16 @@ class irc_subst(commandtarget.CommandTarget):
             self.dbSpecs = {}
             for option in parser.options('db'):
                 self.dbSpecs[option] = parser.get('db', option)
+
+        # print the config file (if desired)
+        if self.printConfigP:
+            print("config file: ")
+
+            for sect in parser.sections():
+                print("section %s:" % sect)
+                for opt in parser.options(sect):
+                    val = parser.get(sect, opt)
+                    print("  %s = %s" % (opt, val))
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
