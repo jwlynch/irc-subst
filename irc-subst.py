@@ -148,6 +148,9 @@ class irc_subst(commandtarget.CommandTarget):
         self.reload(self.scriptPath)
         self.sent = False
 
+        # now storing db connection info in the object, init to None
+        db_psyco_conn = None
+
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
         self.debugSects = []
@@ -394,11 +397,13 @@ class irc_subst(commandtarget.CommandTarget):
     def opendb(self):
         result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
 
-        return result
+        self.db_psyco_conn = result
 
     # takes database connection object, closes connection
-    def closedb(self, conn):
-        conn.close()
+    def closedb(self):
+        self.db_psyco_conn.close()
+
+        self.db_psyco_conn = None
 
     # accepts list of keys (strings of the form "[[somekey]]") and
     # returns a dictionary with those keys as keys, and values that
