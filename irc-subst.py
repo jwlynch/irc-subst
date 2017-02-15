@@ -10,6 +10,7 @@ printConfigP = True
 import pathlib
 import re
 import psycopg2
+from sqlalchemy import create_engine
 import arrow # for timestamps
 
 import hexchat
@@ -174,6 +175,12 @@ class irc_subst(commandtarget.CommandTarget):
 
         # now storing db connection info in the object, init to None
         self.db_psyco_conn = None
+
+        # sqlalchemy
+        self.sqla_eng = None
+
+        if self.dbOK:
+            self.sqla_eng = create_engine(self.sqlalchemy_conn_str)
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
