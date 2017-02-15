@@ -149,7 +149,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.sent = False
 
         # now storing db connection info in the object, init to None
-        db_psyco_conn = None
+        self.db_psyco_conn = None
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
