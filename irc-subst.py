@@ -79,7 +79,7 @@ class KeywordList(object):
 
     def attachProp(self, prop, value):
         self.properties[prop] = value
-                                                                                   
+
 class irc_subst(commandtarget.CommandTarget):
     # reload config file
     #
@@ -115,7 +115,7 @@ class irc_subst(commandtarget.CommandTarget):
             else:
                 # no print-config in general sect
                 self.printConfigP = True # default
-                       
+
         else:
             # no general sect
             self.cmdPrefix = '.' # default
@@ -542,7 +542,7 @@ class irc_subst(commandtarget.CommandTarget):
     def privmsg_hook(self, word, word_eol, userdata):
 
         # TODO
-        #      - 
+        #      -
         #      - store hostmask and nick somewhere (db?)
         #      - get user's account name (where is this stored already?
         #                                 would like to get it from that
@@ -628,7 +628,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         # less typing
         w = word
-        
+
         src_hostmask = w[0][1:]
 
         # is it from saslserv?
