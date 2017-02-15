@@ -127,11 +127,32 @@ class irc_subst(commandtarget.CommandTarget):
             self.dbOK = True
 
         self.dbSpecs = None
+        self.sqlalchemy_conn_str = None
 
         if self.dbOK:
             self.dbSpecs = {}
             for option in parser.options('db'):
                 self.dbSpecs[option] = parser.get('db', option)
+
+            # build the sqlalchemy connect string
+            k = self.dbSpecs.keys()
+
+            s = "postgresql://"
+            if 'user' in k:
+                s += self.dbSpecs['user']
+                if 'passwd' in k:
+                    s += ':' + self.dbSpecs['passwd']
+
+                if 'host' in k:
+                    s += '@' + self.dbSpecs['host']
+                else:
+                    s += '@localhost'
+
+                if 'port' in k:
+                    s += ':' + self.dbSpecs['port']
+
+            s += '/' + 'sqlaTest' # self.dbSpecs['dbname']
+            self.sqlalchemy_conn_str = s
 
         # print the config file (if desired)
         if self.printConfigP:
@@ -142,6 +163,9 @@ class irc_subst(commandtarget.CommandTarget):
                 for opt in parser.options(sect):
                     val = parser.get(sect, opt)
                     print("  %s = %s" % (opt, val))
+
+            if self.dbOK:
+                print("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
