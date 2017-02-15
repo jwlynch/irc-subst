@@ -270,7 +270,8 @@ class irc_subst(commandtarget.CommandTarget):
                 if not bad:
                     # do query and insert here
                     print("factoid add: key %s, value %s" % (key, value))
-                    conn = self.opendb()
+                    self.opendb()
+                    conn = self.db_psyco_conn
 
                     try:
                         self.cur = conn.cursor()
@@ -283,7 +284,7 @@ class irc_subst(commandtarget.CommandTarget):
                         conn.commit()
 
                     self.cur = None
-                    self.closedb(conn)
+                    self.closedb()
 
                 result = 0
 
@@ -322,7 +323,8 @@ class irc_subst(commandtarget.CommandTarget):
                 if not bad:
                     # do delete query here
                     print("factoid remove: key %s" % (key))
-                    conn = self.opendb()
+                    self.opendb()
+                    conn = self.db_psyco_conn
 
                     try:
                         self.cur = conn.cursor()
@@ -335,7 +337,7 @@ class irc_subst(commandtarget.CommandTarget):
                         conn.commit()
 
                     self.cur = None
-                    self.closedb(conn)
+                    self.closedb()
             else:
                 print("no db")
 
@@ -412,11 +414,12 @@ class irc_subst(commandtarget.CommandTarget):
     def lookupKeyList(self, key_list):
         # now query the db
         if self.dbOK:
-            conn = self.opendb()
+            self.opendb()
+            conn = self.db_psyco_conn
             cur = conn.cursor()
             cur.execute("""select f.key,f.value from factoids f where f.key = any (%s)""", (key_list,))
             result_list = cur.fetchall()
-            self.closedb(conn)
+            self.closedb()
 
         # go through results, forming a lookup table
         lookup = dict()
@@ -466,11 +469,12 @@ class irc_subst(commandtarget.CommandTarget):
 
     # prints to the irc client the list of keys available in the db
     def list_keys(self):
-        conn = self.opendb()
+        self.opendb()
+        conn = self.db_psyco_conn
         cur = conn.cursor()
         cur.execute("select i.key from factoids i order by i.key;")
         result_list = cur.fetchall()
-        self.closedb(conn)
+        self.closedb()
 
         result_string = ""
         for row in result_list:
@@ -603,7 +607,8 @@ class irc_subst(commandtarget.CommandTarget):
             # get a now() into timestamp_or_null with correct time zone
             timestamp_or_null = arrow.now().datetime
 
-        conn = self.opendb()
+        self.opendb()
+        conn = self.db_psyco_conn
 
         cur = conn.cursor()
         if failed_login_id_or_null is None:
@@ -616,7 +621,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         cur.close()
 
-        self.closedb(conn)
+        self.closedb()
 
     def notice_hook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
