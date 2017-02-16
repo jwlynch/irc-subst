@@ -152,7 +152,7 @@ class irc_subst(commandtarget.CommandTarget):
                 if 'port' in k:
                     s += ':' + self.dbSpecs['port']
 
-            s += '/' + 'sqlaTest' # self.dbSpecs['dbname']
+            s += '/' + self.dbSpecs['dbname']
             self.sqlalchemy_conn_str = s
 
         # print the config file (if desired)
