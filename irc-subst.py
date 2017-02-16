@@ -429,13 +429,13 @@ class irc_subst(commandtarget.CommandTarget):
         # return success/fail exit status
         return result
 
-    # opens connection to db, returns that connection object
+    # opens connection to db, stores that connection object in the object
     def opendb(self):
         result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
 
         self.db_psyco_conn = result
 
-    # takes database connection object, closes connection
+    # closes connection
     def closedb(self):
         self.db_psyco_conn.close()
 
