@@ -183,7 +183,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if self.dbOK:
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
-            self.sqla_meta = Metadata(bind=self.sqla_eng, reflect=True)
+            self.sqla_meta = MetaData(bind=self.sqla_eng, reflect=True)
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
