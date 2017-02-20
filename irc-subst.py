@@ -525,7 +525,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         # now get it with sqlalchemy
         factoids = self.sqla_factoids_table
-        sel = select([factoids.c.key]).orderby(factoids.c.key)
+        sel = select([factoids.c.key]).order_by(factoids.c.key)
 
         result_string = ""
         for row in result_list:
