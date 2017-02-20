@@ -10,7 +10,7 @@ printConfigP = True
 import pathlib
 import re
 import psycopg2
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey
 import arrow # for timestamps
 
 import hexchat
