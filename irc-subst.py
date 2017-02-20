@@ -141,8 +141,8 @@ class irc_subst(commandtarget.CommandTarget):
             s = "postgresql://"
             if 'user' in k:
                 s += self.dbSpecs['user']
-                if 'passwd' in k:
-                    s += ':' + self.dbSpecs['passwd']
+                if 'password' in k:
+                    s += ':' + self.dbSpecs['password']
 
                 if 'host' in k:
                     s += '@' + self.dbSpecs['host']
