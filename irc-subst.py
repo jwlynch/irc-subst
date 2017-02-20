@@ -518,10 +518,10 @@ class irc_subst(commandtarget.CommandTarget):
     def list_keys(self):
         factoids = self.sqla_factoids_table
         sel = select([factoids.c.key]).order_by(factoids.c.key)
-        res = self.sqla_conn.execute(sel)
         print("key list from sqla:")
         for tupl in res:
             print(tupl[factoids.c.key])
+        result = self.sqla_conn.execute(sel)
 
         result_string = ""
         for row in result_list:
