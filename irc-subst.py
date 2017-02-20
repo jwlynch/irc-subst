@@ -521,8 +521,8 @@ class irc_subst(commandtarget.CommandTarget):
         result = self.sqla_conn.execute(sel)
 
         result_string = ""
-            result_string += row[0] + "\n"
         for row in result:
+            result_string += row[factoids.c.key] + "\n"
 
         # in Python 3, no strings support the buffer interface, because they don't contain bytes.
         # Before, I was using print. print only writes strings. I shouldn't use print to try and
