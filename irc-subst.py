@@ -157,6 +157,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
             self.sqla_meta = MetaData(bind=self.sqla_eng, reflect=True)
+            self.sqla_conn = self.sqla_eng.connect()
 
             self.sqla_factoids_table = Table\
                                        (\
