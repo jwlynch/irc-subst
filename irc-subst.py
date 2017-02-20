@@ -178,7 +178,6 @@ class irc_subst(commandtarget.CommandTarget):
 
             if self.dbOK:
                 print("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
-                print("sqla_factoids_table is ", repr(self.sqla_factoids_table))
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
