@@ -516,14 +516,6 @@ class irc_subst(commandtarget.CommandTarget):
 
     # prints to the irc client the list of keys available in the db
     def list_keys(self):
-        self.opendb()
-        conn = self.db_psyco_conn
-        cur = conn.cursor()
-        cur.execute("select i.key from factoids i order by i.key;")
-        result_list = cur.fetchall()
-        self.closedb()
-
-        # now get it with sqlalchemy
         factoids = self.sqla_factoids_table
         sel = select([factoids.c.key]).order_by(factoids.c.key)
         res = self.sqla_conn.execute(sel)
