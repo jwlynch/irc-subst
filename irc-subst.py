@@ -155,10 +155,10 @@ class irc_subst(commandtarget.CommandTarget):
             s += '/' + self.dbSpecs['dbname']
             self.sqlalchemy_conn_str = s
 
-        # print the config file (if desired)
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
             self.sqla_meta = MetaData(bind=self.sqla_eng, reflect=True)
 
+        # print the config file (if desired)
         if self.printConfigP:
             print("config file: ")
 
