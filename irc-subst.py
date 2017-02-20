@@ -158,6 +158,8 @@ class irc_subst(commandtarget.CommandTarget):
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
             self.sqla_meta = MetaData(bind=self.sqla_eng, reflect=True)
 
+            self.sqla_factoids_table = Table("factoids", metadata, autoload=True, autoload_with=engine)
+
         # print the config file (if desired)
         if self.printConfigP:
             print("config file: ")
@@ -181,6 +183,8 @@ class irc_subst(commandtarget.CommandTarget):
         self.sqla_eng = None
         self.sqla_meta = None
         self.sqla_conn = None
+
+        self.sqla_factoids_table = None
 
         self.reload(self.scriptPath)
         self.sent = False
