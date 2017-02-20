@@ -173,8 +173,6 @@ class irc_subst(commandtarget.CommandTarget):
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
-        self.reload(self.scriptPath)
-        self.sent = False
 
         # now storing db connection info in the object, init to None
         self.db_psyco_conn = None
@@ -184,6 +182,8 @@ class irc_subst(commandtarget.CommandTarget):
         self.sqla_meta = None
         self.sqla_conn = None
 
+        self.reload(self.scriptPath)
+        self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
