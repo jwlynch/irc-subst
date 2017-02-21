@@ -476,6 +476,8 @@ class irc_subst(commandtarget.CommandTarget):
             result = self.sqla_conn.execute(sel_stmt)
 
             # go through results, forming a lookup table
+            for row in result:
+                lookup[row[factoids.c.key]] = row[factoids.c.value]
         else:
             # populate lookup table with (no db) for each key
             for key in key_list:
