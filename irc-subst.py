@@ -464,6 +464,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if len(key_list) == 0:
             pass # through to return stmt, returning empty dict
+        elif self.dbOK:
             # go through results, forming a lookup table
         else:
             # populate lookup table with (no db) for each key
