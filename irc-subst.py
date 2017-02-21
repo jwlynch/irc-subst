@@ -466,6 +466,12 @@ class irc_subst(commandtarget.CommandTarget):
             pass # through to return stmt, returning empty dict
         elif self.dbOK:
             factoids = self.sqla_factoids_table
+
+            sel_stmt = select([factoids]).\
+                            where\
+                              (\
+                                factoids.c.key.in_(key_list)
+                              )
             # go through results, forming a lookup table
         else:
             # populate lookup table with (no db) for each key
