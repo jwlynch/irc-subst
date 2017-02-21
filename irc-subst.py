@@ -462,9 +462,6 @@ class irc_subst(commandtarget.CommandTarget):
         # now query the db
         lookup = dict()
 
-        if self.dbOK:
-            for row in result_list:
-                lookup[row[0]] = row[1]
             # go through results, forming a lookup table
         else:
             # populate lookup table with (no db) for each key
