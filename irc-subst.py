@@ -460,12 +460,12 @@ class irc_subst(commandtarget.CommandTarget):
 
     def lookupKeyList(self, key_list):
         # now query the db
-        # go through results, forming a lookup table
         lookup = dict()
 
         if self.dbOK:
             for row in result_list:
                 lookup[row[0]] = row[1]
+            # go through results, forming a lookup table
         else:
             # populate lookup table with (no db) for each key
             for key in key_list:
