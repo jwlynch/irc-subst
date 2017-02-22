@@ -361,21 +361,18 @@ class irc_subst(commandtarget.CommandTarget):
                 if not bad:
                     # do delete query here
                     print("factoid remove: key %s" % (key))
-                    self.opendb()
-                    conn = self.db_psyco_conn
 
-                    try:
-                        self.cur = conn.cursor()
-                        self.cur.execute("delete from factoids where key = %s", (key,))
-                    except psycopg2.Error as pe:
-                        conn.rollback()
-                        print("factoid remove: db insert error: " + str(pe))
-                    finally:
-                        self.cur.close()
-                        conn.commit()
-
-                    self.cur = None
-                    self.closedb()
+                    self.sqla_conn.execute\
+                        (
+                            self.sqla_factoids_table\
+                                .delete()\
+                                .where\
+                                (
+                                    self.sqla_factoids_table.c.key
+                                    ==
+                                    key
+                                )
+                        )
             else:
                 print("no db")
 
