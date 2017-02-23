@@ -66,6 +66,13 @@ returns text []
 language 'plpgsql'
 as
 $$
+  declare
+    res text[];
+  begin
+    res = regexp_split_to_array(hostname, '\.');
+
+    return res;
+  end;
 $$;
 
 create or replace function reverse_hostname(hostname text)
