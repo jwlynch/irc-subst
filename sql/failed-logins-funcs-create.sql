@@ -45,10 +45,31 @@ $$
   end;
 $$;
 
+CREATE OR REPLACE FUNCTION array_reverse(anyarray)
+RETURNS anyarray
+AS
+$$
+$$
+LANGUAGE 'sql'
+STRICT IMMUTABLE;
+
+create or replace function hostname_split
+(
+  hostname text
+)
+returns text []
+language 'plpgsql'
+as
+$$
+$$;
+
 create or replace function reverse_hostname(hostname text)
 returns text
 language 'plpgsql'
 as
 $$
+  begin
+    return array_to_string(array_reverse(hostname_split(hostname)), '.');
+  end;
 $$;
 
