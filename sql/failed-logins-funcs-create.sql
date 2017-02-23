@@ -44,3 +44,11 @@ $$
     return fl_id;
   end;
 $$;
+
+create or replace function reverse_hostname(hostname text)
+returns text
+language 'plpgsql'
+as
+$$
+$$;
+
