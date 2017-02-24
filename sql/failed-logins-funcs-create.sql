@@ -45,6 +45,8 @@ $$
   end;
 $$;
 
+-- the pg lib doesn't have this func, got it from https://wiki.postgresql.org/wiki/Array_reverse
+
 CREATE OR REPLACE FUNCTION array_reverse(anyarray)
 RETURNS anyarray
 AS
