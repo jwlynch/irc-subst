@@ -169,6 +169,15 @@ class irc_subst(commandtarget.CommandTarget):
                                         autoload_with=self.sqla_eng
                                        )
 
+            self.sqla_failed_logins_table = Table\
+                                            (\
+                                             "failed_logins_sasl",
+                                             self.sqla_meta,
+                                             autoload=True,
+                                             autoload_with=self.sqla_eng
+                                            )
+
+
         # print the config file (if desired)
         if self.printConfigP:
             print("config file: ")
