@@ -668,6 +668,29 @@ class irc_subst(commandtarget.CommandTarget):
         #
         # self.closedb()
 
+        # (begin transaction)
+        with self.sqla_eng.begin() as conn:
+
+          # (get id if failed_login_id_or_null is None)
+          if failed_login_id_or_null is None:
+              seq_sel = select([func.nextval('object_id_seq')])
+              # scalar executes, and gets first col of first row
+              failed_login_id_or_null = conn.scalar(seq_sel)
+
+          # (add row to failed_logins_sasl table)
+          fl_ins = self.sqla_failed_logins_table.insert()
+
+          conn.execute\
+          (
+            fl_ins,
+            {
+                'failed_login_id': failed_login_id_or_null,
+                'host_or_ip_addr': ip_or_hostname_or_null,
+                'timestamp': timestamp_or_null
+            }
+          )
+          # (end transaction)
+
     def notice_hook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
 
