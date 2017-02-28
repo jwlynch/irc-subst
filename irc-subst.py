@@ -652,21 +652,21 @@ class irc_subst(commandtarget.CommandTarget):
             # get a now() into timestamp_or_null with correct time zone
             timestamp_or_null = arrow.now().datetime
 
-        self.opendb()
-        conn = self.db_psyco_conn
-
-        cur = conn.cursor()
-        if failed_login_id_or_null is None:
-            cur.execute("select nextval('object_id_seq');")
-            failed_login_id_or_null = cur.fetchone()[0]
-
-        cur.execute("begin transaction;")
-        cur.execute("select failed_login_new(%s, %s, %s);", [failed_login_id_or_null, ip_or_hostname_or_null, timestamp_or_null])
-        cur.execute("end transaction;")
-
-        cur.close()
-
-        self.closedb()
+        # self.opendb()
+        # conn = self.db_psyco_conn
+        #
+        # cur = conn.cursor()
+        # if failed_login_id_or_null is None:
+        #     cur.execute("select nextval('object_id_seq');")
+        #     failed_login_id_or_null = cur.fetchone()[0]
+        #
+        # cur.execute("begin transaction;")
+        # cur.execute("select failed_login_new(%s, %s, %s);", [failed_login_id_or_null, ip_or_hostname_or_null, timestamp_or_null])
+        # cur.execute("end transaction;")
+        #
+        # cur.close()
+        #
+        # self.closedb()
 
     def notice_hook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
