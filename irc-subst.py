@@ -9,7 +9,7 @@ printConfigP = True
 
 import pathlib
 import re
-import psycopg2
+#import psycopg2
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
@@ -194,8 +194,8 @@ class irc_subst(commandtarget.CommandTarget):
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
 
-        # now storing db connection info in the object, init to None
-        self.db_psyco_conn = None
+        # # now storing db connection info in the object, init to None
+        # self.db_psyco_conn = None
 
         # sqlalchemy
         self.sqla_eng = None
@@ -439,17 +439,17 @@ class irc_subst(commandtarget.CommandTarget):
         # return success/fail exit status
         return result
 
-    # opens connection to db, stores that connection object in the object
-    def opendb(self):
-        result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
-
-        self.db_psyco_conn = result
-
-    # closes connection
-    def closedb(self):
-        self.db_psyco_conn.close()
-
-        self.db_psyco_conn = None
+    # # opens connection to db, stores that connection object in the object
+    # def opendb(self):
+    #     result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
+    #
+    #     self.db_psyco_conn = result
+    #
+    # # closes connection
+    # def closedb(self):
+    #     self.db_psyco_conn.close()
+    #
+    #     self.db_psyco_conn = None
 
     # accepts list of keys (strings of the form "[[somekey]]") and
     # returns a dictionary with those keys as keys, and values that
