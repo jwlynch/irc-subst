@@ -522,7 +522,9 @@ class irc_subst(commandtarget.CommandTarget):
     def list_keys(self):
         factoids = self.sqla_factoids_table
         sel = select([factoids.c.key]).order_by(factoids.c.key)
-        result = self.sqla_conn.execute(sel)
+
+        with self.sqla_eng.begin() as conn:
+            result = conn.execute(sel)
 
         result_string = ""
         for row in result:
