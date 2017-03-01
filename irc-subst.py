@@ -472,7 +472,8 @@ class irc_subst(commandtarget.CommandTarget):
                                 factoids.c.key.in_(key_list)
                               )
 
-            result = self.sqla_conn.execute(sel_stmt)
+            with self.sqla_eng.begin() as conn:
+                result = conn.execute(sel_stmt)
 
             # go through results, forming a lookup table
             for row in result:
