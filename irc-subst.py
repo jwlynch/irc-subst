@@ -327,11 +327,12 @@ class irc_subst(commandtarget.CommandTarget):
                     # do query and insert here
                     print("factoid add: key %s, value %s" % (key, value))
 
-                    self.sqla_conn.execute\
-                        (\
-                            self.sqla_factoids_table.insert(),
-                            {'key': key, 'value': value}
-                        )
+                    with self.sqla_eng.begin() as conn:
+                        conn.execute\
+                            (\
+                                self.sqla_factoids_table.insert(),
+                                {'key': key, 'value': value}
+                            )
 
                 result = 0
 
