@@ -754,7 +754,7 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             # from someone else
             if debugNoticeTestsP:
-                self.debugPrint("notice was not from saslserv")
+                self.debugPrint("notice was not from saslserv or nickserv")
 
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
