@@ -748,6 +748,9 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("!justToMeP or !failedLoginP or !unknownUserP or !viaSASLP")
                     self.debugPrint("justToMeP: %s, failedLoginP: %s, unknownUserP: %s, viaSASLP: %s" % (str(justToMeP), str(failedLoginP), str(unknownUserP), str(viaSASLP)))
 
+        elif src_hostmask == "NickServ@services.":
+            pass
+            # TODO: [20170301 00:45:36] -NickServ- JiML_!~jim@kivu.grabeuh.com failed to login to jim.  There have been 75 failed login attempts since your last successful login.
         else:
             # from someone else
             if debugNoticeTestsP:
