@@ -751,6 +751,8 @@ class irc_subst(commandtarget.CommandTarget):
             pass
         elif src_hostmask == "NickServ!NickServ@services.":
             # TODO: [20170301 00:45:36] -NickServ- JiML_!~jim@kivu.grabeuh.com failed to login to jim.  There have been 75 failed login attempts since your last successful login.
+            # TODO: [20170302 12:31:37]  notice: [0]: :NickServ!NickServ@services. [1]: NOTICE [2]: jim [3]: :+JiML_!~jim@kivu.grabeuh.com [4]: failed [5]: to [6]: login [7]: to [8]: jim. [9]: There [10]: have [11]: been [12]: 135 [13]: failed [14]: login [15]: attempts [16]: since [17]: your [18]: last [19]: successful [20]: login.
+            # message as it appeared in client: [20170302 12:31:37] -NickServ- JiML_!~jim@kivu.grabeuh.com failed to login to jim.  There have been 135 failed login attempts since your last successful login.
         else:
             # from someone else
             if debugNoticeTestsP:
