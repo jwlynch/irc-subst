@@ -758,6 +758,9 @@ class irc_subst(commandtarget.CommandTarget):
             if debugNoticeTestsP:
                 self.debugPrint("justToMeP: %s, failedLoginP: %s" % (str(justToMeP), str(failedLoginP)))
 
+            if justToMeP and failedLoginP:
+                failingHostmask = w[3][2:]
+
         else:
             # from someone else
             if debugNoticeTestsP:
