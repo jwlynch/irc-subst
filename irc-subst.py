@@ -755,6 +755,9 @@ class irc_subst(commandtarget.CommandTarget):
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[4] == "failed" and w[6] == "login")
 
+            if debugNoticeTestsP:
+                self.debugPrint("justToMeP: %s, failedLoginP: %s" % (str(justToMeP), str(failedLoginP)))
+
         else:
             # from someone else
             if debugNoticeTestsP:
