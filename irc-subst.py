@@ -159,7 +159,6 @@ class irc_subst(Objects):
 
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
             self.sqla_meta = MetaData(bind=self.sqla_eng, reflect=True)
-            #self.sqla_conn = self.sqla_eng.connect()
 
             self.sqla_factoids_table = Table\
                                        (\
@@ -197,7 +196,6 @@ class irc_subst(Objects):
         # sqlalchemy
         self.sqla_eng = None
         self.sqla_meta = None
-        #self.sqla_conn = None
 
         self.sqla_factoids_table = None
 
