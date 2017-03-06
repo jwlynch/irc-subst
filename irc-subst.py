@@ -449,6 +449,7 @@ class irc_subst(Objects):
         elif self.dbOK:
             factoids = self.sqla_factoids_table
 
+            # "select * from factoids where key in (key_list)"
             sel_stmt = select([factoids]).\
                             where\
                               (\
