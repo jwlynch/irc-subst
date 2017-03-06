@@ -9,7 +9,6 @@ printConfigP = True
 
 import pathlib
 import re
-#import psycopg2
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
@@ -194,9 +193,6 @@ class irc_subst(Objects):
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
-
-        # # now storing db connection info in the object, init to None
-        # self.db_psyco_conn = None
 
         # sqlalchemy
         self.sqla_eng = None
@@ -442,18 +438,6 @@ class irc_subst(Objects):
         # return success/fail exit status
         return result
 
-    # # opens connection to db, stores that connection object in the object
-    # def opendb(self):
-    #     result = psycopg2.connect(str(KeywordList(self.dbSpecs)))
-    #
-    #     self.db_psyco_conn = result
-    #
-    # # closes connection
-    # def closedb(self):
-    #     self.db_psyco_conn.close()
-    #
-    #     self.db_psyco_conn = None
-
     # accepts list of keys (strings of the form "[[somekey]]") and
     # returns a dictionary with those keys as keys, and values that
     # come from the db
@@ -657,22 +641,6 @@ class irc_subst(Objects):
         if timestamp_or_null is None:
             # get a now() into timestamp_or_null with correct time zone
             timestamp_or_null = arrow.now().datetime
-
-        # self.opendb()
-        # conn = self.db_psyco_conn
-        #
-        # cur = conn.cursor()
-        # if failed_login_id_or_null is None:
-        #     cur.execute("select nextval('object_id_seq');")
-        #     failed_login_id_or_null = cur.fetchone()[0]
-        #
-        # cur.execute("begin transaction;")
-        # cur.execute("select failed_login_new(%s, %s, %s);", [failed_login_id_or_null, ip_or_hostname_or_null, timestamp_or_null])
-        # cur.execute("end transaction;")
-        #
-        # cur.close()
-        #
-        # self.closedb()
 
         # (begin transaction)
         with self.sqla_eng.begin() as conn:
