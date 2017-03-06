@@ -679,9 +679,7 @@ class irc_subst(Objects):
 
           # (get id if failed_login_id_or_null is None)
           if failed_login_id_or_null is None:
-              seq_sel = select([func.nextval('object_id_seq')])
-              # scalar executes, and gets first col of first row
-              failed_login_id_or_null = conn.scalar(seq_sel)
+              failed_login_id_or_null = self.nextObjectID(conn)
 
           # (add row to failed_logins_sasl table)
           fl_ins = self.sqla_failed_logins_table.insert()
