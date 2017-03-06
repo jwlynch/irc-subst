@@ -42,6 +42,7 @@ pathname = pathlib.Path(__file__).parent.__str__()
 sys.path.append(pathname) # so that modules that are siblings of the script can be found
 
 from utils import commandtarget
+from objects import Objects
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
@@ -83,7 +84,7 @@ class KeywordList(object):
     def attachProp(self, prop, value):
         self.properties[prop] = value
 
-class irc_subst(commandtarget.CommandTarget):
+class irc_subst(Objects):
     # reload config file
     #
     # vars that get set as a result of this call:
