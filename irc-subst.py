@@ -646,7 +646,7 @@ class irc_subst(commandtarget.CommandTarget):
 
           # (get id if failed_login_id_or_null is None)
           if failed_login_id_or_null is None:
-              failed_login_id_or_null = self.nextObjectID(conn)
+              failed_login_id_or_null = nextObjectID(conn)
 
           # (add row to failed_logins_sasl table)
           fl_ins = self.sqla_failed_logins_table.insert()
