@@ -83,7 +83,7 @@ class KeywordList(object):
     def attachProp(self, prop, value):
         self.properties[prop] = value
 
-class irc_subst(Objects):
+class irc_subst(commandtarget.CommandTarget):
     # reload config file
     #
     # vars that get set as a result of this call:
