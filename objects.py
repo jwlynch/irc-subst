@@ -2,7 +2,7 @@
 
 from sqlalchemy import select, func
 
-def nextObjectID(self, conn):
+def nextObjectID(conn):
     seq_sel = select([func.nextval('object_id_seq')])
     # scalar executes, and gets first col of first row
     result = conn.scalar(seq_sel)
