@@ -9,5 +9,5 @@ def nextObjectID(conn):
 
     return result
 
-class Objects():
+class Objects(object):
     pass
