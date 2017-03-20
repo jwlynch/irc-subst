@@ -14,3 +14,16 @@ class Objects(object):
         self.engine = engine
         self.metadata = metadata
 
+        self.objects_table = Table(
+            "object",
+            self.metadata,
+            autoload=True,
+            autoload_with=self.engine
+        )
+
+        self.object_type_table = Table(
+            "object_type",
+            self.metadata,
+            autoload=True,
+            autoload_with=self.engine
+        )
