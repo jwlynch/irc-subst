@@ -10,4 +10,7 @@ def nextObjectID(conn):
     return result
 
 class Objects(object):
-    pass
+    def __init__(self, engine, metadata):
+        self.engine = engine
+        self.metadata = metadata
+
