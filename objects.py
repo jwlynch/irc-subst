@@ -53,3 +53,6 @@ class Objects(object):
 
     def object__new(self, **kwargs):
         pass
+
+    def object_type__new(self, **kwargs):
+        pass
