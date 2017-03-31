@@ -18,6 +18,14 @@ class Objects(object):
         self.object_type_table = Table(
             "object_type",
             self.metadata,
+            Column(
+                "object_type",
+                String(100),
+                nullable=False,
+                primary_key = True
+            ),
+            Column("extension_table", String(100)),
+            Column("ext_tbl_id_column", String(100))
         )
 
         self.objects_table = Table(
