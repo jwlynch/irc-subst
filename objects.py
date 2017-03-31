@@ -18,6 +18,24 @@ class Objects(object):
         self.objects_table = Table(
             "object",
             self.metadata,
+            Column("object_id", BigInteger, primary_key = True),
+            Column(
+                "object_type",
+                String(100),
+                nullable=False,
+                ForeignKey("object_type.object_type")
+            ),
+            Column("creation_date", DateTime(timezone=True)),
+            Column(
+                "creation_user",
+                BigInteger,
+                ForeignKey("object.object_id")
+            ),
+            Column(
+                "context_id",
+                BigInteger,
+                ForeignKey("object.object_id")
+            )
         )
 
         self.object_type_table = Table(
