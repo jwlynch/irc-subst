@@ -18,8 +18,6 @@ class Objects(object):
         self.objects_table = Table(
             "object",
             self.metadata,
-            autoload=True,
-            autoload_with=self.engine
         )
 
         self.object_type_table = Table(
