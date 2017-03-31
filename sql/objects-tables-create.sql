@@ -20,6 +20,12 @@ create table object
       not null
     constraint object_type_fk_ob_type
       references object_type(object_type),
-  creation_date timestamptz
+  creation_date timestamptz,
+  creation_user bigint
+    constraint creation_user__object_id__fk
+      references object(object_id),
+  context_id bigint
+    constraint context_id__object_id__fk
+      references object(object_id)
 );
 
