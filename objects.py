@@ -15,6 +15,13 @@ class Objects(object):
         self.engine = engine
         self.metadata = metadata
 
+        self.object_type_table = Table(
+            "object_type",
+            self.metadata,
+            autoload=True,
+            autoload_with=self.engine
+        )
+
         self.objects_table = Table(
             "object",
             self.metadata,
@@ -36,13 +43,6 @@ class Objects(object):
                 BigInteger,
                 ForeignKey("object.object_id")
             )
-        )
-
-        self.object_type_table = Table(
-            "object_type",
-            self.metadata,
-            autoload=True,
-            autoload_with=self.engine
         )
 
     def object__new(self, **kwargs):
