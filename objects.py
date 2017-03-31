@@ -1,6 +1,7 @@
 # class, methods and funcs for dealing with objects and object types
 
 from sqlalchemy import select, func, Table, MetaData, Column
+from sqlalchemy.types import BigInteger, DateTime, String
 
 def nextObjectID(conn):
     seq_sel = select([func.nextval('object_id_seq')])
