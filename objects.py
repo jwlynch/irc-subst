@@ -44,3 +44,6 @@ class Objects(object):
             autoload=True,
             autoload_with=self.engine
         )
+
+    def object__new(self, **kwargs):
+        pass
