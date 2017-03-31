@@ -51,8 +51,8 @@ class Objects(object):
             )
         )
 
-    def object__new(self, **kwargs):
+    def object__new(self, conn, **kwargs):
         pass
 
-    def object_type__new(self, **kwargs):
+    def object_type__new(self, conn, **kwargs):
         pass
