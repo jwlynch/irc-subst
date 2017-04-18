@@ -15,6 +15,8 @@
 #
 # checking should be done, for example for columns that have nullable=False
 # make sure they have a value, etc
+#
+# TODO: the types table needs a supertype column
 
 from sqlalchemy import select, func, Table, MetaData, Column
 from sqlalchemy.types import BigInteger, DateTime, String
