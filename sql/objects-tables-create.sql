@@ -34,4 +34,3 @@ create table object
     constraint context_id__object_id__fk
       references object(object_id)
 );
-
