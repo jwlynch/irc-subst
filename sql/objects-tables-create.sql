@@ -13,6 +13,9 @@ create table object_type
   ext_tbl_id_column varchar(100)
 );
 
+-- we might have to add the supertype__object_type__fk constraint
+-- after defining the table
+
 create table object
 (
   object_id bigint
