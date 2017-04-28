@@ -38,108 +38,6 @@ def nextObjectID(conn):
 
     return result
 
-from configparser import ConfigParser
-
-class Test(object):
-    def reload(self, scriptPath):
-        parser = ConfigParser()
-        conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
-
-        if dex(scriptPath + '/' + 'irc-subst.cfg', conffiles) == -1:
-            print("config file '" + scriptPath + "/irc-subst.cfg' cannot be found")
-
-        # pull stuff from general section of config file
-        if dex('general', parser.sections()) != -1:
-            if dex('command-prefix', parser.options('general')) != -1:
-                self.cmdPrefix = parser.get('general', 'command-prefix')
-            else:
-                # no command-prefix in general sect
-                self.cmdPrefix = '.' # default
-
-            if dex('print-config', parser.options('general')) != -1:
-                self.printConfigP = parser.get('general', 'print-config')
-
-                if self.printConfigP.startswith("t"):
-                    self.printConfigP = True
-                elif self.printConfigP.startswith("f"):
-                    self.printConfigP = False
-                else:
-                    self.printConfigP = True # default
-            else:
-                # no print-config in general sect
-                self.printConfigP = True # default
-
-        else:
-            # no general sect
-            self.cmdPrefix = '.' # default
-            self.printConfigP = True # default
-
-        if dex("db", parser.sections()) == -1:
-            self.dbOK = False
-        else:
-            self.dbOK = True
-
-        self.dbSpecs = None
-        self.sqlalchemy_conn_str = None
-
-        if self.dbOK:
-            self.dbSpecs = {}
-            for option in parser.options('db'):
-                self.dbSpecs[option] = parser.get('db', option)
-
-            # build the sqlalchemy connect string
-            k = self.dbSpecs.keys()
-
-            s = "postgresql://"
-            if 'user' in k:
-                s += self.dbSpecs['user']
-                if 'password' in k:
-                    s += ':' + self.dbSpecs['password']
-
-                if 'host' in k:
-                    s += '@' + self.dbSpecs['host']
-                else:
-                    s += '@localhost'
-
-                if 'port' in k:
-                    s += ':' + self.dbSpecs['port']
-
-            s += '/' + self.dbSpecs['dbname']
-            self.sqlalchemy_conn_str = s
-
-            self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
-            self.sqla_meta = MetaData()
-
-            self.sqla_factoids_table = Table\
-                                       (\
-                                        "factoids",
-                                        self.sqla_meta,
-                                        autoload=True,
-                                        autoload_with=self.sqla_eng
-                                       )
-
-            self.sqla_failed_logins_table = Table\
-                                            (\
-                                             "failed_logins_sasl",
-                                             self.sqla_meta,
-                                             autoload=True,
-                                             autoload_with=self.sqla_eng
-                                            )
-
-
-        # print the config file (if desired)
-        if self.printConfigP:
-            print("config file: ")
-
-            for sect in parser.sections():
-                print("section %s:" % sect)
-                for opt in parser.options(sect):
-                    val = parser.get(sect, opt)
-                    print("  %s = %s" % (opt, val))
-
-            if self.dbOK:
-                print("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
-
 
 class Objects(object):
     def __init__(self, engine, metadata):
@@ -154,6 +52,11 @@ class Objects(object):
                 String(100),
                 nullable=False,
                 primary_key = True
+            ),
+            Column(
+                "supertype",
+                String(100),
+                ForeignKey("object_type.object_type")
             ),
             Column("extension_table", String(100)),
             Column("ext_tbl_id_column", String(100))
