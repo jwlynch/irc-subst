@@ -6,6 +6,9 @@ create table object_type
       primary key
     constraint object_type_nn
       not null,
+  supertype varchar(100)
+    constraint supertype__object_type__fk
+      references object_type(object_type),
   extension_table varchar(100),
   ext_tbl_id_column varchar(100)
 );
