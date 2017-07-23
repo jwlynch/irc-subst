@@ -279,6 +279,11 @@ class irc_subst(commandtarget.CommandTarget):
                 # command is 'remove nick', get channel
                 nick = argList[0]
                 channel = hexchat.get_info("channel")
+            elif len(argList) == 0:
+                print("remove usage:")
+                print("remove <nick>")
+                print("remove <channel> <nick>")
+                print("remove <channel> <nick> <reason>")
 
             removeCommand = "remove " + channel + " " + nick
             if reason is not None:
@@ -296,7 +301,10 @@ class irc_subst(commandtarget.CommandTarget):
                 key = ""
                 value = ""
 
-                if len(argList) < 2:
+                if len(argList) == 0:
+                    print("addfact usage:")
+                    print("addfact <key> <value>")
+                elif len(argList) < 2:
                     print("factoid add: too few args")
                 elif len(argList) > 2:
                     print("factoid add: too many args")
@@ -342,7 +350,10 @@ class irc_subst(commandtarget.CommandTarget):
                 key = ""
                 value = ""
 
-                if len(argList) < 1:
+                if len(argList) == 0:
+                    print("rmfact usage:")
+                    print("rmfact <key>")
+                elif len(argList) < 1:
                     print("factoid remove: too few args")
                 elif len(argList) > 1:
                     print("factoid remove: too many args")
