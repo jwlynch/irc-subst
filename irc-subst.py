@@ -632,7 +632,9 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             debugSQLP = False
 
-        if debugBasicP:
+        if debugDetailP:
+            self.debugPrint(self.detailList(word))
+        elif debugBasicP:
             self.debugPrint("source nick:      " + src_nick)
             self.debugPrint("source emailname: " + src_emailname)
             self.debugPrint("source host:      " + src_host)
