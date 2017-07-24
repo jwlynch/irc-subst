@@ -266,30 +266,31 @@ class irc_subst(commandtarget.CommandTarget):
             nick = None
             reason = None
 
-            if len(argList) >= 3:
-                reason = " ".join(argList[2:])
-
-            if len(argList) >= 2:
-                nick = argList[1]
-
-            if len(argList) >= 1:
-                channel = argList[0]
-
-            if len(argList) == 1:
-                # command is 'remove nick', get channel
-                nick = argList[0]
-                channel = hexchat.get_info("channel")
-            elif len(argList) == 0:
+            if len(argList) == 0:
                 print("remove usage:")
                 print("remove <nick>")
                 print("remove <channel> <nick>")
                 print("remove <channel> <nick> <reason>")
+            else: # not zero args
+                if len(argList) >= 3:
+                    reason = " ".join(argList[2:])
 
-            removeCommand = "remove " + channel + " " + nick
-            if reason is not None:
-                removeCommand += " :" + reason
+                if len(argList) >= 2:
+                    nick = argList[1]
 
-            hexchat.command(removeCommand)
+                if len(argList) >= 1:
+                    channel = argList[0]
+
+                if len(argList) == 1:
+                    # command is 'remove nick', get channel
+                    nick = argList[0]
+                    channel = hexchat.get_info("channel")
+
+                removeCommand = "remove " + channel + " " + nick
+                if reason is not None:
+                    removeCommand += " :" + reason
+
+                hexchat.command(removeCommand)
 
             result = 0 # success
 
