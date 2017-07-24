@@ -613,6 +613,13 @@ class irc_subst(commandtarget.CommandTarget):
         src_emailname = hostmaskdict["emailname"]
         src_host = hostmaskdict["site"]
 
+        # if "privmsgdetail" is in debugsects, show the entire array
+        # of all priv messaages and messages to channels.
+        if dex("privmsgdetail", self.debugSects) != -1:
+            debugDetailP = True
+        else:
+            debugDetailP = False
+
         # if the word "privmsgbasic" is in the list debugSects, print debug message
         if dex("privmsgbasic", self.debugSects) != -1:
             debugBasicP = True
