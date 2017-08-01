@@ -220,6 +220,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdRemove = "remove"
         self.cmdAddFact = "addfact"
         self.cmdRmFact = "rmfact"
+        self.cmdShowFact = "showfact"
         self.cmdInfo = "info"
         self.cmdDebugSects = "debugsects"
         self.cmdLSDebugSects = "lsdebugsects"
@@ -393,6 +394,28 @@ class irc_subst(commandtarget.CommandTarget):
                             )
             else:
                 print("no db")
+
+        elif cmdString == self.cmdShowFact:
+            result = 0
+
+            if len(argList) == 0:
+                # print usage
+                print("showfact usage:")
+                print("showfact <key>")
+
+            elif len(argList) != 1:
+                # wrong nbr args
+                print("showfact: wrong number of arguments")
+            else:
+                # correct number of args
+
+                if self.dbOK:
+                    bad = True
+                    key = ""
+
+                    print("show the factoidq")
+                else:
+                    print("no db")
 
         elif cmdString == self.cmdInfo:
             top_context = hexchat.find_context()
