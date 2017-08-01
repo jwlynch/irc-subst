@@ -410,10 +410,24 @@ class irc_subst(commandtarget.CommandTarget):
                 # correct number of args
 
                 if self.dbOK:
-                    bad = True
-                    key = ""
+                    bad = False
+                    key = argList[0]
 
-                    print("show the factoidq")
+                    if not self.key_re.match(key):
+                        print("factoid show: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                        bad = True
+
+                    if not bad:
+                        lookupTable = self.lookupKeyList([key])
+
+                        if lookupTable:
+                            bad = False
+                        else:
+                            bad = True
+                            print("showfact: no such factoid '%s'" % key)
+
+                        if not bad:
+                            print("showfact: key %s has value '%s'" % (key, lookupTable[key]))
                 else:
                     print("no db")
 
