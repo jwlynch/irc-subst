@@ -275,8 +275,8 @@ class irc_subst(commandtarget.CommandTarget):
             if len(argList) == 0:
                 print("remove usage:")
                 print("remove <nick>")
-                print("remove <channel> <nick>")
-                print("remove <channel> <nick> <reason>")
+                print("remove <nick> \"reason\" # must quote reason in 2-arg form")
+                print("remove <channel> <nick> <reason> # need not quote reason in 3-arg form")
             else: # not zero args
                 if len(argList) >= 3:
                     reason = " ".join(argList[2:])
