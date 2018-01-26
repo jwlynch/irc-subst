@@ -263,6 +263,11 @@ class irc_subst(commandtarget.CommandTarget):
                 print("no db")
 
         elif cmdString == self.cmdRemove:
+            if dex("rm", self.debugSects) != -1:
+                debugRm = True
+            else:
+                debugRm = False
+
             channel = None
             nick = None
             reason = None
@@ -291,7 +296,10 @@ class irc_subst(commandtarget.CommandTarget):
                 if reason is not None:
                     removeCommand += " :" + reason
 
-                hexchat.command(removeCommand)
+                if debugRm:
+                    print("debugRm: " + removeCommand)
+                else:
+                    hexchat.command(removeCommand)
 
             result = 0 # success
 
