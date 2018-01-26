@@ -280,17 +280,18 @@ class irc_subst(commandtarget.CommandTarget):
             else: # not zero args
                 if len(argList) >= 3:
                     reason = " ".join(argList[2:])
-
-                if len(argList) >= 2:
                     nick = argList[1]
-
-                if len(argList) >= 1:
                     channel = argList[0]
+                else:
+                    if len(argList) == 2:
+                        reason = argList[1]
+                        nick = argList[0]
+                        channel = hexchat.get_info("channel")
 
-                if len(argList) == 1:
-                    # command is 'remove nick', get channel
-                    nick = argList[0]
-                    channel = hexchat.get_info("channel")
+                    if len(argList) == 1:
+                        nick = argList[0]
+                        reason = nick
+                        channel = hexchat.get_info("channel")
 
                 removeCommand = "remove " + channel + " " + nick
                 if reason is not None:
