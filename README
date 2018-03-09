@@ -22,6 +22,7 @@ To run this script, you need:
  - python version 3
  - a postgresql database, running locally or remotely
  - the python arrow module, which is a dropin replacement for datetime (and others)
+     debian packagename: python3-arrow
  - the python dateutil module, which arrow also depends on.
 
 SETUP
