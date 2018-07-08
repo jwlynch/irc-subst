@@ -1,5 +1,4 @@
 
-drop table object;
+drop table objects;
 
-drop table object_type;
-
+drop table object_types;

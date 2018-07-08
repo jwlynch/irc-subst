@@ -1,5 +1,5 @@
 
-create table object_type
+create table object_types
 (
   object_type varchar(100)
     constraint object_type_pk
@@ -8,15 +8,18 @@ create table object_type
       not null,
   supertype varchar(100)
     constraint supertype__object_type__fk
-      references object_type(object_type),
+      references object_types(object_type),
   extension_table varchar(100),
-  ext_tbl_id_column varchar(100)
+  ext_tbl_id_column varchar(100),
+  table_name varchar(100),
+  id_column varchar(100),
+  package_name varchar(100)
 );
 
 -- we might have to add the supertype__object_type__fk constraint
 -- after defining the table
 
-create table object
+create table objects
 (
   object_id bigint
     constraint objects_pk
@@ -25,12 +28,12 @@ create table object
     constraint object_type_nn
       not null
     constraint object_type_fk_ob_type
-      references object_type(object_type),
+      references object_types(object_type),
   creation_date timestamptz,
   creation_user bigint
     constraint creation_user__object_id__fk
-      references object(object_id),
+      references objects(object_id),
   context_id bigint
     constraint context_id__object_id__fk
-      references object(object_id)
+      references objects(object_id)
 );
