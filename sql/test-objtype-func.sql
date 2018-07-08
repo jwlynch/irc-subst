@@ -27,9 +27,16 @@ $$
     v_id_column                         object_types.id_column%TYPE;
     v_table_name                        object_types.table_name%TYPE;
   begin
+      v_idx := position('.' in p_name_method);
+      if v_idx <> 0 then
+           v_name_method := substr(p_name_method,1,v_idx - 1) ||
+                         '__' || substr(p_name_method, v_idx + 1);
+      else
+           v_name_method := p_name_method;
+      end if;
 
 
-    return ''; -- should return 0 in final func
+    return 'v_name_method is ' || v_name_method; -- should return 0 in final func
   end;
 $$;
 
@@ -58,13 +65,7 @@ $$;
 --   v_id_column                         acs_object_types.id_column%TYPE;
 --   v_table_name                        acs_object_types.table_name%TYPE;
 -- BEGIN
---     v_idx := position('.' in p_name_method);
---     if v_idx <> 0 then
---          v_name_method := substr(p_name_method,1,v_idx - 1) ||
---                        '__' || substr(p_name_method, v_idx + 1);
---     else
---          v_name_method := p_name_method;
---     end if;
+-- TOOK STUFF FROM HERE
 --
 --     -- If we are asked to create the table, provide reasonable default values for the
 --     -- table name and id column.  Traditionally OpenACS uses the plural form of the type
