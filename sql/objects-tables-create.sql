@@ -13,7 +13,13 @@ create table object_types
   ext_tbl_id_column varchar(100),
   table_name varchar(100),
   id_column varchar(100),
-  package_name varchar(100)
+  package_name varchar(100),
+  pretty_name varchar(100),
+  pretty_plural varchar(100),
+  abstract_p boolean,
+  type_extension_table varchar(100),
+  name_method varchar(100),
+  dynamic_p boolean
 );
 
 -- we might have to add the supertype__object_type__fk constraint
