@@ -43,3 +43,23 @@ create table objects
     constraint context_id__object_id__fk
       references objects(object_id)
 );
+
+insert
+    into object_types
+    (
+        object_type,
+        pretty_name,
+        pretty_plural,
+        supertype,
+        table_name,
+        id_column
+    )
+    values
+    (
+        'object',
+        'Object',
+        'Objects',
+        NULL,
+        'objects',
+        'object_id'
+    );
