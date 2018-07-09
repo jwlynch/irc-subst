@@ -63,6 +63,18 @@ $$
         v_package_name := p_package_name;
       end if;
 
+      if p_object_type <> 'object' then
+        if p_supertype is null or p_supertype = '' then
+          v_supertype := 'object';
+        else
+          v_supertype := p_supertype;
+        -- TODO: define object_type__is_subtype_p()
+        --   if not acs_object_type__is_subtype_p('acs_object', p_supertype) then
+        --     raise exception '%s is not a valid type', p_supertype;
+        --   end if;
+        end if;
+      end if;
+
       return v_test_out; -- should return 0 in final func
   end;
 $$;
@@ -96,17 +108,6 @@ $$;
 --
 --
 --
---
---     if p_object_type <> 'acs_object' then
---       if p_supertype is null or p_supertype = '' then
---         v_supertype := 'acs_object';
---       else
---         v_supertype := p_supertype;
---         if not acs_object_type__is_subtype_p('acs_object', p_supertype) then
---           raise exception '%s is not a valid type', p_supertype;
---         end if;
---       end if;
---     end if;
 --
 --     insert into acs_object_types
 --       (object_type, pretty_name, pretty_plural, supertype, table_name,
