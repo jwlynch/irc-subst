@@ -18,7 +18,7 @@ language 'plpgsql'
 as
 $$
   declare
-    --v_package_name                      object_types.package_name%TYPE;
+    v_package_name                      object_types.package_name%TYPE;
     v_supertype                         object_types.supertype%TYPE;
     v_name_method                       varchar;
     v_idx                               integer;
@@ -48,6 +48,12 @@ $$
         v_table_name := p_object_type || '_t';
       else
         v_table_name := p_table_name;
+      end if;
+
+      if p_create_table_p and (p_id_column is null or p_id_column = '') then
+        v_id_column := p_object_type || '_id';
+      else
+        v_id_column := p_id_column;
       end if;
 
 
@@ -83,11 +89,6 @@ $$;
 -- TOOK STUFF FROM HERE
 --
 --
---     if p_create_table_p and (p_id_column is null or p_id_column = '') then
---       v_id_column := p_object_type || '_id';
---     else
---       v_id_column := p_id_column;
---     end if;
 --
 --     if p_package_name is null or p_package_name = '' then
 --       v_package_name := p_object_type;
