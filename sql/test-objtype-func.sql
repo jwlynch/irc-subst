@@ -57,6 +57,12 @@ $$
       end if;
 
 
+      if p_package_name is null or p_package_name = '' then
+        v_package_name := p_object_type;
+      else
+        v_package_name := p_package_name;
+      end if;
+
       return v_test_out; -- should return 0 in final func
   end;
 $$;
@@ -90,11 +96,6 @@ $$;
 --
 --
 --
---     if p_package_name is null or p_package_name = '' then
---       v_package_name := p_object_type;
---     else
---       v_package_name := p_package_name;
---     end if;
 --
 --     if p_object_type <> 'acs_object' then
 --       if p_supertype is null or p_supertype = '' then
