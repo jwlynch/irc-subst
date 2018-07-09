@@ -88,6 +88,13 @@ $$
          v_package_name, v_name_method, p_dynamic_p);
 
          if p_create_table_p then
+
+           if exists (select 1
+                      from pg_class
+                      where relname = lower(v_table_name)) then
+             raise exception 'Table "%" already exists', v_table_name;
+           end if;
+
          end if;
 
 
@@ -124,12 +131,6 @@ $$;
 --
 --
 --
---
---       if exists (select 1
---                  from pg_class
---                  where relname = lower(v_table_name)) then
---         raise exception 'Table "%" already exists', v_table_name;
---       end if;
 --
 --       loop
 --         select table_name,object_type into v_supertype_table,v_supertype
