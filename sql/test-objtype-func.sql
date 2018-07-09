@@ -26,6 +26,8 @@ $$
     v_supertype_table                   object_types.table_name%TYPE;
     v_id_column                         object_types.id_column%TYPE;
     v_table_name                        object_types.table_name%TYPE;
+
+    v_test_out                          varchar;
   begin
       v_idx := position('.' in p_name_method);
       if v_idx <> 0 then
@@ -35,8 +37,12 @@ $$
            v_name_method := p_name_method;
       end if;
 
+      v_test_out := ''; -- remove me
+
 
     return 'v_name_method is ' || v_name_method; -- should return 0 in final func
+
+      return v_test_out; -- should return 0 in final func
   end;
 $$;
 
