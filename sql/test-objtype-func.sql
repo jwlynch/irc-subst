@@ -95,6 +95,13 @@ $$
              raise exception 'Table "%" already exists', v_table_name;
            end if;
 
+           loop
+             select table_name,object_type into v_supertype_table,v_supertype
+             from object_types
+             where object_type = v_supertype;
+             exit when v_supertype_table is not null;
+           end loop;
+
          end if;
 
 
@@ -130,14 +137,6 @@ $$;
 -- TOOK STUFF FROM HERE
 --
 --
---
---
---       loop
---         select table_name,object_type into v_supertype_table,v_supertype
---         from acs_object_types
---         where object_type = v_supertype;
---         exit when v_supertype_table is not null;
---       end loop;
 --
 --       execute 'create table ' || v_table_name || ' (' ||
 --         v_id_column || ' integer constraint ' || v_table_name ||
