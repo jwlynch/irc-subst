@@ -8,7 +8,121 @@
 -- returns: nothing
 --
 
--- put object_type__new func here
+create or replace function object_type__new(
+   p_object_type varchar,
+   p_pretty_name varchar,
+   p_pretty_plural varchar,
+   p_supertype varchar             default 'object',
+   p_table_name varchar            default null,
+   p_id_column varchar             default null,
+   p_package_name varchar          default null,
+   p_abstract_p boolean            default 'f',
+   p_type_extension_table varchar  default null,
+   p_name_method varchar           default null,
+   p_create_table_p boolean        default 'f',
+   p_dynamic_p boolean             default 'f'
+)
+-- final func should return integer
+returns varchar
+language 'plpgsql'
+as
+$$
+  declare
+    v_package_name                      object_types.package_name%TYPE;
+    v_supertype                         object_types.supertype%TYPE;
+    v_name_method                       varchar;
+    v_idx                               integer;
+    v_temp_p                            boolean;
+    v_supertype_table                   object_types.table_name%TYPE;
+    v_id_column                         object_types.id_column%TYPE;
+    v_table_name                        object_types.table_name%TYPE;
+
+    v_test_out                          varchar;
+  begin
+      v_idx := position('.' in p_name_method);
+      if v_idx <> 0 then
+           v_name_method := substr(p_name_method,1,v_idx - 1) ||
+                         '__' || substr(p_name_method, v_idx + 1);
+      else
+           v_name_method := p_name_method;
+      end if;
+
+      v_test_out := ''; -- remove me
+
+      -- If we are asked to create the table, provide reasonable default values for the
+      -- table name and id column.  Traditionally OpenACS uses the plural form of the type
+      -- name.  This code appends "_t" (for "table") because the use of english plural rules
+      -- does not work well for all languages.
+
+      if p_create_table_p and (p_table_name is null or p_table_name = '') then
+        v_table_name := p_object_type || '_t';
+      else
+        v_table_name := p_table_name;
+      end if;
+
+      if p_create_table_p and (p_id_column is null or p_id_column = '') then
+        v_id_column := p_object_type || '_id';
+      else
+        v_id_column := p_id_column;
+      end if;
+
+
+      if p_package_name is null or p_package_name = '' then
+        v_package_name := p_object_type;
+      else
+        v_package_name := p_package_name;
+      end if;
+
+      if p_object_type <> 'object' then
+        if p_supertype is null or p_supertype = '' then
+          v_supertype := 'object';
+        else
+          v_supertype := p_supertype;
+        -- TODO: define object_type__is_subtype_p()
+        --   if not acs_object_type__is_subtype_p('acs_object', p_supertype) then
+        --     raise exception '%s is not a valid type', p_supertype;
+        --   end if;
+        end if;
+      end if;
+
+
+      insert into object_types
+        (object_type, pretty_name, pretty_plural, supertype, table_name,
+         id_column, abstract_p, type_extension_table, package_name,
+         name_method, dynamic_p)
+      values
+        (p_object_type, p_pretty_name,
+         p_pretty_plural, v_supertype,
+         v_table_name, v_id_column,
+         p_abstract_p, p_type_extension_table,
+         v_package_name, v_name_method, p_dynamic_p);
+
+         if p_create_table_p then
+
+           if exists (select 1
+                      from pg_class
+                      where relname = lower(v_table_name)) then
+             raise exception 'Table "%" already exists', v_table_name;
+           end if;
+
+           loop
+             select table_name,object_type into v_supertype_table,v_supertype
+             from object_types
+             where object_type = v_supertype;
+             exit when v_supertype_table is not null;
+           end loop;
+
+           execute
+             'create table ' || v_table_name || ' (' ||
+             v_id_column || ' integer constraint ' || v_table_name ||
+             '_pk primary key ' || ' constraint ' || v_table_name ||
+             '_fk references ' || v_supertype_table || ' on delete cascade)';
+         end if;
+
+
+      return v_test_out; -- should return 0 in final func
+  end;
+$$;
 
 create or replace function object_type__delete(
 )
