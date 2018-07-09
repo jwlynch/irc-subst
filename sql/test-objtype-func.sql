@@ -39,8 +39,17 @@ $$
 
       v_test_out := ''; -- remove me
 
+      -- If we are asked to create the table, provide reasonable default values for the
+      -- table name and id column.  Traditionally OpenACS uses the plural form of the type
+      -- name.  This code appends "_t" (for "table") because the use of english plural rules
+      -- does not work well for all languages.
 
-    return 'v_name_method is ' || v_name_method; -- should return 0 in final func
+      if p_create_table_p and (p_table_name is null or p_table_name = '') then
+        v_table_name := p_object_type || '_t';
+      else
+        v_table_name := p_table_name;
+      end if;
+
 
       return v_test_out; -- should return 0 in final func
   end;
@@ -73,16 +82,6 @@ $$;
 -- BEGIN
 -- TOOK STUFF FROM HERE
 --
---     -- If we are asked to create the table, provide reasonable default values for the
---     -- table name and id column.  Traditionally OpenACS uses the plural form of the type
---     -- name.  This code appends "_t" (for "table") because the use of english plural rules
---     -- does not work well for all languages.
---
---     if p_create_table_p and (p_table_name is null or p_table_name = '') then
---       v_table_name := p_object_type || '_t';
---     else
---       v_table_name := p_table_name;
---     end if;
 --
 --     if p_create_table_p and (p_id_column is null or p_id_column = '') then
 --       v_id_column := p_object_type || '_id';
