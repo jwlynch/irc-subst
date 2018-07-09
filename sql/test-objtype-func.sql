@@ -75,6 +75,18 @@ $$
         end if;
       end if;
 
+
+      insert into object_types
+        (object_type, pretty_name, pretty_plural, supertype, table_name,
+         id_column, abstract_p, type_extension_table, package_name,
+         name_method, dynamic_p)
+      values
+        (p_object_type, p_pretty_name,
+         p_pretty_plural, v_supertype,
+         v_table_name, v_id_column,
+         p_abstract_p, p_type_extension_table,
+         v_package_name, v_name_method, p_dynamic_p);
+
       return v_test_out; -- should return 0 in final func
   end;
 $$;
@@ -107,18 +119,6 @@ $$;
 -- TOOK STUFF FROM HERE
 --
 --
---
---
---     insert into acs_object_types
---       (object_type, pretty_name, pretty_plural, supertype, table_name,
---        id_column, abstract_p, type_extension_table, package_name,
---        name_method, dynamic_p)
---     values
---       (p_object_type, p_pretty_name,
---        p_pretty_plural, v_supertype,
---        v_table_name, v_id_column,
---        p_abstract_p, p_type_extension_table,
---        v_package_name, v_name_method, p_dynamic_p);
 --
 --     if p_create_table_p then
 --
