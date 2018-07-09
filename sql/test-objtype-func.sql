@@ -102,6 +102,11 @@ $$
              exit when v_supertype_table is not null;
            end loop;
 
+           execute
+             'create table ' || v_table_name || ' (' ||
+             v_id_column || ' integer constraint ' || v_table_name ||
+             '_pk primary key ' || ' constraint ' || v_table_name ||
+             '_fk references ' || v_supertype_table || ' on delete cascade)';
          end if;
 
 
@@ -138,10 +143,6 @@ $$;
 --
 --
 --
---       execute 'create table ' || v_table_name || ' (' ||
---         v_id_column || ' integer constraint ' || v_table_name ||
---         '_pk primary key ' || ' constraint ' || v_table_name ||
---         '_fk references ' || v_supertype_table || ' on delete cascade)';
 --     return 0;
 -- END;
 -- $$ LANGUAGE plpgsql;
