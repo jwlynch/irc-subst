@@ -1,32 +1,59 @@
--- CREATE OR REPLACE FUNCTION acs_object_type__create_type(
+--
+-- procedure acs_object_type__drop_type/3
+--
+-- CREATE OR REPLACE FUNCTION acs_object_type__drop_type(
 --    p_object_type varchar,
---    p_pretty_name varchar,
---    p_pretty_plural varchar,
---    p_supertype varchar,
---    p_table_name varchar,           -- default null
---    p_id_column varchar,            -- default null
---    p_package_name varchar,         -- default null
---    p_abstract_p boolean,           -- default 'f'
---    p_type_extension_table varchar, -- default null
---    p_name_method varchar,          -- default null
---    p_create_table_p boolean,       -- default 'f'
---    p_dynamic_p boolean             -- default 'f'
+--    p_drop_children_p boolean, -- default 'f'
+--    p_drop_table_p boolean     -- default 'f'
 --
 -- ) RETURNS integer AS $$
 -- DECLARE
---   v_package_name                      acs_object_types.package_name%TYPE;
---   v_supertype                         acs_object_types.supertype%TYPE;
---   v_name_method                       varchar;
---   v_idx                               integer;
---   v_temp_p                            boolean;
---   v_supertype_table                   acs_object_types.table_name%TYPE;
---   v_id_column                         acs_object_types.id_column%TYPE;
---   v_table_name                        acs_object_types.table_name%TYPE;
+--   row                               record;
+--   object_row                        record;
+--   v_table_name                      acs_object_types.table_name%TYPE;
 -- BEGIN
--- TOOK STUFF FROM HERE
 --
+--   -- drop children recursively
+--   if p_drop_children_p then
+--     for row in select object_type
+--                from acs_object_types
+--                where supertype = p_object_type
+--     loop
+--       perform acs_object_type__drop_type(row.object_type, 't', p_drop_table_p);
+--     end loop;
+--   end if;
 --
+--   -- drop all the attributes associated with this type
+--   for row in select attribute_name
+--              from acs_attributes
+--              where object_type = p_object_type
+--   loop
+--     perform acs_attribute__drop_attribute (p_object_type, row.attribute_name);
+--   end loop;
 --
---     return 0;
+--   -- Remove the associated table if it exists and p_drop_table_p is true
+--
+--   if p_drop_table_p then
+--
+--     select table_name into v_table_name
+--     from acs_object_types
+--     where object_type = p_object_type;
+--
+--     if found then
+--       if not exists (select 1
+--                      from pg_class
+--                      where relname = lower(v_table_name)) then
+--         raise exception 'Table "%" does not exist', v_table_name;
+--       end if;
+--
+--       execute 'drop table ' || v_table_name || ' cascade';
+--     end if;
+-- 
+--   end if;
+--
+--   delete from acs_object_types
+--   where object_type = p_object_type;
+--
+--   return 0;
 -- END;
 -- $$ LANGUAGE plpgsql;
