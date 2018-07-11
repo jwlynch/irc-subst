@@ -1,12 +1,16 @@
+CREATE OR REPLACE FUNCTION object_type__delete(
+   p_object_type varchar,
+   p_drop_children_p boolean default 'f',
+   p_drop_table_p boolean    default 'f'
+
+) RETURNS varchar AS $$
+$$ LANGUAGE plpgsql;
+
+
 --
 -- procedure acs_object_type__drop_type/3
 --
--- CREATE OR REPLACE FUNCTION acs_object_type__drop_type(
---    p_object_type varchar,
---    p_drop_children_p boolean, -- default 'f'
---    p_drop_table_p boolean     -- default 'f'
---
--- ) RETURNS integer AS $$
+-- (got stuff from here)
 -- DECLARE
 --   row                               record;
 --   object_row                        record;
@@ -48,7 +52,7 @@
 --
 --       execute 'drop table ' || v_table_name || ' cascade';
 --     end if;
--- 
+--
 --   end if;
 --
 --   delete from acs_object_types
@@ -56,4 +60,4 @@
 --
 --   return 0;
 -- END;
--- $$ LANGUAGE plpgsql;
+-- (and from here)
