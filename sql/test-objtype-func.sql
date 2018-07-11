@@ -1,17 +1,17 @@
 CREATE OR REPLACE FUNCTION object_type__delete(
-   p_object_type varchar,
-   p_drop_children_p boolean default 'f',
-   p_drop_table_p boolean    default 'f'
+    p_object_type varchar,
+    p_drop_children_p boolean default 'f',
+    p_drop_table_p boolean    default 'f'
 
 ) RETURNS varchar AS $$
 DECLARE
-  row                               record;
-  object_row                        record;
-  v_table_name                      object_types.table_name%TYPE;
+    row                               record;
+    object_row                        record;
+    v_table_name                      object_types.table_name%TYPE;
 
-  v_test_out                         varchar;
+    v_test_out                        varchar;
 BEGIN
-  v_test_out = 'p_object_type is ' || p_object_type;
+    v_test_out = 'p_object_type is ' || p_object_type;
 
     -- drop children recursively
     if p_drop_children_p then
@@ -56,7 +56,7 @@ BEGIN
     delete from object_types
     where object_type = p_object_type;
 
-  return v_test_out;
+    return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
 
