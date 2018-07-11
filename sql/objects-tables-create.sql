@@ -86,12 +86,12 @@ comment on column object_types.name_method is '
 
 comment on column object_types.type_extension_table is '
  Object types (and their subtypes) that require more type-specific
- data than the fields already existing in acs_object_types may name
+ data than the fields already existing in object_types may name
  a table in which that data is stored.  The table should be keyed
  by the associated object_type.  For example, a row in the group_types
  table stores a default approval policy for every user group of that type.
  In this example, the group_types table has a primary key named
- group_type that references acs_object_types.  If a subtype of groups
+ group_type that references object_types.  If a subtype of groups
  for example, lab_courses, has its own type-specific data, it could be
  maintained in a table called lab_course_types, with a primary key named
  lab_course_type that references group_types.  This provides the same
