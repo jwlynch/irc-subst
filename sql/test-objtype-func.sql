@@ -25,7 +25,7 @@ BEGIN
     -- drop children recursively
     if p_drop_children_p then
       for row in select object_type
-                 from acs_object_types
+                 from object_types
                  where supertype = p_object_type
       loop
         perform object_type__delete(row.object_type, 't', p_drop_table_p);
