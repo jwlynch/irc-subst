@@ -47,7 +47,7 @@ BEGIN
     if p_drop_table_p then
 
       select table_name into v_table_name
-      from acs_object_types
+      from object_types
       where object_type = p_object_type;
 
       if found then
