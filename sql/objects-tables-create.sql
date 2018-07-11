@@ -108,6 +108,64 @@ comment on column object_types.dynamic_p is '
   future. That is the reason it is not yet part of the API.
 ';
 
+------------------------------------
+-- DATATYPES AND ATTRIBUTES --
+------------------------------------
+
+create table datatypes (
+	datatype	varchar(50) not null
+			constraint acs_datatypes_datatype_pk primary key,
+	max_n_values	integer default 1
+			constraint acs_datatypes_max_n_values_ck
+			check (max_n_values > 0),
+        database_type   text,
+        column_size     text,
+        column_check_expr text,
+        column_output_function text
+);
+
+comment on table datatypes is '
+ Defines the set of available abstract datatypes for attributes, along with
+ an optional default mapping to a database type, size, and constraint to use if the
+ attribute is created with create_attribute''s storage_type param set to "type_specific"
+ and the create_storage_p param is set to true.  These defaults can be overwritten by
+ the caller.
+
+ The set of pre-defined datatypes is inspired by XForms
+ (http://www.w3.org/TR/xforms-datamodel/).
+';
+
+comment on column datatypes.max_n_values is '
+ The maximum number of values that any attribute with this datatype
+ can have. Of the predefined attribute types, only "boolean" specifies
+ a non-null max_n_values, because it doesn''t make sense to have a
+ boolean attribute with more than one value. There is no
+ corresponding min_n_values column, because each attribute may be
+ optional, i.e., min_n_values would always be zero.
+';
+
+comment on column datatypes.database_type is '
+  The base database type corresponding to the abstract datatype.  For example "varchar" or
+  "integer".
+';
+
+comment on column datatypes.column_size is '
+  Optional default column size specification to append to the base database type.  For
+  example "1000" for the "string" abstract datatype, or "10,2" for "number".
+';
+
+comment on column datatypes.column_check_expr is '
+  Optional check constraint expression to declare for the type_specific database column.  In
+  Oracle, for instance, the abstract "boolean" type is declared "text", with a column
+  check expression to restrict the values to "f" and "t".
+';
+
+comment on column datatypes.column_output_function is '
+  Function to call for this datatype when building a select view.  If not null, it will
+  be called with an attribute name and is expected to return an expression on that
+  attribute.  Example: date attributes will be transformed to calls to "to_char()".
+';
+
 -- we might have to add the supertype__object_type__fk constraint
 -- after defining the table
 
