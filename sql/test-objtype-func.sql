@@ -23,6 +23,15 @@ BEGIN
       end loop;
     end if;
 
+    --
+    --   -- drop all the attributes associated with this type
+    --   for row in select attribute_name
+    --              from acs_attributes
+    --              where object_type = p_object_type
+    --   loop
+    --     perform acs_attribute__drop_attribute (p_object_type, row.attribute_name);
+    --   end loop;
+
   return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
@@ -32,15 +41,6 @@ $$ LANGUAGE plpgsql;
 -- procedure acs_object_type__drop_type/3
 --
 -- (got stuff from here)
---
---
---   -- drop all the attributes associated with this type
---   for row in select attribute_name
---              from acs_attributes
---              where object_type = p_object_type
---   loop
---     perform acs_attribute__drop_attribute (p_object_type, row.attribute_name);
---   end loop;
 --
 --   -- Remove the associated table if it exists and p_drop_table_p is true
 --
