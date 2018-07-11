@@ -8,8 +8,11 @@ DECLARE
   row                               record;
   object_row                        record;
   v_table_name                      object_types.table_name%TYPE;
+
+  v_test_out                         varchar;
 BEGIN
-  return 'return';
+  v_test_out = 'return';
+  return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
 
