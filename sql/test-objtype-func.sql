@@ -4,6 +4,13 @@ CREATE OR REPLACE FUNCTION object_type__delete(
    p_drop_table_p boolean    default 'f'
 
 ) RETURNS varchar AS $$
+DECLARE
+  row                               record;
+  object_row                        record;
+  v_table_name                      acs_object_types.table_name%TYPE;
+BEGIN
+  return 'return';
+END;
 $$ LANGUAGE plpgsql;
 
 
@@ -11,11 +18,6 @@ $$ LANGUAGE plpgsql;
 -- procedure acs_object_type__drop_type/3
 --
 -- (got stuff from here)
--- DECLARE
---   row                               record;
---   object_row                        record;
---   v_table_name                      acs_object_types.table_name%TYPE;
--- BEGIN
 --
 --   -- drop children recursively
 --   if p_drop_children_p then
@@ -58,6 +60,4 @@ $$ LANGUAGE plpgsql;
 --   delete from acs_object_types
 --   where object_type = p_object_type;
 --
---   return 0;
--- END;
 -- (and from here)
