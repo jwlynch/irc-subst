@@ -13,6 +13,15 @@ DECLARE
 BEGIN
     v_test_out = 'p_object_type is ' || p_object_type;
 
+    select table_name into v_table_name
+    from object_types
+    where object_type = p_object_type;
+
+    if not found then
+        raise exception 'Type "%" does not exist', p_object_type;
+    end if;
+
+
     -- drop children recursively
     if p_drop_children_p then
       for row in select object_type
