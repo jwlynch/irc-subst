@@ -11,7 +11,8 @@ DECLARE
 
   v_test_out                         varchar;
 BEGIN
-  v_test_out = 'return';
+  v_test_out = 'p_object_type is ' || p_object_type;
+
   return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
