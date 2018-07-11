@@ -53,6 +53,9 @@ BEGIN
 
     end if;
 
+    delete from object_types
+    where object_type = p_object_type;
+
   return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
@@ -62,8 +65,5 @@ $$ LANGUAGE plpgsql;
 -- procedure acs_object_type__drop_type/3
 --
 -- (got stuff from here)
---
---   delete from acs_object_types
---   where object_type = p_object_type;
 --
 -- (and from here)
