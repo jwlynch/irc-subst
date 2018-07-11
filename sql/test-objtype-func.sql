@@ -13,6 +13,16 @@ DECLARE
 BEGIN
   v_test_out = 'p_object_type is ' || p_object_type;
 
+    -- drop children recursively
+    if p_drop_children_p then
+      for row in select object_type
+                 from acs_object_types
+                 where supertype = p_object_type
+      loop
+        perform object_type__delete(row.object_type, 't', p_drop_table_p);
+      end loop;
+    end if;
+
   return v_test_out;
 END;
 $$ LANGUAGE plpgsql;
@@ -23,15 +33,6 @@ $$ LANGUAGE plpgsql;
 --
 -- (got stuff from here)
 --
---   -- drop children recursively
---   if p_drop_children_p then
---     for row in select object_type
---                from acs_object_types
---                where supertype = p_object_type
---     loop
---       perform acs_object_type__drop_type(row.object_type, 't', p_drop_table_p);
---     end loop;
---   end if;
 --
 --   -- drop all the attributes associated with this type
 --   for row in select attribute_name
