@@ -7,7 +7,7 @@ CREATE OR REPLACE FUNCTION object_type__delete(
 DECLARE
   row                               record;
   object_row                        record;
-  v_table_name                      acs_object_types.table_name%TYPE;
+  v_table_name                      object_types.table_name%TYPE;
 BEGIN
   return 'return';
 END;
