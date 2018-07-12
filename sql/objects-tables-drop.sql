@@ -1,4 +1,4 @@
-drop table attributes;
+drop table datatypes;
 
 drop table objects;
 
