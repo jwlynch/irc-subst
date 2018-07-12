@@ -3,6 +3,9 @@
 --
 
 drop function object_type__delete(
+  p_object_type varchar,
+  p_drop_children_p boolean,
+  p_drop_table_p boolean
 );
 
 drop function object_type__new(
