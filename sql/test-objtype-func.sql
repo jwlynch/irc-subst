@@ -43,15 +43,15 @@ BEGIN
                  where object_type = p_object_type) then
     raise exception 'Object type % does not exist', p_object_type;
   end if;
---
---   if p_sort_order is null then
---     select coalesce(max(sort_order), 1) into v_sort_order
---     from acs_attributes
---     where object_type = p_object_type
---     and attribute_name = p_attribute_name;
---   else
---     v_sort_order := p_sort_order;
---   end if;
+
+  if p_sort_order is null then
+    select coalesce(max(sort_order), 1) into v_sort_order
+    from acs_attributes
+    where object_type = p_object_type
+    and attribute_name = p_attribute_name;
+  else
+    v_sort_order := p_sort_order;
+  end if;
 --
 --   select nextval('t_acs_attribute_id_seq') into v_attribute_id;
 --
