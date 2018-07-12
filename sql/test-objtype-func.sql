@@ -1,7 +1,7 @@
 --
 -- procedure acs_attribute__create_attribute/20
 --
-CREATE OR REPLACE FUNCTION acs_attribute__create_attribute(
+CREATE OR REPLACE FUNCTION attribute__new(
    p_object_type varchar,
    p_attribute_name varchar,
    p_datatype varchar,
