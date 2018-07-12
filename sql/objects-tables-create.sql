@@ -166,6 +166,102 @@ comment on column datatypes.column_output_function is '
   attribute.  Example: date attributes will be transformed to calls to "to_char()".
 ';
 
+-- Load pre-defined datatypes.
+--
+begin;
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('string', null, 'varchar', '4000');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('boolean', 1, 'bool', null);
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('number', null, 'numeric', '10,2');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('integer', 1, 'integer', null);
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('currency', null, 'money', null);
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_output_function)
+ values
+  ('date', null, 'timestamp', 'acs_datatype__date_output_function');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_output_function)
+ values
+  ('timestamp', null, 'timestamp', 'acs_datatype__timestamp_output_function');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_output_function)
+ values
+  ('time_of_day', null, 'timestamp', 'acs_datatype__timestamp_output_function');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('enumeration', null, 'varchar', '100');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('url', null, 'varchar', '250');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('email', null, 'varchar', '200');
+
+ insert into acs_datatypes
+  (datatype, max_n_values, database_type, column_size)
+ values
+  ('file', 1, 'varchar', '100');
+
+insert into acs_datatypes
+ (datatype, max_n_values, database_type, column_size)
+values
+ ('text', null, 'text', null);
+
+insert into acs_datatypes
+  (datatype, max_n_values, database_type)
+values
+  ('keyword', 1, 'text');
+
+insert into acs_datatypes
+ (datatype, max_n_values, database_type, column_size)
+values
+ ('richtext', null, 'text', null);
+
+insert into acs_datatypes
+ (datatype, max_n_values, database_type, column_size)
+values
+ ('filename', null, 'varchar', '100');
+
+insert into acs_datatypes
+ (datatype, max_n_values, database_type, column_size)
+values
+ ('float', null, 'float8', null);
+
+-- PG 8.x has no unsigned integer datatype
+insert into acs_datatypes
+ (datatype, max_n_values, database_type, column_size)
+values
+ ('naturalnum', null, 'integer', null);
+
+end;
+
 -- we might have to add the supertype__object_type__fk constraint
 -- after defining the table
 
