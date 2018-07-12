@@ -54,19 +54,19 @@ BEGIN
   end if;
 
   select nextval('t_attribute_id_seq') into v_attribute_id;
---
---   insert into acs_attributes
---     (attribute_id, object_type, table_name, column_name, attribute_name,
---      pretty_name, pretty_plural, sort_order, datatype, default_value,
---      min_n_values, max_n_values, storage, static_p)
---   values
---     (v_attribute_id, p_object_type,
---      p_table_name, p_column_name,
---      p_attribute_name, p_pretty_name,
---      p_pretty_plural, v_sort_order,
---      p_datatype, p_default_value,
---      p_min_n_values, p_max_n_values,
---      p_storage, p_static_p);
+
+  insert into attributes
+    (attribute_id, object_type, table_name, column_name, attribute_name,
+     pretty_name, pretty_plural, sort_order, datatype, default_value,
+     min_n_values, max_n_values, storage, static_p)
+  values
+    (v_attribute_id, p_object_type,
+     p_table_name, p_column_name,
+     p_attribute_name, p_pretty_name,
+     p_pretty_plural, v_sort_order,
+     p_datatype, p_default_value,
+     p_min_n_values, p_max_n_values,
+     p_storage, p_static_p);
 --
 --   if p_create_column_p then
 --
