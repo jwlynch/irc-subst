@@ -284,6 +284,42 @@ create table objects
       references objects(object_id)
 );
 
+comment on table objects is '
+The root table for the acs object heirarchy.  It all starts here folks.
+';
+
+comment on column objects.context_id is '
+ The context_id column points to an object that provides a context for
+ this object. Often this will reflect an observed hierarchy in a site,
+ for example a bboard message would probably list a bboard topic as
+ it''s context, and a bboard topic might list a sub-site as it''s
+ context. Whenever we ask a question of the form "can user X perform
+ action Y on object Z", the acs security model will defer to an
+ object''s context if there is no information about user X''s
+ permission to perform action Y on object Z.
+';
+
+comment on column objects.creation_user is '
+ Who created the object; may be null since objects can be created by
+ automated processes
+';
+
+comment on column objects.modifying_user is '
+ Who last modified the object
+';
+
+comment on column objects.package_id is '
+ Which package instance this object belongs to.
+ Please note that in mid-term this column will replace all
+ package_ids of package specific tables.
+';
+
+comment on column objects.title is '
+ Title of the object if applicable.
+ Please note that in mid-term this column will replace all
+ titles or object_names of package specific tables.
+';
+
 insert
     into object_types
     (
