@@ -163,7 +163,7 @@ BEGIN
 --
 --   end if;
 --
---   return v_attribute_id;
+  return v_attribute_id;
 --
 END;
 $$ LANGUAGE 'plpgsql';
