@@ -282,3 +282,54 @@ insert
         'objects',
         'object_id'
     );
+
+create table object_type_tables (
+	object_type	varchar(100) not null
+                        constraint obj_type_tbls_obj_type_fk
+			references object_types (object_type),
+	table_name	varchar(30) not null,
+	id_column	varchar(30),
+	constraint acs_object_type_tables_pk
+	primary key (object_type, table_name)
+);
+
+create table attributes (
+	attribute_id	integer not null
+			constraint attributes_attribute_id_pk
+			primary key,
+	object_type	varchar(100) not null
+			constraint attributes_object_type_fk
+			references object_types (object_type),
+	table_name	varchar(30),
+	constraint attrs_obj_type_tbl_name_fk
+	foreign key (object_type, table_name)
+        references object_type_tables,
+	attribute_name	varchar(100) not null,
+	pretty_name	varchar(100) not null,
+	pretty_plural	varchar(100),
+	sort_order	integer not null,
+	datatype	varchar(50) not null
+			constraint attributes_datatype_fk
+			references datatypes (datatype),
+	default_value	text,
+	min_n_values	integer default 1 not null
+			constraint attributes_min_n_values_ck
+			check (min_n_values >= 0),
+	max_n_values	integer default 1 not null
+			constraint attributes_max_n_values_ck
+			check (max_n_values >= 0),
+	storage 	varchar(13) default 'type_specific'
+			constraint attributes_storage_ck
+			check (storage in ('type_specific',
+					   'generic')),
+        static_p        boolean default 'f',
+	column_name	varchar(30),
+	constraint attributes_attr_name_un
+	unique (attribute_name, object_type),
+	constraint attributes_pretty_name_un
+	unique (pretty_name, object_type),
+	constraint attributes_sort_order_un
+	unique (attribute_id, sort_order),
+	constraint attributes_n_values_ck
+	check (min_n_values <= max_n_values)
+);
