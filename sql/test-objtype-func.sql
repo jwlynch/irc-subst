@@ -36,6 +36,8 @@ DECLARE
 
 BEGIN
 
+  v_attribute_id := 0; -- remove me when this gets set properly
+
   if not exists (select 1
                  from acs_object_types
                  where object_type = p_object_type) then
