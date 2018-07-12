@@ -35,12 +35,12 @@ DECLARE
   v_datatype              record;
 
 BEGIN
---
---   if not exists (select 1
---                  from acs_object_types
---                  where object_type = p_object_type) then
---     raise exception 'Object type % does not exist', p_object_type;
---   end if;
+
+  if not exists (select 1
+                 from acs_object_types
+                 where object_type = p_object_type) then
+    raise exception 'Object type % does not exist', p_object_type;
+  end if;
 --
 --   if p_sort_order is null then
 --     select coalesce(max(sort_order), 1) into v_sort_order
