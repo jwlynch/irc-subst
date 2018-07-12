@@ -53,7 +53,7 @@ BEGIN
     v_sort_order := p_sort_order;
   end if;
 
-  select nextval('t_acs_attribute_id_seq') into v_attribute_id;
+  select nextval('t_attribute_id_seq') into v_attribute_id;
 --
 --   insert into acs_attributes
 --     (attribute_id, object_type, table_name, column_name, attribute_name,
