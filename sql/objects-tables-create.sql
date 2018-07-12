@@ -172,94 +172,32 @@ begin;
  insert into datatypes
   (datatype, max_n_values, database_type, column_size)
  values
-  ('string', null, 'varchar', '4000');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('boolean', 1, 'bool', null);
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('number', null, 'numeric', '10,2');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('integer', 1, 'integer', null);
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('currency', null, 'money', null);
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_output_function)
- values
-  ('date', null, 'timestamp', 'acs_datatype__date_output_function');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_output_function)
- values
-  ('timestamp', null, 'timestamp', 'acs_datatype__timestamp_output_function');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_output_function)
- values
+  ('date', null, 'timestamp', 'acs_datatype__date_output_function'),
+  ('timestamp', null, 'timestamp', 'acs_datatype__timestamp_output_function'),
   ('time_of_day', null, 'timestamp', 'acs_datatype__timestamp_output_function');
 
  insert into datatypes
   (datatype, max_n_values, database_type, column_size)
  values
-  ('enumeration', null, 'varchar', '100');
+  ('enumeration', null, 'varchar', '100'),
+  ('url', null, 'varchar', '250'),
+  ('email', null, 'varchar', '200'),
+  ('file', 1, 'varchar', '100'),
+  ('filename', null, 'varchar', '100'),
+  ('string', null, 'varchar', '4000'),
+  ('number', null, 'numeric', '10,2'),
+  ('boolean', 1, 'bool', null),
+  ('integer', 1, 'integer', null),
+  ('currency', null, 'money', null),
+  ('text', null, 'text', null),
+  ('richtext', null, 'text', null),
+  ('float', null, 'float8', null),
+  ('naturalnum', null, 'integer', null);
 
  insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('url', null, 'varchar', '250');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('email', null, 'varchar', '200');
-
- insert into datatypes
-  (datatype, max_n_values, database_type, column_size)
- values
-  ('file', 1, 'varchar', '100');
-
-insert into datatypes
- (datatype, max_n_values, database_type, column_size)
-values
- ('text', null, 'text', null);
-
-insert into datatypes
   (datatype, max_n_values, database_type)
-values
+ values
   ('keyword', 1, 'text');
-
-insert into datatypes
- (datatype, max_n_values, database_type, column_size)
-values
- ('richtext', null, 'text', null);
-
-insert into datatypes
- (datatype, max_n_values, database_type, column_size)
-values
- ('filename', null, 'varchar', '100');
-
-insert into datatypes
- (datatype, max_n_values, database_type, column_size)
-values
- ('float', null, 'float8', null);
-
--- PG 8.x has no unsigned integer datatype
-insert into datatypes
- (datatype, max_n_values, database_type, column_size)
-values
- ('naturalnum', null, 'integer', null);
-
 end;
 
 -- we might have to add the supertype__object_type__fk constraint
