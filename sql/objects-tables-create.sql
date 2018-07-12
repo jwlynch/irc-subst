@@ -293,6 +293,10 @@ create table object_type_tables (
 	primary key (object_type, table_name)
 );
 
+create sequence t_attribute_id_seq;
+create view attribute_id_seq as
+select nextval('t_attribute_id_seq') as nextval;
+
 create table attributes (
 	attribute_id	integer not null
 			constraint attributes_attribute_id_pk
