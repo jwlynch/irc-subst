@@ -46,7 +46,7 @@ BEGIN
 
   if p_sort_order is null then
     select coalesce(max(sort_order), 1) into v_sort_order
-    from acs_attributes
+    from attributes
     where object_type = p_object_type
     and attribute_name = p_attribute_name;
   else
