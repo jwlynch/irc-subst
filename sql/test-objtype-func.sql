@@ -39,7 +39,7 @@ BEGIN
   v_attribute_id := 0; -- remove me when this gets set properly
 
   if not exists (select 1
-                 from acs_object_types
+                 from object_types
                  where object_type = p_object_type) then
     raise exception 'Object type % does not exist', p_object_type;
   end if;
