@@ -25,15 +25,15 @@ CREATE OR REPLACE FUNCTION acs_attribute__create_attribute(
 
 ) RETURNS integer AS $$
 DECLARE
---
---   v_sort_order            attributes.sort_order%TYPE;
---   v_attribute_id          attributes.attribute_id%TYPE;
---   v_column_spec           text;
---   v_table_name            text;
---   v_constraint_stub       text;
---   v_column_name           text;
---   v_datatype              record;
---
+
+  v_sort_order            attributes.sort_order%TYPE;
+  v_attribute_id          attributes.attribute_id%TYPE;
+  v_column_spec           text;
+  v_table_name            text;
+  v_constraint_stub       text;
+  v_column_name           text;
+  v_datatype              record;
+
 BEGIN
 --
 --   if not exists (select 1
