@@ -213,10 +213,15 @@ create table objects
       not null
     constraint object_type_fk_ob_type
       references object_types(object_type),
+  title			varchar(1000) default null,
+  package_id		integer default null,
   creation_date timestamptz,
   creation_user bigint
     constraint creation_user__object_id__fk
       references objects(object_id),
+  last_modified		timestamptz default current_timestamp not null,
+  modifying_user		integer,
+  modifying_ip		varchar(50),
   context_id bigint
     constraint context_id__object_id__fk
       references objects(object_id)
