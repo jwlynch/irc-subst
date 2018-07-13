@@ -112,7 +112,7 @@ BEGIN
 --     -- all conditions for creating this column have been met, now let's see if the type
 --     -- spec is OK
 --
---     if p_column_spec is not null then
+    if p_column_spec is not null then
 --       if p_database_type is not null
 --         or p_size is not null
 --         or p_null_p is not null
@@ -122,7 +122,7 @@ BEGIN
 --         p_attribute_name, p_object_type;
 --       end if;
 --       v_column_spec := p_column_spec;
---     else
+    else
 --       select coalesce(p_database_type, database_type) as database_type,
 --         coalesce(p_size, column_size) as column_size,
 --         coalesce(p_check_expr, column_check_expr) as check_expr
@@ -158,7 +158,7 @@ BEGIN
 --         end if;
 --       end if;
 --
---     end if;
+    end if;
 --
 --     execute 'alter table ' || v_table_name || ' add ' || p_attribute_name || ' ' ||
 --             v_column_spec;
