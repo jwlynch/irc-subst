@@ -131,10 +131,10 @@ BEGIN
       where datatype = p_datatype;
 
       v_column_spec := v_datatype.database_type;
---
---       if v_datatype.column_size is not null then
---         v_column_spec := v_column_spec || '(' || v_datatype.column_size || ')';
---       end if;
+
+      if v_datatype.column_size is not null then
+        v_column_spec := v_column_spec || '(' || v_datatype.column_size || ')';
+      end if;
 --
 --       v_constraint_stub := ' constraint ' || p_object_type || '_' ||
 --         p_attribute_name || '_';
