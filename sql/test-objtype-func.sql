@@ -31,12 +31,12 @@ BEGIN
       execute 'alter table ' || v_table_name || ' drop column ' ||
         p_attribute_name || ' cascade';
   end if;
---
---   -- Finally, get rid of the attribute
---   delete from acs_attributes
---   where object_type = p_object_type
---   and attribute_name = p_attribute_name;
---
+
+  -- Finally, get rid of the attribute
+  delete from attributes
+  where object_type = p_object_type
+  and attribute_name = p_attribute_name;
+
   return 0;
 END;
 $$ LANGUAGE plpgsql;
