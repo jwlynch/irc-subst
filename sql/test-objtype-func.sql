@@ -69,15 +69,15 @@ BEGIN
      p_storage, p_static_p);
 
   if p_create_column_p then
---
---     if not exists (select 1
---                    from pg_class
---                    where relname = lower(v_table_name)) then
---       raise exception 'Table % for object type % does not exist', v_table_name, p_object_type;
---     end if;
 
     select table_name into v_table_name from object_types
     where object_type = p_object_type;
+
+    if not exists (select 1
+                   from pg_class
+                   where relname = lower(v_table_name)) then
+      raise exception 'Table "%" for object type "%" does not exist', v_table_name, p_object_type;
+    end if;
 --
 --     -- Add the appropriate column to the table
 --
