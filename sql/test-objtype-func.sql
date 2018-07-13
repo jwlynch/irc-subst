@@ -78,18 +78,18 @@ BEGIN
                    where relname = lower(v_table_name)) then
       raise exception 'Table "%" for object type "%" does not exist', v_table_name, p_object_type;
     end if;
---
---     -- Add the appropriate column to the table
---
---     -- We can only create the table column if
---     -- 1. the attribute is declared type_specific (generic storage uses an auxillary table)
---     -- 2. the attribute is not declared static
---     -- 3. it does not already exist in the table
---
---     if p_storage <> 'type_specific' then
---       raise exception 'Attribute % for object type % must be declared with type_specific storage',
---         p_attribute_name, p_object_type;
---     end if;
+
+    -- Add the appropriate column to the table
+
+    -- We can only create the table column if
+    -- 1. the attribute is declared type_specific (generic storage uses an auxillary table)
+    -- 2. the attribute is not declared static
+    -- 3. it does not already exist in the table
+
+    if p_storage <> 'type_specific' then
+      raise exception 'Attribute "%" for object type "%" must be declared with type_specific storage',
+        p_attribute_name, p_object_type;
+    end if;
 --
 --     if p_static_p then
 --       raise exception 'Attribute % for object type % can not be declared static',
