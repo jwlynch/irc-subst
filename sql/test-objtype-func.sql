@@ -121,7 +121,7 @@ BEGIN
       raise exception 'Attribute "%" for object type "%" is being created with an explicit column_spec, but not all of the type modification fields are null',
         p_attribute_name, p_object_type;
       end if;
---       v_column_spec := p_column_spec;
+      v_column_spec := p_column_spec;
     else
 --       select coalesce(p_database_type, database_type) as database_type,
 --         coalesce(p_size, column_size) as column_size,
