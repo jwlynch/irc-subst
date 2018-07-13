@@ -159,10 +159,10 @@ BEGIN
       end if;
 
     end if;
---
---     execute 'alter table ' || v_table_name || ' add ' || p_attribute_name || ' ' ||
---             v_column_spec;
---
+
+    execute 'alter table ' || v_table_name || ' add ' || p_attribute_name || ' ' ||
+            v_column_spec;
+
   end if;
 
   return v_attribute_id;
