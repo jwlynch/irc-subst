@@ -25,12 +25,12 @@ BEGIN
 --                          from acs_attributes a
 --                          where a.object_type = p_object_type
 --                          and a.attribute_name = p_attribute_name);
---
---   -- Drop the table if one were specified for the type and we're asked to
---   if p_drop_column_p and v_table_name is not null then
---       execute 'alter table ' || v_table_name || ' drop column ' ||
---         p_attribute_name || ' cascade';
---   end if;
+
+  -- Drop the column if one were specified for the type and we're asked to
+  if p_drop_column_p and v_table_name is not null then
+      execute 'alter table ' || v_table_name || ' drop column ' ||
+        p_attribute_name || ' cascade';
+  end if;
 --
 --   -- Finally, get rid of the attribute
 --   delete from acs_attributes
