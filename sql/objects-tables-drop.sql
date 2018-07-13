@@ -7,6 +7,7 @@ drop table object_type_tables;
 
 drop table datatypes;
 
-drop table object_types;
 
 drop table objects;
+
+drop table object_types;
