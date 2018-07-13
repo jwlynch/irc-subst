@@ -97,7 +97,7 @@ BEGIN
     end if;
 --
 --     if p_table_name is not null then
---       raise exception 'Attribute % for object type % can not specify a table for storage', p_attribute_name, p_object_type;
+--       raise exception 'Attribute "%" for object type "%" can not specify a table for storage', p_attribute_name, p_object_type;
 --     end if;
 --
 --     if exists (select 1
