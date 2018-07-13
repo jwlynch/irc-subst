@@ -2,6 +2,29 @@
 -- deletes the object functions
 --
 
+drop FUNCTION attribute__new(
+   p_object_type varchar,
+   p_attribute_name varchar,
+   p_datatype varchar,
+   p_pretty_name varchar,
+   p_pretty_plural varchar,
+   p_table_name varchar,
+   p_column_name varchar,
+   p_default_value varchar,
+   p_min_n_values integer,
+   p_max_n_values integer,
+   p_sort_order integer,
+   p_storage varchar,
+   p_static_p boolean,
+   p_create_column_p boolean,
+   p_database_type varchar,
+   p_size varchar,
+   p_null_p boolean,
+   p_references varchar,
+   p_check_expr varchar,
+   p_column_spec varchar
+);
+
 drop function object_type__delete(
   p_object_type varchar,
   p_drop_children_p boolean,
