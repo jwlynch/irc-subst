@@ -129,8 +129,8 @@ BEGIN
       into v_datatype
       from datatypes
       where datatype = p_datatype;
---
---       v_column_spec := v_datatype.database_type;
+
+      v_column_spec := v_datatype.database_type;
 --
 --       if v_datatype.column_size is not null then
 --         v_column_spec := v_column_spec || '(' || v_datatype.column_size || ')';
