@@ -5,19 +5,19 @@ CREATE OR REPLACE FUNCTION attribute__delete(
 
 ) RETURNS integer AS $$
 DECLARE
---   v_table_name             acs_object_types.table_name%TYPE;
+  v_table_name             acs_object_types.table_name%TYPE;
 BEGIN
---
---   -- Check that attribute exists and simultaneously grab the type's table name
---   select t.table_name into v_table_name
---   from acs_object_types t, acs_attributes a
---   where a.object_type = p_object_type
---     and a.attribute_name = p_attribute_name
---     and t.object_type = p_object_type;
---
---   if not found then
---     raise exception 'Attribute %:% does not exist', p_object_type, p_attribute_name;
---   end if;
+
+  -- Check that attribute exists and simultaneously grab the type's table name
+  select t.table_name into v_table_name
+  from object_types t, attributes a
+  where a.object_type = p_object_type
+    and a.attribute_name = p_attribute_name
+    and t.object_type = p_object_type;
+
+  if not found then
+    raise exception 'Attribute "%":"%" does not exist', p_object_type, p_attribute_name;
+  end if;
 --
 --   -- first remove possible values for the enumeration
 --   delete from acs_enum_values
