@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION attribute__delete(
 
 ) RETURNS integer AS $$
 DECLARE
-  v_table_name             acs_object_types.table_name%TYPE;
+  v_table_name             object_types.table_name%TYPE;
 BEGIN
 
   -- Check that attribute exists and simultaneously grab the type's table name
