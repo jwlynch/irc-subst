@@ -67,8 +67,8 @@ BEGIN
      p_datatype, p_default_value,
      p_min_n_values, p_max_n_values,
      p_storage, p_static_p);
---
---   if p_create_column_p then
+
+  if p_create_column_p then
 --
 --     select table_name into v_table_name from acs_object_types
 --     where object_type = p_object_type;
@@ -163,9 +163,9 @@ BEGIN
 --     execute 'alter table ' || v_table_name || ' add ' || p_attribute_name || ' ' ||
 --             v_column_spec;
 --
---   end if;
---
+  end if;
+
   return v_attribute_id;
---
+
 END;
 $$ LANGUAGE 'plpgsql';
