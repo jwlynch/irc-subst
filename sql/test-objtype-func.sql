@@ -135,9 +135,9 @@ BEGIN
       if v_datatype.column_size is not null then
         v_column_spec := v_column_spec || '(' || v_datatype.column_size || ')';
       end if;
---
---       v_constraint_stub := ' constraint ' || p_object_type || '_' ||
---         p_attribute_name || '_';
+
+      v_constraint_stub := ' constraint ' || p_object_type || '_' ||
+        p_attribute_name || '_';
 --
 --       if v_datatype.check_expr is not null then
 --         v_column_spec := v_column_spec || v_constraint_stub || 'ck check(' ||
