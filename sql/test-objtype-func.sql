@@ -143,10 +143,10 @@ BEGIN
         v_column_spec := v_column_spec || v_constraint_stub || 'ck check(' ||
           p_attribute_name || v_datatype.check_expr || ')';
       end if;
---
---       if not p_null_p then
---         v_column_spec := v_column_spec || v_constraint_stub || 'nn not null';
---       end if;
+
+      if not p_null_p then
+        v_column_spec := v_column_spec || v_constraint_stub || 'nn not null';
+      end if;
 --
 --       if p_references is not null then
 --         v_column_spec := v_column_spec || v_constraint_stub || 'fk references ' ||
