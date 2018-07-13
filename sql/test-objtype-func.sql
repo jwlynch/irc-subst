@@ -123,12 +123,12 @@ BEGIN
       end if;
       v_column_spec := p_column_spec;
     else
---       select coalesce(p_database_type, database_type) as database_type,
---         coalesce(p_size, column_size) as column_size,
---         coalesce(p_check_expr, column_check_expr) as check_expr
---       into v_datatype
---       from acs_datatypes
---       where datatype = p_datatype;
+      select coalesce(p_database_type, database_type) as database_type,
+        coalesce(p_size, column_size) as column_size,
+        coalesce(p_check_expr, column_check_expr) as check_expr
+      into v_datatype
+      from datatypes
+      where datatype = p_datatype;
 --
 --       v_column_spec := v_datatype.database_type;
 --
