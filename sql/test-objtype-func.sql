@@ -108,10 +108,10 @@ BEGIN
       raise exception 'Column "%" for object type "%" already exists',
         p_attribute_name, p_object_type;
     end if;
---
---     -- all conditions for creating this column have been met, now let's see if the type
---     -- spec is OK
---
+
+    -- all conditions for creating this column have been met, now let's see if the type
+    -- spec is OK
+
     if p_column_spec is not null then
 --       if p_database_type is not null
 --         or p_size is not null
