@@ -113,14 +113,14 @@ BEGIN
     -- spec is OK
 
     if p_column_spec is not null then
---       if p_database_type is not null
---         or p_size is not null
---         or p_null_p is not null
---         or p_references is not null
---         or p_check_expr is not null then
---       raise exception 'Attribute % for object type % is being created with an explicit column_spec, but not all of the type modification fields are null',
---         p_attribute_name, p_object_type;
---       end if;
+      if p_database_type is not null
+        or p_size is not null
+        or p_null_p is not null
+        or p_references is not null
+        or p_check_expr is not null then
+      raise exception 'Attribute "%" for object type "%" is being created with an explicit column_spec, but not all of the type modification fields are null',
+        p_attribute_name, p_object_type;
+      end if;
 --       v_column_spec := p_column_spec;
     else
 --       select coalesce(p_database_type, database_type) as database_type,
