@@ -147,17 +147,17 @@ BEGIN
       if not p_null_p then
         v_column_spec := v_column_spec || v_constraint_stub || 'nn not null';
       end if;
---
---       if p_references is not null then
---         v_column_spec := v_column_spec || v_constraint_stub || 'fk references ' ||
---           p_references || ' on delete';
---         if p_null_p then
---           v_column_spec := v_column_spec || ' set null';
---         else
---           v_column_spec := v_column_spec || ' cascade';
---         end if;
---       end if;
---
+
+      if p_references is not null then
+        v_column_spec := v_column_spec || v_constraint_stub || 'fk references ' ||
+          p_references || ' on delete';
+        if p_null_p then
+          v_column_spec := v_column_spec || ' set null';
+        else
+          v_column_spec := v_column_spec || ' cascade';
+        end if;
+      end if;
+
     end if;
 --
 --     execute 'alter table ' || v_table_name || ' add ' || p_attribute_name || ' ' ||
