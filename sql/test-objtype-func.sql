@@ -90,11 +90,11 @@ BEGIN
       raise exception 'Attribute "%" for object type "%" must be declared with type_specific storage',
         p_attribute_name, p_object_type;
     end if;
---
---     if p_static_p then
---       raise exception 'Attribute % for object type % can not be declared static',
---         p_attribute_name, p_object_type;
---     end if;
+
+    if p_static_p then
+      raise exception 'Attribute "%" for object type "%" can not be declared static',
+        p_attribute_name, p_object_type;
+    end if;
 --
 --     if p_table_name is not null then
 --       raise exception 'Attribute % for object type % can not specify a table for storage', p_attribute_name, p_object_type;
