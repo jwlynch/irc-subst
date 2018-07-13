@@ -7,6 +7,8 @@ drop table object_type_tables;
 
 drop table datatypes;
 
+delete from object_types
+    where object_type = 'object';
 
 drop table objects;
 
