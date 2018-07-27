@@ -97,7 +97,8 @@ $$
          p_abstract_p, p_type_extension_table,
          v_package_name, v_name_method, p_dynamic_p);
 
-         if p_create_table_p then
+
+      if p_create_table_p then
 
            if exists (select 1
                       from pg_class
@@ -117,7 +118,7 @@ $$
              v_id_column || ' integer constraint ' || v_table_name ||
              '_pk primary key ' || ' constraint ' || v_table_name ||
              '_fk references ' || v_supertype_table || ' on delete cascade)';
-         end if;
+      end if;
 
 
       return v_test_out; -- should return 0 in final func
