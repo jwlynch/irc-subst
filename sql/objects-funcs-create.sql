@@ -118,11 +118,16 @@ $$
              end loop;
            end if;
 
-           v_table_create_string :=
-             'create table ' || v_table_name || ' (' ||
+           v_table_create_string := 'create table ' || v_table_name;
+
+           v_table_create_string := v_table_create_string || ' (';
+
+           v_table_create_string := v_table_create_string ||
              v_id_column || ' integer constraint ' || v_table_name ||
              '_pk primary key ' || ' constraint ' || v_table_name ||
-             '_fk references ' || v_supertype_table || ' on delete cascade)';
+             '_fk references ' || v_supertype_table || ' on delete cascade';
+
+           v_table_create_string := v_table_create_string || ')';
 
            execute v_table_create_string;
       end if;
