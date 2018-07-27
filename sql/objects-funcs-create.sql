@@ -30,6 +30,7 @@ $$
   declare
     v_package_name                      object_types.package_name%TYPE;
     v_supertype                         object_types.supertype%TYPE;
+    v_supertype_nn_p                    boolean;
     v_name_method                       varchar;
     v_idx                               integer;
     v_temp_p                            boolean;
@@ -97,6 +98,7 @@ $$
          p_abstract_p, p_type_extension_table,
          v_package_name, v_name_method, p_dynamic_p);
 
+      v_supertype_nn_p = p_supertype is not NULL and p_supertype <> '';
 
       if p_create_table_p then
 
