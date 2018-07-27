@@ -37,6 +37,7 @@ $$
     v_supertype_table                   object_types.table_name%TYPE;
     v_id_column                         object_types.id_column%TYPE;
     v_table_name                        object_types.table_name%TYPE;
+    v_table_create_string               varchar;
 
     v_test_out                          varchar;
   begin
