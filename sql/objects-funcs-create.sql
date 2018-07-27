@@ -109,12 +109,14 @@ $$
              raise exception 'Table "%" already exists', v_table_name;
            end if;
 
-           loop
-             select table_name,object_type into v_supertype_table,v_supertype
-             from object_types
-             where object_type = v_supertype;
-             exit when v_supertype_table is not null;
-           end loop;
+           if v_supertype_nn_p then
+             loop
+               select table_name,object_type into v_supertype_table,v_supertype
+               from object_types
+               where object_type = v_supertype;
+               exit when v_supertype_table is not null;
+             end loop;
+           end if;
 
            v_table_create_string :=
              'create table ' || v_table_name || ' (' ||
