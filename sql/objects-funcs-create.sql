@@ -116,11 +116,13 @@ $$
              exit when v_supertype_table is not null;
            end loop;
 
-           execute
+           v_table_create_string :=
              'create table ' || v_table_name || ' (' ||
              v_id_column || ' integer constraint ' || v_table_name ||
              '_pk primary key ' || ' constraint ' || v_table_name ||
              '_fk references ' || v_supertype_table || ' on delete cascade)';
+
+           execute v_table_create_string;
       end if;
 
 
