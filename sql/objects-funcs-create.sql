@@ -124,8 +124,12 @@ $$
 
            v_table_create_string := v_table_create_string ||
              v_id_column || ' integer constraint ' || v_table_name ||
-             '_pk primary key ' || ' constraint ' || v_table_name ||
-             '_fk references ' || v_supertype_table || ' on delete cascade';
+             '_pk primary key ';
+
+           if v_supertype_table is not NULL then
+             v_table_create_string := v_table_create_string || ' constraint ' || v_table_name ||
+               '_fk references ' || v_supertype_table || ' on delete cascade';
+           end if;
 
            v_table_create_string := v_table_create_string || ')';
 
