@@ -118,6 +118,9 @@ $$
              end loop;
            end if;
 
+           -- NOTE it's possible for there to be a supertype without a table
+           -- maybe I should make sure that's not possible
+
            v_table_create_string := 'create table ' || v_table_name;
 
            v_table_create_string := v_table_create_string || ' (';
