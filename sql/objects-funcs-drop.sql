@@ -2,6 +2,14 @@
 -- deletes the object functions
 --
 
+drop FUNCTION acs_datatype__timestamp_output_function(
+   p_attribute_name text
+);
+
+drop FUNCTION acs_datatype__date_output_function(
+   p_attribute_name text
+);
+
 drop FUNCTION attribute__delete(
    p_object_type varchar,
    p_attribute_name varchar,

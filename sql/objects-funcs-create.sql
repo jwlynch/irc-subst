@@ -441,3 +441,28 @@ BEGIN
   return 0;
 END;
 $$ LANGUAGE plpgsql;
+
+-- procedure acs_datatype__date_output_function/1
+--
+CREATE OR REPLACE FUNCTION acs_datatype__date_output_function(
+   p_attribute_name text
+) RETURNS text AS $$
+DECLARE
+BEGIN
+  return 'to_char(' || p_attribute_name || ', ''YYYY-MM-DD'')';
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+--
+-- procedure acs_datatype__timestamp_output_function/1
+--
+CREATE OR REPLACE FUNCTION acs_datatype__timestamp_output_function(
+   p_attribute_name text
+) RETURNS text AS $$
+DECLARE
+BEGIN
+  return 'to_char(' || p_attribute_name || ', ''YYYY-MM-DD HH24:MI:SS'')';
+END;
+$$ LANGUAGE plpgsql;
