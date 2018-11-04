@@ -243,6 +243,50 @@ class irc_subst(commandtarget.CommandTarget):
     def debugPrint(self, *args, **kwargs):
         self.debug_tab.context.prnt(*args, **kwargs)
 
+    def doRemove(sself):
+        result = 0 # no error
+
+        if dex("rm", self.debugSects) != -1:
+            debugRm = True
+        else:
+            debugRm = False
+
+        channel = None
+        nick = None
+        reason = None
+
+        if len(argList) == 0:
+            print("remove usage:")
+            print("remove <nick>")
+            print("remove <nick> \"reason\" # must quote reason in 2-arg form")
+            print("remove <channel> <nick> <reason> # need not quote reason in 3-arg form")
+        else: # not zero args
+            if len(argList) >= 3:
+                reason = " ".join(argList[2:])
+                nick = argList[1]
+                channel = argList[0]
+            else:
+                if len(argList) == 2:
+                    reason = argList[1]
+                    nick = argList[0]
+                    channel = hexchat.get_info("channel")
+
+                if len(argList) == 1:
+                    nick = argList[0]
+                    reason = nick
+                    channel = hexchat.get_info("channel")
+
+            removeCommand = "remove " + channel + " " + nick
+            if reason is not None:
+                removeCommand += " :" + reason
+
+            if debugRm:
+                print("debugRm: " + removeCommand)
+            else:
+                hexchat.command(removeCommand)
+
+        return result
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
@@ -263,46 +307,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("no db")
 
         elif cmdString == self.cmdRemove:
-            if dex("rm", self.debugSects) != -1:
-                debugRm = True
-            else:
-                debugRm = False
 
-            channel = None
-            nick = None
-            reason = None
-
-            if len(argList) == 0:
-                print("remove usage:")
-                print("remove <nick>")
-                print("remove <nick> \"reason\" # must quote reason in 2-arg form")
-                print("remove <channel> <nick> <reason> # need not quote reason in 3-arg form")
-            else: # not zero args
-                if len(argList) >= 3:
-                    reason = " ".join(argList[2:])
-                    nick = argList[1]
-                    channel = argList[0]
-                else:
-                    if len(argList) == 2:
-                        reason = argList[1]
-                        nick = argList[0]
-                        channel = hexchat.get_info("channel")
-
-                    if len(argList) == 1:
-                        nick = argList[0]
-                        reason = nick
-                        channel = hexchat.get_info("channel")
-
-                removeCommand = "remove " + channel + " " + nick
-                if reason is not None:
-                    removeCommand += " :" + reason
-
-                if debugRm:
-                    print("debugRm: " + removeCommand)
-                else:
-                    hexchat.command(removeCommand)
-
-            result = 0 # success
+            result = self.doRemove()
 
         elif cmdString == self.cmdAddFact:
             result = 0 # success/command is found
