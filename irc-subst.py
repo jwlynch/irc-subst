@@ -475,8 +475,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
-        elif cmdString == cmdAncestorDirs:
             result = self.doAncestorDirs()
+        elif cmdString == self.cmdAncestorDirs:
         elif cmdString == self.cmdLSDebugSects:
             self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
         elif cmdString == self.cmdDebugSects:
