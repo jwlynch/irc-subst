@@ -244,7 +244,7 @@ class irc_subst(commandtarget.CommandTarget):
     def debugPrint(self, *args, **kwargs):
         self.debug_tab.context.prnt(*args, **kwargs)
 
-    def doRemove(sself):
+    def doRemove(self):
         result = 0 # no error
 
         if dex("rm", self.debugSects) != -1:
