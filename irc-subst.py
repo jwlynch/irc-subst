@@ -293,7 +293,7 @@ class irc_subst(commandtarget.CommandTarget):
         if len(argList) != 1:
             print("takes one arg, the pathname")
         else:
-            print("arg is " + argList[0])
+            pathName = argList[0]
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
