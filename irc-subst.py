@@ -289,8 +289,11 @@ class irc_subst(commandtarget.CommandTarget):
         return result
 
     # make list of dirs, going back to its ancestor
-    def doAncestorDirs(self):
-        print("doAncestorDirs")
+    def doAncestorDirs(self, cmdString, argList, kwargs):
+        if len(argList) != 1:
+            print("takes one arg, the pathname")
+        else:
+            print("arg is " + argList[0])
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
@@ -475,8 +478,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
-            result = self.doAncestorDirs()
         elif cmdString == self.cmdAncestorDirs:
+            result = self.doAncestorDirs(cmdString, argList, kwargs)
         elif cmdString == self.cmdLSDebugSects:
             self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
         elif cmdString == self.cmdDebugSects:
