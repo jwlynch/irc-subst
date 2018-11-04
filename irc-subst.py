@@ -222,6 +222,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.cmdRmFact = "rmfact"
         self.cmdShowFact = "showfact"
         self.cmdInfo = "info"
+        self.cmdAncestorDirs = "ancdirs"
         self.cmdDebugSects = "debugsects"
         self.cmdLSDebugSects = "lsdebugsects"
 
@@ -286,6 +287,10 @@ class irc_subst(commandtarget.CommandTarget):
                 hexchat.command(removeCommand)
 
         return result
+
+    # make list of dirs, going back to its ancestor
+    def doAncestorDirs(self):
+        print("doAncestorDirs")
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
@@ -470,6 +475,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("SNotices tab")
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
+        elif cmdString == cmdAncestorDirs:
+            result = self.doAncestorDirs()
         elif cmdString == self.cmdLSDebugSects:
             self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
         elif cmdString == self.cmdDebugSects:
