@@ -390,6 +390,59 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doRMFact(self, cmdString, argList, kwargs):
+        result = 0 # success/command is found
+
+        if self.dbOK:
+            bad = True
+            key = ""
+            value = ""
+
+            if len(argList) == 0:
+                print("rmfact usage:")
+                print("rmfact <key>")
+            elif len(argList) < 1:
+                print("factoid remove: too few args")
+            elif len(argList) > 1:
+                print("factoid remove: too many args")
+            else:
+                # correct number of args
+                bad = False
+                key = argList[0]
+
+            if not bad:
+                if not self.key_re.match(key):
+                    print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                    bad = True
+
+            if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if not lookupTable:
+                    # key is not in db
+                    print("factoid remove: key %s is not in db" % (key))
+                    bad = True
+
+            if not bad:
+                # do delete query here
+                print("factoid remove: key %s" % (key))
+
+                with self.sqla_eng.begin() as conn:
+                    conn.execute\
+                        (
+                            self.sqla_factoids_table\
+                                .delete()\
+                                .where\
+                                (
+                                    self.sqla_factoids_table.c.key
+                                    ==
+                                    key
+                                )
+                        )
+        else:
+            print("no db")
+
+        return result
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
@@ -417,55 +470,7 @@ class irc_subst(commandtarget.CommandTarget):
             result = self.doAddFact(cmdString, argList, kwargs)
 
         elif cmdString == self.cmdRmFact:
-            result = 0 # success/command is found
-
-            if self.dbOK:
-                bad = True
-                key = ""
-                value = ""
-
-                if len(argList) == 0:
-                    print("rmfact usage:")
-                    print("rmfact <key>")
-                elif len(argList) < 1:
-                    print("factoid remove: too few args")
-                elif len(argList) > 1:
-                    print("factoid remove: too many args")
-                else:
-                    # correct number of args
-                    bad = False
-                    key = argList[0]
-
-                if not bad:
-                    if not self.key_re.match(key):
-                        print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
-                        bad = True
-
-                if not bad:
-                    lookupTable = self.lookupKeyList([key])
-                    if not lookupTable:
-                        # key is not in db
-                        print("factoid remove: key %s is not in db" % (key))
-                        bad = True
-
-                if not bad:
-                    # do delete query here
-                    print("factoid remove: key %s" % (key))
-
-                    with self.sqla_eng.begin() as conn:
-                        conn.execute\
-                            (
-                                self.sqla_factoids_table\
-                                    .delete()\
-                                    .where\
-                                    (
-                                        self.sqla_factoids_table.c.key
-                                        ==
-                                        key
-                                    )
-                            )
-            else:
-                print("no db")
+            result = self.doRMFact(cmdString, argList, kwargs)
 
         elif cmdString == self.cmdShowFact:
             result = self.doShowFact(cmdString, argList, kwargs)
