@@ -295,6 +295,7 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             pathName = argList[0]
             pathList = list(pathlib.Path(pathName).parents)
+            pathList = list(reversed(pathList))
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
