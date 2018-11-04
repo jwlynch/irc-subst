@@ -244,7 +244,7 @@ class irc_subst(commandtarget.CommandTarget):
     def debugPrint(self, *args, **kwargs):
         self.debug_tab.context.prnt(*args, **kwargs)
 
-    def doRemove(self):
+    def doRemove(self, cmdString, argList, kwargs):
         result = 0 # no error
 
         if dex("rm", self.debugSects) != -1:
@@ -313,7 +313,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         elif cmdString == self.cmdRemove:
 
-            result = self.doRemove()
+            result = self.doRemove(cmdString, argList, kwargs)
 
         elif cmdString == self.cmdAddFact:
             result = 0 # success/command is found
