@@ -91,7 +91,7 @@ class irc_subst(commandtarget.CommandTarget):
     # - self.dbSpecs (the dict with the database settings, to be give to psycopg2.open()
     # - self.dbOK (boolean telling whether database is reachable and openable)
     # - self.printConfigP (which is true if reload calls should print the config file)
-    def reload(self, scriptPath):
+    def doReload(self, scriptPath):
         parser = ConfigParser()
         conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
 
@@ -254,7 +254,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if cmdString == self.cmdReload:
             print("reloading config file...")
-            self.reload(self.scriptPath)
+            self.doReload(self.scriptPath)
         elif cmdString == self.cmdLskeys:
             if self.dbOK:
                 self.list_keys()
