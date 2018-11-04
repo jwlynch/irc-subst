@@ -342,6 +342,54 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doAddFact(self, cmdString, argList, kwargs):
+        result = 0 # success/command is found
+
+        if self.dbOK:
+            bad = True
+            key = ""
+            value = ""
+
+            if len(argList) == 0:
+                print("addfact usage:")
+                print("addfact <key> <value>")
+            elif len(argList) < 2:
+                print("factoid add: too few args")
+            elif len(argList) > 2:
+                print("factoid add: too many args")
+            else:
+                # correct number of args
+                bad = False
+                key = argList[0]
+                value = argList[1]
+
+            if not bad:
+                if not self.key_re.match(key):
+                    print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
+                    bad = True
+
+            if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if lookupTable:
+                    # key is already in db
+                    print("key %s is already in db" % (key))
+                    bad = True
+
+            if not bad:
+                # do query and insert here
+                print("factoid add: key %s, value %s" % (key, value))
+
+                with self.sqla_eng.begin() as conn:
+                    conn.execute\
+                        (\
+                            self.sqla_factoids_table.insert(),
+                            {'key': key, 'value': value}
+                        )
+            else:
+                print("no db")
+
+        return result
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
@@ -366,53 +414,7 @@ class irc_subst(commandtarget.CommandTarget):
             result = self.doRemove(cmdString, argList, kwargs)
 
         elif cmdString == self.cmdAddFact:
-            result = 0 # success/command is found
-
-            if self.dbOK:
-                bad = True
-                key = ""
-                value = ""
-
-                if len(argList) == 0:
-                    print("addfact usage:")
-                    print("addfact <key> <value>")
-                elif len(argList) < 2:
-                    print("factoid add: too few args")
-                elif len(argList) > 2:
-                    print("factoid add: too many args")
-                else:
-                    # correct number of args
-                    bad = False
-                    key = argList[0]
-                    value = argList[1]
-
-                if not bad:
-                    if not self.key_re.match(key):
-                        print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
-                        bad = True
-
-                if not bad:
-                    lookupTable = self.lookupKeyList([key])
-                    if lookupTable:
-                        # key is already in db
-                        print("key %s is already in db" % (key))
-                        bad = True
-
-                if not bad:
-                    # do query and insert here
-                    print("factoid add: key %s, value %s" % (key, value))
-
-                    with self.sqla_eng.begin() as conn:
-                        conn.execute\
-                            (\
-                                self.sqla_factoids_table.insert(),
-                                {'key': key, 'value': value}
-                            )
-
-                result = 0
-
-            else:
-                print("no db")
+            result = self.doAddFact(cmdString, argList, kwargs)
 
         elif cmdString == self.cmdRmFact:
             result = 0 # success/command is found
