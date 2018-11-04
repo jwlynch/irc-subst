@@ -199,7 +199,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.sqla_factoids_table = None
 
-        self.reload(self.scriptPath)
+        self.doReload(self.scriptPath)
         self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
