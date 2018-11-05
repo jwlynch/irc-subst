@@ -483,12 +483,7 @@ class irc_subst(commandtarget.CommandTarget):
             print("reloading config file...")
             self.doReload(self.scriptPath)
         elif cmdString == self.cmdLskeys:
-            if self.dbOK:
-                self.list_keys()
-                result = 0 # success
-            else:
-                print("no db")
-
+            result = self.list_keys(cmdString, argList, kwargs)
         elif cmdString == self.cmdRemove:
 
             result = self.doRemove(cmdString, argList, kwargs)
@@ -604,34 +599,44 @@ class irc_subst(commandtarget.CommandTarget):
         return [modified, outStr]
 
     # prints to the irc client the list of keys available in the db
-    def list_keys(self):
-        factoids = self.sqla_factoids_table
-        sel = select([factoids.c.key]).order_by(factoids.c.key)
+    def list_keys(self, cmdString, argList, kwargs):
 
-        with self.sqla_eng.begin() as conn:
-            result = conn.execute(sel)
+        if self.dbOK:
 
-        result_string = ""
-        for row in result:
-            result_string += row[factoids.c.key] + "\n"
+            factoids = self.sqla_factoids_table
+            sel = select([factoids.c.key]).order_by(factoids.c.key)
 
-        # in Python 3, no strings support the buffer interface, because they don't contain bytes.
-        # Before, I was using print. print only writes strings. I shouldn't use print to try and
-        # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
-        # the write() method of to_col, which itself is a pipe.
+            with self.sqla_eng.begin() as conn:
+                result = conn.execute(sel)
 
-        column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
+            result_string = ""
+            for row in result:
+                result_string += row[factoids.c.key] + "\n"
 
-        # note, encoding a str object, you get a bytes object,
-        # and, decoding a bytes object, you get a str obhect
+            # in Python 3, no strings support the buffer interface, because they don't contain bytes.
+            # Before, I was using print. print only writes strings. I shouldn't use print to try and
+            # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
+            # the write() method of to_col, which itself is a pipe.
 
-        comm_stdout, comm_sterr = column.communicate(result_string.encode())
-        # here, split the stdout to lines
+            column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
 
-        lineList = comm_stdout.splitlines()
-        for line in lineList:
-            print(line.decode())
-            #sys.stdout.write(comm_stdout.decode())
+            # note, encoding a str object, you get a bytes object,
+            # and, decoding a bytes object, you get a str obhect
+
+            comm_stdout, comm_sterr = column.communicate(result_string.encode())
+            # here, split the stdout to lines
+
+            lineList = comm_stdout.splitlines()
+            for line in lineList:
+                print(line.decode())
+                #sys.stdout.write(comm_stdout.decode())
+
+            result = 0 # success
+        else:
+            print("no db")
+            result = 1
+
+        return result
 
     # accepts an irc line as a list of words, which is the arguments to a command
     # consolidates the quoted arguments into a single list item
