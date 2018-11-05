@@ -443,6 +443,33 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doInfo(self, cmdString, argList, kwargs):
+        result = 0
+
+        top_context = hexchat.find_context()
+        channel_list = hexchat.get_list('channels')
+        front_tab = [c for c in hexchat.get_list('channels') if c.context == top_context][0]
+        type = front_tab.type
+
+        if type == 1:
+            # server tab
+            print("server tab, server is", front_tab.server)
+        elif type == 2:
+            # channel tab
+            print("channel tab, channel is %s, modes are %s" % (front_tab.channel, front_tab.chanmodes))
+            users = top_context.get_list("users")
+        elif type == 3:
+            # dialog/query tab
+            print("query tab, nick is", front_tab.channel)
+        elif type == 4:
+            # notices tab
+            print("notices tab")
+        elif type == 5:
+            # SNotices tab
+            print("SNotices tab")
+
+        return result
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
@@ -475,27 +502,7 @@ class irc_subst(commandtarget.CommandTarget):
         elif cmdString == self.cmdShowFact:
             result = self.doShowFact(cmdString, argList, kwargs)
         elif cmdString == self.cmdInfo:
-            top_context = hexchat.find_context()
-            channel_list = hexchat.get_list('channels')
-            front_tab = [c for c in hexchat.get_list('channels') if c.context == top_context][0]
-            type = front_tab.type
-
-            if type == 1:
-                # server tab
-                print("server tab, server is", front_tab.server)
-            elif type == 2:
-                # channel tab
-                print("channel tab, channel is %s, modes are %s" % (front_tab.channel, front_tab.chanmodes))
-                users = top_context.get_list("users")
-            elif type == 3:
-                # dialog/query tab
-                print("query tab, nick is", front_tab.channel)
-            elif type == 4:
-                # notices tab
-                print("notices tab")
-            elif type == 5:
-                # SNotices tab
-                print("SNotices tab")
+            result = self.doInfo(cmdString, argList, kwargs)
         elif cmdString == self.cmdDebugHi:
             self.debugPrint("hi")
         elif cmdString == self.cmdAncestorDirs:
