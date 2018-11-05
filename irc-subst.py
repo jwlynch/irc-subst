@@ -470,6 +470,32 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doDebugSects(self, cmdString, argList, kwargs):
+        result = 0
+
+        if len(argList) == 0:
+            self.debugPrint("debug sections: " + repr(self.debugSects))
+        elif len(argList) == 2:
+            if argList[0] == "add":
+                if dex(argList[1], self.debugSects) == -1:
+                    self.debugSects.append(argList[1])
+                    print("debugsects add: %s" % (argList[1]))
+                else:
+                    print("debugsects add: %s already present" % (argList[1]))
+            elif argList[0] == "rm":
+                if dex(argList[1], self.debugSects) != -1:
+                    self.debugSects.remove(argList[1])
+                    print("debugsects rm: %s" % (argList[1]))
+                else:
+                    print("debugsects rm: %s not present" % (argList[1]))
+            else:
+                print("debugsects: unrecognized subcommand '%s'" % (argList[0]))
+        else:
+            print("debug sections: wrong number of args")
+
+        return result
+
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
@@ -505,26 +531,7 @@ class irc_subst(commandtarget.CommandTarget):
         elif cmdString == self.cmdLSDebugSects:
             self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
         elif cmdString == self.cmdDebugSects:
-            if len(argList) == 0:
-                self.debugPrint("debug sections: " + repr(self.debugSects))
-            elif len(argList) == 2:
-                if argList[0] == "add":
-                    if dex(argList[1], self.debugSects) == -1:
-                        self.debugSects.append(argList[1])
-                        print("debugsects add: %s" % (argList[1]))
-                    else:
-                        print("debugsects add: %s already present" % (argList[1]))
-                elif argList[0] == "rm":
-                    if dex(argList[1], self.debugSects) != -1:
-                        self.debugSects.remove(argList[1])
-                        print("debugsects rm: %s" % (argList[1]))
-                    else:
-                        print("debugsects rm: %s not present" % (argList[1]))
-                else:
-                    print("debugsects: unrecognized subcommand '%s'" % (argList[0]))
-            else:
-                print("debug sections: wrong number of args")
-
+            result = self.doDebugSects(cmdString, argList, kwargs)
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
