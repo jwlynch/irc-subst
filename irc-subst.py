@@ -507,9 +507,15 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doLSDebugSects(self, cmdString, argList, kwargs):
+        self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
+
+        return 0
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
+
 
         argList = args[0]
 
@@ -540,7 +546,7 @@ class irc_subst(commandtarget.CommandTarget):
         elif cmdString == self.cmdAncestorDirs:
             result = self.doAncestorDirs(cmdString, argList, kwargs)
         elif cmdString == self.cmdLSDebugSects:
-            self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
+            result = self.doLSDebugSects(cmdString, argList, kwargs)
         elif cmdString == self.cmdDebugSects:
             result = self.doDebugSects(cmdString, argList, kwargs)
         else:
