@@ -545,7 +545,7 @@ class irc_subst(commandtarget.CommandTarget):
             result = self.doDebugSects(cmdString, argList, kwargs)
         else:
             # pass buck to superclass
-            result = super(irc_subst, self).doCommandStr(cmdString, *args, **kwargs)
+            result = super(irc_subst, self).doCommandStr(cmdString, args, kwargs)
 
         # return success/fail exit status
         return result
