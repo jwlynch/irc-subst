@@ -215,6 +215,18 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.makeDebugTab()
 
+        self.command_dict = {}
+
+        self.command_dict["lskeys"] = self.list_keys
+        self.command_dict["remove"] = self.doRemove
+        self.command_dict["addfact"] = self.doAddFact
+        self.command_dict["rmfact"] = self.doRMFact
+        self.command_dict["showfact"] = self.doShowFact
+        self.command_dict["info"] = self.doInfo
+        self.command_dict["ancdirs"] = self.doAncestorDirs
+        #self.command_dict["debugsects"] =
+        self.command_dict["lsdebugsects"] = self.doDebugSects
+
         self.cmdReload = "reload"
         self.cmdLskeys = "lskeys"
         self.cmdRemove = "remove"
@@ -494,7 +506,6 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("debug sections: wrong number of args")
 
         return result
-
 
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
