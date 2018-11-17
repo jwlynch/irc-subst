@@ -228,17 +228,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["lsdebugsects"] = self.doLSDebugSects
 
         self.cmdReload = "reload"
-        self.cmdLskeys = "lskeys"
-        self.cmdRemove = "remove"
-        self.cmdAddFact = "addfact"
-        self.cmdRmFact = "rmfact"
-        self.cmdShowFact = "showfact"
-        self.cmdInfo = "info"
-        self.cmdAncestorDirs = "ancdirs"
-        self.cmdDebugSects = "debugsects"
-        self.cmdLSDebugSects = "lsdebugsects"
-
-        self.cmdDebugHi = "debughi"
 
         self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         self.channel_re = re.compile("^[#&~].*$")
