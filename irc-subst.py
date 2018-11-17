@@ -496,6 +496,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doDebugHi(self, cmdString, argList, kwargs):
+        self.debugPrint("hi")
+
     def doLSDebugSects(self, cmdString, argList, kwargs):
         self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
 
