@@ -514,30 +514,6 @@ class irc_subst(commandtarget.CommandTarget):
         if cmdString == self.cmdReload:
             print("reloading config file...")
             self.doReload(self.scriptPath)
-        elif cmdString == self.cmdLskeys:
-            result = self.list_keys(cmdString, argList, kwargs)
-        elif cmdString == self.cmdRemove:
-
-            result = self.doRemove(cmdString, argList, kwargs)
-
-        elif cmdString == self.cmdAddFact:
-            result = self.doAddFact(cmdString, argList, kwargs)
-
-        elif cmdString == self.cmdRmFact:
-            result = self.doRMFact(cmdString, argList, kwargs)
-
-        elif cmdString == self.cmdShowFact:
-            result = self.doShowFact(cmdString, argList, kwargs)
-        elif cmdString == self.cmdInfo:
-            result = self.doInfo(cmdString, argList, kwargs)
-        elif cmdString == self.cmdDebugHi:
-            self.debugPrint("hi")
-        elif cmdString == self.cmdAncestorDirs:
-            result = self.doAncestorDirs(cmdString, argList, kwargs)
-        elif cmdString == self.cmdLSDebugSects:
-            result = self.doLSDebugSects(cmdString, argList, kwargs)
-        elif cmdString == self.cmdDebugSects:
-            result = self.doDebugSects(cmdString, argList, kwargs)
         else:
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, args, kwargs)
