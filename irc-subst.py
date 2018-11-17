@@ -518,7 +518,7 @@ class irc_subst(commandtarget.CommandTarget):
         if cmdString == self.cmdReload:
             print("reloading config file...")
             self.doReload(self.scriptPath)
-        elif cmdString in command_dict:
+        elif cmdString in self.command_dict:
             result = self.command_dict[cmdString](cmdString, argList, kwargs)
         else:
             # pass buck to superclass
