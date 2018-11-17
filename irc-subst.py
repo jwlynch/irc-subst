@@ -223,6 +223,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["rmfact"] = self.doRMFact
         self.command_dict["showfact"] = self.doShowFact
         self.command_dict["info"] = self.doInfo
+        self.command_dict["debughi"] = self.doDebugHi
         self.command_dict["ancdirs"] = self.doAncestorDirs
         self.command_dict["debugsects"] = self.doDebugSects
         self.command_dict["lsdebugsects"] = self.doLSDebugSects
