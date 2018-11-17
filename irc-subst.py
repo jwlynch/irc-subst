@@ -505,6 +505,13 @@ class irc_subst(commandtarget.CommandTarget):
 
         return 0
 
+    def doLsCmds(self, cmdString, argList, kwargs):
+        cmdList = sorted(self.command_dict)
+
+        print(repr(cmdList))
+
+        return 0
+
     # override from commandtarget
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
