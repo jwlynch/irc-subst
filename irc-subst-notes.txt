@@ -1,3 +1,5 @@
+idea: try to match existing commands, otherwise "say" the thing that was tried
+
 # connect to remote with passwd:
 conn = psycopg2.connect("dbname=jim user=jim host=orie password=pass")
 
