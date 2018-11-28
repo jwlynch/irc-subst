@@ -39,4 +39,3 @@ def connectString(db):
         if db.
     else:
         # error, malformed db
-    
