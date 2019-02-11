@@ -864,6 +864,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugJoinP:
             self.debugPrint("debugJoinP: " + word_eol[0])
+            self.debugPrint("attribs:    " + repr(attribs))
 
         return hexchat.EAT_NONE
 
@@ -875,6 +876,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugPartP:
             self.debugPrint("debugPartP: " + word_eol[0])
+            self.debugPrint("attribs:    " + repr(attribs))
 
         return hexchat.EAT_NONE
 
@@ -886,6 +888,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugPartReasP:
             self.debugPrint("debugPartReasP: " + word_eol[0])
+            self.debugPrint("attribs:    " + repr(attribs))
 
         return hexchat.EAT_NONE
 
