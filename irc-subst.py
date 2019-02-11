@@ -856,7 +856,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
-    def join_hook(self, word, word_eol, userdata):
+    def join_hook(self, word, word_eol, userdata, attribs):
         if dex("join", self.debugSects) != -1:
             debugJoinP = True
         else:
@@ -867,7 +867,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
-    def part_hook(self, word, word_eol, userdata):
+    def part_hook(self, word, word_eol, userdata, attribs):
         if dex("part", self.debugSects) != -1:
             debugPartP = True
         else:
@@ -878,7 +878,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
-    def partreas_hook(self, word, word_eol, userdata):
+    def partreas_hook(self, word, word_eol, userdata, attribs):
         if dex("partreas", self.debugSects) != -1:
             debugPartReasP = True
         else:
@@ -903,8 +903,8 @@ hexchat.hook_server('PRIVMSG', irc_subst_obj.privmsg_hook)
 hexchat.hook_server('NOTICE', irc_subst_obj.notice_hook)
 
 # establish the hook to the join_hook method of irc_subst, above
-hexchat.hook_print('Join', irc_subst_obj.join_hook)
+hexchat.hook_print_attrs('Join', irc_subst_obj.join_hook)
 
 # establish the hooks to the part_hook and partreas_hook methods of irc_subst, above
-hexchat.hook_print('Part', irc_subst_obj.part_hook)
-hexchat.hook_print('Part with Reason', irc_subst_obj.partreas_hook)
+hexchat.hook_print_attrs('Part', irc_subst_obj.part_hook)
+hexchat.hook_print_attrs('Part with Reason', irc_subst_obj.partreas_hook)
