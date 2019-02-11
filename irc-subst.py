@@ -124,6 +124,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.cmdPrefix = '.' # default
             self.printConfigP = True # default
 
+        # if there's no db section in the config, db is bad
         if dex("db", parser.sections()) == -1:
             self.dbOK = False
         else:
