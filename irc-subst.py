@@ -757,6 +757,9 @@ class irc_subst(commandtarget.CommandTarget):
 
     # text event hook func for 'Channel Message'
     def channel_msg_hook(self, word, word_eol, userdata, attribs):
+        if dex("chanmsgdetail", self.debugSects) != -1:
+            self.debugPrint(detailList(word))
+            self.debugPrint(attribs.time)
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
