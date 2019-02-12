@@ -811,6 +811,63 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
+    # text event hook func for 'Private Message'
+    # and possibly also for 'Private Message to Dialog'
+    def private_msg_hook(self, word, word_eol, userdata, attribs):
+        # src_hostmask = word[0][1:]
+        # dest = word[2]
+        # message = word[3][1:] + " " + " ".join(word[4:])
+        #
+        # hostmaskdict = split_hostmask(src_hostmask)
+        #
+        # src_nick = hostmaskdict["nick"]
+        # src_emailname = hostmaskdict["emailname"]
+        # src_host = hostmaskdict["site"]
+        #
+        # # if "privmsgdetail" is in debugsects, show the entire array
+        # # of all priv messaages and messages to channels.
+        # if dex("privmsgdetail", self.debugSects) != -1:
+        #     debugDetailP = True
+        # else:
+        #     debugDetailP = False
+        #
+        # # if the word "privmsgbasic" is in the list debugSects, print debug message
+        # if dex("privmsgbasic", self.debugSects) != -1:
+        #     debugBasicP = True
+        # else:
+        #     debugBasicP = False
+        #
+        # # if the word "privmsgsql" is in the list debugSects, print debug message
+        # if dex("privmsgsql", self.debugSects) != -1:
+        #     debugSQLP = True
+        # else:
+        #     debugSQLP = False
+        #
+        # if debugDetailP:
+        #     self.debugPrint(detailList(word))
+        # elif debugBasicP:
+        #     self.debugPrint("source nick:      " + src_nick)
+        #     self.debugPrint("source emailname: " + src_emailname)
+        #     self.debugPrint("source host:      " + src_host)
+        #
+        # # differentiate between private messages and messages to channels
+        # if re.match(self.channel_re, dest):
+        #     channel = dest
+        #
+        #     if debugBasicP:
+        #         self.debugPrint("destination channel: " + channel)
+        #
+        # else:
+        #     nick = dest
+        #
+        #     if debugBasicP:
+        #         self.debugPrint("destination nick: " + nick)
+        #
+        # if debugBasicP:
+        #     self.debugPrint("message: " + message)
+
+        return hexchat.EAT_NONE
+
     def insertFailedLogin(self, failed_login_id_or_null, ip_or_hostname_or_null, timestamp_or_null):
         if timestamp_or_null is None:
             # get a now() into timestamp_or_null with correct time zone
@@ -970,3 +1027,4 @@ hexchat.hook_print_attrs('Part with Reason', irc_subst_obj.partreas_hook)
 
 # establish for channel, and for private, messages
 hexchat.hook_print_attrs('Channel message', irc_subst_obj.channel_msg_hook)
+hexchat.hook_print_attrs('private message', irc_subst_obj.private_msg_hook)
