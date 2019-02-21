@@ -780,6 +780,8 @@ class irc_subst(commandtarget.CommandTarget):
                 out += "None"
             out += "); msg: " + msg
 
+            self.debugPrint(out)
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
