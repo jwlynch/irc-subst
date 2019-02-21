@@ -760,6 +760,9 @@ class irc_subst(commandtarget.CommandTarget):
         if dex("chanmsgdetail", self.debugSects) != -1:
             dest = hexchat.get_info('channel')
 
+            nick = word[0]
+            msg = word[1]
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
