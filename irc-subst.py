@@ -772,6 +772,14 @@ class irc_subst(commandtarget.CommandTarget):
 
             user_hostmask = user_dict[nick].host
 
+            out = "chanmsgdetail dest: " + dest + "; nick: " + nick
+            out += " ("
+            if user_hostmask is not None:
+                out += user_hostmask
+            else:
+                out += "None"
+            out += "); msg: " + msg
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
