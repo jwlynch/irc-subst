@@ -770,6 +770,8 @@ class irc_subst(commandtarget.CommandTarget):
             for user in user_list:
                 user_dict[user.nick] = user
 
+            user_hostmask = user_dict[nick].host
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
