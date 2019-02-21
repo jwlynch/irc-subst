@@ -763,6 +763,13 @@ class irc_subst(commandtarget.CommandTarget):
             nick = word[0]
             msg = word[1]
 
+            # index user_list by nick, in user_dict
+            user_list = hexchat.get_list("users")
+
+            user_dict = dict()
+            for user in user_list:
+                user_dict[user.nick] = user
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
