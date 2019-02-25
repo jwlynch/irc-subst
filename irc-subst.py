@@ -757,20 +757,22 @@ class irc_subst(commandtarget.CommandTarget):
 
     # text event hook func for 'Channel Message'
     def channel_msg_hook(self, word, word_eol, userdata, attribs):
+        dest = hexchat.get_info('channel')
+
+        nick = word[0]
+        msg = word[1]
+
+        # index user_list by nick, in user_dict
+        # NOTE, TODO: build a way to keep this list maintained
+        user_list = hexchat.get_list("users")
+
+        user_dict = dict()
+        for user in user_list:
+            user_dict[user.nick] = user
+
+        user_hostmask = user_dict[nick].host
+
         if dex("chanmsgdetail", self.debugSects) != -1:
-            dest = hexchat.get_info('channel')
-
-            nick = word[0]
-            msg = word[1]
-
-            # index user_list by nick, in user_dict
-            user_list = hexchat.get_list("users")
-
-            user_dict = dict()
-            for user in user_list:
-                user_dict[user.nick] = user
-
-            user_hostmask = user_dict[nick].host
 
             out = "chanmsgdetail dest: " + dest + "; nick: " + nick
             out += " ("
