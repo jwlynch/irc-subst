@@ -854,6 +854,12 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             debugBasicP = False
 
+        # if the word "privmsgsql" is in the list debugSects, print debug message
+        if dex("privmsgsql", self.debugSects) != -1:
+            debugSQLP = True
+        else:
+            debugSQLP = False
+
         if debugDetailP:
             self.debugPrint(detailList(word))
 
