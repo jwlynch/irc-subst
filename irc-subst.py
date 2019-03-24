@@ -841,6 +841,13 @@ class irc_subst(commandtarget.CommandTarget):
     # text event hook func for 'Private Message'
     # and possibly also for 'Private Message to Dialog'
     def private_msg_hook(self, word, word_eol, userdata, attribs):
+        # if "privmsgdetail" is in debugsects, show the entire array
+        # of all priv messaages and messages to channels.
+        if dex("privmsgdetail", self.debugSects) != -1:
+            debugDetailP = True
+        else:
+            debugDetailP = False
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
