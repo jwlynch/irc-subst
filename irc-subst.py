@@ -1074,3 +1074,4 @@ hexchat.hook_print_attrs('Part with Reason', irc_subst_obj.partreas_hook)
 # establish for channel, and for private, messages
 hexchat.hook_print_attrs('Channel Message', irc_subst_obj.channel_msg_hook)
 hexchat.hook_print_attrs('Private Message', irc_subst_obj.private_msg_hook)
+hexchat.hook_print_attrs('Private Message to Dialog', irc_subst_obj.private_msg_hook)
