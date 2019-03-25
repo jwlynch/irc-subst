@@ -804,7 +804,7 @@ class irc_subst(commandtarget.CommandTarget):
             eventStub = "privMsg"
 
         if debugDetailP:
-            self.debugPrint(detailList(word))
+            self.debugPrint(eventStub + ": " + detailList(word))
 
         # src_hostmask = word[0][1:]
         # dest = word[2]
