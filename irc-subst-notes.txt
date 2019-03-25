@@ -39,3 +39,10 @@ def connectString(db):
         if db.
     else:
         # error, malformed db
+
+# TODO for private msg and channel msg:
+#      -
+#      - store hostmask and nick somewhere (db?)
+#      - get user's account name (where is this stored already?
+#                                 would like to get it from that
+#                                 rather than bother the server about it
