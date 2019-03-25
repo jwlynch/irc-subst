@@ -852,6 +852,16 @@ class irc_subst(commandtarget.CommandTarget):
 
         return hexchat.EAT_NONE
 
+    def private_msg_hook(self, word, word_eol, userdata, attribs):
+        result = private_maybe_dialog_msg_hook(self, False, word, word_eol, userdata, attribs)
+
+        return result
+
+    def private_dialog_msg_hook(self, word, word_eol, userdata, attribs):
+        result = private_maybe_dialog_msg_hook(self, True, word, word_eol, userdata, attribs)
+
+        return result
+
     def insertFailedLogin(self, failed_login_id_or_null, ip_or_hostname_or_null, timestamp_or_null):
         if timestamp_or_null is None:
             # get a now() into timestamp_or_null with correct time zone
