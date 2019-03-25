@@ -774,7 +774,7 @@ class irc_subst(commandtarget.CommandTarget):
         return hexchat.EAT_NONE
 
     # text event hook func for 'Private Message'
-    # and possibly also for 'Private Message to Dialog'
+    # and also for 'Private Message to Dialog'
     def private_maybe_dialog_msg_hook(self, dialog_p, word, word_eol, userdata, attribs):
         # if "privmsgdetail" is in debugsects, show the entire array
         # of all priv messaages and messages to channels.
