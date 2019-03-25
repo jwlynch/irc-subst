@@ -806,6 +806,9 @@ class irc_subst(commandtarget.CommandTarget):
         if debugDetailP:
             self.debugPrint(eventStub + ": " + detailList(word))
 
+        if debugBasicP:
+            self.debugPrint(eventStub + ": nick: %s, message: %s" % (nick, msg))
+
         # src_hostmask = word[0][1:]
         # dest = word[2]
         # message = word[3][1:] + " " + " ".join(word[4:])
