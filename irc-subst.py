@@ -798,6 +798,11 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             debugSQLP = False
 
+        if dialog_p:
+            eventStub = "privMsgToDialog"
+        else:
+            eventStub = "privMsg"
+
         if debugDetailP:
             self.debugPrint(detailList(word))
 
