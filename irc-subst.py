@@ -719,58 +719,6 @@ class irc_subst(commandtarget.CommandTarget):
 
             self.debugPrint(out)
 
-        # src_hostmask = word[0][1:]
-        # dest = word[2]
-        # message = word[3][1:] + " " + " ".join(word[4:])
-        #
-        # hostmaskdict = split_hostmask(src_hostmask)
-        #
-        # src_nick = hostmaskdict["nick"]
-        # src_emailname = hostmaskdict["emailname"]
-        # src_host = hostmaskdict["site"]
-        #
-        # # if "privmsgdetail" is in debugsects, show the entire array
-        # # of all priv messaages and messages to channels.
-        # if dex("privmsgdetail", self.debugSects) != -1:
-        #     debugDetailP = True
-        # else:
-        #     debugDetailP = False
-        #
-        # # if the word "privmsgbasic" is in the list debugSects, print debug message
-        # if dex("privmsgbasic", self.debugSects) != -1:
-        #     debugBasicP = True
-        # else:
-        #     debugBasicP = False
-        #
-        # # if the word "privmsgsql" is in the list debugSects, print debug message
-        # if dex("privmsgsql", self.debugSects) != -1:
-        #     debugSQLP = True
-        # else:
-        #     debugSQLP = False
-        #
-        # if debugDetailP:
-        #     self.debugPrint(detailList(word))
-        # elif debugBasicP:
-        #     self.debugPrint("source nick:      " + src_nick)
-        #     self.debugPrint("source emailname: " + src_emailname)
-        #     self.debugPrint("source host:      " + src_host)
-        #
-        # # differentiate between private messages and messages to channels
-        # if re.match(self.channel_re, dest):
-        #     channel = dest
-        #
-        #     if debugBasicP:
-        #         self.debugPrint("destination channel: " + channel)
-        #
-        # else:
-        #     nick = dest
-        #
-        #     if debugBasicP:
-        #         self.debugPrint("destination nick: " + nick)
-        #
-        # if debugBasicP:
-        #     self.debugPrint("message: " + message)
-
         return hexchat.EAT_NONE
 
     # text event hook func for 'Private Message'
@@ -808,58 +756,6 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugBasicP:
             self.debugPrint(eventStub + ": nick: %s, message: %s" % (nick, msg))
-
-        # src_hostmask = word[0][1:]
-        # dest = word[2]
-        # message = word[3][1:] + " " + " ".join(word[4:])
-        #
-        # hostmaskdict = split_hostmask(src_hostmask)
-        #
-        # src_nick = hostmaskdict["nick"]
-        # src_emailname = hostmaskdict["emailname"]
-        # src_host = hostmaskdict["site"]
-        #
-        # # if "privmsgdetail" is in debugsects, show the entire array
-        # # of all priv messaages and messages to channels.
-        # if dex("privmsgdetail", self.debugSects) != -1:
-        #     debugDetailP = True
-        # else:
-        #     debugDetailP = False
-        #
-        # # if the word "privmsgbasic" is in the list debugSects, print debug message
-        # if dex("privmsgbasic", self.debugSects) != -1:
-        #     debugBasicP = True
-        # else:
-        #     debugBasicP = False
-        #
-        # # if the word "privmsgsql" is in the list debugSects, print debug message
-        # if dex("privmsgsql", self.debugSects) != -1:
-        #     debugSQLP = True
-        # else:
-        #     debugSQLP = False
-        #
-        # if debugDetailP:
-        #     self.debugPrint(detailList(word))
-        # elif debugBasicP:
-        #     self.debugPrint("source nick:      " + src_nick)
-        #     self.debugPrint("source emailname: " + src_emailname)
-        #     self.debugPrint("source host:      " + src_host)
-        #
-        # # differentiate between private messages and messages to channels
-        # if re.match(self.channel_re, dest):
-        #     channel = dest
-        #
-        #     if debugBasicP:
-        #         self.debugPrint("destination channel: " + channel)
-        #
-        # else:
-        #     nick = dest
-        #
-        #     if debugBasicP:
-        #         self.debugPrint("destination nick: " + nick)
-        #
-        # if debugBasicP:
-        #     self.debugPrint("message: " + message)
 
         return hexchat.EAT_NONE
 
