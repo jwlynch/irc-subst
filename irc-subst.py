@@ -724,7 +724,7 @@ class irc_subst(commandtarget.CommandTarget):
     # text event hook func for 'Private Message'
     # and also for 'Private Message to Dialog'
     def private_maybe_dialog_msg_hook(self, dialog_p, word, word_eol, userdata, attribs):
-        nick = word[0]
+        sender_nick = word[0]
         msg = word[1]
 
         # if "privmsgdetail" is in debugsects, show the entire array
@@ -755,7 +755,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint(eventStub + ": " + detailList(word))
 
         if debugBasicP:
-            self.debugPrint(eventStub + ": nick: %s, message: %s" % (nick, msg))
+            self.debugPrint(eventStub + ": nick: %s, message: %s" % (sender_nick, msg))
 
         return hexchat.EAT_NONE
 
