@@ -381,7 +381,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             if not bad:
                 # do query and insert here
-                print("factoid add: key %s, value %s" % (key, value))
+                print("factoid add: key '%s', value '%s'" % (key, value))
 
                 with self.sqla_eng.begin() as conn:
                     conn.execute\
