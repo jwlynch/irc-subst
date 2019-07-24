@@ -447,6 +447,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def doCvtTime(self, cmdString, argList, kwargs):
+        print("doCvtTime")
+
     def doInfo(self, cmdString, argList, kwargs):
         result = 0
 
