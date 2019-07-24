@@ -451,6 +451,21 @@ class irc_subst(commandtarget.CommandTarget):
     def doCvtTime(self, cmdString, argList, kwargs):
         result = 0
 
+        if len(argList) < 1 or len(argList) > 1:
+            result = 1
+
+            print("cvttime usage:")
+            print("cvttime <timeString>")
+            print("displays time in the local timezone")
+
+            if len(argList) < 1:
+                print("cvttime: too few args")
+            elif len(argList) > 1:
+                print("cvttime: too many args")
+        else:
+            # correct number of args
+            pass
+
         print("doCvtTime")
 
         return result
