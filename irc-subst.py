@@ -12,7 +12,7 @@ import re
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
-import arrow # for timestamps
+# import arrow # for timestamps
 
 import hexchat
 
@@ -464,7 +464,8 @@ class irc_subst(commandtarget.CommandTarget):
                 print("cvttime: too many args")
         else:
             # correct number of args
-            print("doCvtTime")
+            timeString = argList[0]
+            print("doCvtTime %s" % (timeString))
 
         return result
 
