@@ -464,9 +464,7 @@ class irc_subst(commandtarget.CommandTarget):
                 print("cvttime: too many args")
         else:
             # correct number of args
-            pass
-
-        print("doCvtTime")
+            print("doCvtTime")
 
         return result
 
