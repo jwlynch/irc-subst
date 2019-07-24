@@ -452,7 +452,7 @@ class irc_subst(commandtarget.CommandTarget):
         result = 0
 
         if len(argList) < 1 or len(argList) > 1:
-            result = 1
+            result = -1
 
             print("cvttime usage:")
             print("cvttime <timeString>")
