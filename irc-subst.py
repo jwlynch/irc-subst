@@ -229,6 +229,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["debugsects"] = self.doDebugSects
         self.command_dict["lsdebugsects"] = self.doLSDebugSects
         self.command_dict["lscmds"] = self.doLsCmds
+        self.command_dict["cvttime"] = self.doCvtTime
 
         self.cmdReload = "reload"
 
