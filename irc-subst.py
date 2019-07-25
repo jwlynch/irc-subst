@@ -4,6 +4,8 @@
 # keys that look like [[key]] and substitutes a value looked up in a pg database.
 # Right now, this is specific to hexchat.
 
+__module_name__ = "irc_subst"
+
 # whether to print the config file when first loading the script
 printConfigP = True
 
