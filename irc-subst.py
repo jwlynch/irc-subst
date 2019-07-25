@@ -468,7 +468,6 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             # correct number of args
             timeString = argList[0]
-            print(repr(arrow.get(timeString)))
 
         return result
 
