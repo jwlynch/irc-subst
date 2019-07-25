@@ -15,6 +15,7 @@ from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
 import arrow # for timestamps
+from dateutil import tz
 
 import hexchat
 
