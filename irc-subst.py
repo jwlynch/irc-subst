@@ -467,7 +467,7 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             # correct number of args
             timeString = argList[0]
-            print("doCvtTime %s" % (timeString))
+            print(repr(arrow.get(timeString)))
 
         return result
 
