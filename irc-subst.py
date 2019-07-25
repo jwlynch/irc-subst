@@ -539,6 +539,11 @@ class irc_subst(commandtarget.CommandTarget):
         return 0
 
     # override from commandtarget
+    #
+    # doCommandStr: try to find the command in command_dict
+    #      if found, run it, returning 0 if no errors
+    #      if not found, return 1
+
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
 
