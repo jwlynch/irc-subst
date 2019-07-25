@@ -470,6 +470,8 @@ class irc_subst(commandtarget.CommandTarget):
             timeString = argList[0]
             timeObj = arrow.get(timeString)
 
+            print(timeObj.to('local').format('YYYY-MM-DD HH:mm:ss ZZ'))
+
         return result
 
     def doInfo(self, cmdString, argList, kwargs):
