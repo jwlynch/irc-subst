@@ -345,7 +345,7 @@ class irc_subst(commandtarget.CommandTarget):
                         print("showfact: no such factoid '%s'" % key)
 
                     if not bad:
-                        print("showfact: key %s has value '%s'" % (key, lookupTable[key]))
+                        print("showfact: key %s has value \"%s\"" % (key, lookupTable[key]))
             else:
                 print("no db")
 
@@ -393,7 +393,7 @@ class irc_subst(commandtarget.CommandTarget):
                             {'key': key, 'value': value}
                         )
 
-                print("factoid add: key '%s', value '%s'" % (key, value))
+                print("factoid add: key \"%s\", value \"%s\"" % (key, value))
             else:
                 print("no db")
 
