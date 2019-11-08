@@ -2,3 +2,4 @@ ircsubst-env/
 *.pyc
 __pycache__/
 openacs/
+backups/
