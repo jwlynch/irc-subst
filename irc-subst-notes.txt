@@ -1,3 +1,38 @@
+idea: improve templating system by making templates that take params, so:
+  ((foo bar baz))
+would take bar and baz as strings, and "apply" the macro foo to them
+
+some experiments:
+
+re.split(r'(\(\(|\)\))', 'foo((bar((baz))quux))biff))zazz') returns:
+  ['foo', '((', 'bar', '((', 'baz', '))', 'quux', '))', 'biff', '))', 'zazz']
+which is just what I'd want for now.
+
+and, re.split(r'(\(\(|\)\)|\ )', 'foo((ba r((ba z))qu uxbi ff))za zz')
+returns:
+  [
+    'foo',
+    '((',
+      'ba', ' ', 'r',
+      '((',
+        'ba', ' ', 'z',
+      '))',
+      'qu', ' ', 'uxbi', ' ', 'ff',
+    '))', 'za', ' ', 'zz'
+  ]
+
+energiser suggests:
+
+<energizer> jim: is this for an sql system, or something more general?
+<energizer> jim: if it's a general string templating system you might
+               want to use something like jinja2
+
+<energizer> jim: for sql, there are pugsql, dbt, sqlalchemy
+
+<energizer> jim: for fancy string transformations, there is pyparsing and lark
+
+
+
 idea: try to match existing commands, otherwise "say" the thing that was tried
 
 # connect to remote with passwd:
