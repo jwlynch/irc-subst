@@ -535,7 +535,7 @@ class irc_subst(commandtarget.CommandTarget):
         outLineResult = self.outLine(word_eol[0])
 
         self.debugPrint("debug (()):")
-        self.debugPrint("outLineResult: %s" % (repr(outLineResult))
+        self.debugPrint("outLineResult: %s" % (repr(outLineResult)))
 
     def doLSDebugSects(self, cmdString, argList, kwargs):
         self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
