@@ -514,13 +514,13 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("debug sections: " + repr(self.debugSects))
         elif len(argList) == 2:
             if argList[0] == "add":
-                if dex(argList[1], self.debugSects) == -1:
+                if not self.debugSectsContains(argList[1]):
                     self.debugSects.append(argList[1])
                     self.debugPrint("debugsects add: %s" % (argList[1]))
                 else:
                     self.debugPrint("debugsects add: %s already present" % (argList[1]))
             elif argList[0] == "rm":
-                if dex(argList[1], self.debugSects) != -1:
+                if self.debugSectsContains(argList[1]):
                     self.debugSects.remove(argList[1])
                     self.debugPrint("debugsects rm: %s" % (argList[1]))
                 else:
@@ -745,7 +745,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         user_hostmask = user_dict[nick].host
 
-        if dex("chanmsgdetail", self.debugSects) != -1:
+        if self.debugSectsContains("chanmsgdetail"):
 
             out = "chanmsgdetail dest: " + dest + "; nick: " + nick
             out += " ("
@@ -767,19 +767,19 @@ class irc_subst(commandtarget.CommandTarget):
 
         # if "privmsgdetail" is in debugsects, show the entire array
         # of all priv messaages and messages to channels.
-        if dex("privmsgdetail", self.debugSects) != -1:
+        if self.debugSectsContains("privmsgdetail"):
             debugDetailP = True
         else:
             debugDetailP = False
 
         # if the word "privmsgbasic" is in the list debugSects, print debug message
-        if dex("privmsgbasic", self.debugSects) != -1:
+        if self.debugSectsContains("privmsgbasic"):
             debugBasicP = True
         else:
             debugBasicP = False
 
         # if the word "privmsgsql" is in the list debugSects, print debug message
-        if dex("privmsgsql", self.debugSects) != -1:
+        if self.debugSectsContains("privmsgsql"):
             debugSQLP = True
         else:
             debugSQLP = False
@@ -836,12 +836,12 @@ class irc_subst(commandtarget.CommandTarget):
     def notice_hook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
 
-        if dex("notice", self.debugSects) != -1:
+        if self.debugSectsContains("notice"):
             debugNoticeP = True
         else:
             debugNoticeP = False
 
-        if dex("noticetests", self.debugSects) != -1:
+        if self.debugSectsContains("noticetests"):
             debugNoticeTestsP = True
         else:
             debugNoticeTestsP = False
@@ -909,7 +909,7 @@ class irc_subst(commandtarget.CommandTarget):
         return result
 
     def join_hook(self, word, word_eol, userdata, attribs):
-        if dex("join", self.debugSects) != -1:
+        if self.debugSectsContains("join"):
             debugJoinP = True
         else:
             debugJoinP = False
@@ -921,7 +921,7 @@ class irc_subst(commandtarget.CommandTarget):
         return hexchat.EAT_NONE
 
     def part_hook(self, word, word_eol, userdata, attribs):
-        if dex("part", self.debugSects) != -1:
+        if self.debugSectsContains("part"):
             debugPartP = True
         else:
             debugPartP = False
@@ -933,7 +933,7 @@ class irc_subst(commandtarget.CommandTarget):
         return hexchat.EAT_NONE
 
     def partreas_hook(self, word, word_eol, userdata, attribs):
-        if dex("partreas", self.debugSects) != -1:
+        if self.debugSectsContains("partreas"):
             debugPartReasP = True
         else:
             debugPartReasP = False
