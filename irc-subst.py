@@ -618,10 +618,15 @@ class irc_subst(commandtarget.CommandTarget):
     # substitutes the values for the keys
 
     def outLine(self, inString):
+        debug_outline = self.debugSectsContains("outline")
+
         modified = False
 
         # split string using (( and )) as delims
         linelistparen = re.split(r'(\(\(|\)\))', inString)
+
+        if debug_outline:
+            self.debugPrint("paren list: " + repr(linelistparen))
 
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
