@@ -243,6 +243,11 @@ class irc_subst(commandtarget.CommandTarget):
         # initialize superclass
         super(irc_subst, self).__init__()
 
+    def debugSectsContains(self, sectName):
+        result = dex(sectName, self.debugSects) != -1
+
+        return result
+
     def makeDebugTab(self):
         # add the tab for debugging
         hexchat.command("query " + self.debugtab_nick)
