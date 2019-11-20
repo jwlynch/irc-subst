@@ -620,6 +620,9 @@ class irc_subst(commandtarget.CommandTarget):
     def outLine(self, inString):
         modified = False
 
+        # split string using (( and )) as delims
+        linelistparen = re.split(r'(\(\(|\)\))', inString)
+
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
