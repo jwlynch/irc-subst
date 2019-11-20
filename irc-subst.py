@@ -229,7 +229,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["showfact"] = self.doShowFact
         self.command_dict["info"] = self.doInfo
         self.command_dict["debughi"] = self.doDebugHi
-        self.command_dict["debugoutline"] = self.doDebugOutLine
         self.command_dict["ancdirs"] = self.doAncestorDirs
         self.command_dict["debugsects"] = self.doDebugSects
         self.command_dict["lsdebugsects"] = self.doLSDebugSects
@@ -530,12 +529,6 @@ class irc_subst(commandtarget.CommandTarget):
 
     def doDebugHi(self, cmdString, argList, kwargs):
         self.debugPrint("hi")
-
-    def doDebugOutLine(self, cmdString, argList, kwargs):
-        outLineResult = self.outLine(word_eol[0])
-
-        self.debugPrint("debug (()):")
-        self.debugPrint("outLineResult: %s" % (repr(outLineResult)))
 
     def doLSDebugSects(self, cmdString, argList, kwargs):
         self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
