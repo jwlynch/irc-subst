@@ -732,9 +732,18 @@ class irc_subst(commandtarget.CommandTarget):
                         print("command '%s' not found" % (cmd))
                 else:
                     outLineResult = self.outLine("say " + word_eol[0])
-                    if outLineResult[0]:
-                        hexchat.command(outLineResult[1])
-                        result = hexchat.EAT_ALL
+
+                    result = hexchat.EAT_ALL
+
+                    # implement noout in debugsects by testing for None
+                    if outLineResult[1] is None:
+                        # means we're testing:
+                        # noout is in debugSects, so mute user output
+                        # and don't do anything else
+                    else:
+                        # do normal processing of hexchat user's input line
+                        if outLineResult[0]:
+                            hexchat.command(outLineResult[1])
 
             self.sent = False
 
