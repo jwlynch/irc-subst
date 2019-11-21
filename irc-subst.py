@@ -619,6 +619,7 @@ class irc_subst(commandtarget.CommandTarget):
 
     def outLine(self, inString):
         debug_outline = self.debugSectsContains("outline")
+        debug_noOut = self.debugSectsContains("noout")
 
         modified = False
 
