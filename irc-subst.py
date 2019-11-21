@@ -647,7 +647,10 @@ class irc_subst(commandtarget.CommandTarget):
             else:
                 outStr += linelist[item]
 
-        return [modified, outStr]
+        if debug_noOut:
+            return [False, None]
+        else:
+            return [modified, outStr]
 
     # prints to the irc client the list of keys available in the db
     def list_keys(self, cmdString, argList, kwargs):
