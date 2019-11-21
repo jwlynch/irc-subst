@@ -740,6 +740,8 @@ class irc_subst(commandtarget.CommandTarget):
                         # means we're testing:
                         # noout is in debugSects, so mute user output
                         # and don't do anything else
+
+                        pass
                     else:
                         # do normal processing of hexchat user's input line
                         if outLineResult[0]:
