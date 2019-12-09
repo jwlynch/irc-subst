@@ -1,4 +1,15 @@
-idea: improve templating system by making templates that take params, so:
+idea: while writing the (( ... )) thing, have a stack that would allow
+... (( ... (( ... )) ... )) (meaning (( ... )) -inside- another (( ... )))
+
+idea: while debugging the (( ... )) thing, have another list of stored stacks,
+and have (say) a ! character signal when to save the stack into the list.
+So, when the line has (say) (( ! )), the stack would be saved in the list after
+the item involving the (( was pushed, and before the )) took the item off the
+stack.
+
+Then, have commands that display that list.
+
+idea: improve macro system by making macros that take params, so:
   ((foo bar baz))
 would take bar and baz as strings, and "apply" the macro foo to them
 
