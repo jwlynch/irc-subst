@@ -733,19 +733,19 @@ class irc_subst(commandtarget.CommandTarget):
                 else:
                     outLineResult = self.outLine("say " + word_eol[0])
 
-                    result = hexchat.EAT_ALL
-
                     # implement noout in debugsects by testing for None
                     if outLineResult[1] is None:
                         # means we're testing:
                         # noout is in debugSects, so mute user output
                         # and don't do anything else
 
-                        pass
+                        result = hexchat.EAT_ALL
                     else:
                         # do normal processing of hexchat user's input line
                         if outLineResult[0]:
                             hexchat.command(outLineResult[1])
+
+                            result = hexchat.EAT_ALL
 
             self.sent = False
 
