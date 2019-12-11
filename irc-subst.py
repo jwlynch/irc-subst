@@ -574,13 +574,19 @@ class irc_subst(commandtarget.CommandTarget):
         # return success/fail exit status
         return result
 
-    # accepts list of keys (strings of the form "[[somekey]]") and
-    # returns a dictionary with those keys as keys, and values that
-    # come from the db
+    # accepts list of keys (strings of the form "[[somekey]]"),
+    # optionally followed by an existing dict, which will be used
+    # to store additional key/value pairs.
+    #
+    # returns a dictionary (possibly the one passed in) with those
+    # keys as keys, and values that come from the db
 
-    def lookupKeyList(self, key_list):
+    def lookupKeyList(self, key_list, running_dict=None):
         # now query the db
-        lookup = dict()
+        if running_dict is None:
+            lookup = dict()
+        else:
+            lookup = running_dict
 
         if len(key_list) == 0:
             pass # through to return stmt, returning empty dict
