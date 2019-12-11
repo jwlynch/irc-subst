@@ -746,6 +746,13 @@ class irc_subst(commandtarget.CommandTarget):
                             hexchat.command(outLineResult[1])
 
                             result = hexchat.EAT_ALL
+                        else:
+                            pass
+
+                            # in this case, self.outLine() did not
+                            # alter the line, so we just give it to
+                            # the system, and we need not do anything
+                            # for that to happen.
 
             self.sent = False
 
