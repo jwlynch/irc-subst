@@ -663,6 +663,7 @@ class irc_subst(commandtarget.CommandTarget):
                 resultList = ["(("]
 
                 if debug_outline:
+                    self.debugPrint("\nstart of macro")
                     self.debugPrint("currSymbol: %s" % (currSymbol))
                     self.debugPrint("resultList: %s" % (resultList))
                     self.debugPrint("macro stack:")
@@ -682,6 +683,7 @@ class irc_subst(commandtarget.CommandTarget):
                     resultList.extend(tempList)
 
                 if debug_outline:
+                    self.debugPrint("\nend of macro")
                     self.debugPrint("currSymbol: %s" % (currSymbol))
                     self.debugPrint("resultList: %s" % (resultList))
                     self.debugPrint("macro stack:")
@@ -693,6 +695,7 @@ class irc_subst(commandtarget.CommandTarget):
                 resultList.append(currSymbol)
 
                 if debug_outline:
+                    self.debugPrint("\nparameter of macro")
                     self.debugPrint("currSymbol: %s" % (currSymbol))
                     self.debugPrint("resultList: %s" % (resultList))
                     self.debugPrint("macro stack:")
