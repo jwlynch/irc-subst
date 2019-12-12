@@ -692,6 +692,12 @@ class irc_subst(commandtarget.CommandTarget):
                 # parse [[...]] keys
                 resultList.append(currSymbol)
 
+                if debug_outline:
+                    self.debugPrint("currSymbol: %s" % (currSymbol))
+                    self.debugPrint("resultList: %s" % (resultList))
+                    self.debugPrint("macro stack:")
+                    self.debugPrintListAsStack(macro_stack)
+
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
