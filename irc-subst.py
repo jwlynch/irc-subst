@@ -659,7 +659,9 @@ class irc_subst(commandtarget.CommandTarget):
 
             if currSymbol == '((':
                 # start of macro call
-                pass
+                macro_stack.append(resultList)
+                resultList = ["(("]
+
             elif currSymbol == '))':
                 # end of macro call
                 pass
