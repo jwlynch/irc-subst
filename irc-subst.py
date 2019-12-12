@@ -613,6 +613,15 @@ class irc_subst(commandtarget.CommandTarget):
 
         return lookup
 
+    # for debugging, print a list, one line per item
+
+    def debugPrintListAsStack(self, theList):
+        if len(theList) == 0:
+            self.debugPrint("stack empty")
+        else:
+            for index, item in enumerate(theList):
+                self.debugPrint("%d: %s" % (index, item))
+
     # takes
     #   the string to be sent (which could be altereed inside the func)
     # returns a list,
