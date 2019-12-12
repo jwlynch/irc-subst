@@ -669,7 +669,17 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrintListAsStack(macro_stack)
             elif currSymbol == '))':
                 # end of macro call
-                pass
+
+                # if nothing is on macro_stack, this is an error
+                if len(macro_stack) == 0:
+                    self.debugPrint("Syntax error: )) without ((\n")
+                    linelistparen = []
+                else:
+                    # parameter of macro call (incl. name of macro)
+                    resultList.append('))')
+                    tempList = resultList
+                    resultList = macro_stack.pop(-1)
+                    resultList.extend(tempList)
             else:
                 # parameter of macro call
                 pass
