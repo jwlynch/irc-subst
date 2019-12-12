@@ -680,6 +680,12 @@ class irc_subst(commandtarget.CommandTarget):
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
                     resultList.extend(tempList)
+
+                if debug_outline:
+                    self.debugPrint("currSymbol: %s" % (currSymbol))
+                    self.debugPrint("resultList: %s" % (resultList))
+                    self.debugPrint("macro stack:")
+                    self.debugPrintListAsStack(macro_stack)
             else:
                 # parameter of macro call
                 pass
