@@ -688,7 +688,9 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrintListAsStack(macro_stack)
             else:
                 # parameter of macro call
-                pass
+                # this needs work, to separate parameters and
+                # parse [[...]] keys
+                resultList.append(currSymbol)
 
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
