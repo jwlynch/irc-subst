@@ -648,6 +648,8 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debug_outline:
             self.debugPrint("paren list: " + repr(linelistparen))
+            self.debugPrint("macro stack:")
+            self.debugPrintListAsStack(macro_stack)
 
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
