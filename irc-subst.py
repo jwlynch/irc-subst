@@ -631,6 +631,10 @@ class irc_subst(commandtarget.CommandTarget):
     # extracts any strings it finds that match [[something]]
     # looks up those keys
     # substitutes the values for the keys
+    #
+    # also parses the (( ... )) stuff
+    # -note- there's no current reason to allow a (( ... ))
+    # to span lines
 
     def outLine(self, inString):
         debug_outline = self.debugSectsContains("outline")
