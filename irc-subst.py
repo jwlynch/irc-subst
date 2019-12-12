@@ -662,6 +662,11 @@ class irc_subst(commandtarget.CommandTarget):
                 macro_stack.append(resultList)
                 resultList = ["(("]
 
+                if debug_outline:
+                    self.debugPrint("currSymbol: %s" % (currSymbol))
+                    self.debugPrint("resultList: %s" % (resultList))
+                    self.debugPrint("macro stack:")
+                    self.debugPrintListAsStack(macro_stack)
             elif currSymbol == '))':
                 # end of macro call
                 pass
