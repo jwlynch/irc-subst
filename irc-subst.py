@@ -657,6 +657,16 @@ class irc_subst(commandtarget.CommandTarget):
         while len(linelistparen) != 0:
             currSymbol = linelistparen.pop(0)
 
+            if currSymbol == '((':
+                # start of macro call
+                pass
+            elif currSymbol == '))':
+                # end of macro call
+                pass
+            else:
+                # parameter of macro call
+                pass
+
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
