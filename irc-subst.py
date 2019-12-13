@@ -697,13 +697,18 @@ class irc_subst(commandtarget.CommandTarget):
                     # inside any number of macro calls
 
                     resultList.append(currSymbol)
+
+                    if debug_outline:
+                        self.debugPrint("\nparameter of macro")
                 else:
                     # outside all macro calls
 
                     resultList.append(currSymbol)
 
+                    if debug_outline:
+                        self.debugPrint("\nnot inside a macro call")
+
                 if debug_outline:
-                    self.debugPrint("\nparameter of macro")
                     self.debugPrint("currSymbol: %s" % (currSymbol))
                     self.debugPrint("resultList: %s" % (resultList))
                     self.debugPrint("macro stack:")
