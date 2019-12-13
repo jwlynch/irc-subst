@@ -692,12 +692,15 @@ class irc_subst(commandtarget.CommandTarget):
                 # parameter of macro call
                 # this needs work, to separate parameters and
                 # parse [[...]] keys
-                resultList.append(currSymbol)
 
                 if len(macro_stack) != 0:
                     # inside any number of macro calls
+
+                    resultList.append(currSymbol)
                 else:
                     # outside all macro calls
+
+                    resultList.append(currSymbol)
 
                 if debug_outline:
                     self.debugPrint("\nparameter of macro")
