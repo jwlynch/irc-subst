@@ -714,6 +714,16 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
 
+        # while loop has exited, so linelistparen is empty.
+        #
+        # so, either the macro_stack is also empty (means we're done)
+        # or it's not, meaning there are missing '))'s
+
+        if len(macro_stack) != 0:
+            pass
+        else:
+            pass
+
         # split string, using [[ and ]] as delims
         linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
 
