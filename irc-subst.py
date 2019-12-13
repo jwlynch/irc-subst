@@ -694,6 +694,11 @@ class irc_subst(commandtarget.CommandTarget):
                 # parse [[...]] keys
                 resultList.append(currSymbol)
 
+                if len(macro_stack) != 0:
+                    # inside any number of macro calls
+                else:
+                    # outside all macro calls
+
                 if debug_outline:
                     self.debugPrint("\nparameter of macro")
                     self.debugPrint("currSymbol: %s" % (currSymbol))
