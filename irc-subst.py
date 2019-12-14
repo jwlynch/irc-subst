@@ -654,6 +654,22 @@ class irc_subst(commandtarget.CommandTarget):
         # will become output string
         resultList = []
 
+        # split string, using [[ and ]] as delims
+        linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
+
+        key_list = list(filter(self.key_re.match, linelist))
+
+        lookup = self.lookupKeyList(key_list)
+
+        outStr = ""
+
+        for item in linelist:
+            if item in lookup:
+                outStr += lookup[item]
+                modified = True
+            else:
+                outStr += item
+
         while len(linelistparen) != 0:
             currSymbol = linelistparen.pop(0)
 
@@ -721,24 +737,10 @@ class irc_subst(commandtarget.CommandTarget):
 
         if len(macro_stack) != 0:
             self.debugPrint("Syntax error: (( without ))\n")
+            outStrParen = ""
         else:
             pass
 
-        # split string, using [[ and ]] as delims
-        linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
-
-        key_list = list(filter(self.key_re.match, linelist))
-
-        lookup = self.lookupKeyList(key_list)
-
-        outStr = ""
-
-        for item in linelist:
-            if item in lookup:
-                outStr += lookup[item]
-                modified = True
-            else:
-                outStr += item
 
         if debug_noOut:
             return [False, None]
