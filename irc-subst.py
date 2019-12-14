@@ -661,14 +661,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         lookup = self.lookupKeyList(key_list)
 
-        outStr = ""
-
-        for item in linelist:
-            if item in lookup:
-                outStr += lookup[item]
-                modified = True
-            else:
-                outStr += item
+        outStrParen = ""
 
         while len(linelistparen) != 0:
             currSymbol = linelistparen.pop(0)
