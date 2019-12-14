@@ -720,7 +720,7 @@ class irc_subst(commandtarget.CommandTarget):
         # or it's not, meaning there are missing '))'s
 
         if len(macro_stack) != 0:
-            pass
+            self.debugPrint("Syntax error: (( without ))\n")
         else:
             pass
 
