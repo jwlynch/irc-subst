@@ -731,16 +731,14 @@ class irc_subst(commandtarget.CommandTarget):
 
         lookup = self.lookupKeyList(key_list)
 
-        numItems = len(linelist)
-
         outStr = ""
 
-        for item in range(numItems):
-            if linelist[item] in lookup:
-                outStr += lookup[linelist[item]]
+        for item in linelist:
+            if item in lookup:
+                outStr += lookup[item]
                 modified = True
             else:
-                outStr += linelist[item]
+                outStr += item
 
         if debug_noOut:
             return [False, None]
