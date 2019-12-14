@@ -705,7 +705,7 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
             else:
-                # parameter of macro call
+                # parameter of macro call or not in a mmacro call
                 # this needs work, to separate parameters and
                 # parse [[...]] keys
 
@@ -739,13 +739,12 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("Syntax error: (( without ))\n")
             outStrParen = ""
         else:
-            pass
-
+            outStrParen = "".join(resultList)
 
         if debug_noOut:
             return [False, None]
         else:
-            return [modified, outStr]
+            return [modified, outStrParen]
 
     # prints to the irc client the list of keys available in the db
     def list_keys(self, cmdString, argList, kwargs):
