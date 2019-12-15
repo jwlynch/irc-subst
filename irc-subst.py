@@ -727,6 +727,11 @@ class irc_subst(commandtarget.CommandTarget):
                     key_list = list(filter(self.key_re.match, symbList))
                     lookup = self.lookupKeyList(key_list, lookup)
 
+                    if debug_outline:
+                        self.debugPrint("symbList: %s" % (repr(symbList)))
+                        self.debugPrint("key_list: %s" % (repr(key_list)))
+                        self.debugPrint("lookup: %s" % (repr(lookup)))
+
                     symb = ""
 
                     for item in symbList:
