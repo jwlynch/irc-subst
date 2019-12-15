@@ -687,6 +687,11 @@ class irc_subst(commandtarget.CommandTarget):
                 else:
                     # parameter of macro call (incl. name of macro)
                     resultList.append('))')
+
+                    if debug_outline:
+                        self.debugPrint("resultList just after )) seen:")
+                        self.debugPrint("%s" % (resultList))
+
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
                     resultList.extend(tempList)
