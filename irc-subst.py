@@ -705,7 +705,8 @@ class irc_subst(commandtarget.CommandTarget):
                 if len(macro_stack) != 0:
                     # inside any number of macro calls
 
-                    resultList.append(currSymbol)
+                    paramsList = currSymbol.split()
+                    resultList.extend(paramsList)
 
                     if debug_outline:
                         self.debugPrint("\nparameter of macro")
