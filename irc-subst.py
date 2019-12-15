@@ -692,6 +692,11 @@ class irc_subst(commandtarget.CommandTarget):
                         self.debugPrint("resultList just after )) seen:")
                         self.debugPrint("%s" % (resultList))
 
+                    # because a complete macro call is now in resultList,
+                    # here's where to invoke the macro, to produce a string,
+                    # then replace resultList with [thatString] and set
+                    # the var modified to True
+
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
                     resultList.extend(tempList)
