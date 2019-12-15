@@ -698,7 +698,7 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
             else:
-                # parameter of macro call or not in a mmacro call
+                # parameter of macro call or not in a macro call
                 # this needs work, to separate parameters and
                 # parse [[...]] keys
 
