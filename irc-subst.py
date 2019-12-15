@@ -659,7 +659,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         key_list = list(filter(self.key_re.match, linelist))
 
-        lookup = self.lookupKeyList(key_list)
+        lookup = dict()
 
         outStrParen = ""
 
@@ -723,7 +723,13 @@ class irc_subst(commandtarget.CommandTarget):
                 else:
                     # outside all macro calls
 
-                    resultList.append(currSymbol)
+                    symbList = re.split(r"(\[\[[^\[\]]+\]\])", currSymbol)
+                    key_list = list(filter(self.key_re.match, symbList))
+                    lookup = self.lookupKeyList(key_list, lookup)
+
+                    symb = ""
+
+                    resultList.append(symb)
 
                     if debug_outline:
                         self.debugPrint("\nnot inside a macro call")
