@@ -729,6 +729,13 @@ class irc_subst(commandtarget.CommandTarget):
 
                     symb = ""
 
+                    for item in symbList:
+                        if item in lookup:
+                            symb += lookup[item]
+                            modified = True
+                        else:
+                            symb += item
+
                     resultList.append(symb)
 
                     if debug_outline:
