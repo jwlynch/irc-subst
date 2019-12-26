@@ -697,6 +697,11 @@ class irc_subst(commandtarget.CommandTarget):
                     # then replace resultList with [thatString] and set
                     # the var modified to True
 
+                    # test the macro parser by making the complete macro
+                    # call into a string
+
+                    resultList = list( "".join(resultList))
+
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
                     resultList.extend(tempList)
