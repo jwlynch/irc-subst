@@ -716,7 +716,23 @@ class irc_subst(commandtarget.CommandTarget):
                     # inside any number of macro calls
 
                     paramsList = currSymbol.split()
-                    resultList.extend(paramsList)
+
+                    for param in paramsList:
+                        # split each param by [[...]] delimiter
+                        symbList = re.split(r"(\[\[[^\[\]]+\]\])", param)
+                        key_list = list(filter(self.key_re.match, symbList))
+                        lookup = self.lookupKeyList(key_list, lookup)
+
+                        symb = ""
+
+                        for item in symbList:
+                            if item in lookup:
+                                symb += lookup[item]
+                                modified = True
+                            else:
+                                symb += item
+
+                        resultList.append(symb)
 
                     if debug_outline:
                         self.debugPrint("\nparameter of macro")
