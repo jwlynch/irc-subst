@@ -399,8 +399,8 @@ class irc_subst(commandtarget.CommandTarget):
                         )
 
                 print("factoid add: key \"%s\", value \"%s\"" % (key, value))
-            else:
-                print("no db")
+        else:
+            print("no db")
 
         return result
 
