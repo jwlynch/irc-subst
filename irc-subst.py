@@ -227,6 +227,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["addfact"] = self.doAddFact
         self.command_dict["rmfact"] = self.doRMFact
         self.command_dict["showfact"] = self.doShowFact
+        self.command_dict["addmacro"] = self.doAddMacro
         self.command_dict["showmacro"] = self.doShowMacro
         self.command_dict["info"] = self.doInfo
         self.command_dict["debughi"] = self.doDebugHi
@@ -495,6 +496,54 @@ class irc_subst(commandtarget.CommandTarget):
                         print("showmacro: key %s has value \"%s\"" % (key, lookupTable[key]))
             else:
                 print("showmacro: no db")
+
+        return result
+
+    def doAddMacro(self, cmdString, argList, kwargs):
+        result = 0 # success/command is found
+
+        if self.dbOK:
+            bad = True
+            key = ""
+            value = ""
+
+            if len(argList) == 0:
+                print("addmacro usage:")
+                print("addmacro <key> <value>")
+            elif len(argList) < 2:
+                print("macro add: too few args")
+            elif len(argList) > 2:
+                print("macro add: too many args")
+            else:
+                # correct number of args
+                bad = False
+                key = argList[0]
+                value = argList[1]
+
+            if not bad:
+                if not self.macroname_key_re.match(key):
+                    print("macro add: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    bad = True
+
+            if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if lookupTable:
+                    # key is already in db
+                    print("key %s is already in db" % (key))
+                    bad = True
+
+            if not bad:
+                # do query and insert here
+                with self.sqla_eng.begin() as conn:
+                    conn.execute\
+                        (\
+                            self.sqla_factoids_table.insert(),
+                            {'key': key, 'value': value}
+                        )
+
+                print("macro add: key \"%s\", value \"%s\"" % (key, value))
+        else:
+            print("no db")
 
         return result
 
