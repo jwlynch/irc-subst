@@ -227,6 +227,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["addfact"] = self.doAddFact
         self.command_dict["rmfact"] = self.doRMFact
         self.command_dict["showfact"] = self.doShowFact
+        self.command_dict["showmacro"] = self.doShowMacro
         self.command_dict["info"] = self.doInfo
         self.command_dict["debughi"] = self.doDebugHi
         self.command_dict["ancdirs"] = self.doAncestorDirs
@@ -239,6 +240,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.factoid_key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         self.macroname_key_re = re.compile("^[a-zA-Z0-9-_]+$")
+        self.macro_re = re.compile("^\([a-zA-Z0-9-_ ]+\).*$")
         self.channel_re = re.compile("^[#&~].*$")
 
         # initialize superclass
@@ -455,6 +457,44 @@ class irc_subst(commandtarget.CommandTarget):
                         )
         else:
             print("no db")
+
+        return result
+
+    def doShowMacro(self, cmdString, argList, kwargs):
+        result = 0
+
+        if len(argList) == 0:
+            # print usage
+            print("showmacro usage:")
+            print("showmacro <key>")
+
+        elif len(argList) != 1:
+            # wrong nbr args
+            print("showmacro: wrong number of arguments")
+        else:
+            # correct number of args
+
+            if self.dbOK:
+                bad = False
+                key = argList[0]
+
+                if not self.macroname_key_re.match(key):
+                    print("macro show: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    bad = True
+
+                if not bad:
+                    lookupTable = self.lookupKeyList([key])
+
+                    if lookupTable:
+                        bad = False
+                    else:
+                        bad = True
+                        print("showmacro: no such macro '%s'" % key)
+
+                    if not bad:
+                        print("showmacro: key %s has value \"%s\"" % (key, lookupTable[key]))
+            else:
+                print("showmacro: no db")
 
         return result
 
