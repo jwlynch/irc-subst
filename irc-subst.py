@@ -642,6 +642,8 @@ class irc_subst(commandtarget.CommandTarget):
         debug_noOut = self.debugSectsContains("mute")
         macro_stack = []
 
+        lookup = {}
+
         modified = False
 
         # split string using (( and )) as delims
