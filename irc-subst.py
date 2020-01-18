@@ -237,7 +237,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.cmdReload = "reload"
 
-        self.key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
+        self.factoid_key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         self.channel_re = re.compile("^[#&~].*$")
 
         # initialize superclass
@@ -336,7 +336,7 @@ class irc_subst(commandtarget.CommandTarget):
                 bad = False
                 key = argList[0]
 
-                if not self.key_re.match(key):
+                if not self.factoid_key_re.match(key):
                     print("factoid show: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
                     bad = True
 
@@ -378,7 +378,7 @@ class irc_subst(commandtarget.CommandTarget):
                 value = argList[1]
 
             if not bad:
-                if not self.key_re.match(key):
+                if not self.factoid_key_re.match(key):
                     print("factoid add: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
                     bad = True
 
@@ -425,7 +425,7 @@ class irc_subst(commandtarget.CommandTarget):
                 key = argList[0]
 
             if not bad:
-                if not self.key_re.match(key):
+                if not self.factoid_key_re.match(key):
                     print("factoid remove: the key -- %s -- doesn't look like '[[a-zA-A-_]]'" % (key))
                     bad = True
 
@@ -736,7 +736,7 @@ class irc_subst(commandtarget.CommandTarget):
                     for param in paramsList:
                         # split each param by [[...]] delimiter
                         symbList = re.split(r"(\[\[[^\[\]]+\]\])", param)
-                        key_list = list(filter(self.key_re.match, symbList))
+                        key_list = list(filter(self.factoid_key_re.match, symbList))
                         lookup = self.lookupKeyList(key_list, lookup)
 
                         symb = ""
@@ -756,7 +756,7 @@ class irc_subst(commandtarget.CommandTarget):
                     # outside all macro calls
 
                     symbList = re.split(r"(\[\[[^\[\]]+\]\])", currSymbol)
-                    key_list = list(filter(self.key_re.match, symbList))
+                    key_list = list(filter(self.factoid_key_re.match, symbList))
                     lookup = self.lookupKeyList(key_list, lookup)
 
                     if debug_outline:
