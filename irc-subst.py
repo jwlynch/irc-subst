@@ -228,6 +228,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["rmfact"] = self.doRMFact
         self.command_dict["showfact"] = self.doShowFact
         self.command_dict["addmacro"] = self.doAddMacro
+        self.command_dict["rmmacro"] = self.doRMMacro
         self.command_dict["showmacro"] = self.doShowMacro
         self.command_dict["info"] = self.doInfo
         self.command_dict["debughi"] = self.doDebugHi
@@ -542,6 +543,59 @@ class irc_subst(commandtarget.CommandTarget):
                         )
 
                 print("macro add: key \"%s\", value \"%s\"" % (key, value))
+        else:
+            print("no db")
+
+        return result
+
+    def doRMMacro(self, cmdString, argList, kwargs):
+        result = 0 # success/command is found
+
+        if self.dbOK:
+            bad = True
+            key = ""
+            value = ""
+
+            if len(argList) == 0:
+                print("rmmacro usage:")
+                print("rmmacro <key>")
+            elif len(argList) < 1:
+                print("macro remove: too few args")
+            elif len(argList) > 1:
+                print("macro remove: too many args")
+            else:
+                # correct number of args
+                bad = False
+                key = argList[0]
+
+            if not bad:
+                if not self.macroname_key_re.match(key):
+                    print("macro remove: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    bad = True
+
+            if not bad:
+                lookupTable = self.lookupKeyList([key])
+                if not lookupTable:
+                    # key is not in db
+                    print("macro remove: key %s is not in db" % (key))
+                    bad = True
+
+            if not bad:
+                # do delete query here
+                print("macro remove: key %s" % (key))
+
+                with self.sqla_eng.begin() as conn:
+                    conn.execute\
+                        (
+                            self.sqla_factoids_table\
+                                .delete()\
+                                .where\
+                                (
+                                    self.sqla_factoids_table.c.key
+                                    ==
+                                    key
+                                )
+                        )
         else:
             print("no db")
 
