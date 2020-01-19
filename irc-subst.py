@@ -894,6 +894,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                             modified = True
                         else: # wrong nbr of params
+                            print("wrong number of macro parameters\n")
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
