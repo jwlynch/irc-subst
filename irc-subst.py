@@ -876,6 +876,8 @@ class irc_subst(commandtarget.CommandTarget):
 
                             param_lookup = dict(zip(renamed_params, resultList))
 
+                            param_pattern = r"(%[a-zA-Z0-9_]+%)"
+
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
