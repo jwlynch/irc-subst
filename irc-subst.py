@@ -838,10 +838,9 @@ class irc_subst(commandtarget.CommandTarget):
                         self.debugPrint("resultList just after )) seen:")
                         self.debugPrint("%s" % (resultList))
 
-                    # because a complete macro call is now in resultList,
-                    # here's where to invoke the macro, to produce a string,
-                    # then replace resultList with [thatString] and set
-                    # the var modified to True
+                    # invoke the macro, to produce a string, then replace
+                    # resultList with [thatString] and set the var
+                    # modified to True, to tell hexchat not to eat it
 
                     # start of test
                     # test the macro parser by making the complete macro
