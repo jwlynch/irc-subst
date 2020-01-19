@@ -846,6 +846,11 @@ class irc_subst(commandtarget.CommandTarget):
                     resultList.pop(0) # ((
                     resultList.pop(-1) # ))
 
+                    # look name up
+                    macro_call_name = resultList.pop(0) # name
+
+                    lookup = self.lookupKeyList([macro_call_name], lookup)
+
 
 
 
