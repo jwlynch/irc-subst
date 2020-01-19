@@ -846,12 +846,8 @@ class irc_subst(commandtarget.CommandTarget):
                     resultList.pop(0) # ((
                     resultList.pop(-1) # ))
 
-                    resultList = [ "((" + ",".join(resultList) + "))" ]
 
-                    modified = True
 
-                    if debug_outline:
-                        self.debugPrint("converted macro call: %s" % (repr(resultList)))
 
 
                     tempList = resultList
