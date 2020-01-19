@@ -880,8 +880,12 @@ class irc_subst(commandtarget.CommandTarget):
 
                             body_param_list = re.split(param_pattern, mac_body)
 
+                            # apply the macro, and substitute the params
                             out_list = []
                             for body_part in body_param_list:
+                                if body_part in param_lookup:
+                                else:
+
 
 
                         else: # wrong nbr of params
