@@ -871,6 +871,9 @@ class irc_subst(commandtarget.CommandTarget):
 
                         # this simple comparison will change when I add features to macros
                         if len(mac_params_array) == len(resultList):
+                            # params in the body should be of the form %name%, so change formal params to that
+                            renamed_params = ["%" + x + "%" for x in mac_params_array]
+
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
