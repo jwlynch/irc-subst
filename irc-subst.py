@@ -851,8 +851,14 @@ class irc_subst(commandtarget.CommandTarget):
 
                     lookup = self.lookupKeyList([macro_call_name], lookup)
 
+                    # now, resultList has just has the parameters, so compare
+                    # length of actual params to length of formal params
+
                     if macro_call_name in lookup:
                         macro = lookup[macro_call_name]
+
+                        # resultList should now have just the params of the macro call: their number
+                        # should match the number of formal params in the macro definition (well, first cut.)
 
                         mac_split_pattern = "\(([^)]*)\)(.*)" # splits the macro def into its parts
 
@@ -863,6 +869,9 @@ class irc_subst(commandtarget.CommandTarget):
                         # params in (params list) are space-separated
                         mac_params_array = mac_params.split()
 
+                        # this simple comparison will change when I add features to macros
+                        if len(mac_params_array) == len(resultList):
+                        else: # wrong nbr of params
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
