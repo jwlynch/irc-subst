@@ -860,6 +860,9 @@ class irc_subst(commandtarget.CommandTarget):
                         mac_params = matchObj.group(1)
                         mac_body = matchObj.group(2).lstrip() # and remove leading spaces
 
+                        # params in (params list) are space-separated
+                        mac_params_array = mac_params.split()
+
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
