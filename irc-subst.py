@@ -888,6 +888,7 @@ class irc_subst(commandtarget.CommandTarget):
                                 else:
                                     out_list.append(body_part)
 
+                            result_str = "".join(out_list)
 
 
                         else: # wrong nbr of params
