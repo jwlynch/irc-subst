@@ -854,6 +854,12 @@ class irc_subst(commandtarget.CommandTarget):
                     if macro_call_name in lookup:
                         macro = lookup[macro_call_name]
 
+                        mac_split_pattern = "\(([^)]*)\)(.*)" # splits the macro def into its parts
+
+                        matchObj = re.match(mac_split_pattern, macro)
+                        mac_params = matchObj.group(1)
+                        mac_body = matchObj.group(2).lstrip() # and remove leading spaces
+
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
