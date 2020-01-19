@@ -886,6 +886,7 @@ class irc_subst(commandtarget.CommandTarget):
                                 if body_part in param_lookup:
                                     out_list.append(param_lookup[body_part])
                                 else:
+                                    out_list.append(body_part)
 
 
 
