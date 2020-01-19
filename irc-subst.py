@@ -842,9 +842,6 @@ class irc_subst(commandtarget.CommandTarget):
                     # resultList with [thatString] and set the var
                     # modified to True, to tell hexchat not to eat it
 
-                    # start of test
-                    # test the macro parser by making the complete macro
-                    # call into a string
 
                     resultList.pop(0)
                     resultList.pop(-1)
@@ -856,7 +853,6 @@ class irc_subst(commandtarget.CommandTarget):
                     if debug_outline:
                         self.debugPrint("converted macro call: %s" % (repr(resultList)))
 
-                    # end of test
 
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
