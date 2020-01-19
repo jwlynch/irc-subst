@@ -878,6 +878,8 @@ class irc_subst(commandtarget.CommandTarget):
 
                             param_pattern = r"(%[a-zA-Z0-9_]+%)"
 
+                            body_param_list = re.split(param_pattern, mac_body)
+
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
