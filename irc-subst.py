@@ -842,6 +842,8 @@ class irc_subst(commandtarget.CommandTarget):
                     # resultList with [thatString] and set the var
                     # modified to True, to tell hexchat not to eat it
 
+                    if debug_outline:
+                        print("macro call is %s\n" % (repr(resultList)))
 
                     resultList.pop(0) # ((
                     resultList.pop(-1) # ))
@@ -902,6 +904,8 @@ class irc_subst(commandtarget.CommandTarget):
 
                         modified = True
 
+                        if debug_outline:
+                            self.debugPrint("converted macro call: %s" % (repr(resultList)))
 
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
