@@ -881,6 +881,8 @@ class irc_subst(commandtarget.CommandTarget):
                             body_param_list = re.split(param_pattern, mac_body)
 
                             out_list = []
+                            for body_part in body_param_list:
+
 
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
