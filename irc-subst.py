@@ -874,6 +874,8 @@ class irc_subst(commandtarget.CommandTarget):
                             # params in the body should be of the form %name%, so change formal params to that
                             renamed_params = ["%" + x + "%" for x in mac_params_array]
 
+                            param_lookup = dict(zip(renamed_params, resultList))
+
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
