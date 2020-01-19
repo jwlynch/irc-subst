@@ -851,8 +851,13 @@ class irc_subst(commandtarget.CommandTarget):
 
                     lookup = self.lookupKeyList([macro_call_name], lookup)
 
+                    if macro_call_name in lookup:
+                    else: # macro not found in lookup table
+                        # turn the text of the call into a string
 
+                        resultList = [ "((" + macro_call_name + " " + " ".join(resultList) + "))" ]
 
+                        modified = True
 
 
                     tempList = resultList
