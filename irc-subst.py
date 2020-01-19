@@ -890,6 +890,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                             result_str = "".join(out_list)
 
+                            resultList = [result_str]
 
                         else: # wrong nbr of params
                     else: # macro not found in lookup table
