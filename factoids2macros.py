@@ -29,4 +29,6 @@ class FactoidConverter(object):
     def __init__(self, scriptPath):
         pass
 
+converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
+
 print("hi")
