@@ -43,6 +43,10 @@ class FactoidConverter(object):
 
         conffiles = parser.read(self.confFilePathName)
 
+        if dex(self.confFilePathName, conffiles) == -1:
+            print("FATAL: config file '" + self.confFilePathName + "' cannot be found")
+            exit(0)
+
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
