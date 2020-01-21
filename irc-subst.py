@@ -96,10 +96,17 @@ class irc_subst(commandtarget.CommandTarget):
     # - self.printConfigP (which is true if reload calls should print the config file)
     def doReload(self, scriptPath):
         parser = ConfigParser()
-        conffiles = parser.read(scriptPath + '/' + 'irc-subst.cfg')
 
-        if dex(scriptPath + '/' + 'irc-subst.cfg', conffiles) == -1:
-            print("config file '" + scriptPath + "/irc-subst.cfg' cannot be found")
+        confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
+        conffiles = None
+
+        conffile_read_p = False
+
+        conffiles = parser.read(confFilePathName)
+
+        if dex(confFilePathName, conffiles) == -1:
+            print("FATAL: config file '" + confFilePathName + "' cannot be found")
+            exit
 
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
