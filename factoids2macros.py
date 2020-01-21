@@ -27,7 +27,13 @@ class KeywordList(object):
 
 class FactoidConverter(object):
     def __init__(self, scriptPath):
-        pass
+        parser = ConfigParser()
+
+        self.confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
+        conffiles = None
+
+        conffiles = parser.read(self.confFilePathName)
+
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
