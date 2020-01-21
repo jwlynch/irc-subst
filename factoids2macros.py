@@ -54,6 +54,20 @@ class FactoidConverter(object):
             else:
                 # no command-prefix in general sect
                 self.cmdPrefix = '.' # default
+
+            if dex('print-config', parser.options('general')) != -1:
+                self.printConfigP = parser.get('general', 'print-config')
+
+                if self.printConfigP.startswith("t"):
+                    self.printConfigP = True
+                elif self.printConfigP.startswith("f"):
+                    self.printConfigP = False
+                else:
+                    self.printConfigP = True # default
+            else:
+                # no print-config in general sect
+                self.printConfigP = True # default
+
         else:
             # no general sect
             pass
