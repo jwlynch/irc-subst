@@ -9,6 +9,15 @@ from sqlalchemy import select, func
 
 from configparser import ConfigParser
 
+# index of item in list, or -1 if ValueError
+def dex(item, lst):
+    result = -1
+
+    try:
+        result = lst.index(item)
+    finally:
+        return result
+
 class KeywordList(object):
     def __init__(self, properties):
         self.string = ""
