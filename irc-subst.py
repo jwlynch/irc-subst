@@ -106,7 +106,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if dex(confFilePathName, conffiles) == -1:
             print("FATAL: config file '" + confFilePathName + "' cannot be found")
-            exit
+            exit(0)
 
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
