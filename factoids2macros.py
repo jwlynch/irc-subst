@@ -49,7 +49,11 @@ class FactoidConverter(object):
 
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
-            pass
+            if dex('command-prefix', parser.options('general')) != -1:
+                self.cmdPrefix = parser.get('general', 'command-prefix')
+            else:
+                # no command-prefix in general sect
+                self.cmdPrefix = '.' # default
         else:
             # no general sect
             pass
