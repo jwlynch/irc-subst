@@ -9,4 +9,7 @@ from sqlalchemy import select, func
 
 from configparser import ConfigParser
 
+class FactoidConverter(object):
+    pass
+
 print("hi")
