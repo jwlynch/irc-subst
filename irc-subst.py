@@ -800,11 +800,6 @@ class irc_subst(commandtarget.CommandTarget):
         # will become output string
         resultList = []
 
-        # split string, using [[ and ]] as delims
-        linelist = re.split(r"(\[\[[^\[\]]+\]\])", inString)
-
-        key_list = list(filter(self.key_re.match, linelist))
-
         lookup = dict()
 
         outStrParen = ""
