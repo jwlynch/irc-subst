@@ -26,6 +26,7 @@ class KeywordList(object):
         self.properties[prop] = value
 
 class FactoidConverter(object):
-    pass
+    def __init__(self, scriptPath):
+        pass
 
 print("hi")
