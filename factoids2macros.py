@@ -79,6 +79,9 @@ class FactoidConverter(object):
         else:
             self.dbOK = True
 
+        if self.dbOK:
+            pass
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
