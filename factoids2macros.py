@@ -70,7 +70,8 @@ class FactoidConverter(object):
 
         else:
             # no general sect
-            pass
+            self.cmdPrefix = '.' # default
+            self.printConfigP = True # default
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
