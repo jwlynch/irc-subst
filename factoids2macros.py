@@ -134,6 +134,9 @@ for row in converter_object.get_factoids():
 
     if match_result is not None:
         result_dict = dict()
+        result_dict["factoid_key"] = match_result.group(0)
+        result_dict["macro_key"] = match_result.group(1)
+        result_dict["value"] = row[1]
 
 print(results_list)
 print("hi")
