@@ -80,7 +80,9 @@ class FactoidConverter(object):
             self.dbOK = True
 
         if self.dbOK:
-            pass
+            self.dbSpecs = {}
+            for option in parser.options('db'):
+                self.dbSpecs[option] = parser.get('db', option)
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
