@@ -142,6 +142,9 @@ class FactoidConverter(object):
 
         return self.results_list
 
+    def build_insert_list(self):
+        pass
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print(converter_object.build_results())
