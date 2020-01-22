@@ -129,6 +129,8 @@ class FactoidConverter(object):
 results_list = []
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
+for row in converter_object.get_factoids():
+    pass
 
 print(results_list)
 print("hi")
