@@ -133,7 +133,7 @@ for row in converter_object.get_factoids():
     match_result = converter_object.factoid_key_re.match(row[0])
 
     if match_result is not None:
-        pass
+        result_dict = dict()
 
 print(results_list)
 print("hi")
