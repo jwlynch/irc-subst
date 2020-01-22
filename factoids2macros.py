@@ -157,6 +157,8 @@ class FactoidConverter(object):
         self.build_results()
         self.build_insert_list()
 
+        inserter = self.sqla_factoids_table.insert()
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
