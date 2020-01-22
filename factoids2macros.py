@@ -127,21 +127,22 @@ class FactoidConverter(object):
         return self.factoids_result
 
     def build_results(self):
-        pass
+        self.results_list = []
 
-results_list = []
+        for row in self.get_factoids():
+            match_result = self.factoid_key_re.match(row[0])
+
+            if match_result is not None:
+                result_dict = dict()
+                result_dict["factoid_key"] = match_result.group(0)
+                result_dict["macro_key"] = match_result.group(1)
+                result_dict["value"] = row[1]
+
+                self.results_list.append(result_dict)
+
+        return self.results_list
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
-for row in converter_object.get_factoids():
-    match_result = converter_object.factoid_key_re.match(row[0])
 
-    if match_result is not None:
-        result_dict = dict()
-        result_dict["factoid_key"] = match_result.group(0)
-        result_dict["macro_key"] = match_result.group(1)
-        result_dict["value"] = row[1]
-
-        results_list.append(result_dict)
-
-print(results_list)
+print(converter_object.build_results())
 print("hi")
