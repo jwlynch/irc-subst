@@ -148,5 +148,4 @@ class FactoidConverter(object):
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
-print(converter_object.build_results())
 print("hi")
