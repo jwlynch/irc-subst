@@ -106,6 +106,15 @@ class FactoidConverter(object):
 
             self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
             self.sqla_meta = MetaData(bind=self.sqla_eng)
+
+            self.sqla_factoids_table = Table\
+                                       (\
+                                        "factoids",
+                                        self.sqla_meta,
+                                        autoload=True,
+                                        autoload_with=self.sqla_eng
+                                       )
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
