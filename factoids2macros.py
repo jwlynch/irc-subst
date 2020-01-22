@@ -147,6 +147,7 @@ class FactoidConverter(object):
             insert_dict = {}
 
             insert_dict["key"] = row["macro_key"]
+            insert_dict["value"] = "()" + row["value"]
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
