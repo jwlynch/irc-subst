@@ -138,5 +138,7 @@ for row in converter_object.get_factoids():
         result_dict["macro_key"] = match_result.group(1)
         result_dict["value"] = row[1]
 
+        results_list.append(result_dict)
+
 print(results_list)
 print("hi")
