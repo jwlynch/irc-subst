@@ -36,6 +36,8 @@ class KeywordList(object):
 
 class FactoidConverter(object):
     def __init__(self, scriptPath):
+        self.factoid_key_re = re.compile("^\[\[([a-zA-Z-_]+)\]\]$")
+
         parser = ConfigParser()
 
         self.confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
