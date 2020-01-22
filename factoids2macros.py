@@ -37,6 +37,7 @@ class KeywordList(object):
 class FactoidConverter(object):
     def __init__(self, scriptPath):
         self.factoid_key_re = re.compile("^\[\[([a-zA-Z-_]+)\]\]$")
+        self.results_list = []
 
         parser = ConfigParser()
 
@@ -127,8 +128,6 @@ class FactoidConverter(object):
         return self.factoids_result
 
     def build_results(self):
-        self.results_list = []
-
         for row in self.get_factoids():
             match_result = self.factoid_key_re.match(row[0])
 
