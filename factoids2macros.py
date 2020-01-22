@@ -154,7 +154,8 @@ class FactoidConverter(object):
         return self.insert_list
 
     def insert_macros(self):
-        pass
+        self.build_results()
+        self.build_insert_list()
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
