@@ -38,6 +38,7 @@ class FactoidConverter(object):
     def __init__(self, scriptPath):
         self.factoid_key_re = re.compile("^\[\[([a-zA-Z-_]+)\]\]$")
         self.results_list = []
+        self.insert_list = []
 
         parser = ConfigParser()
 
