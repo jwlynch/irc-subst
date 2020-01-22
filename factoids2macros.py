@@ -116,7 +116,7 @@ class FactoidConverter(object):
                                        )
 
     def get_factoids(self):
-        pass
+        selector = select([self.sqla_factoids_table])
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
