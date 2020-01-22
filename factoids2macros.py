@@ -120,6 +120,8 @@ class FactoidConverter(object):
 
         conn = self.sqla_eng.connect()
 
+        self.factoids_result = conn.execute(selector)
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
