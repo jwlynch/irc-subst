@@ -146,6 +146,8 @@ class FactoidConverter(object):
         for row in self.results_list:
             insert_dict = {}
 
+            insert_dict["key"] = row["macro_key"]
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
