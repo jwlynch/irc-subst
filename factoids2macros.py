@@ -84,6 +84,26 @@ class FactoidConverter(object):
             for option in parser.options('db'):
                 self.dbSpecs[option] = parser.get('db', option)
 
+            # build the sqlalchemy connect string
+            k = self.dbSpecs.keys()
+
+            s = "postgresql://"
+            if 'user' in k:
+                s += self.dbSpecs['user']
+                if 'password' in k:
+                    s += ':' + self.dbSpecs['password']
+
+                if 'host' in k:
+                    s += '@' + self.dbSpecs['host']
+                else:
+                    s += '@localhost'
+
+                if 'port' in k:
+                    s += ':' + self.dbSpecs['port']
+
+            s += '/' + self.dbSpecs['dbname']
+            self.sqlalchemy_conn_str = s
+
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 
 print("hi")
