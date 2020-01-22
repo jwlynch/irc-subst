@@ -130,7 +130,7 @@ results_list = []
 
 converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 for row in converter_object.get_factoids():
-    pass
+    match_result = converter_object.factoid_key_re.match(row[0])
 
 print(results_list)
 print("hi")
