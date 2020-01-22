@@ -1,3 +1,8 @@
+Now, the factoids are available as macros... so now we can get rid
+of the factoid stuff, because now everything is a macro.
+
+Idea: to have macro calls in other macro values.
+
 idea: while writing the (( ... )) thing, have a stack that would allow
 ... (( ... (( ... )) ... )) (meaning (( ... )) -inside- another (( ... )))
 
