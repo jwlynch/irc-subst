@@ -928,47 +928,14 @@ class irc_subst(commandtarget.CommandTarget):
 
                     paramsList = currSymbol.split()
 
-                    for param in paramsList:
-                        # split each param by [[...]] delimiter
-                        symbList = re.split(r"(\[\[[^\[\]]+\]\])", param)
-                        key_list = list(filter(self.factoid_key_re.match, symbList))
-                        lookup = self.lookupKeyList(key_list, lookup)
-
-                        symb = ""
-
-                        for item in symbList:
-                            if item in lookup:
-                                symb += lookup[item]
-                                modified = True
-                            else:
-                                symb += item
-
-                        resultList.append(symb)
-
                     if debug_outline:
                         self.debugPrint("\nparameter of macro")
+
+                    resultList.extend(paramsList)
                 else:
                     # outside all macro calls
 
-                    symbList = re.split(r"(\[\[[^\[\]]+\]\])", currSymbol)
-                    key_list = list(filter(self.factoid_key_re.match, symbList))
-                    lookup = self.lookupKeyList(key_list, lookup)
-
-                    if debug_outline:
-                        self.debugPrint("symbList: %s" % (repr(symbList)))
-                        self.debugPrint("key_list: %s" % (repr(key_list)))
-                        self.debugPrint("lookup: %s" % (repr(lookup)))
-
-                    symb = ""
-
-                    for item in symbList:
-                        if item in lookup:
-                            symb += lookup[item]
-                            modified = True
-                        else:
-                            symb += item
-
-                    resultList.append(symb)
+                    resultList.append(currSymbol)
 
                     if debug_outline:
                         self.debugPrint("\nnot inside a macro call")
