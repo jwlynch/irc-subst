@@ -655,7 +655,7 @@ class irc_subst(commandtarget.CommandTarget):
         modified = False
 
         # split string using (( and )) as delims
-        linelistparen = re.split(r'(\(\(|\)\))', inString)
+        linelistparen = re.split(r'(\[\[|\]\])', inString)
 
         if debug_outline:
             self.debugPrint("paren list: " + repr(linelistparen))
@@ -672,10 +672,10 @@ class irc_subst(commandtarget.CommandTarget):
         while len(linelistparen) != 0:
             currSymbol = linelistparen.pop(0)
 
-            if currSymbol == '((':
+            if currSymbol == '[[':
                 # start of macro call
                 macro_stack.append(resultList)
-                resultList = ["(("]
+                resultList = ["[["]
 
                 if debug_outline:
                     self.debugPrint("\nstart of macro")
@@ -683,16 +683,16 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("resultList: %s" % (resultList))
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
-            elif currSymbol == '))':
+            elif currSymbol == ']]':
                 # end of macro call
 
                 # if nothing is on macro_stack, this is an error
                 if len(macro_stack) == 0:
-                    self.debugPrint("Syntax error: )) without ((\n")
+                    self.debugPrint("Syntax error: ]] without [[\n")
                     linelistparen = []
                 else:
                     # parameter of macro call (incl. name of macro)
-                    resultList.append('))')
+                    resultList.append(']]')
 
                     if debug_outline:
                         self.debugPrint("resultList just after )) seen:")
@@ -705,8 +705,8 @@ class irc_subst(commandtarget.CommandTarget):
                     if debug_outline:
                         print("macro call is %s\n" % (repr(resultList)))
 
-                    resultList.pop(0) # ((
-                    resultList.pop(-1) # ))
+                    resultList.pop(0) # [[
+                    resultList.pop(-1) # ]]
 
                     # look name up
                     macro_call_name = resultList.pop(0) # name
@@ -760,7 +760,7 @@ class irc_subst(commandtarget.CommandTarget):
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
-                        resultList = [ "((" + macro_call_name + " " + " ".join(resultList) + "))" ]
+                        resultList = [ "[[" + macro_call_name + " " + " ".join(resultList) + "]]" ]
 
                         modified = True
 
@@ -807,10 +807,10 @@ class irc_subst(commandtarget.CommandTarget):
         # while loop has exited, so linelistparen is empty.
         #
         # so, either the macro_stack is also empty (means we're done)
-        # or it's not, meaning there are missing '))'s
+        # or it's not, meaning there are missing ']]'s
 
         if len(macro_stack) != 0:
-            self.debugPrint("Syntax error: (( without ))\n")
+            self.debugPrint("Syntax error: [[ without ]]\n")
             outStrParen = ""
         else:
             outStrParen = "".join(resultList)
