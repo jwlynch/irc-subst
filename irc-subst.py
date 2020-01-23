@@ -973,39 +973,17 @@ class irc_subst(commandtarget.CommandTarget):
             with self.sqla_eng.begin() as conn:
                 result = conn.execute(sel)
 
-            factoid_string = ""
             macro_string = ""
             for row in result:
                 test_str = row[factoids.c.key]
 
-                if self.factoid_key_re.match(test_str):
-                    factoid_string += test_str + "\n"
-                elif self.macroname_key_re.match(test_str):
+                if self.macroname_key_re.match(test_str):
                     macro_string += test_str + "\n"
-
-            print("FACTOIDS")
-            print("========")
 
             # in Python 3, no strings support the buffer interface, because they don't contain bytes.
             # Before, I was using print. print only writes strings. I shouldn't use print to try and
             # write to a file opened in binary mode (and a pipe is opened in binary mode). I should use
             # the write() method of to_col, which itself is a pipe.
-
-            column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
-
-            # note, encoding a str object, you get a bytes object,
-            # and, decoding a bytes object, you get a str obhect
-
-            comm_stdout, comm_sterr = column.communicate(factoid_string.encode())
-            # here, split the stdout to lines
-
-            lineList = comm_stdout.splitlines()
-            for line in lineList:
-                print(line.decode())
-
-            print("======")
-            print("MACROS")
-            print("======")
 
             column = subprocess.Popen(["/usr/bin/column"], stdin=PIPE, stdout=PIPE)
             comm_stdout, comm_sterr = column.communicate(macro_string.encode())
