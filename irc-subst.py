@@ -738,7 +738,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                             param_lookup = dict(zip(renamed_params, resultList))
 
-                            param_pattern = r"(%[a-zA-Z0-9_]+%)"
+                            param_pattern = r"(%[a-zA-Z0-9_-]+%)"
 
                             body_param_list = re.split(param_pattern, mac_body)
 
