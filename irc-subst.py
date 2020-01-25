@@ -703,7 +703,7 @@ class irc_subst(commandtarget.CommandTarget):
                     # modified to True, to tell hexchat not to eat it
 
                     if debug_outline:
-                        print("macro call is %s\n" % (repr(resultList)))
+                        self.debugPrint("macro call is %s\n" % (repr(resultList)))
 
                     resultList.pop(0) # [[
                     resultList.pop(-1) # ]]
