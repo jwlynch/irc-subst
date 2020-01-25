@@ -784,7 +784,7 @@ class irc_subst(commandtarget.CommandTarget):
                 if len(macro_stack) != 0:
                     # inside any number of macro calls
 
-                    paramsList = currSymbol.split()
+                    paramsList = shlex.split(currSymbol)
 
                     if debug_outline:
                         self.debugPrint("\nparameter of macro")
