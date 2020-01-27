@@ -832,6 +832,7 @@ class irc_subst(commandtarget.CommandTarget):
             macro_string = ""
             for row in result:
                 test_str = row[factoids.c.key]
+                macro_def = row[factoids.c.value]
 
                 if self.macroname_key_re.match(test_str):
                     macro_string += test_str + "\n"
