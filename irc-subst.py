@@ -246,7 +246,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         self.factoid_key_re = re.compile("^\[\[[a-zA-Z-_]+\]\]$")
         self.macroname_key_re = re.compile("^[a-zA-Z0-9-_]+$")
-        self.macro_re = re.compile("^\(([a-zA-Z0-9-_ ]+)\)(.*)$")
+        self.macro_re = re.compile("^\(([a-zA-Z0-9-_ ]*)\)(.*)$")
         self.channel_re = re.compile("^[#&~].*$")
 
         # initialize superclass
