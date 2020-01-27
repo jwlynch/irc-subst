@@ -836,6 +836,7 @@ class irc_subst(commandtarget.CommandTarget):
                 macro_match_obj = self.macro_re.match(macro_def)
                 macro_params = macro_match_obj.group(1) # macro params
 
+                params_list = macro_params.split()
                 if self.macroname_key_re.match(test_str):
                     macro_string += test_str + "\n"
 
