@@ -840,7 +840,7 @@ class irc_subst(commandtarget.CommandTarget):
                 params_list.insert(0, test_str)
 
                 if self.macroname_key_re.match(test_str):
-                    macro_string += test_str + "\n"
+                    macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
 
             # in Python 3, no strings support the buffer interface, because they don't contain bytes.
             # Before, I was using print. print only writes strings. I shouldn't use print to try and
