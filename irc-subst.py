@@ -722,9 +722,7 @@ class irc_subst(commandtarget.CommandTarget):
                         # resultList should now have just the params of the macro call: their number
                         # should match the number of formal params in the macro definition (well, first cut.)
 
-                        mac_split_pattern = "\(([^)]*)\)(.*)" # splits the macro def into its parts
-
-                        matchObj = re.match(mac_split_pattern, macro)
+                        matchObj = re.match(self.macro_re, macro)
                         mac_params = matchObj.group(1)
                         mac_body = matchObj.group(2).lstrip() # and remove leading spaces
 
