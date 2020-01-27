@@ -824,7 +824,7 @@ class irc_subst(commandtarget.CommandTarget):
         if self.dbOK:
 
             factoids = self.sqla_factoids_table
-            sel = select([factoids.c.key]).order_by(factoids.c.key)
+            sel = select([factoids.c.key, factoids.c.value]).order_by(factoids.c.key)
 
             with self.sqla_eng.begin() as conn:
                 result = conn.execute(sel)
