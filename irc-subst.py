@@ -834,13 +834,17 @@ class irc_subst(commandtarget.CommandTarget):
                 test_str = row[factoids.c.key]
                 macro_def = row[factoids.c.value]
                 macro_match_obj = self.macro_re.match(macro_def)
-                macro_params = macro_match_obj.group(1) # macro params
 
-                params_list = macro_params.split()
-                params_list.insert(0, test_str)
+                if macro_match_obj is not None:
+                    macro_params = macro_match_obj.group(1) # macro params
 
-                if self.macroname_key_re.match(test_str):
-                    macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
+                    params_list = macro_params.split()
+                    params_list.insert(0, test_str)
+
+                    if self.macroname_key_re.match(test_str):
+                        macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
+                else:
+                    print("there is a problem with macro key %s" % (test_str))
 
             # in Python 3, no strings support the buffer interface, because they don't contain bytes.
             # Before, I was using print. print only writes strings. I shouldn't use print to try and
