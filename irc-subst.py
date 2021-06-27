@@ -839,7 +839,7 @@ class irc_subst(commandtarget.CommandTarget):
                     macro_params = macro_match_obj.group(1) # macro params
 
                     params_list = macro_params.split()
-                    params_list.insert(0, test_str)
+                    params_list.insert(0, test_str) # put macroname as first param
 
                     if self.macroname_key_re.match(test_str):
                         macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
