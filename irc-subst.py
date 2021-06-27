@@ -844,7 +844,12 @@ class irc_subst(commandtarget.CommandTarget):
                     if self.macroname_key_re.match(test_str):
                         macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
                 else:
-                    print("there is a problem with macro key %s" % (test_str))
+                    print \
+                    (
+                        "the macro value ('%s') at key '%s' doesn't look like a macro"
+                      %
+                        (macro_def, test_str)
+                    )
 
             # in Python 3, no strings support the buffer interface, because they don't contain bytes.
             # Before, I was using print. print only writes strings. I shouldn't use print to try and
