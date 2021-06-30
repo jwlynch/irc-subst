@@ -1041,21 +1041,19 @@ class irc_subst(commandtarget.CommandTarget):
           )
           # (end transaction)
 
-    def notice_hook(self, word, word_eol, userdata):
-        result = hexchat.EAT_NONE
+    # func processSASLFailedNotice
+    #    check for sasl failed login, and log it if so
+    #
+    #   self - a value of type my irc_subst class
+    #   word - input from server, split into words
+    #   word_eol - documented in hexchat docs
+    #   userdata - documented in hexchat docs
 
-        if self.debugSectsContains("notice"):
-            debugNoticeP = True
-        else:
-            debugNoticeP = False
+    def processSASLFailedNotice(self, word, word_eol, userdata, result):
+        w = word # less typing
+        debugNoticeP = self.debugSectsContains("notice")
+        debugNoticeTestsP = self.debugSectsContains("noticetests")
 
-        if self.debugSectsContains("noticetests"):
-            debugNoticeTestsP = True
-        else:
-            debugNoticeTestsP = False
-
-        # less typing
-        w = word
 
         src_hostmask = w[0][1:]
 
@@ -1113,6 +1111,17 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
+
+        return result
+
+
+    def notice_hook(self, word, word_eol, userdata):
+        result = hexchat.EAT_NONE
+        debugNoticeP = self.debugSectsContains("notice")
+        debugNoticeTestsP = self.debugSectsContains("noticetests")
+        w = word # less typing
+
+        result = self.processSASLFailedNotice(word, word_eol, userdata, result)
 
         return result
 
