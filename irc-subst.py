@@ -14,7 +14,7 @@ import re, shlex
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
-import arrow # for timestamps
+# import arrow # for timestamps
 # from dateutil import tz
 
 import hexchat
@@ -240,7 +240,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.command_dict["debugsects"] = self.doDebugSects
         self.command_dict["lsdebugsects"] = self.doLSDebugSects
         self.command_dict["lscmds"] = self.doLsCmds
-        self.command_dict["cvttime"] = self.doCvtTime
+        #self.command_dict["cvttime"] = self.doCvtTime
 
         self.cmdReload = "reload"
 
@@ -466,28 +466,28 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
-    def doCvtTime(self, cmdString, argList, kwargs):
-        result = 0
-
-        if len(argList) < 1 or len(argList) > 1:
-            result = -1
-
-            print("cvttime usage:")
-            print("cvttime <timeString>")
-            print("displays time in the local timezone")
-
-            if len(argList) < 1:
-                print("cvttime: too few args")
-            elif len(argList) > 1:
-                print("cvttime: too many args")
-        else:
-            # correct number of args
-            timeString = argList[0]
-            timeObj = arrow.get(timeString)
-
-            print(timeObj.to('local').format('YYYY-MM-DD HH:mm:ss ZZ'))
-
-        return result
+    # def doCvtTime(self, cmdString, argList, kwargs):
+    #     result = 0
+    #
+    #     if len(argList) < 1 or len(argList) > 1:
+    #         result = -1
+    #
+    #         print("cvttime usage:")
+    #         print("cvttime <timeString>")
+    #         print("displays time in the local timezone")
+    #
+    #         if len(argList) < 1:
+    #             print("cvttime: too few args")
+    #         elif len(argList) > 1:
+    #             print("cvttime: too many args")
+    #     else:
+    #         # correct number of args
+    #         timeString = argList[0]
+    #         timeObj = arrow.get(timeString)
+    #
+    #         print(timeObj.to('local').format('YYYY-MM-DD HH:mm:ss ZZ'))
+    #
+    #     return result
 
     def doInfo(self, cmdString, argList, kwargs):
         result = 0
@@ -1054,6 +1054,8 @@ class irc_subst(commandtarget.CommandTarget):
         debugNoticeP = self.debugSectsContains("notice")
         debugNoticeTestsP = self.debugSectsContains("noticetests")
 
+        if debugNoticeP:
+            self.debugPrint("ENTER processSASLFailedNotice")
 
         src_hostmask = w[0][1:]
 
@@ -1111,6 +1113,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         if debugNoticeP:
             self.debugPrint("notice: %s" % (detailList(word)))
+
+        if debugNoticeP:
+            self.debugPrint("EXIT processSASLFailedNotice")
 
         return result
 
