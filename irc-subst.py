@@ -1063,6 +1063,9 @@ class irc_subst(commandtarget.CommandTarget):
 
         src_hostmask = w[0][1:]
 
+        if debugNoticeP:
+            self.debugPrint("source hostmask was " + src_hostmask)
+
         # is it from saslserv?
         if src_hostmask == "SaslServ!SaslServ@services.":
             if debugNoticeTestsP:
