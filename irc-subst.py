@@ -1050,6 +1050,7 @@ class irc_subst(commandtarget.CommandTarget):
     #   userdata - documented in hexchat docs
 
     def processSASLFailedNotice(self, word, word_eol, userdata, result):
+        # one from libera, from client: -SaslServ- <Unknown user on tin.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 3 failed login attempts since your last successful login.
         w = word # less typing
         debugNoticeP = self.debugSectsContains("notice")
         debugNoticeTestsP = self.debugSectsContains("noticetests")
@@ -1099,7 +1100,14 @@ class irc_subst(commandtarget.CommandTarget):
         elif src_hostmask == "NickServ!NickServ@services.":
             # TODO: [20170301 00:45:36] -NickServ- JiML_!~jim@kivu.grabeuh.com failed to login to jim.  There have been 75 failed login attempts since your last successful login.
             # TODO: [20170302 12:31:37]  notice: [0]: :NickServ!NickServ@services. [1]: NOTICE [2]: jim [3]: :+JiML_!~jim@kivu.grabeuh.com [4]: failed [5]: to [6]: login [7]: to [8]: jim. [9]: There [10]: have [11]: been [12]: 135 [13]: failed [14]: login [15]: attempts [16]: since [17]: your [18]: last [19]: successful [20]: login.
-            # message as it appeared in client: [20170302 12:31:37] -NickServ- JiML_!~jim@kivu.grabeuh.com failed to login to jim.  There have been 135 failed login attempts since your last successful login.
+            # messages as they appeared in client:
+            # -SaslServ- <Unknown user on tin.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 2 failed login attempts since your last successful login.
+            # -SaslServ- <Unknown user on tin.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 3 failed login attempts since your last successful login.
+            # -SaslServ- <Unknown user on tin.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 4 failed login attempts since your last successful login.
+            # -SaslServ- <Unknown user on sodium.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 5 failed login attempts since your last successful login.
+            # -SaslServ- <Unknown user on sodium.libera.chat (via SASL):69-92-185-65.cpe.sparklight.net> failed to login to jim. There have been 6 failed login attempts since your last successful login.
+            # notice: [0]: :SaslServ!SaslServ@services.libera.chat [1]: NOTICE [2]: jim [3]: :<Unknown [4]: user [5]: on [6]: copper.libera.chat [7]: (via [8]: SASL):108-226-23-245.lightspeed.sntcca.sbcglobal.net> [9]: failed [10]: to [11]: login [12]: to [13]: jim. [14]: There [15]: have [16]: been [17]: 8 [18]: failed [19]: login [20]: attempts [21]: since [22]: your [23]: last [24]: successful [25]: login.
+
             justToMeP = (w[2] == "jim")
             failedLoginP = (w[4] == "failed" and w[6] == "login")
 
