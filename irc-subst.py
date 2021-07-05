@@ -1057,6 +1057,9 @@ class irc_subst(commandtarget.CommandTarget):
         if debugNoticeP:
             self.debugPrint("ENTER processSASLFailedNotice")
 
+        if debugNoticeP:
+            self.debugPrint("word array length: " + str(len(w)))
+
         src_hostmask = w[0][1:]
 
         # is it from saslserv?
