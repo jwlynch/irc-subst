@@ -1061,6 +1061,9 @@ class irc_subst(commandtarget.CommandTarget):
         if debugNoticeP:
             self.debugPrint("word array length: " + str(len(w)))
 
+        if debugNoticeP:
+            print("word_eol[0] is " + word_eol[0])
+
         src_hostmask = w[0][1:]
 
         if debugNoticeP:
