@@ -759,6 +759,11 @@ class irc_subst(commandtarget.CommandTarget):
                         # turn the text of the call into a string
 
                         resultList = [ "[[" + macro_call_name + " " + " ".join(resultList) + "]]" ]
+                        if len(resultList) > 0:
+                            paramsSpaceSeparator = ""
+                        else:
+                            paramsSpaceSeparator = ""
+
 
                         modified = True
 
