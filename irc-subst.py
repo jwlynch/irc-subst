@@ -1071,7 +1071,8 @@ class irc_subst(commandtarget.CommandTarget):
 
         # is it from saslserv?
         fromSASLServ_maybe_freenode = (src_hostmask == "SaslServ!SaslServ@services.")
-        if src_hostmask == "SaslServ!SaslServ@services.":
+
+        if fromSASLServP:
             if debugNoticeTestsP:
                 self.debugPrint("notice was from saslserv")
 
