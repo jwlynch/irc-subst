@@ -1071,6 +1071,8 @@ class irc_subst(commandtarget.CommandTarget):
 
         # is it from saslserv?
         fromSASLServ_maybe_freenode = (src_hostmask == "SaslServ!SaslServ@services.")
+        fromSASLServ_libera = (src_hostmask == "SaslServ!SaslServ@services.libera.chat")
+        fromSASLServP = (fromSASLServ_maybe_freenode or fromSASLServ_libera)
 
         if fromSASLServP:
             if debugNoticeTestsP:
