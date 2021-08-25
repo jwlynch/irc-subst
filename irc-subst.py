@@ -40,7 +40,11 @@ def dex(item, lst):
 
 # script and config file dir
 
-pathname = pathlib.Path(__file__).parent.__str__()
+# nedbat's hack to replace __file__
+def foo():
+    pass
+pathname = pathlib.Path(foo.__code__.co_filename).parent.__str__()
+
 sys.path.append(pathname) # so that modules that are siblings of the script can be found
 
 from utils import commandtarget
