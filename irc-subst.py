@@ -902,17 +902,35 @@ class irc_subst(commandtarget.CommandTarget):
 
     def inputHook(self, word, word_eol, userdata):
         result = hexchat.EAT_NONE
+        debug_input = self.debugSectsContains("input")
+
+        if debug_input:
+            self.debugPrint("entering inputHook()")
+
+            self.debugPrint("print the word array:")
+
+            self.debugPrint("word's type is " + str(type(word)))
+            self.debugPrint("repr(word) is " + repr(word))
+
+            if word is not None:
+                self.debugPrint("word in detail is: " + detailList(word))
+            else:
+                self.debugPrint("word is None")
 
         if not self.sent:
+            if debug_input: self.debugPrint("input: self.sent is False; set it True")
             self.sent = True
 
             if len(word) > 0:
+                if debug_input: self.debugPrint("len(word) > 0")
                 if word[0].startswith("\\"):
                     hexchat.command("say " + word_eol[0][1:])
                     result = hexchat.EAT_ALL
                 elif word[0].startswith(self.cmdPrefix):
+                    if debug_input: self.debugPrint("first word starts with cmdPrefix")
                     result = hexchat.EAT_ALL
                     cmd = word[0][1:]
+                    if debug_input: self.debugPrint("cmd is " + cmd)
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
 
                     if cmdResult == 1:
