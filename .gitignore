@@ -3,3 +3,4 @@ ircsubst-env/
 __pycache__/
 openacs/
 backups/
+*~
