@@ -1,0 +1,10 @@
+# so nedbat simply defined a function, and extracted the file path info from it:
+
+def foo():
+    pass
+
+path_to_script = foo.__code__.co_filename
+
+# the way I used this to get the dir the script is in:
+
+pathname = pathlib.Path(foo.__code__.co_filename).parent.__str__()
