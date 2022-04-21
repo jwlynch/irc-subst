@@ -172,7 +172,10 @@ class irc_subst(commandtarget.CommandTarget):
             s += '/' + self.dbSpecs['dbname']
             self.sqlalchemy_conn_str = s
 
-            self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
+            self.sqla_eng = create_engine(
+                                             self.sqlalchemy_conn_str, 
+                                             client_encoding='utf8'
+                                         )
             self.sqla_meta = MetaData(bind=self.sqla_eng)
             self.sqla_meta.reflect()
 
