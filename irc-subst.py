@@ -974,7 +974,6 @@ class irc_subst(commandtarget.CommandTarget):
                     if cmdResult == 1:
                         print(f"command '{cmd}' not found")
 
-                        result = hexchat.EAT_ALL
                     else:
                         # do normal processing of hexchat user's input line
                         if outLineResult[0]: # if True, outLine -did- alter the line
