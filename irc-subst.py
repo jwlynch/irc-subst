@@ -946,7 +946,10 @@ class irc_subst(commandtarget.CommandTarget):
                     if debug_input: self.debugPrint("first word starts with cmdPrefix")
                     result = hexchat.EAT_ALL
                     cmd = word[0][1:]
-                    if debug_input: self.debugPrint("cmd is " + cmd)
+                    if debug_input:
+                        self.debugPrint(f"cmd is {cmd}")
+                        self.debugPrint(f"args are {word[1:]}")
+
                     cmdResult = self.doCommandStr(cmd, word[1:], None)
 
                     if cmdResult == 1:
