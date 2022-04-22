@@ -674,7 +674,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         modified = False
 
-        # split string using (( and )) as delims
+        # split string using [[ and ]] as delims
         linelistparen = re.split(r'(\[\[|\]\])', inString)
 
         if debug_outline:
@@ -715,8 +715,8 @@ class irc_subst(commandtarget.CommandTarget):
                     resultList.append(']]')
 
                     if debug_outline:
-                        self.debugPrint("resultList just after )) seen:")
-                        self.debugPrint("%s" % (resultList))
+                        self.debugPrint("resultList just after ]] seen:")
+                        self.debugPrint(resultList)
 
                     # invoke the macro, to produce a string, then replace
                     # resultList with [thatString] and set the var
