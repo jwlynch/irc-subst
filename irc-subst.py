@@ -963,12 +963,13 @@ class irc_subst(commandtarget.CommandTarget):
                     result = hexchat.EAT_ALL
 
                     cmd = word[0][1:]
+                    args = word[1:]
 
                     if debug_input:
                         self.debugPrint(f"cmd is {cmd}")
-                        self.debugPrint(f"args are {word[1:]}")
+                        self.debugPrint(f"args are {args}")
 
-                    cmdResult = self.doCommandStr(cmd, word[1:], None)
+                    cmdResult = self.doCommandStr(cmd, args, None)
 
                     if cmdResult == 1:
                         print("command '%s' not found" % (cmd))
