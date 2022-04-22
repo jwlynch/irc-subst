@@ -977,7 +977,7 @@ class irc_subst(commandtarget.CommandTarget):
                         result = hexchat.EAT_ALL
                     else:
                         # do normal processing of hexchat user's input line
-                        if outLineResult[0]:
+                        if outLineResult[0]: # if True, outLine -did- alter the line
                             hexchat.command(outLineResult[1])
 
                             result = hexchat.EAT_ALL
