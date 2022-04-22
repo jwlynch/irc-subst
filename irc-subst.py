@@ -52,6 +52,14 @@ from objects import nextObjectID
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
+    # self.debugPrint("testing detailList:")
+    # test0 = []
+    # test1 = ["one"]
+    # test2 = ["one", "two"]
+    # self.debugPrint(f"empty: {test0}")
+    # self.debugPrint(f"1 item: {test1}")
+    # self.debugPrint(f"2 items: {test2}")
+
     reslst = []
 
     for i in range(len(l)):
