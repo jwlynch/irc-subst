@@ -937,6 +937,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         if not self.sent:
             if debug_input: self.debugPrint("input: self.sent is False; set it True")
+
             self.sent = True
 
             if len(word) > 0:
@@ -944,10 +945,14 @@ class irc_subst(commandtarget.CommandTarget):
                 if word[0].startswith("\\"):
                     hexchat.command("say " + word_eol[0][1:])
                     result = hexchat.EAT_ALL
+
                 elif word[0].startswith(self.cmdPrefix):
                     if debug_input: self.debugPrint("first word starts with cmdPrefix")
+
                     result = hexchat.EAT_ALL
+
                     cmd = word[0][1:]
+
                     if debug_input:
                         self.debugPrint(f"cmd is {cmd}")
                         self.debugPrint(f"args are {word[1:]}")
