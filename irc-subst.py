@@ -941,10 +941,11 @@ class irc_subst(commandtarget.CommandTarget):
             self.sent = True
 
             if len(word) > 0:
-                if word[0].startswith("\\"):
-                    hexchat.command("say " + word_eol[0][1:])
                 if debug_input:
                     self.debugPrint("len(word) > 0")
+                if word_eol[0].startswith("\\"): # if so, the irc line is backslashed
+                    backslashed_line = word_eol[0]
+                    hexchat.command("say " + backslashed_line[1:])
                     result = hexchat.EAT_ALL
 
                 elif word[0].startswith(self.cmdPrefix):
