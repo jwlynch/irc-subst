@@ -947,6 +947,14 @@ class irc_subst(commandtarget.CommandTarget):
                 if word_eol[0].startswith("\\"): # if so, the irc line is backslashed
                     backslashed_line = word_eol[0]
                     hexchat.command("say " + backslashed_line[1:])
+                    outLineResult = self.outLine("say " + backslashed_line[1:])
+
+                    # implement noout in debugsects by testing for None
+                    if outLineResult[1] is None:
+                        # means we're testing:
+                        # noout is in debugSects, so mute user output
+                        # and don't do anything else
+
                     result = hexchat.EAT_ALL
 
                 elif word[0].startswith(self.cmdPrefix):
@@ -964,14 +972,6 @@ class irc_subst(commandtarget.CommandTarget):
 
                     if cmdResult == 1:
                         print("command '%s' not found" % (cmd))
-                else:
-                    outLineResult = self.outLine("say " + word_eol[0])
-
-                    # implement noout in debugsects by testing for None
-                    if outLineResult[1] is None:
-                        # means we're testing:
-                        # noout is in debugSects, so mute user output
-                        # and don't do anything else
 
                         result = hexchat.EAT_ALL
                     else:
