@@ -839,9 +839,11 @@ class irc_subst(commandtarget.CommandTarget):
             outStrParen = "".join(resultList)
 
         if debug_noOut:
-            return [False, None]
+            result = [False, None] # debugging: MUTE output
         else:
-            return [modified, outStrParen]
+            result = [modified, outStrParen]
+
+        return result
 
     # prints to the irc client the list of keys available in the db
     def list_keys(self, cmdString, argList, kwargs):
