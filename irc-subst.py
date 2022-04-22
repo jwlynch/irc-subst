@@ -57,7 +57,12 @@ def detailList(l):
     for i in range(len(l)):
         reslst.append("[%s]: %s" % (str(i), str(l[i])))
 
-    return " ".join(reslst)
+    if len(reslst) != 0:
+        resStr = " ".join(reslst)
+    else: # reslst is empty
+        resStr = "[]"
+
+    return resStr
 
 # splits hostmask (string of form nick!email@site) into its parts
 # returns a dict with keys nick, emailname, site
