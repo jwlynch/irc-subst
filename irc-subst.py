@@ -962,6 +962,8 @@ class irc_subst(commandtarget.CommandTarget):
                         # noout is in debugSects, so mute user output
                         # and don't do anything else
 
+                        pass
+
                     result = hexchat.EAT_ALL
 
                 elif word[0].startswith(self.cmdPrefix):
