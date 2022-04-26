@@ -919,9 +919,13 @@ class irc_subst(commandtarget.CommandTarget):
     # substituted by the values from the db
 
     def inputHook(self, word, word_eol, userdata):
+        # default return value
         result = hexchat.EAT_NONE
+
+        # are we debugging input and inputHook?
         debug_input = self.debugSectsContains("input")
 
+        # some opening debug info
         if debug_input:
             self.debugPrint("entering inputHook()")
 
