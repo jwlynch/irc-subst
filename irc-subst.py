@@ -538,10 +538,11 @@ class irc_subst(commandtarget.CommandTarget):
 
     def addDebugSect(self, addedSect):
         if not self.debugSectsContains(argList[1]):
-            self.debugSects.append(argList[1])
-            self.debugPrint("debugsects add: %s" % (argList[1]))
+            self.debugSects.append(addedSect)
+            self.debugPrint("debugsects add: %s" % (addedSect))
         else:
-            self.debugPrint("debugsects add: %s already present" % (argList[1]))
+            self.debugPrint("debugsects add: %s already present" % (addedSect))
+
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
