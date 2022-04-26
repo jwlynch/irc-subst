@@ -543,6 +543,12 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             self.debugPrint("debugsects add: %s already present" % (addedSect))
 
+    def rmDebugSects(self, removedSect):
+        if self.debugSectsContains(removedSect):
+            self.debugSects.remove(removedSect)
+            self.debugPrint("debugsects rm: %s" % (removedSect))
+        else:
+            self.debugPrint("debugsects rm: %s not present" % (removedSect))
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
@@ -553,11 +559,7 @@ class irc_subst(commandtarget.CommandTarget):
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
             elif argList[0] == "rm":
-                if self.debugSectsContains(argList[1]):
-                    self.debugSects.remove(argList[1])
-                    self.debugPrint("debugsects rm: %s" % (argList[1]))
-                else:
-                    self.debugPrint("debugsects rm: %s not present" % (argList[1]))
+                self.rmDebugSect(argList[1])
             else:
                 self.debugPrint("debugsects: unrecognized subcommand '%s'" % (argList[0]))
         else:
