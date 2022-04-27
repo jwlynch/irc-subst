@@ -62,8 +62,8 @@ def detailList(l):
 
     reslst = []
 
-    for i in range(len(l)):
-        reslst.append("[%s]: %s" % (str(i), str(l[i])))
+    for i, item in enumerate(l):
+        reslst.append(f"[{i}]: {item}")
 
     if len(reslst) != 0:
         resStr = " ".join(reslst)
