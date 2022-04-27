@@ -537,7 +537,7 @@ class irc_subst(commandtarget.CommandTarget):
         return result
 
     def addDebugSect(self, addedSect):
-        if not self.debugSectsContains(argList[1]):
+        if not self.debugSectsContains(addedSect):
             self.debugSects.append(addedSect)
             self.debugPrint("debugsects add: %s" % (addedSect))
         else:
