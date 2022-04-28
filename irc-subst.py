@@ -667,8 +667,8 @@ class irc_subst(commandtarget.CommandTarget):
     # looks up those keys
     # substitutes the values for the keys
     #
-    # also parses the (( ... )) stuff
-    # -note- there's no current reason to allow a (( ... ))
+    # also parses the [[ ... ]] stuff
+    # -note- there's no current reason to allow a [[ ... ]]
     # to span lines
 
     def outLine(self, inString):
