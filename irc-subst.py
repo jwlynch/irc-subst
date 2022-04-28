@@ -916,6 +916,26 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    # refactored from inputHook(), this is called if the
+    # input line is found to be backslashed.
+
+    def process_backslashed_line(self, word_eol):
+        backslashed_line = word_eol[0]
+        hexchat.command("say " + backslashed_line[1:])
+        outLineResult = self.outLine("say " + backslashed_line[1:])
+
+        # implement noout in debugsects by testing for None
+        if outLineResult[1] is None:
+            # means we're testing:
+            # noout is in debugSects, so mute user output
+            # and don't do anything else
+
+            pass
+
+        result = hexchat.EAT_ALL
+
+        return result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
@@ -955,19 +975,7 @@ class irc_subst(commandtarget.CommandTarget):
                     self.debugPrint("len(word) > 0")
 
                 if word_eol[0].startswith("\\"): # if so, the irc line is backslashed
-                    backslashed_line = word_eol[0]
-                    hexchat.command("say " + backslashed_line[1:])
-                    outLineResult = self.outLine("say " + backslashed_line[1:])
-
-                    # implement noout in debugsects by testing for None
-                    if outLineResult[1] is None:
-                        # means we're testing:
-                        # noout is in debugSects, so mute user output
-                        # and don't do anything else
-
-                        pass
-
-                    result = hexchat.EAT_ALL
+                    result = self.process_backslashed_line(word_eol)
 
                 elif word[0].startswith(self.cmdPrefix):
                     if debug_input: self.debugPrint("first word starts with cmdPrefix")
