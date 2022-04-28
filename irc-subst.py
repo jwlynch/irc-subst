@@ -936,6 +936,35 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    # refactored from inputHook(), this is called if the input
+    # is found to be a command; process that command
+
+    def process_command(self, word):
+        debug_input = self.debugSectsContains("input")
+
+        if debug_input: self.debugPrint("first word starts with cmdPrefix")
+
+        result = hexchat.EAT_ALL
+
+        cmd = word[0][1:]
+        args = word[1:]
+
+        if debug_input:
+            self.debugPrint(f"cmd is {cmd}")
+            self.debugPrint(f"args are {args}")
+
+        cmdResult = self.doCommandStr(cmd, args, None)
+
+        if cmdResult == 1:
+            print(f"command '{cmd}' not found")
+
+        else:
+            # eat the command the user typed if found;
+            # if not, let it get sent like any other input
+            result = hexchat.EAT_ALL
+
+            return result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
@@ -978,35 +1007,7 @@ class irc_subst(commandtarget.CommandTarget):
                     result = self.process_backslashed_line(word_eol)
 
                 elif word[0].startswith(self.cmdPrefix):
-                    if debug_input: self.debugPrint("first word starts with cmdPrefix")
-
-                    result = hexchat.EAT_ALL
-
-                    cmd = word[0][1:]
-                    args = word[1:]
-
-                    if debug_input:
-                        self.debugPrint(f"cmd is {cmd}")
-                        self.debugPrint(f"args are {args}")
-
-                    cmdResult = self.doCommandStr(cmd, args, None)
-
-                    if cmdResult == 1:
-                        print(f"command '{cmd}' not found")
-
-                    else:
-                        # do normal processing of hexchat user's input line
-                        if outLineResult[0]: # if True, outLine -did- alter the line
-                            hexchat.command(outLineResult[1])
-
-                            result = hexchat.EAT_ALL
-                        else:
-                            pass
-
-                            # in this case, self.outLine() did not
-                            # alter the line, so we just give it to
-                            # the system, and we need not do anything
-                            # for that to happen.
+                    return self.process_command(word)
 
             self.sent = False
 
