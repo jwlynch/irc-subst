@@ -986,11 +986,11 @@ class irc_subst(commandtarget.CommandTarget):
 
             self.debugPrint("print the word array:")
 
-            self.debugPrint("word's type is " + str(type(word)))
-            self.debugPrint("repr(word) is " + repr(word))
+            self.debugPrint(f"word's type is {type(word)}")
+            self.debugPrint(f"repr(word) is {repr(word)}")
 
             if word is not None:
-                self.debugPrint("word in detail is: " + detailList(word))
+                self.debugPrint(f"word in detail is: {detailList(word)}")
             else:
                 self.debugPrint("word is None")
 
