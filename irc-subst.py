@@ -1006,6 +1006,9 @@ class irc_subst(commandtarget.CommandTarget):
                 if word_eol[0].startswith("\\"):
                     # if so, the irc line is backslashed
 
+                    if debug_input:
+                        self.debugPrint(f"first word (should start '\\') is {word[0]}")
+
                     result = self.process_backslashed_line(word_eol)
 
                 elif word[0].startswith(self.cmdPrefix):
