@@ -1003,7 +1003,9 @@ class irc_subst(commandtarget.CommandTarget):
                 if debug_input:
                     self.debugPrint("len(word) > 0")
 
-                if word_eol[0].startswith("\\"): # if so, the irc line is backslashed
+                if word_eol[0].startswith("\\"):
+                    # if so, the irc line is backslashed
+
                     result = self.process_backslashed_line(word_eol)
 
                 elif word[0].startswith(self.cmdPrefix):
