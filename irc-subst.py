@@ -1012,7 +1012,7 @@ class irc_subst(commandtarget.CommandTarget):
                     result = self.process_backslashed_line(word_eol)
 
                 elif word[0].startswith(self.cmdPrefix):
-                    return self.process_command(word)
+                    result = self.process_command(word)
 
             self.sent = False
 
