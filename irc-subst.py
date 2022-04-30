@@ -1273,9 +1273,6 @@ class irc_subst(commandtarget.CommandTarget):
 # make an object of the class which contains all of the above funcs as methods
 irc_subst_obj = irc_subst(pathname)
 
-# maybe add some debug sects here
-irc_subst_obj.addDebugSect('input')
-
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
 
