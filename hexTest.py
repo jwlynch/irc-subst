@@ -57,6 +57,6 @@ def detailList(l):
     return resStr
 
 def testHex(word, word_eol, userdata):
-    print(f"word in detail is: {detailList(word)}")
+    hexchat.prnt(f"word list in detail is: {detailList(word)}")
 
 hexchat.hook_command('', testHex)
