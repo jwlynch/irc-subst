@@ -556,6 +556,7 @@ class irc_subst(commandtarget.CommandTarget):
         result = 0
 
         if len(argList) == 0:
+            # no args, so -list- current debug sections
             hexchat.prnt(f"debug sections: {self.debugSects}")
         elif len(argList) == 2:
             if argList[0] == "add":
