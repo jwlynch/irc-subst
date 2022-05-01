@@ -284,8 +284,10 @@ class irc_subst(commandtarget.CommandTarget):
         # put the channel list entry for it in the object so I can get at it
         self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
 
-    def debugPrint(self, *args, **kwargs):
-        self.debug_tab.context.prnt(*args, **kwargs)
+    def debugPrint(self, printThis):
+        printThis = repr(printThis)
+
+        self.debug_tab.context.prnt(printThis)
 
     def doRemove(self, cmdString, argList, kwargs):
         result = 0 # no error
