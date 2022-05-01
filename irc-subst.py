@@ -232,7 +232,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.sqla_factoids_table = None
 
         self.doReload(self.scriptPath)
-        self.sent = False
+        #self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
@@ -994,10 +994,10 @@ class irc_subst(commandtarget.CommandTarget):
             else:
                 self.debugPrint("word is None")
 
-        if not self.sent:
-            if debug_input: self.debugPrint("input: self.sent is False; set it True")
+        #if not self.sent:
+        if debug_input: self.debugPrint("input: self.sent is False; set it True")
 
-            self.sent = True
+        #self.sent = True
 
             if len(word) > 0:
                 if debug_input:
@@ -1014,7 +1014,7 @@ class irc_subst(commandtarget.CommandTarget):
                 elif word[0].startswith(self.cmdPrefix):
                     result = self.process_command(word)
 
-            self.sent = False
+        #self.sent = False
 
         return result
 
