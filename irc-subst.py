@@ -541,22 +541,22 @@ class irc_subst(commandtarget.CommandTarget):
     def addDebugSect(self, addedSect):
         if not self.debugSectsContains(addedSect):
             self.debugSects.append(addedSect)
-            self.debugPrint("debugsects add: %s" % (addedSect))
+            self.debugPrint(f"debugsects add: {addedSect}")
         else:
-            self.debugPrint("debugsects add: %s already present" % (addedSect))
+            self.debugPrint(f"debugsects add: {addedSect} already present")
 
     def rmDebugSects(self, removedSect):
         if self.debugSectsContains(removedSect):
             self.debugSects.remove(removedSect)
-            self.debugPrint("debugsects rm: %s" % (removedSect))
+            self.debugPrint(f"debugsects rm: {removedSect}")
         else:
-            self.debugPrint("debugsects rm: %s not present" % (removedSect))
+            self.debugPrint(f"debugsects rm: {removedSect} not present")
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
-            self.debugPrint("debug sections: " + repr(self.debugSects))
+            self.debugPrint(f"debug sections: {self.debugSects}")
         elif len(argList) == 2:
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
@@ -657,7 +657,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("stack empty")
         else:
             for index, item in enumerate(theList):
-                self.debugPrint("%d: %s" % (index, item))
+                self.debugPrint(f"{index}: {item}")
 
     # takes
     #   the string to be sent (which could be altereed inside the func)
