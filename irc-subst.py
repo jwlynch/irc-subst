@@ -541,31 +541,31 @@ class irc_subst(commandtarget.CommandTarget):
     def addDebugSect(self, addedSect):
         if not self.debugSectsContains(addedSect):
             self.debugSects.append(addedSect)
-            self.debugPrint(f"debugsects add: {addedSect}")
+            hexchat.prnt(f"debugsects add: {addedSect}")
         else:
-            self.debugPrint(f"debugsects add: {addedSect} already present")
+            hexchat.prnt(f"debugsects add: {addedSect} already present")
 
     def rmDebugSect(self, removedSect):
         if self.debugSectsContains(removedSect):
             self.debugSects.remove(removedSect)
-            self.debugPrint(f"debugsects rm: {removedSect}")
+            hexchat.prnt(f"debugsects rm: {removedSect}")
         else:
-            self.debugPrint(f"debugsects rm: {removedSect} not present")
+            hexchat.prnt(f"debugsects rm: {removedSect} not present")
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
-            self.debugPrint(f"debug sections: {self.debugSects}")
+            hexchat.prnt(f"debug sections: {self.debugSects}")
         elif len(argList) == 2:
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
             elif argList[0] == "rm":
                 self.rmDebugSect(argList[1])
             else:
-                self.debugPrint("debugsects: unrecognized subcommand '%s'" % (argList[0]))
+                hexchat.prnt("debugsects: unrecognized subcommand '%s'" % (argList[0]))
         else:
-            self.debugPrint("debug sections: wrong number of args")
+            hexchat.prnt("debug sections: wrong number of args")
 
         return result
 
