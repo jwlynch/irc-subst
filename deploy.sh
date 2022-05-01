@@ -1,6 +1,6 @@
 deploy_dir="/home/jim/.config/hexchat/addons"
 
-rm -r $deploy_dir/utils
+rm -rf $deploy_dir/utils
 
 cp -a utils $deploy_dir/
 
