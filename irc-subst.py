@@ -847,6 +847,9 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             outStrParen = "".join(resultList)
 
+        if debug_outline:
+            self.debugPrint("Exit outLine")
+
         if debug_noOut:
             result = [False, None] # debugging: MUTE output
         else:
