@@ -545,7 +545,7 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             self.debugPrint(f"debugsects add: {addedSect} already present")
 
-    def rmDebugSects(self, removedSect):
+    def rmDebugSect(self, removedSect):
         if self.debugSectsContains(removedSect):
             self.debugSects.remove(removedSect)
             self.debugPrint(f"debugsects rm: {removedSect}")
