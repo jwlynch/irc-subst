@@ -971,6 +971,20 @@ class irc_subst(commandtarget.CommandTarget):
 
             return result
 
+    def process_normal_line(self, line):
+        result = hexchat.EAT_NONE
+
+        outLineResult = self.outLine(f"say {line}")
+
+        if outLineResult[0]:
+            # outLine() altered the line, so use
+            # the one in outLineResult[1]
+
+            result = hexchat.EAT_ALL
+            hexchat.command(outLineResult[1])
+
+        return result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
@@ -1020,6 +1034,8 @@ class irc_subst(commandtarget.CommandTarget):
             elif word[0].startswith(self.cmdPrefix):
                 result = self.process_command(word)
 
+            else: # not a command, not backslashed, so normal line
+                result = self.process_normal_line(word_eol[0])
 
         #self.sent = False
 
