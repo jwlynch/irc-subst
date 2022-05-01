@@ -1002,20 +1002,21 @@ class irc_subst(commandtarget.CommandTarget):
 
         #self.sent = True
 
-            if len(word) > 0:
+        if len(word) > 0:
+            if debug_input:
+                self.debugPrint("len(word) > 0")
+
+            if word_eol[0].startswith("\\"):
+                # if so, the irc line is backslashed
+
                 if debug_input:
-                    self.debugPrint("len(word) > 0")
+                    self.debugPrint(f"first word (should start '\\') is {word[0]}")
 
-                if word_eol[0].startswith("\\"):
-                    # if so, the irc line is backslashed
+                result = self.process_backslashed_line(word_eol)
 
-                    if debug_input:
-                        self.debugPrint(f"first word (should start '\\') is {word[0]}")
+            elif word[0].startswith(self.cmdPrefix):
+                result = self.process_command(word)
 
-                    result = self.process_backslashed_line(word_eol)
-
-                elif word[0].startswith(self.cmdPrefix):
-                    result = self.process_command(word)
 
         #self.sent = False
 
