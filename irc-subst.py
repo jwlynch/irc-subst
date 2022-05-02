@@ -52,13 +52,13 @@ from objects import nextObjectID
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
-    # self.debugPrint("testing detailList:")
+    # hexchat.prnt("testing detailList:")
     # test0 = []
     # test1 = ["one"]
     # test2 = ["one", "two"]
-    # self.debugPrint(f"empty: {test0}")
-    # self.debugPrint(f"1 item: {test1}")
-    # self.debugPrint(f"2 items: {test2}")
+    # hexchat.prnt(f"empty: {test0}")
+    # hexchat.prnt(f"1 item: {test1}")
+    # hexchat.prnt(f"2 items: {test2}")
 
     reslst = []
 
@@ -574,7 +574,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.debugPrint("hi")
 
     def doLSDebugSects(self, cmdString, argList, kwargs):
-        self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
+        hexchat.prnt("possible debug sections: " + repr(self.allDebugSects))
 
         return 0
 
@@ -717,7 +717,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                 # if nothing is on macro_stack, this is an error
                 if len(macro_stack) == 0:
-                    self.debugPrint("Syntax error: ]] without [[\n")
+                    hexchat.prnt("Syntax error: ]] without [[\n")
                     linelistparen = []
                 else:
                     # parameter of macro call (incl. name of macro)
@@ -842,7 +842,7 @@ class irc_subst(commandtarget.CommandTarget):
         # or it's not, meaning there are missing ']]'s
 
         if len(macro_stack) != 0:
-            self.debugPrint("Syntax error: [[ without ]]\n")
+            hexchat.prnt("Syntax error: [[ without ]]\n")
             outStrParen = ""
         else:
             outStrParen = "".join(resultList)
