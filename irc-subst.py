@@ -1016,6 +1016,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         #if not self.sent:
         if debug_input: self.debugPrint("input: self.sent is False; set it True")
+        # note, there's no more self.sent
 
         #self.sent = True
 
