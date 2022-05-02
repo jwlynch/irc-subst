@@ -661,7 +661,7 @@ class irc_subst(commandtarget.CommandTarget):
                 self.debugPrint(f"{index}: {item}")
 
     # takes
-    #   the string to be sent (which could be altereed inside the func)
+    #   the string to be sent (which could be altered inside the func)
     # returns a list,
     #   first item is True if the string is altered, False otherwise
     #   second item is the string
