@@ -594,6 +594,7 @@ class irc_subst(commandtarget.CommandTarget):
     def doCommandStr(self, cmdString, *args, **kwargs):
         result = None
 
+        debugCmd = self.debugSectsContains("cmd")
 
         argList = args[0]
 
