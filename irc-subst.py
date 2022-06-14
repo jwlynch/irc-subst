@@ -1002,7 +1002,7 @@ class irc_subst(commandtarget.CommandTarget):
         # default return value
         result = hexchat.EAT_NONE
 
-        # are we debugging input and inputHook?
+        # are we debugging input and inputHook? commands?
         debug_input = self.debugSectsContains("input")
 
         # some opening debug info
