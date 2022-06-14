@@ -1004,6 +1004,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         # are we debugging input and inputHook? commands?
         debug_input = self.debugSectsContains("input")
+        debugCmd = self.debugSectsContains("cmd")
 
         # some opening debug info
         if debug_input:
