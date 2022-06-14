@@ -1038,6 +1038,10 @@ class irc_subst(commandtarget.CommandTarget):
                 result = self.process_backslashed_line(word_eol)
 
             elif word[0].startswith(self.cmdPrefix):
+
+                if debugCmd:
+                    print("cmd prefix present, go process command")
+
                 result = self.process_command(word)
 
             else: # not a command, not backslashed, so normal line
