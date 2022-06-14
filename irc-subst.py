@@ -950,6 +950,7 @@ class irc_subst(commandtarget.CommandTarget):
     # is found to be a command; process that command
 
     def process_command(self, word):
+        debugCmd = self.debugSectsContains("cmd")
         debug_input = self.debugSectsContains("input")
 
         if debug_input: self.debugPrint("first word starts with cmdPrefix")
