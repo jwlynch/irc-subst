@@ -168,6 +168,8 @@ class irc_subst(commandtarget.CommandTarget):
             # build the sqlalchemy connect string
             k = self.dbSpecs.keys()
 
+            # sample conn str: postgresql://scott:tiger@localhost/test?application_name=myapp
+
             s = "postgresql://"
             if 'user' in k:
                 s += self.dbSpecs['user']
@@ -183,6 +185,11 @@ class irc_subst(commandtarget.CommandTarget):
                     s += ':' + self.dbSpecs['port']
 
             s += '/' + self.dbSpecs['dbname']
+
+            # put app name in connect string, if it appears in the config
+            if 'appname' in k:
+                s += f"?application_name={self.dbSpecs['appname']}"
+
             self.sqlalchemy_conn_str = s
 
             self.sqla_eng = create_engine(
