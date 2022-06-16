@@ -1035,6 +1035,7 @@ class irc_subst(commandtarget.CommandTarget):
         if len(word) > 0:
             if debug_input:
                 self.debugPrint("len(word) > 0")
+                self.debugPrint(f"word_eol[0] is {word_eol[0]}")
 
             if word_eol[0].startswith("\\"):
                 # if so, the irc line is backslashed
@@ -1046,13 +1047,17 @@ class irc_subst(commandtarget.CommandTarget):
 
             elif word[0].startswith(self.cmdPrefix):
 
-                if debugCmd:
+                if debugCmd or debug_input:
                     print("cmd prefix present, go process command")
 
                 result = self.process_command(word)
 
             else: # not a command, not backslashed, so normal line
                 result = self.process_normal_line(word_eol[0])
+
+        else:
+            if debug_input:
+                self.debugPrint("word is an empty list")
 
         #self.sent = False
 
