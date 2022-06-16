@@ -981,7 +981,7 @@ class irc_subst(commandtarget.CommandTarget):
             # if not, let it get sent like any other input
             result = hexchat.EAT_ALL
 
-            return result
+        return result
 
     def process_normal_line(self, line):
         result = hexchat.EAT_NONE
