@@ -230,6 +230,11 @@ class irc_subst(commandtarget.CommandTarget):
                 self.debugPrint("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
 
     def __init__(self, scriptPath):
+        # the debug tab name, which will show up in the client
+        self.debugtab_nick = "DebugTab" # TODO: put this in config file
+
+        self.makeDebugTab()
+
         self.scriptPath = scriptPath
 
         # sqlalchemy
@@ -248,11 +253,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.allDebugSects = []
 
         self.allDebugSects = ["privmsgbasic", "privmsgsql", "notice", "noticetests", "join", "part", "partreas"]
-
-        # the debug tab name, which will show up in the client
-        self.debugtab_nick = "DebugTab" # TODO: put this in config file
-
-        self.makeDebugTab()
 
         self.command_dict = {}
 
