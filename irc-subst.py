@@ -218,16 +218,16 @@ class irc_subst(commandtarget.CommandTarget):
 
         # print the config file (if desired)
         if self.printConfigP:
-            print("config file: ")
+            self.debugPrint("config file: ")
 
             for sect in parser.sections():
-                print("section %s:" % sect)
+                self.debugPrint("section %s:" % sect)
                 for opt in parser.options(sect):
                     val = parser.get(sect, opt)
-                    print("  %s = %s" % (opt, val))
+                    self.debugPrint("  %s = %s" % (opt, val))
 
             if self.dbOK:
-                print("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
+                self.debugPrint("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
 
     def __init__(self, scriptPath):
         self.scriptPath = scriptPath
@@ -309,10 +309,10 @@ class irc_subst(commandtarget.CommandTarget):
         reason = None
 
         if len(argList) == 0:
-            print("remove usage:")
-            print("remove <nick>")
-            print("remove <nick> \"reason\" # must quote reason in 2-arg form")
-            print("remove <channel> <nick> <reason> # need not quote reason in 3-arg form")
+            self.debugPrint("remove usage:")
+            self.debugPrint("remove <nick>")
+            self.debugPrint("remove <nick> \"reason\" # must quote reason in 2-arg form")
+            self.debugPrint("remove <channel> <nick> <reason> # need not quote reason in 3-arg form")
         else: # not zero args
             if len(argList) >= 3:
                 reason = " ".join(argList[2:])
@@ -334,7 +334,7 @@ class irc_subst(commandtarget.CommandTarget):
                 removeCommand += " :" + reason
 
             if debugRm:
-                print("debugRm: " + removeCommand)
+                self.debugPrint("debugRm: " + removeCommand)
             else:
                 hexchat.command(removeCommand)
 
@@ -343,7 +343,7 @@ class irc_subst(commandtarget.CommandTarget):
     # make list of dirs, going back to its ancestor
     def doAncestorDirs(self, cmdString, argList, kwargs):
         if len(argList) != 1:
-            print("takes one arg, the pathname")
+            self.debugPrint("takes one arg, the pathname")
         else:
             pathName = argList[0]
             pathList = list(pathlib.Path(pathName).parents)
@@ -354,19 +354,19 @@ class irc_subst(commandtarget.CommandTarget):
             for path in pathList:
                 outStr += str(path) + " "
 
-            print(outStr)
+            self.debugPrint(outStr)
 
     def doShowMacro(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
             # print usage
-            print("showmacro usage:")
-            print("showmacro <key>")
+            self.debugPrint("showmacro usage:")
+            self.debugPrint("showmacro <key>")
 
         elif len(argList) != 1:
             # wrong nbr args
-            print("showmacro: wrong number of arguments")
+            self.debugPrint("showmacro: wrong number of arguments")
         else:
             # correct number of args
 
@@ -375,7 +375,7 @@ class irc_subst(commandtarget.CommandTarget):
                 key = argList[0]
 
                 if not self.macroname_key_re.match(key):
-                    print("macro show: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint("macro show: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
                     bad = True
 
                 if not bad:
@@ -385,12 +385,12 @@ class irc_subst(commandtarget.CommandTarget):
                         bad = False
                     else:
                         bad = True
-                        print("showmacro: no such macro '%s'" % key)
+                        self.debugPrint("showmacro: no such macro '%s'" % key)
 
                     if not bad:
-                        print("showmacro: key %s has value \"%s\"" % (key, lookupTable[key]))
+                        self.debugPrint("showmacro: key %s has value \"%s\"" % (key, lookupTable[key]))
             else:
-                print("showmacro: no db")
+                self.debugPrint("showmacro: no db")
 
         return result
 
@@ -403,12 +403,12 @@ class irc_subst(commandtarget.CommandTarget):
             value = ""
 
             if len(argList) == 0:
-                print("addmacro usage:")
-                print("addmacro <key> <value>")
+                self.debugPrint("addmacro usage:")
+                self.debugPrint("addmacro <key> <value>")
             elif len(argList) < 2:
-                print("macro add: too few args")
+                self.debugPrint("macro add: too few args")
             elif len(argList) > 2:
-                print("macro add: too many args")
+                self.debugPrint("macro add: too many args")
             else:
                 # correct number of args
                 bad = False
@@ -417,14 +417,14 @@ class irc_subst(commandtarget.CommandTarget):
 
             if not bad:
                 if not self.macroname_key_re.match(key):
-                    print("macro add: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint("macro add: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
                     bad = True
 
             if not bad:
                 lookupTable = self.lookupKeyList([key])
                 if lookupTable:
                     # key is already in db
-                    print("key %s is already in db" % (key))
+                    self.debugPrint("key %s is already in db" % (key))
                     bad = True
 
             if not bad:
@@ -436,9 +436,9 @@ class irc_subst(commandtarget.CommandTarget):
                             {'key': key, 'value': value}
                         )
 
-                print("macro add: key \"%s\", value \"%s\"" % (key, value))
+                self.debugPrint("macro add: key \"%s\", value \"%s\"" % (key, value))
         else:
-            print("no db")
+            self.debugPrint("no db")
 
         return result
 
@@ -451,12 +451,12 @@ class irc_subst(commandtarget.CommandTarget):
             value = ""
 
             if len(argList) == 0:
-                print("rmmacro usage:")
-                print("rmmacro <key>")
+                self.debugPrint("rmmacro usage:")
+                self.debugPrint("rmmacro <key>")
             elif len(argList) < 1:
-                print("macro remove: too few args")
+                self.debugPrint("macro remove: too few args")
             elif len(argList) > 1:
-                print("macro remove: too many args")
+                self.debugPrint("macro remove: too many args")
             else:
                 # correct number of args
                 bad = False
@@ -464,19 +464,19 @@ class irc_subst(commandtarget.CommandTarget):
 
             if not bad:
                 if not self.macroname_key_re.match(key):
-                    print("macro remove: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint("macro remove: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
                     bad = True
 
             if not bad:
                 lookupTable = self.lookupKeyList([key])
                 if not lookupTable:
                     # key is not in db
-                    print("macro remove: key %s is not in db" % (key))
+                    self.debugPrint("macro remove: key %s is not in db" % (key))
                     bad = True
 
             if not bad:
                 # do delete query here
-                print("macro remove: key %s" % (key))
+                self.debugPrint("macro remove: key %s" % (key))
 
                 with self.sqla_eng.begin() as conn:
                     conn.execute\
@@ -491,7 +491,7 @@ class irc_subst(commandtarget.CommandTarget):
                                 )
                         )
         else:
-            print("no db")
+            self.debugPrint("no db")
 
         return result
 
@@ -548,32 +548,32 @@ class irc_subst(commandtarget.CommandTarget):
     def addDebugSect(self, addedSect):
         if not self.debugSectsContains(addedSect):
             self.debugSects.append(addedSect)
-            hexchat.prnt(f"debugsects add: {addedSect}")
+            self.debugPrint(f"debugsects add: {addedSect}")
         else:
-            hexchat.prnt(f"debugsects add: {addedSect} already present")
+            self.debugPrint(f"debugsects add: {addedSect} already present")
 
     def rmDebugSect(self, removedSect):
         if self.debugSectsContains(removedSect):
             self.debugSects.remove(removedSect)
-            hexchat.prnt(f"debugsects rm: {removedSect}")
+            self.debugPrint(f"debugsects rm: {removedSect}")
         else:
-            hexchat.prnt(f"debugsects rm: {removedSect} not present")
+            self.debugPrint(f"debugsects rm: {removedSect} not present")
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
             # no args, so -list- current debug sections
-            hexchat.prnt(f"debug sections: {self.debugSects}")
+            self.debugPrint(f"debug sections: {self.debugSects}")
         elif len(argList) == 2:
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
             elif argList[0] == "rm":
                 self.rmDebugSect(argList[1])
             else:
-                hexchat.prnt("debugsects: unrecognized subcommand '%s'" % (argList[0]))
+                self.debugPrint("debugsects: unrecognized subcommand '%s'" % (argList[0]))
         else:
-            hexchat.prnt("debug sections: wrong number of args")
+            self.debugPrint("debug sections: wrong number of args")
 
         return result
 
@@ -581,14 +581,14 @@ class irc_subst(commandtarget.CommandTarget):
         self.debugPrint("hi")
 
     def doLSDebugSects(self, cmdString, argList, kwargs):
-        hexchat.prnt("possible debug sections: " + repr(self.allDebugSects))
+        self.debugPrint("possible debug sections: " + repr(self.allDebugSects))
 
         return 0
 
     def doLsCmds(self, cmdString, argList, kwargs):
         cmdList = sorted(self.command_dict)
 
-        print(repr(cmdList))
+        self.debugPrint(repr(cmdList))
 
         return 0
 
@@ -612,7 +612,7 @@ class irc_subst(commandtarget.CommandTarget):
         #   #  for running the command)
 
         if cmdString == self.cmdReload:
-            print("reloading config file...")
+            self.debugPrint("reloading config file...")
             self.doReload(self.scriptPath)
         elif cmdString in self.command_dict:
             result = self.command_dict[cmdString](cmdString, argList, kwargs)
@@ -794,7 +794,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                             modified = True
                         else: # wrong nbr of params
-                            print("wrong number of macro parameters\n")
+                            self.debugPrint("wrong number of macro parameters\n")
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
@@ -894,7 +894,7 @@ class irc_subst(commandtarget.CommandTarget):
                     if self.macroname_key_re.match(test_str):
                         macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
                 else:
-                    print \
+                    self.debugPrint \
                     (
                         "the macro value ('%s') at key '%s' doesn't look like a macro"
                       %
@@ -911,7 +911,7 @@ class irc_subst(commandtarget.CommandTarget):
 
             lineList = comm_stdout.splitlines()
             for line in lineList:
-                print(line.decode())
+                self.debugPrint(line.decode())
 
             result = 0 # success
         else:
@@ -1048,7 +1048,7 @@ class irc_subst(commandtarget.CommandTarget):
             elif word[0].startswith(self.cmdPrefix):
 
                 if debugCmd or debug_input:
-                    print("cmd prefix present, go process command")
+                    self.debugPrint("cmd prefix present, go process command")
 
                 result = self.process_command(word)
 
@@ -1189,7 +1189,7 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("word array length: " + str(len(w)))
 
         if debugNoticeP:
-            print("word_eol[0] is " + word_eol[0])
+            self.debugPrint("word_eol[0] is " + word_eol[0])
 
         src_hostmask = w[0][1:]
 
