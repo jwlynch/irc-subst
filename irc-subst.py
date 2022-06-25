@@ -608,6 +608,10 @@ class irc_subst(commandtarget.CommandTarget):
 
         argList = args[0]
 
+        if debugCmd:
+            print(f"command is {cmdString}")
+            print(f"args are {repr(argList)}")
+
         # (extract from args whatever might be needed
         #   #  for running the command)
 
@@ -615,8 +619,13 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("reloading config file...")
             self.doReload(self.scriptPath)
         elif cmdString in self.command_dict:
+            # next line calls -function- stored in command_dict
+            if debugCmd:
+                print(f"command found, run it")
             result = self.command_dict[cmdString](cmdString, argList, kwargs)
         else:
+            if debugCmd:
+                print(f"cmd is not reload, and is not found, pass buck to superclass")
             # pass buck to superclass
             result = super(irc_subst, self).doCommandStr(cmdString, args, kwargs)
 
@@ -967,7 +976,7 @@ class irc_subst(commandtarget.CommandTarget):
         cmd = word[0][1:]
         args = word[1:]
 
-        if debug_input:
+        if debug_input or debugCmd:
             self.debugPrint(f"cmd is {cmd}")
             self.debugPrint(f"args are {args}")
 
