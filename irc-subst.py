@@ -1021,6 +1021,7 @@ class irc_subst(commandtarget.CommandTarget):
         # are we debugging input and inputHook? commands?
         debug_input = self.debugSectsContains("input")
         debugCmd = self.debugSectsContains("cmd")
+        debug_initinput = self.debugSectsContains("initinput")
 
         # some opening debug info
         if debug_input:
@@ -1029,12 +1030,14 @@ class irc_subst(commandtarget.CommandTarget):
             self.debugPrint("print the word array:")
 
             self.debugPrint(f"word's type is {type(word)}")
-            self.debugPrint(f"repr(word) is {repr(word)}")
 
             if word is not None:
                 self.debugPrint(f"word in detail is: {detailList(word)}")
             else:
                 self.debugPrint("word is None")
+
+        if debug_initinput:
+            print(repr(word))
 
         #if not self.sent:
         # note, there's no more self.sent
@@ -1049,19 +1052,28 @@ class irc_subst(commandtarget.CommandTarget):
             if word_eol[0].startswith("\\"):
                 # if so, the irc line is backslashed
 
-                if debug_input:
+                if debug_input or debug_initinput:
                     self.debugPrint(f"first word (should start '\\') is {word[0]}")
+
+                if debug_initinput:
+                    self.debugPrint(f"repr(word): {repr(word)}")
 
                 result = self.process_backslashed_line(word_eol)
 
             elif word[0].startswith(self.cmdPrefix):
 
-                if debugCmd or debug_input:
+                if debugCmd or debug_input or debug_initinput:
                     self.debugPrint("cmd prefix present, go process command")
+
+                if debug_initinput:
+                    self.debugPrint(f"word: {detailList(word)}")
 
                 result = self.process_command(word)
 
             else: # not a command, not backslashed, so normal line
+                if debug_initinput:
+                    self.debugPrint(f"normal line, {detailList(word)}")
+
                 result = self.process_normal_line(word_eol[0])
 
         else:
