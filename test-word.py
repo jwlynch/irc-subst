@@ -29,7 +29,8 @@ def detailList(l):
     return resStr
 
 def inputHook(word, word_eol, userdata):
-    pass
+    hexchat.prnt(f"word list in detail: {detailList(word)}")
+    hexchat.prnt(f"the line itself, word_eol[0]: {word_eol[0]}")
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', inputHook)
