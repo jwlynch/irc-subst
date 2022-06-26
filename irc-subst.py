@@ -983,6 +983,7 @@ class irc_subst(commandtarget.CommandTarget):
         cmdResult = self.doCommandStr(cmd, args, None)
 
         if cmdResult == 1:
+            result = hexchat.EAT_NONE
             print(f"command '{cmd}' not found")
 
         else:
