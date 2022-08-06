@@ -811,7 +811,7 @@ class irc_subst(commandtarget.CommandTarget):
                         # turn the text of the call into a string
 
                         if len(resultList) > 0:
-                            paramsSpaceSeparator = ""
+                            paramsSpaceSeparator = " "
                         else:
                             paramsSpaceSeparator = ""
 
