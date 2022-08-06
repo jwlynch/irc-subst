@@ -748,7 +748,7 @@ class irc_subst(commandtarget.CommandTarget):
 
                     if debug_outline:
                         self.debugPrint("resultList just after ]] seen:")
-                        self.debugPrint(resultList)
+                        self.debugPrint(repr(resultList))
 
                     # invoke the macro, to produce a string, then replace
                     # resultList with [thatString] and set the var
@@ -820,7 +820,7 @@ class irc_subst(commandtarget.CommandTarget):
                         modified = True
 
                         if debug_outline:
-                            self.debugPrint("converted macro call: %s" % (repr(resultList)))
+                            self.debugPrint(f"converted macro call: {repr(resultList)}")
 
                     tempList = resultList
                     resultList = macro_stack.pop(-1)
