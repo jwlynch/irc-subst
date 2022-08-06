@@ -815,7 +815,7 @@ class irc_subst(commandtarget.CommandTarget):
                         else:
                             paramsSpaceSeparator = ""
 
-                        resultList = [ "[[" + macro_call_name + paramsSpaceSeparator + " ".join(resultList) + "]]" ]
+                        resultList = [ f"[[{macro_call_name}{paramsSpaceSeparator}{' '.join(resultList)}]]" ]
 
                         modified = True
 
