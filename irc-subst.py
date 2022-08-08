@@ -810,11 +810,6 @@ class irc_subst(commandtarget.CommandTarget):
                     else: # macro not found in lookup table
                         # turn the text of the call into a string
 
-                        if len(resultList) > 0:
-                            paramsSpaceSeparator = " "
-                        else:
-                            paramsSpaceSeparator = ""
-
                         resList = resultList[:]
                         resList.insert(0, macro_call_name)
                         resultList = [ f"[[{' '.join(resList)}]]"]
