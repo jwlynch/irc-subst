@@ -1038,7 +1038,7 @@ class irc_subst(commandtarget.CommandTarget):
                 self.debugPrint("word is None")
 
         if debug_initinput:
-            print(repr(word))
+            self.debugPrint(repr(word))
 
         #if not self.sent:
         # note, there's no more self.sent
