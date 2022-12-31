@@ -332,9 +332,9 @@ class irc_subst(commandtarget.CommandTarget):
                     reason = nick
                     channel = hexchat.get_info("channel")
 
-            removeCommand = "remove " + channel + " " + nick
+            removeCommand = f"remove {channel} {nick}"
             if reason is not None:
-                removeCommand += " :" + reason
+                removeCommand += " :{reason}"
 
             if debugRm:
                 self.debugPrint("debugRm: " + removeCommand)
