@@ -337,7 +337,7 @@ class irc_subst(commandtarget.CommandTarget):
                 removeCommand += " :{reason}"
 
             if debugRm:
-                self.debugPrint("debugRm: " + removeCommand)
+                self.debugPrint("debugRm: {removeCommand}")
             else:
                 hexchat.command(removeCommand)
 
