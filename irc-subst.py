@@ -1094,6 +1094,9 @@ class irc_subst(commandtarget.CommandTarget):
             if debug_input:
                 self.debugPrint("len(word) > 0")
                 self.debugPrint(f"word_eol[0] is {word_eol[0]}")
+            # new quoting system
+
+            quoting_result = self.process_quoting(input_line)
 
             if word_eol[0].startswith("\\"):
                 # if so, the irc line is backslashed
