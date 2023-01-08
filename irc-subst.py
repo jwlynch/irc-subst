@@ -1007,6 +1007,48 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def process_quoting(self, input_line):
+        debugQuote = self.debugSectsContains("quotes")
+
+        # result is a list of dicts, each has the char, and some attribs
+        result = []
+        self.next_ch_backslashed = False
+        in_single_quote = False
+        in_double_quote = False
+
+        for ch in input_line:
+            if debugQuote:
+                self.debugPrint(f"this char is {ch}")
+
+            if self.next_ch_backslashed:
+                # add the char, with a "quoted" attrib
+                result.append({"ch": ch, "quoted": True})
+                self.next_ch_backslashed = False
+            elif in_single_quote:
+                if ch == "'":
+                    # end of quoted string
+                    in_single_quote = False
+                else:
+                    # single quoted character, add it
+                    pass
+            elif in_double_quote:
+                if ch == '"':
+                    # end of double quote
+                    in_double_quote = False
+                else:
+                    # double quoted character, add it
+                    pass
+            elif ch == '\\':
+                self.next_ch_backslashed = True
+            elif ch == "'":
+                # single quote
+                in_single_quote = True
+            elif ch == '"':
+                # start of double quote
+                in_double_quote = True
+
+        return result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
