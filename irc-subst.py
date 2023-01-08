@@ -1093,7 +1093,8 @@ class irc_subst(commandtarget.CommandTarget):
         if len(word) > 0:
             if debug_input:
                 self.debugPrint("len(word) > 0")
-                self.debugPrint(f"word_eol[0] is {word_eol[0]}")
+                self.debugPrint(f"the input line is {input_line}")
+
             # new quoting system
 
             quoting_result = self.process_quoting(input_line)
