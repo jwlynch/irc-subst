@@ -1058,6 +1058,9 @@ class irc_subst(commandtarget.CommandTarget):
     # substituted by the values from the db
 
     def inputHook(self, word, word_eol, userdata):
+        # line from irc client
+        input_line = word_eol[0]
+
         # default return value
         result = hexchat.EAT_NONE
 
