@@ -1068,6 +1068,7 @@ class irc_subst(commandtarget.CommandTarget):
         debug_input = self.debugSectsContains("input")
         debugCmd = self.debugSectsContains("cmd")
         debug_initinput = self.debugSectsContains("initinput")
+        debugQuote = self.debugSectsContains("quotes")
 
         # some opening debug info
         if debug_input:
