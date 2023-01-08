@@ -1100,6 +1100,13 @@ class irc_subst(commandtarget.CommandTarget):
 
             quoting_result = self.process_quoting(input_line)
 
+            if debugQuote:
+                if len(quoting_result) > 0:
+                    for d in quoting_result:
+                        self.debugPrint(repr(d))
+                else:
+                    self.debugPrint("input line empty")
+
             if word_eol[0].startswith("\\"):
                 # if so, the irc line is backslashed
 
