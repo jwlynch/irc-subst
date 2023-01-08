@@ -1010,6 +1010,9 @@ class irc_subst(commandtarget.CommandTarget):
     def process_quoting(self, input_line):
         debugQuote = self.debugSectsContains("quotes")
 
+        if debugQuote:
+            self.debugPrint("enter process_quoting")
+
         # result is a list of dicts, each has the char, and some attribs
         result = []
         self.next_ch_backslashed = False
@@ -1046,6 +1049,9 @@ class irc_subst(commandtarget.CommandTarget):
             elif ch == '"':
                 # start of double quote
                 in_double_quote = True
+
+        if debugQuote:
+            self.debugPrint("exit process_quoting")
 
         return result
 
