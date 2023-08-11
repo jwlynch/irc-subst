@@ -59,7 +59,7 @@ cd sql
 
 Then, you need to create the empty database, which you can name anything you want, so we will
 assume you're calling it myircsubstdb . Remember to adjust the config file so that the dbname
-is set properly to tyhat name.
+is set properly to that name.
 
 Next, you would load the initial infrastructure, by running this command:
 
