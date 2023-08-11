@@ -32,8 +32,9 @@ In order to get this working, you need to place the main script, irc-subst.py, i
 /home/you/.config/hexchat/addons dir. Due in part to the lack of a way for a python hexchat
 script to query its location, I had to hardwire it, which is something you'll see on line 26
 of the file irc-subst.py. You will need to put the pathname to where your script is located
-in its place, in order for the script to work properly. I consider this a bug, which I will
-be trying to fix.
+in its place, in order for the script to work properly. I added a script to put the files
+into the right place for hexchat to run the script, called deploy.sh . Just run this script,
+and it will copy all files except the config file, to the right place.
 
 Also needed in that dir are: the utils dir (with the two enclosed files) as well as a
 config file, which should be called irc-subst.cfg.
