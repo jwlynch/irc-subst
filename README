@@ -81,3 +81,8 @@ LOADING THE SCRIPT FOR THE FIRST TIME
 Once you have the database created and the initial data model loaded, it's ready to run. Here's
 how:
 
+From hexchat, pull down the HexChat menu (top left of the hexchat window), and choose
+the menu item "Load Plugin or Script...", a dialog box will show up, allowing you to
+locate the irc-subst.py file in hexchat's addons directory. Once you locate and hilite
+the file, click the OK button on the lower right of the window, and that's it, the script
+will initialize itself. All done!
