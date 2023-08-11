@@ -61,6 +61,8 @@ Then, you need to create the empty database, which you can name anything you wan
 assume you're calling it myircsubstdb . Remember to adjust the config file so that the dbname
 is set properly to that name.
 
+So: createdb myircsubstdb
+
 Next, you would load the initial infrastructure, by running this command:
 
 psql myircsubstdb -f irc-subst-create.sql
