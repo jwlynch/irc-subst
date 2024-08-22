@@ -1024,8 +1024,8 @@ class irc_subst(commandtarget.CommandTarget):
                 self.debugPrint(f"this char is {ch}")
 
             if self.next_ch_backslashed:
-                # add the char, with a "escaped" attrib
-                result.append({"ch": ch, "escaped": True})
+                # add the char, with a "quoted" attrib
+                result.append({"ch": ch, "quoted": True})
                 self.next_ch_backslashed = False
             elif in_single_quote:
                 if ch == "'":
@@ -1033,14 +1033,14 @@ class irc_subst(commandtarget.CommandTarget):
                     in_single_quote = False
                 else:
                     # single quoted character, add it
-                    result.append({"ch": ch, "quoted": True})
+                    pass
             elif in_double_quote:
                 if ch == '"':
                     # end of double quote
                     in_double_quote = False
                 else:
                     # double quoted character, add it
-                    result.append({"ch": ch, "quoted": True})
+                    pass
             elif ch == '\\':
                 self.next_ch_backslashed = True
             elif ch == "'":
