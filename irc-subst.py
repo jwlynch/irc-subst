@@ -1107,6 +1107,8 @@ class irc_subst(commandtarget.CommandTarget):
             quoting_result = self.process_quoting(input_line)
 
             if debugQuote:
+                self.debugPrint("quote result type is {type(quoting_result)}")
+
                 if len(quoting_result) > 0:
                     for d in quoting_result:
                         self.debugPrint(repr(d))
