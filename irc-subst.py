@@ -1049,6 +1049,8 @@ class irc_subst(commandtarget.CommandTarget):
             elif ch == '"':
                 # start of double quote
                 in_double_quote = True
+            else:
+                result.append({"ch": ch, "plainP": True})
 
         if debugQuote:
             self.debugPrint("exit process_quoting")
