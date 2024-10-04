@@ -1043,6 +1043,7 @@ class irc_subst(commandtarget.CommandTarget):
                 if ch == '"':
                     # end of double quote
                     in_double_quote = False
+                    result.append({"quoStr": self.double_quoted_str})
                 else:
                     # double quoted character, add it
                     self.double_quoted_str += ch
