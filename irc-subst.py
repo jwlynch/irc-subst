@@ -1019,6 +1019,7 @@ class irc_subst(commandtarget.CommandTarget):
         in_single_quote = False
         in_double_quote = False
         self.single_quoted_str = ""
+        self.double_quoted_str = ""
 
         for ch in input_line:
             if debugQuote:
