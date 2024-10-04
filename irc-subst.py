@@ -1018,8 +1018,10 @@ class irc_subst(commandtarget.CommandTarget):
         self.next_ch_backslashed = False
         in_single_quote = False
         in_double_quote = False
+        in_plain_string = False
         self.single_quoted_str = ""
         self.double_quoted_str = ""
+        self.plain_str = ""
 
         for ch in input_line:
             if debugQuote:
