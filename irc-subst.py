@@ -1018,6 +1018,7 @@ class irc_subst(commandtarget.CommandTarget):
         self.next_ch_backslashed = False
         in_single_quote = False
         in_double_quote = False
+        self.single_quoted_str = ""
 
         for ch in input_line:
             if debugQuote:
@@ -1031,9 +1032,11 @@ class irc_subst(commandtarget.CommandTarget):
                 if ch == "'":
                     # end of quoted string
                     in_single_quote = False
+                    result.append({"quoStr": self.single_quoted_str})
+                    self.single_quoted_str = ""
                 else:
                     # single quoted character, add it
-                    result.append({"ch": ch, "quoted": True})
+                    self.single_quoted_str += ch
             elif in_double_quote:
                 if ch == '"':
                     # end of double quote
