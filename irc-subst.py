@@ -1045,7 +1045,7 @@ class irc_subst(commandtarget.CommandTarget):
                     in_double_quote = False
                 else:
                     # double quoted character, add it
-                    result.append({"ch": ch, "quoted": True})
+                    self.double_quoted_str += ch
             elif ch == '\\':
                 self.next_ch_backslashed = True
             elif ch == "'":
