@@ -244,7 +244,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.sqla_factoids_table = None
 
         self.doReload(self.scriptPath)
-        #self.sent = False
 
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
@@ -1100,11 +1099,6 @@ class irc_subst(commandtarget.CommandTarget):
         if debug_initinput:
             self.debugPrint(repr(word))
 
-        #if not self.sent:
-        # note, there's no more self.sent
-
-        #self.sent = True
-
         if len(word) > 0:
             if debug_input:
                 self.debugPrint("len(word) > 0")
@@ -1153,8 +1147,6 @@ class irc_subst(commandtarget.CommandTarget):
         else:
             if debug_input:
                 self.debugPrint("word is an empty list")
-
-        #self.sent = False
 
         return result
 
