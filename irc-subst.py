@@ -1015,9 +1015,11 @@ class irc_subst(commandtarget.CommandTarget):
         # result is a list of dicts, each has the char, and some attribs
         result = []
         self.next_ch_backslashed = False
-        in_single_quote = False
-        in_double_quote = False
-        in_plain_string = False
+
+        # possible values for curr_quote_type:
+        in_plain_string = 1
+        in_single_quote = 2
+        in_double_quote = 3
         self.collector_str = ""
 
         for ch in input_line:
