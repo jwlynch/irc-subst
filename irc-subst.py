@@ -1037,7 +1037,7 @@ class irc_subst(commandtarget.CommandTarget):
 
         for ch in input_line:
             if debugQuote:
-                self.debugPrint(f"this char is {ch}")
+                self.debugPrint(f"this char is {ch}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
             if self.next_ch_backslashed:
                 # add the char, with a "escaped" attrib
