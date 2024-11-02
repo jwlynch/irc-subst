@@ -1068,7 +1068,7 @@ class irc_subst(commandtarget.CommandTarget):
                 self.curr_quote_type = in_single_quote
             elif ch == '"':
                 # start of double quote
-                in_double_quote = True
+                self.curr_quote_type = in_double_quote
             else: # self.curr_quote_type == in_plain_string
                 result.append({"ch": ch, "plainP": True})
 
