@@ -1021,6 +1021,7 @@ class irc_subst(commandtarget.CommandTarget):
         in_single_quote = 2
         in_double_quote = 3
         self.collector_str = ""
+        self.curr_quote_type = 0
 
         for ch in input_line:
             if debugQuote:
