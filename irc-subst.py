@@ -1006,6 +1006,18 @@ class irc_subst(commandtarget.CommandTarget):
 
         return result
 
+    def quote_type_str(self):
+        result = ""
+
+        if self.curr_quote_type == 1:
+            result = "in_plain_string"
+        elif self.curr_quote_type == 2:
+            result = "in_single_quote"
+        elif self.curr_quote_type == 3:
+            result = "in_double_quote"
+
+        return result
+
     def process_quoting(self, input_line):
         debugQuote = self.debugSectsContains("quotes")
 
