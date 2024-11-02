@@ -1030,7 +1030,7 @@ class irc_subst(commandtarget.CommandTarget):
                 # add the char, with a "escaped" attrib
                 result.append({"ch": ch, "escaped": True})
                 self.next_ch_backslashed = False
-            elif in_single_quote:
+            elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
                     # end of quoted string
                     in_single_quote = False
@@ -1039,7 +1039,7 @@ class irc_subst(commandtarget.CommandTarget):
                 else:
                     # single quoted character, add it
                     self.collector_str += ch
-            elif in_double_quote:
+            elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     # end of double quote
                     in_double_quote = False
@@ -1052,7 +1052,7 @@ class irc_subst(commandtarget.CommandTarget):
                 self.next_ch_backslashed = True
             elif ch == "'":
                 # single quote
-                in_single_quote = True
+                self.curr_quote_type = in_single_quote
             elif ch == '"':
                 # start of double quote
                 in_double_quote = True
