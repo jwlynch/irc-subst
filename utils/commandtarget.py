@@ -1,4 +1,9 @@
 
+# the file your subclass is in, should first import like this:
+#
+# from utils.commandtarget import CommandTarget
+#
+# and then the following is the base class (with interspersed comments):
 
 class CommandTarget:
     def __init__(self):
