@@ -87,7 +87,7 @@ def split_hostmask(hostmask):
 
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
-class KeywordList(object):
+class KeywordList:
     def __init__(self, properties):
         self.string = ""
         self.properties = properties

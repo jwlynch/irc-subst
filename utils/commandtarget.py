@@ -1,6 +1,6 @@
 
 
-class CommandTarget(object):
+class CommandTarget:
     def __init__(self):
         super(CommandTarget, self).__init__()
         self._itsNextTarget = None
