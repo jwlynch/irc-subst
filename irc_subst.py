@@ -47,7 +47,7 @@ pathname = pathlib.Path(foo.__code__.co_filename).parent.__str__()
 
 sys.path.append(pathname) # so that modules that are siblings of the script can be found
 
-from utils import commandtarget
+from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 
 # return a string detailing a list (its items togeter with each index)
@@ -103,7 +103,7 @@ class KeywordList:
     def attachProp(self, prop, value):
         self.properties[prop] = value
 
-class irc_subst(commandtarget.CommandTarget):
+class irc_subst(CommandTarget):
     # reload config file
     #
     # vars that get set as a result of this call:
