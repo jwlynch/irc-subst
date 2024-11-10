@@ -281,9 +281,7 @@ class irc_subst(commandtarget.CommandTarget):
         super(irc_subst, self).__init__()
 
     def debugSectsContains(self, sectName):
-        result = dex(sectName, self.debugSects) != -1
-
-        return result
+        return self.debugSectsObj.debugSectsContains(sectName)
 
     def makeDebugTab(self):
         # add the tab for debugging
@@ -550,25 +548,25 @@ class irc_subst(commandtarget.CommandTarget):
         return result
 
     def addDebugSect(self, addedSect):
-        if not self.debugSectsContains(addedSect):
-            self.debugSects.append(addedSect)
-            self.debugPrint(f"debugsects add: {addedSect}")
-        else:
-            self.debugPrint(f"debugsects add: {addedSect} already present")
+        addRes = self.debugSectsObj.addDebugSect(addedSect)
+
+        self.debugPrint(addRes[1])
+
+        return addRes[0]
 
     def rmDebugSect(self, removedSect):
-        if self.debugSectsContains(removedSect):
-            self.debugSects.remove(removedSect)
-            self.debugPrint(f"debugsects rm: {removedSect}")
-        else:
-            self.debugPrint(f"debugsects rm: {removedSect} not present")
+        rmRes = self.debugSectsObj.rmDebugSect(removedSect)
+
+        self.debugPrint(rmRes[1])
+
+        return rmRes[0]
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
             # no args, so -list- current debug sections
-            self.debugPrint(f"debug sections: {self.debugSects}")
+            self.debugPrint(f"debug sections: {self.debugSectsObj.debugSectsList}")
         elif len(argList) == 2:
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
