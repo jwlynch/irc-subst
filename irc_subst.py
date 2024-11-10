@@ -113,6 +113,10 @@ class irc_subst(commandtarget.CommandTarget):
     # - self.dbOK (boolean telling whether database is reachable and openable)
     # - self.printConfigP (which is true if reload calls should print the config file)
     def doReload(self, scriptPath):
+        # a list of words, which if present specify a section to print debugging about.
+        # at first, this will be each hook
+        self.debugSectsObj = DebugSectsObject()
+
         parser = ConfigParser()
 
         confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
