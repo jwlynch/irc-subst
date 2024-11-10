@@ -49,6 +49,7 @@ sys.path.append(pathname) # so that modules that are siblings of the script can 
 
 from utils import commandtarget
 from objects import nextObjectID
+from debugsects import DebugSectsObj
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
