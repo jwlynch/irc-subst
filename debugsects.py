@@ -10,14 +10,18 @@ class DebugSectsObj(object):
     def addDebugSect(self, addedSect):
         if not self.debugSectsContains(addedSect):
             self.debugSectsList.append(addedSect)
-            self.debugPrint(f"debugsects add: {addedSect}")
+            result = [True, f"debugsects add: {addedSect}"]
         else:
-            self.debugPrint(f"debugsects add: {addedSect} already present")
+            result = [False, f"debugsects add: {addedSect} already present"]
+
+        return result
 
     def rmDebugSect(self, removedSect):
         if self.debugSectsContains(removedSect):
             self.debugSectsList.remove(removedSect)
-            self.debugPrint(f"debugsects rm: {removedSect}")
+            result = [True, f"debugsects rm: {removedSect}"]
         else:
-            self.debugPrint(f"debugsects rm: {removedSect} not present")
+            result = [False, f"debugsects rm: {removedSect} not present"]
+
+        return result
 
