@@ -25,6 +25,8 @@ import subprocess
 from subprocess import PIPE
 from configparser import ConfigParser
 
+from dex import dex
+
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
