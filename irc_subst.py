@@ -25,8 +25,6 @@ import subprocess
 from subprocess import PIPE
 from configparser import ConfigParser
 
-from dex import dex
-
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
@@ -43,6 +41,7 @@ sys.path.append(pathname) # so that modules that are siblings of the script can 
 from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 from debugsects import DebugSectsObj
+from dex import dex
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
