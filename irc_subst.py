@@ -251,10 +251,6 @@ class irc_subst(commandtarget.CommandTarget):
         self.doReload(self.scriptPath)
         #self.sent = False
 
-        # a list of words, which if present specify a section to print debugging about.
-        # at first, this will be each hook
-        self.debugSects = []
-        # the list of all such sections
         self.allDebugSects = []
 
         self.allDebugSects = ["privmsgbasic", "privmsgsql", "notice", "noticetests", "join", "part", "partreas"]
