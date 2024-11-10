@@ -29,15 +29,6 @@ __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
 __module_description__ = "IRC substituter by Jim"
 
-# index of item in list, or -1 if ValueError
-def dex(item, lst):
-    result = -1
-
-    try:
-        result = lst.index(item)
-    finally:
-        return result
-
 # script and config file dir
 
 # nedbat's hack to replace __file__
