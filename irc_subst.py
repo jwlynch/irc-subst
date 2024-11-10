@@ -49,6 +49,7 @@ sys.path.append(pathname) # so that modules that are siblings of the script can 
 
 from utils.commandtarget import CommandTarget
 from objects import nextObjectID
+from debugsects import DebugSectsObj
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
@@ -112,6 +113,10 @@ class irc_subst(CommandTarget):
     # - self.dbOK (boolean telling whether database is reachable and openable)
     # - self.printConfigP (which is true if reload calls should print the config file)
     def doReload(self, scriptPath):
+        # a list of words, which if present specify a section to print debugging about.
+        # at first, this will be each hook
+        self.debugSectsObj = DebugSectsObject()
+
         parser = ConfigParser()
 
         confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
@@ -246,10 +251,6 @@ class irc_subst(CommandTarget):
         self.doReload(self.scriptPath)
         #self.sent = False
 
-        # a list of words, which if present specify a section to print debugging about.
-        # at first, this will be each hook
-        self.debugSects = []
-        # the list of all such sections
         self.allDebugSects = []
 
         self.allDebugSects = ["privmsgbasic", "privmsgsql", "notice", "noticetests", "join", "part", "partreas"]
@@ -280,9 +281,7 @@ class irc_subst(CommandTarget):
         super(irc_subst, self).__init__()
 
     def debugSectsContains(self, sectName):
-        result = dex(sectName, self.debugSects) != -1
-
-        return result
+        return self.debugSectsObj.debugSectsContains(sectName)
 
     def makeDebugTab(self):
         # add the tab for debugging
@@ -549,25 +548,25 @@ class irc_subst(CommandTarget):
         return result
 
     def addDebugSect(self, addedSect):
-        if not self.debugSectsContains(addedSect):
-            self.debugSects.append(addedSect)
-            self.debugPrint(f"debugsects add: {addedSect}")
-        else:
-            self.debugPrint(f"debugsects add: {addedSect} already present")
+        addRes = self.debugSectsObj.addDebugSect(addedSect)
+
+        self.debugPrint(addRes[1])
+
+        return addRes[0]
 
     def rmDebugSect(self, removedSect):
-        if self.debugSectsContains(removedSect):
-            self.debugSects.remove(removedSect)
-            self.debugPrint(f"debugsects rm: {removedSect}")
-        else:
-            self.debugPrint(f"debugsects rm: {removedSect} not present")
+        rmRes = self.debugSectsObj.rmDebugSect(removedSect)
+
+        self.debugPrint(rmRes[1])
+
+        return rmRes[0]
 
     def doDebugSects(self, cmdString, argList, kwargs):
         result = 0
 
         if len(argList) == 0:
             # no args, so -list- current debug sections
-            self.debugPrint(f"debug sections: {self.debugSects}")
+            self.debugPrint(f"debug sections: {self.debugSectsObj.debugSectsList}")
         elif len(argList) == 2:
             if argList[0] == "add":
                 self.addDebugSect(argList[1])
