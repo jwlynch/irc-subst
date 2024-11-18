@@ -2,7 +2,7 @@ import hexchat
 
 class DebugTabObj:
     def __init__(self):
-        self.debugtab_nick = "wukka" # "DebugTab" # TODO: put this in config file
+        self.debugtab_nick = "DebugTab" # TODO: put this in config file
 
         # add the tab for debugging
         hexchat.command(f"query {self.debugtab_nick}")
