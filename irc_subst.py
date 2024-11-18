@@ -110,6 +110,7 @@ class irc_subst(CommandTarget):
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
         self.debugSectsObj = DebugSectsObject()
+        self.config = ConfigReader(scriptPath)
 
         parser = ConfigParser()
 
