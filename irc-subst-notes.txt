@@ -97,3 +97,8 @@ def connectString(db):
 #      - get user's account name (where is this stored already?
 #                                 would like to get it from that
 #                                 rather than bother the server about it
+
+irc_subst::__init__() calls irc_subst::doReload(), and this dependency
+at least affects debugPrint(), and there might be problems based on
+exactly when the DebugTabObj is created, so look this over and maybe
+adjust.
