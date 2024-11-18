@@ -109,7 +109,7 @@ class irc_subst(CommandTarget):
     def doReload(self, scriptPath):
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
-        self.debugSectsObj = DebugSectsObject()
+        self.debugSectsObj = DebugSectsObj()
         self.config = ConfigReader(scriptPath)
 
         parser = ConfigParser()
