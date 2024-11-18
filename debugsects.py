@@ -1,4 +1,4 @@
-from dex import dex
+from utils.dex import dex
 
 class DebugSectsObj:
     def __init__(self):

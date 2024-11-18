@@ -41,7 +41,7 @@ sys.path.append(pathname) # so that modules that are siblings of the script can 
 from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 from debugsects import DebugSectsObj
-from dex import dex
+from utils.dex import dex
 from utils.configReader import ConfigReader
 from utils.debugTabObj import DebugTabObj
 
