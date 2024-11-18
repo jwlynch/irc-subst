@@ -42,6 +42,7 @@ from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 from debugsects import DebugSectsObj
 from dex import dex
+from utils.debugTabObj import DebugTabObj
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
@@ -212,7 +213,6 @@ class irc_subst(CommandTarget):
                                              autoload_with=self.sqla_eng
                                             )
 
-
         # print the config file (if desired)
         if self.printConfigP:
             self.debugPrint("config file: ")
@@ -227,10 +227,11 @@ class irc_subst(CommandTarget):
                 self.debugPrint("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
 
     def __init__(self, scriptPath):
-        # the debug tab name, which will show up in the client
-        self.debugtab_nick = "DebugTab" # TODO: put this in config file
+        # # the debug tab name, which will show up in the client
+        # self.debugtab_nick = "DebugTab" # TODO: put this in config file
+        self.debug_tab = DebugTabObj()
 
-        self.makeDebugTab()
+        # self.makeDebugTab()
 
         self.scriptPath = scriptPath
 
