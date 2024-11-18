@@ -231,6 +231,8 @@ class irc_subst(CommandTarget):
         # self.debugtab_nick = "DebugTab" # TODO: put this in config file
         self.debug_tab = DebugTabObj()
 
+        self.debugPrint("scriptPath")
+
         # self.makeDebugTab()
 
         self.scriptPath = scriptPath
