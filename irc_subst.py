@@ -284,12 +284,14 @@ class irc_subst(CommandTarget):
         self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
 
     def debugPrint(self, printThis):
-        reprPrintThis = repr(printThis)
+        self.debug_tab.debugPrint(printThis)
+
+        # reprPrintThis = repr(printThis)
 
         #self.debug_tab.context.prnt(printThis) # old debugPrintS
 
         # try debugPrinting on curr. context, to see if I like it
-        hexchat.prnt(printThis) # trying this way
+        # hexchat.prnt(printThis) # trying this way
 
     def doRemove(self, cmdString, argList, kwargs):
         result = 0 # no error
