@@ -42,6 +42,7 @@ from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 from debugsects import DebugSectsObj
 from dex import dex
+from utils.configReader import ConfigReader
 from utils.debugTabObj import DebugTabObj
 
 # return a string detailing a list (its items togeter with each index)
