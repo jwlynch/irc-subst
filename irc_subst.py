@@ -116,6 +116,8 @@ class irc_subst(CommandTarget):
             print("FATAL: problem reading file '" + scriptPath + "'")
             exit(0)
 
+        self.config = self.readResult.config
+
         # pull stuff from general section of config file
         if dex('general', parser.sections()) != -1:
             if dex('command-prefix', parser.options('general')) != -1:
