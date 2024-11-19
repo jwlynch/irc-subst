@@ -119,15 +119,15 @@ class irc_subst(CommandTarget):
         self.config = self.readResult.config
 
         # pull stuff from general section of config file
-        if dex('general', parser.sections()) != -1:
-            if dex('command-prefix', parser.options('general')) != -1:
-                self.cmdPrefix = parser.get('general', 'command-prefix')
+        if 'general' in self.config:
+            if 'command-prefix' in self.config['general']:
+                self.cmdPrefix = self.config['general']['command-prefix']
             else:
                 # no command-prefix in general sect
                 self.cmdPrefix = '.' # default
 
-            if dex('print-config', parser.options('general')) != -1:
-                self.printConfigP = parser.get('general', 'print-config')
+            if 'print-config' in self.config['general']:
+                self.printConfigP = self.config['general']['print-config']
 
                 if self.printConfigP.startswith("t"):
                     self.printConfigP = True
@@ -145,7 +145,7 @@ class irc_subst(CommandTarget):
             self.printConfigP = True # default
 
         # if there's no db section in the config, db is bad
-        if dex("db", parser.sections()) == -1:
+        if 'db' not in self.config:
             self.dbOK = False
         else:
             self.dbOK = True
@@ -154,9 +154,7 @@ class irc_subst(CommandTarget):
         self.sqlalchemy_conn_str = None
 
         if self.dbOK:
-            self.dbSpecs = {}
-            for option in parser.options('db'):
-                self.dbSpecs[option] = parser.get('db', option)
+            self.dbSpecs = self.config['db']
 
             # build the sqlalchemy connect string
             k = self.dbSpecs.keys()
