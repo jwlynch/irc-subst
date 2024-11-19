@@ -6,6 +6,12 @@ class ConfigReader:
         pathName = confFilePathName + '/' + 'irc-subst.cfg'
         confFiles = p.read(confFilePathName)
 
+        # did we successfully read the config file?
+        if len(confFiles) > 0:
+            self.successP = confFiles[0] == confFilePathName
+        else:
+            self.successP = False
+
         configSections = {}
 
         for psect in p.sections():
