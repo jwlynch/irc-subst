@@ -17,7 +17,7 @@ class ConfigReader:
 
         self.config = configSections
 
-        # impport like this:
+        # import like this:
         #
         # from utils.configReader import ConfigReader
         #
