@@ -110,7 +110,7 @@ class irc_subst(CommandTarget):
         # a list of words, which if present specify a section to print debugging about.
         # at first, this will be each hook
         self.debugSectsObj = DebugSectsObj()
-        self.config = ConfigReader(scriptPath)
+        self.readResult = ConfigReader(scriptPath)
 
             print("FATAL: config file '" + confFilePathName + "' cannot be found")
             exit(0)
