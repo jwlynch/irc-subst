@@ -112,16 +112,6 @@ class irc_subst(CommandTarget):
         self.debugSectsObj = DebugSectsObj()
         self.config = ConfigReader(scriptPath)
 
-        parser = ConfigParser()
-
-        confFilePathName = scriptPath + '/' + 'irc-subst.cfg'
-        conffiles = None
-
-        conffile_read_p = False
-
-        conffiles = parser.read(confFilePathName)
-
-        if dex(confFilePathName, conffiles) == -1:
             print("FATAL: config file '" + confFilePathName + "' cannot be found")
             exit(0)
 
