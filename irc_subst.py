@@ -112,7 +112,8 @@ class irc_subst(CommandTarget):
         self.debugSectsObj = DebugSectsObj()
         self.readResult = ConfigReader(scriptPath)
 
-            print("FATAL: config file '" + confFilePathName + "' cannot be found")
+        if not self.readResult.successP:
+            print("FATAL: problem reading file '" + scriptPath + "'")
             exit(0)
 
         # pull stuff from general section of config file
