@@ -210,11 +210,12 @@ class irc_subst(CommandTarget):
         if self.printConfigP:
             self.debugPrint("config file: ")
 
-            for sect in parser.sections():
-                self.debugPrint("section %s:" % sect)
-                for opt in parser.options(sect):
-                    val = parser.get(sect, opt)
-                    self.debugPrint("  %s = %s" % (opt, val))
+            for sect in self.config:
+                self.debugPrint(f"section {sect}:")
+
+                for opt in self.config[sect]:
+                    val = self.config[sect][opt]
+                    self.debugPrint(f"  {opt} = {val}")
 
             if self.dbOK:
                 self.debugPrint("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
