@@ -104,7 +104,7 @@ class irc_subst(CommandTarget):
     # vars that get set as a result of this call:
     # - self.cmdPrefix (the char to signal 'this is a command to the script')
     # - self.dbSpecs (the dict with the database settings, to be give to psycopg2.open()
-    # - self.dbOK (boolean telling whether database is reachable and openable)
+    # - self.config["db"]["dbOK"] (boolean telling whether database is reachable and openable)
     # - self.printConfigP (which is true if reload calls should print the config file)
     def doReload(self, scriptPath):
         # a list of words, which if present specify a section to print debugging about.
@@ -143,7 +143,7 @@ class irc_subst(CommandTarget):
                                             )
 
         # print the config file (if desired)
-        if self.printConfigP:
+        if self.config['general']['print-config']:
             self.debugPrint("config file: ")
 
             for sect in self.config:
@@ -153,8 +153,8 @@ class irc_subst(CommandTarget):
                     val = self.config[sect][opt]
                     self.debugPrint(f"  {opt} = {val}")
 
-            if self.dbOK:
-                self.debugPrint("sqlalchemy_conn_str is " + self.sqlalchemy_conn_str)
+            if self.config["db"]["dbOK"]:
+                self.debugPrint(f"sqlalchemy_conn_str is {self.config['db']['sqlalchemy_conn_str']}")
 
     def __init__(self, scriptPath):
         # # the debug tab name, which will show up in the client
@@ -288,7 +288,7 @@ class irc_subst(CommandTarget):
         else:
             # correct number of args
 
-            if self.dbOK:
+            if self.config["db"]["dbOK"]:
                 bad = False
                 key = argList[0]
 
@@ -315,7 +315,7 @@ class irc_subst(CommandTarget):
     def doAddMacro(self, cmdString, argList, kwargs):
         result = 0 # success/command is found
 
-        if self.dbOK:
+        if self.config["db"]["dbOK"]:
             bad = True
             key = ""
             value = ""
@@ -363,7 +363,7 @@ class irc_subst(CommandTarget):
     def doRMMacro(self, cmdString, argList, kwargs):
         result = 0 # success/command is found
 
-        if self.dbOK:
+        if self.config["db"]["dbOK"]:
             bad = True
             key = ""
             value = ""
@@ -795,7 +795,7 @@ class irc_subst(CommandTarget):
     # prints to the irc client the list of keys available in the db
     def list_keys(self, cmdString, argList, kwargs):
 
-        if self.dbOK:
+        if self.config["db"]["dbOK"]:
 
             factoids = self.sqla_factoids_table
             sel = select([factoids.c.key, factoids.c.value]).order_by(factoids.c.key)
@@ -1039,7 +1039,7 @@ class irc_subst(CommandTarget):
 
                 result = self.process_backslashed_line(word_eol)
 
-            elif word[0].startswith(self.cmdPrefix):
+            elif word[0].startswith(self.config["general"]["command-prefix"]):
 
                 if debugCmd or debug_input or debug_initinput:
                     self.debugPrint("cmd prefix present, go process command")
@@ -1218,14 +1218,14 @@ class irc_subst(CommandTarget):
                 if debugNoticeTestsP:
                     self.debugPrint("w[6][6:-2] aka the IP: %s" % (w[6][6:-2]))
 
-                if self.dbOK:
+                if self.config["db"]["dbOK"]:
                     strDbOk = ""
                 else:
                     strDbOk = " (no db)"
 
                 print("failed sasl login from %s%s" % (ipAddr, strDbOk))
 
-                if self.dbOK:
+                if self.config["db"]["dbOK"]:
                     self.insertFailedLogin(None, ipAddr, None)
 
                 result = hexchat.EAT_ALL
