@@ -23,7 +23,7 @@ import sys, os
 
 import subprocess
 from subprocess import PIPE
-from configparser import ConfigParser
+# from configparser import ConfigParser
 
 __module_name__ = "Jim's IRC substituter"
 __module_version__ = "1.0.0"
@@ -118,70 +118,6 @@ class irc_subst(CommandTarget):
 
         self.config = self.readResult.config
 
-        # pull stuff from general section of config file
-        if 'general' in self.config:
-            if 'command-prefix' in self.config['general']:
-                self.cmdPrefix = self.config['general']['command-prefix']
-            else:
-                # no command-prefix in general sect
-                self.cmdPrefix = '.' # default
-
-            if 'print-config' in self.config['general']:
-                self.printConfigP = self.config['general']['print-config']
-
-                if self.printConfigP.startswith("t"):
-                    self.printConfigP = True
-                elif self.printConfigP.startswith("f"):
-                    self.printConfigP = False
-                else:
-                    self.printConfigP = True # default
-            else:
-                # no print-config in general sect
-                self.printConfigP = True # default
-
-        else:
-            # no general sect
-            self.cmdPrefix = '.' # default
-            self.printConfigP = True # default
-
-        # if there's no db section in the config, db is bad
-        if 'db' not in self.config:
-            self.dbOK = False
-        else:
-            self.dbOK = True
-
-        self.dbSpecs = None
-        self.sqlalchemy_conn_str = None
-
-        if self.dbOK:
-            self.dbSpecs = self.config['db']
-
-            # build the sqlalchemy connect string
-            k = self.dbSpecs.keys()
-
-            # sample conn str: postgresql://scott:tiger@localhost/test?application_name=myapp
-
-            s = "postgresql://"
-            if 'user' in k:
-                s += self.dbSpecs['user']
-                if 'password' in k:
-                    s += ':' + self.dbSpecs['password']
-
-                if 'host' in k:
-                    s += '@' + self.dbSpecs['host']
-                else:
-                    s += '@localhost'
-
-                if 'port' in k:
-                    s += ':' + self.dbSpecs['port']
-
-            s += '/' + self.dbSpecs['dbname']
-
-            # put app name in connect string, if it appears in the config
-            if 'appname' in k:
-                s += f"?application_name={self.dbSpecs['appname']}"
-
-            self.sqlalchemy_conn_str = s
 
             self.sqla_eng = create_engine(
                                              self.sqlalchemy_conn_str, 
