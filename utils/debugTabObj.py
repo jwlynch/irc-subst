@@ -12,8 +12,9 @@ class DebugTabObj:
             if c.channel == self.debugtab_nick:
                 self.debug_tab = c
 
-        print(repr)
             # put the channel list entry for it in the object so I can get at it
+
+        print(f"self.debug_tab is {repr(self.debug_tab)}")
 
         self.context = self.debug_tab.context
 
