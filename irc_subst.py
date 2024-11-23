@@ -1281,7 +1281,7 @@ class irc_subst(CommandTarget):
 
 
 # make an object of the class which contains all of the above funcs as methods
-irc_subst_obj = irc_subst(pathname + "/irc-subst.cfg")
+irc_subst_obj = irc_subst(pathname)
 
 # establish the hook to the input method, immediately above
 hexchat.hook_command('', irc_subst_obj.inputHook)
