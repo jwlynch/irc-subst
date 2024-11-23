@@ -4,7 +4,7 @@ class ConfigReader:
     def __init__(self, confFilePathName):
         p = ConfigParser()
         pathName = confFilePathName + '/' + 'irc-subst.cfg'
-        confFiles = p.read(confFilePathName)
+        confFiles = p.read(pathName)
 
         # did we successfully read the config file?
         if len(confFiles) > 0:
