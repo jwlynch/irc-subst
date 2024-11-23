@@ -45,6 +45,7 @@ from utils.dex import dex
 from utils.keywordList import KeywordList
 from utils.configReader import ConfigReader
 from utils.debugTabObj import DebugTabObj
+from utils.sqla_dbutils import SqlA_DbUtils
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
@@ -104,29 +105,7 @@ class irc_subst(CommandTarget):
 
         self.config = self.readResult.config
 
-
-            self.sqla_eng = create_engine(
-                                             self.sqlalchemy_conn_str, 
-                                             client_encoding='utf8'
-                                         )
-            self.sqla_meta = MetaData(bind=self.sqla_eng)
-            self.sqla_meta.reflect()
-
-            self.sqla_factoids_table = Table\
-                                       (\
-                                        "factoids",
-                                        self.sqla_meta,
-                                        autoload=True,
-                                        autoload_with=self.sqla_eng
-                                       )
-
-            self.sqla_failed_logins_table = Table\
-                                            (\
-                                             "failed_logins_sasl",
-                                             self.sqla_meta,
-                                             autoload=True,
-                                             autoload_with=self.sqla_eng
-                                            )
+        self.sqla_dbutils_obj = SqlA_DbUtils(self.config['db'])
 
         # print the config file (if desired)
         if self.config['general']['print-config']:
@@ -562,7 +541,7 @@ class irc_subst(CommandTarget):
                                 factoids.c.key.in_(key_list)
                               )
 
-            with self.sqla_eng.begin() as conn:
+            with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
                 result = conn.execute(sel_stmt)
 
             # go through results, forming a lookup table

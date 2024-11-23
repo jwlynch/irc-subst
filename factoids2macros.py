@@ -10,6 +10,7 @@ from sqlalchemy import select, func
 from utils.configReader import ConfigReader
 from utils.dex import  dex
 from utils.keywordList import KeywordList
+from utils.sqla_dbutils import SqlA_DbUtils
 
 class FactoidConverter(object):
     def __init__(self, scriptPath):
@@ -20,22 +21,12 @@ class FactoidConverter(object):
         self.config = ConfigReader(scriptPath)
 
         if self.config["db"]["dbOK"]:
-
-            self.sqla_eng = create_engine(self.sqlalchemy_conn_str, client_encoding='utf8')
-            self.sqla_meta = MetaData(bind=self.sqla_eng)
-
-            self.sqla_factoids_table = Table\
-                                       (\
-                                        "factoids",
-                                        self.sqla_meta,
-                                        autoload=True,
-                                        autoload_with=self.sqla_eng
-                                       )
+            self.sqla_dbutils = SqlA_DbUtils(self.config["db"])
 
     def get_factoids(self):
-        selector = select([self.sqla_factoids_table])
+        selector = select([self.sqla_dbutils.sqla_factoids_table])
 
-        conn = self.sqla_eng.connect()
+        conn = self.sqla_dbutils.sqla_eng.connect()
 
         self.factoids_result = conn.execute(selector)
 
@@ -70,9 +61,9 @@ class FactoidConverter(object):
         self.build_results()
         self.build_insert_list()
 
-        inserter = self.sqla_factoids_table.insert()
+        inserter = self.sqla_dbutils.sqla_factoids_table.insert()
 
-        conn = self.sqla_eng.connect()
+        conn = self.sqla_dbutils.sqla_eng.connect()
 
         result = conn.execute(inserter, self.insert_list)
 
