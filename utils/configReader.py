@@ -8,7 +8,7 @@ class ConfigReader:
 
         # did we successfully read the config file?
         if len(confFiles) > 0:
-            self.successP = confFiles[0] == confFilePathName
+            self.successP = pathName in confFiles
         else:
             self.successP = False
 
