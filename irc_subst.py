@@ -128,12 +128,6 @@ class irc_subst(CommandTarget):
 
         self.scriptPath = scriptPath
 
-        # sqlalchemy
-        self.sqla_eng = None
-        self.sqla_meta = None
-
-        self.sqla_factoids_table = None
-
         self.doReload(self.scriptPath)
         #self.sent = False
 
