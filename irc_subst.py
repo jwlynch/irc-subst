@@ -531,8 +531,8 @@ class irc_subst(CommandTarget):
 
         if len(key_list) == 0:
             pass # through to return stmt, returning empty dict
-        elif self.dbOK:
             factoids = self.sqla_factoids_table
+        elif self.config["db"]["dbOK"]:
 
             # "select * from factoids where key in (key_list)"
             sel_stmt = select([factoids]).\
