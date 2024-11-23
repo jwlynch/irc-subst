@@ -7,10 +7,13 @@ class DebugTabObj:
         # add the tab for debugging
         hexchat.command(f"query {self.debugtab_nick}")
 
-        # put the channel list entry for it in the object so I can get at it
-        self.debug_tab = [c for c in hexchat.get_list('channels') if c.channel == self.debugtab_nick][0]
+        debug_channel = None
+        for c in hexchat.get_list('channels'):
+            if c.channel == self.debugtab_nick:
+                self.debug_tab = c
 
         print(repr)
+            # put the channel list entry for it in the object so I can get at it
 
         self.context = self.debug_tab.context
 
