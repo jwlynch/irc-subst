@@ -7,15 +7,6 @@ from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
 
-# index of item in list, or -1 if ValueError
-def dex(item, lst):
-    result = -1
-
-    try:
-        result = lst.index(item)
-    finally:
-        return result
-
 class KeywordList(object):
     def __init__(self, properties):
         self.string = ""
@@ -32,6 +23,7 @@ class KeywordList(object):
     def attachProp(self, prop, value):
         self.properties[prop] = value
 from utils.configReader import ConfigReader
+from utils.dex import  dex
 
 class FactoidConverter(object):
     def __init__(self, scriptPath):
