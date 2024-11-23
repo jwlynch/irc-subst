@@ -42,6 +42,7 @@ from utils.commandtarget import CommandTarget
 from objects import nextObjectID
 from debugsects import DebugSectsObj
 from utils.dex import dex
+from utils.keywordList import KeywordList
 from utils.configReader import ConfigReader
 from utils.debugTabObj import DebugTabObj
 
@@ -82,21 +83,6 @@ def split_hostmask(hostmask):
 
 print( "\0034",__module_name__, __module_version__,"has been loaded\003" )
 
-class KeywordList:
-    def __init__(self, properties):
-        self.string = ""
-        self.properties = properties
-
-    def __repr__(self):
-        reslist = []
-
-        for key in self.properties:
-            reslist.append(key + "=" + self.properties[key])
-
-        return " ".join(reslist)
-
-    def attachProp(self, prop, value):
-        self.properties[prop] = value
 
 class irc_subst(CommandTarget):
     # reload config file
