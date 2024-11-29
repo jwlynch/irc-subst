@@ -41,3 +41,10 @@ class SqlA_DbUtils:
     def factoid_select(self, filtering=None, ordering=None):
         sel = select(self.sqla_factoids_table)
 
+        if filtering is not None:
+            sel = sel.filtering
+
+        if ordering is not None:
+            sel = sel.ordering
+
+        return sel
