@@ -160,12 +160,6 @@ class irc_subst(CommandTarget):
         # initialize superclass
         super(irc_subst, self).__init__()
 
-    # a database select function that can accept
-    # filter arguments, as well as order by args
-
-    def factoid_select(self, filtering=None, ordering=None):
-        sel = select(self.sqla_dbutils_obj.sqla_factoids_table)
-
     def debugSectsContains(self, sectName):
         return self.debugSectsObj.debugSectsContains(sectName)
 

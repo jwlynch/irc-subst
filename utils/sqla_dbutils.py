@@ -35,3 +35,9 @@ class SqlA_DbUtils:
                                             autoload=True,
                                             autoload_with=self.sqla_eng
                                         )
+    # a database select function that can accept
+    # filter arguments, as well as order by args
+
+    def factoid_select(self, filtering=None, ordering=None):
+        sel = select(self.sqla_factoids_table)
+
