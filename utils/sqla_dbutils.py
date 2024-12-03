@@ -48,7 +48,7 @@ class SqlA_DbUtils:
             sel = sel.where(filtering)
 
         if ordering is not None:
-            sel = sel.ordering
+            sel = sel.order_by(ordering)
 
         return sel
 
