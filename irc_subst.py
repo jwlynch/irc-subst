@@ -717,7 +717,7 @@ class irc_subst(CommandTarget):
 
         if self.config["db"]["dbOK"]:
 
-            factoids = self.sqla_factoids_table
+            factoids = self.sqla_dbutils_obj.sqla_factoids_table
             sel = select([factoids.c.key, factoids.c.value]).order_by(factoids.c.key)
 
             with self.sqla_eng.begin() as conn:
