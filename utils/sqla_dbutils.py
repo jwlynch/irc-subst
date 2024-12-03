@@ -13,6 +13,9 @@ class SqlA_DbUtils:
     def __init__(self, dbspecs):
         # NOTE: dbspecs is expected to be a dictionary, specifically the
         # config["db"] dict.
+        self.config = {}
+        self.config["db"] = dbspecs
+
         self.sqla_eng = create_engine(
                                             dbspecs["sqlalchemy_conn_str"],
                                             client_encoding='utf8'
