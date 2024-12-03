@@ -45,7 +45,7 @@ class SqlA_DbUtils:
         sel = select([self.sqla_factoids_table])
 
         if filtering is not None:
-            sel = sel.filtering
+            sel = sel.where(filtering)
 
         if ordering is not None:
             sel = sel.ordering
