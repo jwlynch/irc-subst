@@ -256,7 +256,7 @@ class irc_subst(CommandTarget):
                     bad = True
 
                 if not bad:
-                    lookupTable = self.lookupKeyList([key])
+                    lookupTable = self.sqla_dbutils_obj.lookupKeyList([key])
 
                     if lookupTable:
                         bad = False
@@ -298,7 +298,7 @@ class irc_subst(CommandTarget):
                     bad = True
 
             if not bad:
-                lookupTable = self.lookupKeyList([key])
+                lookupTable = self.sqla_dbutils_obj.lookupKeyList([key])
                 if lookupTable:
                     # key is already in db
                     self.debugPrint("key %s is already in db" % (key))
@@ -306,10 +306,10 @@ class irc_subst(CommandTarget):
 
             if not bad:
                 # do query and insert here
-                with self.sqla_eng.begin() as conn:
+                with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
                     conn.execute\
                         (\
-                            self.sqla_factoids_table.insert(),
+                            self.sqla_dbutils_obj.sqla_factoids_table.insert(),
                             {'key': key, 'value': value}
                         )
 
@@ -345,7 +345,7 @@ class irc_subst(CommandTarget):
                     bad = True
 
             if not bad:
-                lookupTable = self.lookupKeyList([key])
+                lookupTable = self.sqla_dbutils_obj.lookupKeyList([key])
                 if not lookupTable:
                     # key is not in db
                     self.debugPrint("macro remove: key %s is not in db" % (key))
@@ -355,14 +355,14 @@ class irc_subst(CommandTarget):
                 # do delete query here
                 self.debugPrint("macro remove: key %s" % (key))
 
-                with self.sqla_eng.begin() as conn:
+                with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
                     conn.execute\
                         (
-                            self.sqla_factoids_table\
+                            self.sqla_dbutils_obj.sqla_factoids_table\
                                 .delete()\
                                 .where\
                                 (
-                                    self.sqla_factoids_table.c.key
+                                    self.sqla_dbutils_obj.sqla_factoids_table.c.key
                                     ==
                                     key
                                 )
@@ -598,7 +598,10 @@ class irc_subst(CommandTarget):
                     # look name up
                     macro_call_name = resultList.pop(0) # name
 
-                    lookup = self.lookupKeyList([macro_call_name], lookup)
+                    lookup = self.sqla_dbutils_obj.lookupKeyList(
+                        [macro_call_name],
+                        lookup
+                    )
 
                     # now, resultList has just has the parameters, so compare
                     # length of actual params to length of formal params
@@ -720,7 +723,7 @@ class irc_subst(CommandTarget):
             factoids = self.sqla_dbutils_obj.sqla_factoids_table
             sel = select([factoids.c.key, factoids.c.value]).order_by(factoids.c.key)
 
-            with self.sqla_eng.begin() as conn:
+            with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
                 result = conn.execute(sel)
 
             macro_string = ""
