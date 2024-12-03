@@ -509,45 +509,6 @@ class irc_subst(CommandTarget):
         # return success/fail exit status
         return result
 
-    # accepts list of keys (strings of the form "[[somekey]]"),
-    # optionally followed by an existing dict, which will be used
-    # to store additional key/value pairs.
-    #
-    # returns a dictionary (possibly the one passed in) with those
-    # keys as keys, and values that come from the db
-
-    def lookupKeyList(self, key_list, running_dict=None):
-        # now query the db
-        if running_dict is None:
-            lookup = dict()
-        else:
-            lookup = running_dict
-
-        if len(key_list) == 0:
-            pass # through to return stmt, returning empty dict
-        elif self.config["db"]["dbOK"]:
-            factoids = self.sqla_dbutils_obj.sqla_factoids_table
-
-            # "select * from factoids where key in (key_list)"
-            sel_stmt = select([factoids]).\
-                            where\
-                              (\
-                                factoids.c.key.in_(key_list)
-                              )
-
-            with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
-                result = conn.execute(sel_stmt)
-
-            # go through results, forming a lookup table
-            for row in result:
-                lookup[row[factoids.c.key]] = row[factoids.c.value]
-        else:
-            # populate lookup table with (no db) for each key
-            for key in key_list:
-                lookup[key] = "(no db)"
-
-        return lookup
-
     # for debugging, print a list, one line per item
 
     def debugPrintListAsStack(self, theList):
