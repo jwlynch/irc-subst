@@ -42,7 +42,7 @@ class SqlA_DbUtils:
     # filter arguments, as well as order by args
 
     def factoid_select(self, filtering=None, ordering=None):
-        sel = select(self.sqla_factoids_table)
+        sel = select([self.sqla_factoids_table])
 
         if filtering is not None:
             sel = sel.filtering
