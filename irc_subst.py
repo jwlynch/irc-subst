@@ -129,7 +129,6 @@ class irc_subst(CommandTarget):
         self.scriptPath = scriptPath
 
         self.doReload(self.scriptPath)
-        #self.sent = False
 
         self.allDebugSects = []
 
@@ -848,6 +847,18 @@ class irc_subst(CommandTarget):
 
         return result
 
+    def quote_type_str(self):
+        result = ""
+
+        if self.curr_quote_type == 1:
+            result = "in_plain_string"
+        elif self.curr_quote_type == 2:
+            result = "in_single_quote"
+        elif self.curr_quote_type == 3:
+            result = "in_double_quote"
+
+        return result
+
     def process_quoting(self, input_line):
         debugQuote = self.debugSectsContains("quotes")
 
@@ -857,39 +868,50 @@ class irc_subst(CommandTarget):
         # result is a list of dicts, each has the char, and some attribs
         result = []
         self.next_ch_backslashed = False
-        in_single_quote = False
-        in_double_quote = False
+
+        # possible values for curr_quote_type:
+        in_plain_string = 1
+        in_single_quote = 2
+        in_double_quote = 3
+        self.collector_str = ""
+        self.curr_quote_type = 0
 
         for ch in input_line:
             if debugQuote:
-                self.debugPrint(f"this char is {ch}")
+                self.debugPrint(f"this char is {ch}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
             if self.next_ch_backslashed:
-                # add the char, with a "quoted" attrib
-                result.append({"ch": ch, "quoted": True})
+                # add the char, with a "escaped" attrib
+                result.append({"ch": ch, "escaped": True})
                 self.next_ch_backslashed = False
-            elif in_single_quote:
+            elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
                     # end of quoted string
                     in_single_quote = False
+                    result.append({"quoStr": self.collector_str})
+                    self.collector_str = ""
                 else:
                     # single quoted character, add it
-                    pass
-            elif in_double_quote:
+                    self.collector_str += ch
+            elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     # end of double quote
                     in_double_quote = False
+                    result.append({"quoStr": self.collector_str})
+                    self.collector_str = ""
                 else:
                     # double quoted character, add it
-                    pass
+                    self.collector_str += ch
             elif ch == '\\':
                 self.next_ch_backslashed = True
             elif ch == "'":
                 # single quote
-                in_single_quote = True
+                self.curr_quote_type = in_single_quote
             elif ch == '"':
                 # start of double quote
-                in_double_quote = True
+                self.curr_quote_type = in_double_quote
+            else: # self.curr_quote_type == in_plain_string
+                result.append({"ch": ch, "plainP": True})
 
         if debugQuote:
             self.debugPrint("exit process_quoting")
@@ -933,11 +955,6 @@ class irc_subst(CommandTarget):
         if debug_initinput:
             self.debugPrint(repr(word))
 
-        #if not self.sent:
-        # note, there's no more self.sent
-
-        #self.sent = True
-
         if len(word) > 0:
             if debug_input:
                 self.debugPrint("len(word) > 0")
@@ -948,6 +965,8 @@ class irc_subst(CommandTarget):
             quoting_result = self.process_quoting(input_line)
 
             if debugQuote:
+                self.debugPrint("quote result type is {type(quoting_result)}")
+
                 if len(quoting_result) > 0:
                     for d in quoting_result:
                         self.debugPrint(repr(d))
@@ -984,8 +1003,6 @@ class irc_subst(CommandTarget):
         else:
             if debug_input:
                 self.debugPrint("word is an empty list")
-
-        #self.sent = False
 
         return result
 
