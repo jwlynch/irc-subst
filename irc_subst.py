@@ -880,7 +880,7 @@ class irc_subst(CommandTarget):
         self.curr_quote_type = 0
 
         for ch in input_line:
-            if debugQuote:
+            if debugQuoteByChar:
                 self.debugPrint(f"this char is {ch}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
             if self.next_ch_backslashed:
