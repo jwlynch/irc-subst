@@ -860,6 +860,7 @@ class irc_subst(CommandTarget):
         return result
 
     def process_quoting(self, input_line):
+        debugQuoteByChar =  = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
 
         if debugQuote:
