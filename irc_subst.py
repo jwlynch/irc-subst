@@ -863,7 +863,7 @@ class irc_subst(CommandTarget):
         debugQuoteByChar =  = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
 
-        if debugQuote:
+        if debugQuote or debugQuoteByChar:
             self.debugPrint("enter process_quoting")
 
         # result is a list of dicts, each has the char, and some attribs
@@ -914,7 +914,7 @@ class irc_subst(CommandTarget):
             else: # self.curr_quote_type == in_plain_string
                 result.append({"ch": ch, "plainP": True})
 
-        if debugQuote:
+        if debugQuote or debugQuoteByChar:
             self.debugPrint("exit process_quoting")
 
         return result
