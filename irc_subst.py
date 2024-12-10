@@ -887,6 +887,9 @@ class irc_subst(CommandTarget):
                 # add the char, with a "escaped" attrib
                 result.append({"ch": ch, "escaped": True})
                 self.next_ch_backslashed = False
+
+                if debugQuoteByChar:
+                    self.debugPrint(f"this char is {ch}, quoting
             elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
                     # end of quoted string
