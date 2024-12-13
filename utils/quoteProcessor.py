@@ -16,6 +16,20 @@ class QuoteProcessor:
         # forward to debugSects
         return self.debugSects.debugSectsContains(section)
 
+    def quote_type_str(self):
+        result = ""
+
+        if self.next_ch_backslashed:
+            result = "next char backslashed"
+        elif self.curr_quote_type == 1:
+            result = "in_plain_string"
+        elif self.curr_quote_type == 2:
+            result = "in_single_quote"
+        elif self.curr_quote_type == 3:
+            result = "in_double_quote"
+
+        return result
+
     def process_quoting(self, input_line):
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
