@@ -157,6 +157,8 @@ class irc_subst(CommandTarget):
         self.macro_re = re.compile("^\(([a-zA-Z0-9-_ ]*)\)(.*)$")
         self.channel_re = re.compile("^[#&~].*$")
 
+        self.quoteProcessObj = QuoteProcessor(self.debugSectsObj, self.debug_tab)
+
         # initialize superclass
         super(irc_subst, self).__init__()
 
