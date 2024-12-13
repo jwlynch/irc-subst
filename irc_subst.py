@@ -46,6 +46,7 @@ from utils.keywordList import KeywordList
 from utils.configReader import ConfigReader
 from utils.debugTabObj import DebugTabObj
 from utils.sqla_dbutils import SqlA_DbUtils
+from utils.quoteProcessor import QuoteProcessor
 
 # return a string detailing a list (its items togeter with each index)
 def detailList(l):
