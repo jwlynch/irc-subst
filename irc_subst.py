@@ -908,7 +908,7 @@ class irc_subst(CommandTarget):
 
             # new quoting system
 
-            quoting_result = self.process_quoting(input_line)
+            quoting_result = self.quoteProcessObj.process_quoting(input_line)
 
             if debugQuote:
                 self.debugPrint("quote result type is {type(quoting_result)}")
