@@ -90,3 +90,11 @@ class SqlA_DbUtils:
                 lookup[key] = "(no db)"
 
         return lookup
+
+    def insert_factoid(self, key, value):
+        with self.sqla_eng.begin() as conn:
+            conn.execute\
+            (\
+                self.sqla_factoids_table.insert(),
+                {'key': key, 'value': value}
+            )

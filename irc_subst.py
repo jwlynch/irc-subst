@@ -308,12 +308,7 @@ class irc_subst(CommandTarget):
 
             if not bad:
                 # do query and insert here
-                with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
-                    conn.execute\
-                        (\
-                            self.sqla_dbutils_obj.sqla_factoids_table.insert(),
-                            {'key': key, 'value': value}
-                        )
+                self.sqla_dbutils_obj.insert_factoid(key, value)
 
                 self.debugPrint("macro add: key \"%s\", value \"%s\"" % (key, value))
         else:
