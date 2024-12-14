@@ -98,3 +98,17 @@ class SqlA_DbUtils:
                 self.sqla_factoids_table.insert(),
                 {'key': key, 'value': value}
             )
+
+    def rm_factoid(self, key):
+        with self.sqla_eng.begin() as conn:
+            conn.execute\
+            (
+                self.sqla_dbutils_obj.sqla_factoids_table\
+                    .delete()\
+                    .where\
+                    (
+                        self.sqla_dbutils_obj.sqla_factoids_table.c.key
+                        ==
+                        key
+                    )
+            )

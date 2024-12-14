@@ -352,18 +352,7 @@ class irc_subst(CommandTarget):
                 # do delete query here
                 self.debugPrint("macro remove: key %s" % (key))
 
-                with self.sqla_dbutils_obj.sqla_eng.begin() as conn:
-                    conn.execute\
-                        (
-                            self.sqla_dbutils_obj.sqla_factoids_table\
-                                .delete()\
-                                .where\
-                                (
-                                    self.sqla_dbutils_obj.sqla_factoids_table.c.key
-                                    ==
-                                    key
-                                )
-                        )
+                self.sqla_dbutils_obj.rm_factoid(key)
         else:
             self.debugPrint("no db")
 
