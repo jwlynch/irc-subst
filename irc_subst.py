@@ -878,7 +878,7 @@ class irc_subst(CommandTarget):
 
             self.debugPrint("print the word array:")
 
-            self.debugPrint(f"word's type is {type(word)}")
+            self.debugPrint(f"word's type is {str(type(word))}")
 
             if word is not None:
                 self.debugPrint(f"word in detail is: {detailList(word)}")
@@ -897,8 +897,9 @@ class irc_subst(CommandTarget):
 
             quoting_result = self.quoteProcessObj.process_quoting(input_line)
 
-            if debugQuote:
-                self.debugPrint("quote result type is {type(quoting_result)}")
+            if debugQuote or debugQuoteByChar:
+                quoteResultTypeString = str(type(quoting_result))
+                self.debugPrint(f"quote result type is {quoteResultTypeString}")
 
                 if len(quoting_result) > 0:
                     for d in quoting_result:
