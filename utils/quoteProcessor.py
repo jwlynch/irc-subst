@@ -67,8 +67,7 @@ class QuoteProcessor:
             elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
                     # end of quoted string
-                    in_single_quote = False
-                    result.append({"quoStr": self.collector_str})
+                    result.append({"singlequoStr": self.collector_str})
                     self.collector_str = ""
                 else:
                     # single quoted character, add it
