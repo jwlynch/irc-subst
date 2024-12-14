@@ -69,6 +69,7 @@ class QuoteProcessor:
                     # end of quoted string
                     result.append({"singlequoStr": self.collector_str})
                     self.collector_str = "" # since adding prev one to result
+                    self.curr_quote_type = in_plain_string # since at the end
                 else:
                     # single quoted character, add it
                     self.collector_str += ch
@@ -77,6 +78,7 @@ class QuoteProcessor:
                     # end of double quote
                     result.append({"quoStr": self.collector_str})
                     self.collector_str = "" # since adding prev one to result
+                    self.curr_quote_type = in_plain_string # since at the end
                 else:
                     # double quoted character, add it
                     self.collector_str += ch
