@@ -68,7 +68,7 @@ class QuoteProcessor:
                 if ch == "'":
                     # end of quoted string
                     result.append({"singlequoStr": self.collector_str})
-                    self.collector_str = ""
+                    self.collector_str = "" # since adding prev one to result
                 else:
                     # single quoted character, add it
                     self.collector_str += ch
@@ -77,7 +77,7 @@ class QuoteProcessor:
                     # end of double quote
                     in_double_quote = False
                     result.append({"quoStr": self.collector_str})
-                    self.collector_str = ""
+                    self.collector_str = "" # since adding prev one to result
                 else:
                     # double quoted character, add it
                     self.collector_str += ch
