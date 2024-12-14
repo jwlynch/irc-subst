@@ -84,6 +84,9 @@ class QuoteProcessor:
                     self.collector_str += ch
             elif ch == '\\':
                 self.next_ch_backslashed = True
+
+                # note, consider adding "backslashing" within single or double quotes
+                # (and what this implies for quoting result)
             elif ch == "'":
                 # single quote
                 self.curr_quote_type = in_single_quote
