@@ -75,7 +75,6 @@ class QuoteProcessor:
             elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     # end of double quote
-                    in_double_quote = False
                     result.append({"quoStr": self.collector_str})
                     self.collector_str = "" # since adding prev one to result
                 else:
