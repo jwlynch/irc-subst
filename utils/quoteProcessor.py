@@ -50,7 +50,12 @@ class QuoteProcessor:
 
         for ch in input_line:
             if debugQuoteByChar:
-                self.debugPrint(f"this char is {ch}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
+                if ch == "'":
+                    dispCh = f'"{ch}"'
+                else:
+                    dispCh = f"'{ch}'"
+
+                self.debugPrint(f"this char is {dispCh}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
             if self.next_ch_backslashed:
                 # add the char, with a "escaped" attrib
