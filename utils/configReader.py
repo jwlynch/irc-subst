@@ -1,7 +1,11 @@
 from configparser import ConfigParser
 
 class ConfigReader:
-    def __init__(self, confFilePathName):
+    def __init__(self, confFilePathName=None):
+
+        if confFilePathName is None:
+            confFilePathName = "/home/jim/.config/hexchat/addons"
+
         p = ConfigParser()
         pathName = confFilePathName + '/' + 'irc-subst.cfg'
         confFiles = p.read(pathName)
