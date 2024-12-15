@@ -969,16 +969,10 @@ class irc_subst(CommandTarget):
             debugDetailP = False
 
         # if the word "privmsgbasic" is in the list debugSects, print debug message
-        if self.debugSectsContains("privmsgbasic"):
-            debugBasicP = True
-        else:
-            debugBasicP = False
+        debugDetailP = self.debugSectsContains("privmsgbasic")
 
         # if the word "privmsgsql" is in the list debugSects, print debug message
-        if self.debugSectsContains("privmsgsql"):
-            debugSQLP = True
-        else:
-            debugSQLP = False
+        debugSQLP = self.debugSectsContains("privmsgsql")
 
         if dialog_p:
             eventStub = "privMsgToDialog"
