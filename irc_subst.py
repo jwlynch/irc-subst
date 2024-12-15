@@ -254,7 +254,7 @@ class irc_subst(CommandTarget):
                 key = argList[0]
 
                 if not self.macroname_key_re.match(key):
-                    self.debugPrint("macro show: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint(f"macro show: the key -- {key} -- doesn't look like 'a-zA-A0-9-_'")
                     bad = True
 
                 if not bad:
@@ -264,10 +264,10 @@ class irc_subst(CommandTarget):
                         bad = False
                     else:
                         bad = True
-                        self.debugPrint("showmacro: no such macro '%s'" % key)
+                        self.debugPrint(f"showmacro: no such macro '{key}'")
 
                     if not bad:
-                        self.debugPrint("showmacro: key %s has value \"%s\"" % (key, lookupTable[key]))
+                        self.debugPrint(f"showmacro: key {key} has value \"{lookupTable[key]}\"")
             else:
                 self.debugPrint("showmacro: no db")
 
@@ -296,21 +296,21 @@ class irc_subst(CommandTarget):
 
             if not bad:
                 if not self.macroname_key_re.match(key):
-                    self.debugPrint("macro add: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint(f"macro add: the key -- {key} -- doesn't look like 'a-zA-A0-9-_'")
                     bad = True
 
             if not bad:
                 lookupTable = self.sqla_dbutils_obj.lookupKeyList([key])
                 if lookupTable:
                     # key is already in db
-                    self.debugPrint("key %s is already in db" % (key))
+                    self.debugPrint(f"key {key} is already in db")
                     bad = True
 
             if not bad:
                 # do query and insert here
                 self.sqla_dbutils_obj.insert_factoid(key, value)
 
-                self.debugPrint("macro add: key \"%s\", value \"%s\"" % (key, value))
+                self.debugPrint(f"macro add: key \"{key}\", value \"{value}\"")
         else:
             self.debugPrint("no db")
 
@@ -338,19 +338,19 @@ class irc_subst(CommandTarget):
 
             if not bad:
                 if not self.macroname_key_re.match(key):
-                    self.debugPrint("macro remove: the key -- %s -- doesn't look like 'a-zA-A0-9-_'" % (key))
+                    self.debugPrint(f"macro remove: the key -- {key} -- doesn't look like 'a-zA-A0-9-_'")
                     bad = True
 
             if not bad:
                 lookupTable = self.sqla_dbutils_obj.lookupKeyList([key])
                 if not lookupTable:
                     # key is not in db
-                    self.debugPrint("macro remove: key %s is not in db" % (key))
+                    self.debugPrint(f"macro remove: key {key} is not in db")
                     bad = True
 
             if not bad:
                 # do delete query here
-                self.debugPrint("macro remove: key %s" % (key))
+                self.debugPrint(f"macro remove: key {key}")
 
                 self.sqla_dbutils_obj.rm_factoid(key)
         else:
@@ -391,14 +391,14 @@ class irc_subst(CommandTarget):
 
         if type == 1:
             # server tab
-            print("server tab, server is", front_tab.server)
+            print(f"server tab, server is {front_tab.server}")
         elif type == 2:
             # channel tab
-            print("channel tab, channel is %s, modes are %s" % (front_tab.channel, front_tab.chanmodes))
+            print(f"channel tab, channel is {front_tab.channel}, modes are {front_tab.chanmodes}")
             users = top_context.get_list("users")
         elif type == 3:
             # dialog/query tab
-            print("query tab, nick is", front_tab.channel)
+            print(f"query tab, nick is {front_tab.channel}")
         elif type == 4:
             # notices tab
             print("notices tab")
@@ -434,7 +434,7 @@ class irc_subst(CommandTarget):
             elif argList[0] == "rm":
                 self.rmDebugSect(argList[1])
             else:
-                self.debugPrint("debugsects: unrecognized subcommand '%s'" % (argList[0]))
+                self.debugPrint(f"debugsects: unrecognized subcommand '{argList[0]}'")
         else:
             self.debugPrint("debug sections: wrong number of args")
 
@@ -531,7 +531,7 @@ class irc_subst(CommandTarget):
         linelistparen = re.split(r'(\[\[|\]\])', inString)
 
         if debug_outline:
-            self.debugPrint("paren list: " + repr(linelistparen))
+            self.debugPrint(f"paren list: {repr(linelistparen)}")
             self.debugPrint("macro stack:")
             self.debugPrintListAsStack(macro_stack)
 
@@ -552,8 +552,8 @@ class irc_subst(CommandTarget):
 
                 if debug_outline:
                     self.debugPrint("\nstart of macro")
-                    self.debugPrint("currSymbol: %s" % (currSymbol))
-                    self.debugPrint("resultList: %s" % (resultList))
+                    self.debugPrint(f"currSymbol: {currSymbol}")
+                    self.debugPrint(f"resultList: {resultList}")
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
             elif currSymbol == ']]':
@@ -576,7 +576,7 @@ class irc_subst(CommandTarget):
                     # modified to True, to tell hexchat not to eat it
 
                     if debug_outline:
-                        self.debugPrint("macro call is %s\n" % (repr(resultList)))
+                        self.debugPrint(f"macro call is {repr(resultList)}\n")
 
                     resultList.pop(0) # [[
                     resultList.pop(-1) # ]]
@@ -636,7 +636,7 @@ class irc_subst(CommandTarget):
 
                         resList = resultList[:]
                         resList.insert(0, macro_call_name)
-                        resultList = [ f"[[{' '.join(resList)}]]"]
+                        resultList = [ f"[[{' '.join(resList)}]]" ]
 
                         modified = True
 
@@ -675,8 +675,8 @@ class irc_subst(CommandTarget):
                         self.debugPrint("\nnot inside a macro call")
 
                 if debug_outline:
-                    self.debugPrint("currSymbol: %s" % (currSymbol))
-                    self.debugPrint("resultList: %s" % (resultList))
+                    self.debugPrint(f"currSymbol: {currSymbol}")
+                    self.debugPrint(f"resultList: {resultList}")
                     self.debugPrint("macro stack:")
                     self.debugPrintListAsStack(macro_stack)
 
@@ -943,13 +943,13 @@ class irc_subst(CommandTarget):
 
         if self.debugSectsContains("chanmsgdetail"):
 
-            out = "chanmsgdetail dest: " + dest + "; nick: " + nick
+            out = f"chanmsgdetail dest: {dest}; nick: {nick}"
             out += " ("
             if user_hostmask is not None:
                 out += user_hostmask
             else:
                 out += "None"
-            out += "); msg: " + msg
+            out += f"); msg: {msg}"
 
             self.debugPrint(out)
 
@@ -986,10 +986,10 @@ class irc_subst(CommandTarget):
             eventStub = "privMsg"
 
         if debugDetailP:
-            self.debugPrint(eventStub + ": " + detailList(word))
+            self.debugPrint(f"{eventStub}: {detailList(word)}")
 
         if debugBasicP:
-            self.debugPrint(eventStub + ": nick: %s, message: %s" % (sender_nick, msg))
+            self.debugPrint(f"{eventStub}: nick: {sender_nick}, message: {msg}")
 
         return hexchat.EAT_NONE
 
@@ -1121,7 +1121,7 @@ class irc_subst(CommandTarget):
                 self.debugPrint("notice was not from saslserv or nickserv")
 
         if debugNoticeP:
-            self.debugPrint("notice: %s" % (detailList(word)))
+            self.debugPrint(f"notice: {detailList(word)}")
 
         if debugNoticeP:
             self.debugPrint("EXIT processSASLFailedNotice")
