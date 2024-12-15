@@ -963,10 +963,7 @@ class irc_subst(CommandTarget):
 
         # if "privmsgdetail" is in debugsects, show the entire array
         # of all priv messaages and messages to channels.
-        if self.debugSectsContains("privmsgdetail"):
-            debugDetailP = True
-        else:
-            debugDetailP = False
+        debugDetailP = self.debugSectsContains("privmsgdetail")
 
         # if the word "privmsgbasic" is in the list debugSects, print debug message
         debugDetailP = self.debugSectsContains("privmsgbasic")
