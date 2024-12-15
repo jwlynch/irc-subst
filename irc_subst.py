@@ -966,7 +966,7 @@ class irc_subst(CommandTarget):
         debugDetailP = self.debugSectsContains("privmsgdetail")
 
         # if the word "privmsgbasic" is in the list debugSects, print debug message
-        debugDetailP = self.debugSectsContains("privmsgbasic")
+        debugBasicP = self.debugSectsContains("privmsgbasic")
 
         # if the word "privmsgsql" is in the list debugSects, print debug message
         debugSQLP = self.debugSectsContains("privmsgsql")
