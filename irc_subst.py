@@ -25,10 +25,6 @@ import subprocess
 from subprocess import PIPE
 # from configparser import ConfigParser
 
-__module_name__ = "Jim's IRC substituter"
-__module_version__ = "1.0.0"
-__module_description__ = "IRC substituter by Jim"
-
 # script and config file dir
 
 # nedbat's hack to replace __file__
@@ -37,6 +33,10 @@ def foo():
 pathname = pathlib.Path(foo.__code__.co_filename).parent.__str__()
 
 sys.path.append(pathname) # so that modules that are siblings of the script can be found
+
+__module_name__ = "Jim's IRC substituter"
+__module_version__ = "1.0.0"
+__module_description__ = "IRC substituter by Jim"
 
 from utils.commandtarget import CommandTarget
 #from sql.objects import nextObjectID
