@@ -21,7 +21,7 @@ class SqlA_DbUtils:
                                             client_encoding='utf8'
                                         )
         self.sqla_meta = MetaData()
-        self.sqla_meta.reflect()
+        self.sqla_meta.reflect(bind=self.sqla_eng)
 
         self.sqla_factoids_table = Table\
                                     (\
