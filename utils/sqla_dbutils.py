@@ -27,16 +27,16 @@ class SqlA_DbUtils:
                                     (\
                                     "factoids",
                                     self.sqla_meta,
-                                    autoload=True,
-                                    autoload_with=self.sqla_eng
+                                    #autoload=True,
+                                    #autoload_with=self.sqla_eng
                                     )
 
         self.sqla_failed_logins_table = Table\
                                         (\
                                             "failed_logins_sasl",
                                             self.sqla_meta,
-                                            autoload=True,
-                                            autoload_with=self.sqla_eng
+                                            #autoload=True,
+                                            #autoload_with=self.sqla_eng
                                         )
     # a database select function that can accept
     # filter arguments, as well as order by args
