@@ -39,7 +39,7 @@ pathname = pathlib.Path(foo.__code__.co_filename).parent.__str__()
 sys.path.append(pathname) # so that modules that are siblings of the script can be found
 
 from utils.commandtarget import CommandTarget
-from objects import nextObjectID
+#from sql.objects import nextObjectID
 from utils.debugsects import DebugSectsObj
 from utils.dex import dex
 from utils.keywordList import KeywordList
