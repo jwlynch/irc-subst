@@ -99,6 +99,20 @@ class SqlA_DbUtils:
                 {'key': key, 'value': value}
             )
 
+    def update_factoid(self, key, value):
+        with self.sqla_eng.begin() as conn:
+            conn.execute\
+            (\
+                self.sqla_factoids_table.update().
+                where
+                (
+                    self.sqla_factoids_table.c.key
+                    ==
+                    key
+                ).
+                values(self.sqla_factoids_table.c.value == value)
+            )
+
     def rm_factoid(self, key):
         with self.sqla_eng.begin() as conn:
             conn.execute\
