@@ -504,23 +504,8 @@ class irc_subst(CommandTarget):
             for index, item in enumerate(theList):
                 self.debugPrint(f"{index}: {item}")
 
-    # takes
-    #   the string to be sent (which could be altered inside the func)
-    # returns a list,
-    #   first item is True if the string is altered, False otherwise
-    #   second item is the string
-    #
-    # extracts any strings it finds that match [[something]]
-    # looks up those keys
-    # substitutes the values for the keys
-    #
-    # also parses the [[ ... ]] stuff
-    # -note- there's no current reason to allow a [[ ... ]]
-    # to span lines
-
-    def outLine(self, inString):
+    def process_macros(self, inString):
         debug_outline = self.debugSectsContains("outline")
-        debug_noOut = self.debugSectsContains("mute")
         macro_stack = []
 
         lookup = {}
@@ -690,6 +675,28 @@ class irc_subst(CommandTarget):
             outStrParen = ""
         else:
             outStrParen = "".join(resultList)
+        
+        return [modified, outStrParen]
+
+    # takes
+    #   the string to be sent (which could be altered inside the func)
+    # returns a list,
+    #   first item is True if the string is altered, False otherwise
+    #   second item is the string
+    #
+    # extracts any strings it finds that match [[something]]
+    # looks up those keys
+    # substitutes the values for the keys
+    #
+    # also parses the [[ ... ]] stuff
+    # -note- there's no current reason to allow a [[ ... ]]
+    # to span lines
+
+    def outLine(self, inString):
+        debug_outline = self.debugSectsContains("outline")
+        debug_noOut = self.debugSectsContains("mute")
+
+        (modified, outStrParen) = self.process_macros(inString)
 
         if debug_outline:
             self.debugPrint("Exit outLine")
