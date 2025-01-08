@@ -21,7 +21,7 @@ class DebugTabObj:
     def debugPrint(self, printThis):
         reprPrintThis = repr(printThis)
 
-        self.context.prnt(printThis) # old debugPrintS
+        # self.context.prnt(printThis) # old debugPrintS
 
         # try debugPrinting on curr. context, to see if I like it
-        # hexchat.prnt(printThis) # trying this way
+        hexchat.prnt(printThis) # trying this way
