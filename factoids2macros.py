@@ -69,4 +69,4 @@ class FactoidConverter(object):
 
         return result
 
-converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
+#converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
