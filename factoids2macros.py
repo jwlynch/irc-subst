@@ -13,7 +13,7 @@ from utils.keywordList import KeywordList
 from utils.sqla_dbutils import SqlA_DbUtils
 
 class FactoidConverter(object):
-    def __init__(self, scriptPath):
+    def __init__(self, scriptPath=None):
         self.factoid_key_re = re.compile("^\[\[([a-zA-Z-_]+)\]\]$")
         self.results_list = []
         self.insert_list = []
