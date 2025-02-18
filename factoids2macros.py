@@ -18,7 +18,7 @@ class FactoidConverter(object):
         self.results_list = []
         self.insert_list = []
 
-        self.config = ConfigReader(scriptPath)
+        self.config = ConfigReader(scriptPath).config
 
         if self.config["db"]["dbOK"]:
             self.sqla_dbutils = SqlA_DbUtils(self.config["db"])
