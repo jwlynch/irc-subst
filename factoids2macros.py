@@ -33,6 +33,7 @@ class FactoidConverter(object):
 
         return self.factoids_result
 
+    # needs self.get_factoids()
     def build_results(self):
         for row in self.get_factoids():
             match_result = self.factoid_key_re.match(row[0])
@@ -47,7 +48,8 @@ class FactoidConverter(object):
 
         return self.results_list
 
-    def build_insert_list(self):
+    # needs self.build_results()
+    def build_update_list(self):
         for row in self.results_list:
             insert_dict = {}
 
@@ -64,6 +66,8 @@ class FactoidConverter(object):
 
         inserter = self.sqla_dbutils.sqla_factoids_table.insert()
 
+    # needs self.build_results() and self.build_update_list()
+    def update_macros(self):
         conn = self.sqla_dbutils.sqla_eng.connect()
 
         result = conn.execute(inserter, self.insert_list)
