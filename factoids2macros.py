@@ -50,7 +50,11 @@ class FactoidConverter(object):
 
     # needs self.build_results()
     def build_update_list(self):
+        self.changed_list = []
+
         for row in self.results_list:
+            if not row["value"].startswith("()"):
+                changed_dict = {}
 
                 # shorthand for macro key
                 k = row["macro_key"]
@@ -58,6 +62,10 @@ class FactoidConverter(object):
                 # shorthand for the value for that key
                 v = "()" + row["value"]
 
+                changed_dict["key"] = k
+                changed_dict["value"] = v
+
+                self.changed_list.append(changed_dict)
 
                 # shorthand for factoids table
                 t = self.sqla_dbutils.sqla_factoids_table
