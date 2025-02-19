@@ -35,7 +35,7 @@ class FactoidConverter(object):
 
     # needs self.get_factoids()
     def build_results(self):
-        for row in self.get_factoids():
+        for row in self.factoids_result:
             match_result = self.factoid_key_re.match(row[0])
 
             if match_result is not None:
