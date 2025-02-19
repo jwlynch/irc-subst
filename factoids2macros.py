@@ -55,16 +55,24 @@ class FactoidConverter(object):
 
             insert_dict["key"] = row["macro_key"]
             insert_dict["value"] = "()" + row["value"]
+                # shorthand for macro key
+                k = row["macro_key"]
 
             self.insert_list.append(insert_dict)
+                # shorthand for the value for that key
+                v = "()" + row["value"]
 
         return self.insert_list
 
     def insert_macros(self):
         self.build_results()
         self.build_insert_list()
+                # shorthand for factoids table
+                t = self.sqla_dbutils.sqla_factoids_table
 
         inserter = self.sqla_dbutils.sqla_factoids_table.insert()
+                # shorthand for update object
+                u = t.update().where(t.c.key == k).values(value = v)
 
     # needs self.build_results() and self.build_update_list()
     def update_macros(self):
