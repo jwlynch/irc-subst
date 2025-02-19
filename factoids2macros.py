@@ -73,6 +73,11 @@ class FactoidConverter(object):
                 # shorthand for update object
                 u = t.update().where(t.c.key == k).values(value = v)
 
+                # add update object to update list
+                self.update_list.append(u)
+
+        return self.update_list
+
     # needs self.build_results() and self.build_update_list()
     def update_macros(self):
         conn = self.sqla_dbutils.sqla_eng.connect()
