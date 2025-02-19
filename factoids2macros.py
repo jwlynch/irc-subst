@@ -17,6 +17,7 @@ class FactoidConverter(object):
         self.factoid_key_re = re.compile("^\[\[([a-zA-Z-_]+)\]\]$")
         self.results_list = []
         self.insert_list = []
+        self.update_list = []
 
         self.config = ConfigReader(scriptPath).config
 
