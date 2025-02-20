@@ -82,10 +82,10 @@ class FactoidConverter(object):
     def update_macros(self):
         conn = self.sqla_dbutils.sqla_eng.connect()
 
-        # in a transaction:
-        with conn.begin():
-            # do all updates
-            for updater in self.update_list:
+        # for each changed row:
+        for updater in self.update_list:
+            # do each row update in its own transaction
+            with conn.begin():
                 conn.execute(updater)
 
     def main(self, scriptPath=None):
