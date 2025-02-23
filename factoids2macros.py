@@ -3,6 +3,10 @@
 import pathlib
 import re
 
+# you can do the goal of this script using this:
+#
+# update factoids set value = '()' || value where value not like '()%';
+
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import select, func
