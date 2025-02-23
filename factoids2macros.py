@@ -101,8 +101,8 @@ class FactoidConverter(object):
     def main(self, scriptPath=None):
         self.get_factoids()
         self.build_results()
-        self.build_update_list()
-        self.update_macros()
+        #self.build_update_list()
+        #self.update_macros()
 
 #converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 converter_object = FactoidConverter()
