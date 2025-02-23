@@ -48,6 +48,8 @@ class FactoidConverter(object):
                 result_dict["macro_key"] = match_result.group(1)
                 result_dict["value"] = row[1]
 
+                #print(f'factoid_key: {result_dict["factoid_key"]}, macro_key: {result_dict["macro_key"]}')
+
                 self.results_list.append(result_dict)
 
         return self.results_list
@@ -60,11 +62,15 @@ class FactoidConverter(object):
             if not row["value"].startswith("()"):
                 changed_dict = {}
 
+                print(f"macro_key {row['macro_key']}, factoid_key: {row['factoid_key']}")
+
                 # shorthand for macro key
                 k = row["macro_key"]
 
                 # shorthand for the value for that key
                 v = "()" + row["value"]
+
+                print(f"key: {k}\nvalue: {v}\n")
 
                 changed_dict["key"] = k
                 changed_dict["value"] = v
