@@ -107,4 +107,4 @@ class FactoidConverter(object):
 #converter_object = FactoidConverter("/home/jim/.config/hexchat/addons/")
 converter_object = FactoidConverter()
 c = converter_object
-#converter_object.main()
+converter_object.main()
