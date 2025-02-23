@@ -18,7 +18,8 @@ class SqlA_DbUtils:
 
         self.sqla_eng = create_engine(
                                             dbspecs["sqlalchemy_conn_str"],
-                                            client_encoding='utf8'
+                                            client_encoding='utf8',
+                                            echo=True
                                         )
         self.sqla_meta = MetaData()
         self.sqla_meta.reflect(bind=self.sqla_eng)
