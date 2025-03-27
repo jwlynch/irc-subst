@@ -889,8 +889,11 @@ class irc_subst(CommandTarget):
                 self.debugPrint(f"quote result type is {quoteResultTypeString}")
 
                 if len(quoting_result) > 0:
-                    for d in quoting_result:
-                        self.debugPrint(repr(d))
+                    if debugQuoteByChar:
+                        for d in quoting_result:
+                            self.debugPrint(repr(d))
+                    else:
+                        self.debugPrint(repr(quoting_result))
                 else:
                     self.debugPrint("input line empty")
 
