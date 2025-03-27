@@ -738,11 +738,7 @@ class irc_subst(CommandTarget):
                         macro_string += "[[" + " ".join(params_list) + "]]" + "\n"
                 else:
                     self.debugPrint \
-                    (
-                        "the macro value ('%s') at key '%s' doesn't look like a macro"
-                      %
-                        (macro_def, test_str)
-                    )
+                        (f"the macro value ('{macro_def}') at key '{test_str}' doesn't look like a macro")
 
             # in Python 3, no strings support the buffer interface, because they don't contain bytes.
             # Before, I was using print. print only writes strings. I shouldn't use print to try and
