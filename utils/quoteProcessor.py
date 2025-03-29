@@ -3,6 +3,9 @@
 from utils.debugsects import DebugSectsObj
 from utils.debugTabObj import DebugTabObj
 
+# allow 'prepend' to an iterable currently used in a loop
+from more_itertools import peekable
+
 class QuoteProcessor:
     def __init__(self, debugSects, debugTabObject):
         self.debugSects = debugSects
@@ -47,6 +50,9 @@ class QuoteProcessor:
         in_double_quote = 3
         self.collector_str = ""
         self.curr_quote_type = 0
+
+        input_line = iter(input_line)
+        input_line = peekable(input_line) # allow prepend to input_line
 
         for ch in input_line:
             if debugQuoteByChar:
