@@ -56,10 +56,12 @@ class QuoteProcessor:
 
         for ch in input_line:
             if debugQuoteByChar:
+
+                # change display quote if the ch is that quote
                 if ch == "'":
-                    dispCh = f'"{ch}"'
+                    dispCh = f'"{ch}"' # if ch is c, this is "c"
                 else:
-                    dispCh = f"'{ch}'"
+                    dispCh = f"'{ch}'" # this one is 'c'
 
                 self.debugPrint(f"this char is {dispCh}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
@@ -72,7 +74,7 @@ class QuoteProcessor:
                     self.debugPrint(f"this char is {ch}, quoting")
             elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
-                    # end of quoted string
+                    # end of single-quoted string
                     result.append({"singlequoStr": self.collector_str})
                     self.collector_str = "" # since adding prev one to result
                     self.curr_quote_type = in_plain_string # since at the end
