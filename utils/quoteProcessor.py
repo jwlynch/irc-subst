@@ -37,6 +37,16 @@ class QuoteProcessor:
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
 
+        input_list = []
+        for char in input_line:
+            theD = dict()
+            theD["ch"] = char
+            theD["end"] = False
+
+            input_list.append(theD)
+
+        input_list[-1]["end"] = True
+
         if debugQuote or debugQuoteByChar:
             self.debugPrint("enter process_quoting")
 
