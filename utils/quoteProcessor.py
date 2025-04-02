@@ -61,10 +61,9 @@ class QuoteProcessor:
         self.collector_str = ""
         self.curr_quote_type = 0
 
-        input_line = iter(input_line)
-        input_line = peekable(input_line) # allow prepend to input_line
+        for char_d in input_list:
+            ch = char_d["ch"]
 
-        for ch in input_line:
             if debugQuoteByChar:
 
                 # change display quote if the ch is that quote
