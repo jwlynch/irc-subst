@@ -46,7 +46,8 @@ class QuoteProcessor:
         elif curr_quote_type == in_single_quote:
             pass
         elif curr_quote_type == in_double_quote:
-            pass
+            res_dict['doublequoStr'] = self.collector_str
+            self.collector_str = ""
 
     def process_quoting(self, input_line):
         debugQuoteByChar = self.debugSectsContains("quoteschar")
