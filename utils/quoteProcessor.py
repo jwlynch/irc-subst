@@ -44,7 +44,8 @@ class QuoteProcessor:
         if curr_quote_type == in_plain_string:
             pass
         elif curr_quote_type == in_single_quote:
-            pass
+            res_dict['singlequoStr'] = self.collector_str
+            self.collector_str = ""
         elif curr_quote_type == in_double_quote:
             res_dict['doublequoStr'] = self.collector_str
             self.collector_str = ""
