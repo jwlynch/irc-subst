@@ -33,6 +33,21 @@ class QuoteProcessor:
 
         return result
 
+    def end_run(self):
+        res_dict = {}
+
+        # possible values for curr_quote_type:
+        in_plain_string = 1
+        in_single_quote = 2
+        in_double_quote = 3
+
+        if curr_quote_type == in_plain_string:
+            pass
+        elif curr_quote_type == in_single_quote:
+            pass
+        elif curr_quote_type == in_double_quote:
+            pass
+
     def process_quoting(self, input_line):
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
