@@ -51,6 +51,8 @@ class QuoteProcessor:
             res_dict['doublequoStr'] = self.collector_str
             self.collector_str = ""
 
+        return res_dict
+
     def process_quoting(self, input_line):
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
