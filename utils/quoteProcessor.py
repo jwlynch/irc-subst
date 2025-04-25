@@ -57,6 +57,8 @@ class QuoteProcessor:
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
 
+        # this for-loop turns the input_line into a list of dicts,
+        # the last of which is marked with an "end of line" marker
         input_list = []
         for char in input_line:
             theD = dict()
