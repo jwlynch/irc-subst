@@ -131,7 +131,7 @@ class QuoteProcessor:
                 # start of double quote
                 self.curr_quote_type = in_double_quote
             else: # self.curr_quote_type == in_plain_string
-                result.append({"ch": ch, "plainP": True})
+                self.collector_str += ch
 
         if debugQuote or debugQuoteByChar:
             self.debugPrint("exit process_quoting")
