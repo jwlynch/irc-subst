@@ -43,13 +43,13 @@ class QuoteProcessor:
 
         if self.curr_quote_type == in_plain_string:
             res_dict['plainStr'] = self.collector_str
-            self.collector_str = ""
         elif self.curr_quote_type == in_single_quote:
             res_dict['singlequoStr'] = self.collector_str
-            self.collector_str = ""
         elif self.curr_quote_type == in_double_quote:
             res_dict['doublequoStr'] = self.collector_str
-            self.collector_str = ""
+
+        self.curr_quote_type = in_plain_string
+        self.collector_str = ""
 
         return res_dict
 
