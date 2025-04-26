@@ -82,7 +82,7 @@ class QuoteProcessor:
         in_single_quote = 2
         in_double_quote = 3
         self.collector_str = ""
-        self.curr_quote_type = 0
+        self.curr_quote_type = in_plain_string
 
         for char_d in input_list:
             ch = char_d["ch"]
