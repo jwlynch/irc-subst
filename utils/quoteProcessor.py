@@ -107,7 +107,7 @@ class QuoteProcessor:
             elif self.curr_quote_type == in_single_quote:
                 if ch == "'":
                     # end of single-quoted string
-                    result.append({"singlequoStr": self.collector_str})
+                    result.append(self.end_run())
                     self.collector_str = "" # since adding prev one to result
                     self.curr_quote_type = in_plain_string # since at the end
                 else:
@@ -116,7 +116,7 @@ class QuoteProcessor:
             elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     # end of double quote
-                    result.append({"doublequoStr": self.collector_str})
+                    result.append(self.end_run())
                     self.collector_str = "" # since adding prev one to result
                     self.curr_quote_type = in_plain_string # since at the end
                 else:
