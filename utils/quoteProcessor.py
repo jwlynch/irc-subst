@@ -153,6 +153,9 @@ class QuoteProcessor:
             else: # self.curr_quote_type == in_plain_string
                 self.collector_str += ch
 
+                if char_d["end"]:
+                    result.append(self.end_run())
+
         if debugQuote or debugQuoteByChar:
             self.debugPrint("exit process_quoting")
 
