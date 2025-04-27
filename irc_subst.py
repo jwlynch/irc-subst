@@ -837,6 +837,17 @@ class irc_subst(CommandTarget):
 
         return result
 
+    # this func takes a quoting result and assembles it into a string
+
+    def asm_quote_result(self, quo_res):
+        str_result = ""
+
+        for d in quo_res:
+            if "plainStr" in d:
+                str_result += d["plainStr"]
+
+        return str_result
+
     # this function interfaces with hexchat when it is set as the input hook
     #
     # if the input starts with self.cmdPrefix (a char), it is considered a command
