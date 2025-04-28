@@ -908,18 +908,7 @@ class irc_subst(CommandTarget):
                 else:
                     self.debugPrint("input line empty")
 
-            if word_eol[0].startswith("\\"):
-                # if so, the irc line is backslashed
-
-                if debug_input or debug_initinput:
-                    self.debugPrint(f"first word (should start '\\') is {word[0]}")
-
-                if debug_initinput:
-                    self.debugPrint(f"repr(word): {repr(word)}")
-
-                result = self.process_backslashed_line(word_eol)
-
-            elif word[0].startswith(self.config["general"]["command-prefix"]):
+            if word[0].startswith(self.config["general"]["command-prefix"]):
 
                 if debugCmd or debug_input or debug_initinput:
                     self.debugPrint("cmd prefix present, go process command")
