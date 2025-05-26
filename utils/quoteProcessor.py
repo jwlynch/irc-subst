@@ -104,15 +104,6 @@ class QuoteProcessor:
 
                 if debugQuoteByChar:
                     self.debugPrint(f"this char is {ch}, quoting")
-            elif self.curr_quote_type == in_single_quote:
-                if ch == "'":
-                    # end of single-quoted string
-                    result.append(self.end_run())
-                    self.collector_str = "" # since adding prev one to result
-                    self.curr_quote_type = in_plain_string # since at the end
-                else:
-                    # single quoted character, add it
-                    self.collector_str += ch
             elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     # end of double quote
@@ -133,15 +124,6 @@ class QuoteProcessor:
 
                 # note, consider adding "backslashing" within single or double quotes
                 # (and what this implies for quoting result)
-            elif ch == "'":
-                # take care of any prev. existing plainStr
-                if self.curr_quote_type == in_plain_string:
-                    if len(self.collector_str) > 0:
-                        result.append(self.end_run())
-
-                        self.collector_str = ""
-                # single quote
-                self.curr_quote_type = in_single_quote
             elif ch == '"':
                 if self.curr_quote_type == in_plain_string:
                     if len(self.collector_str) > 0:
