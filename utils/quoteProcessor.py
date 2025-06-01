@@ -38,13 +38,10 @@ class QuoteProcessor:
 
         # possible values for curr_quote_type:
         in_plain_string = 1
-        in_single_quote = 2
         in_double_quote = 3
 
         if self.curr_quote_type == in_plain_string:
             res_dict['plainStr'] = self.collector_str
-        elif self.curr_quote_type == in_single_quote:
-            res_dict['singlequoStr'] = self.collector_str
         elif self.curr_quote_type == in_double_quote:
             res_dict['doublequoStr'] = self.collector_str
 
@@ -79,7 +76,6 @@ class QuoteProcessor:
 
         # possible values for curr_quote_type:
         in_plain_string = 1
-        in_single_quote = 2
         in_double_quote = 3
         self.collector_str = ""
         self.curr_quote_type = in_plain_string
