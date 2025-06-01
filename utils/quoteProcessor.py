@@ -110,7 +110,7 @@ class QuoteProcessor:
                     # double quoted character, add it
                     self.collector_str += ch
             elif ch == '\\':
-                if self.curr_quote_type == in_plain_string:
+                if self.curr_quote_type in [in_plain_string, in_double_quote]:
                     if len(self.collector_str) > 0:
                         result.append(self.end_run())
 
