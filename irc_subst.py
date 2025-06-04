@@ -922,7 +922,9 @@ class irc_subst(CommandTarget):
                 if debug_initinput:
                     self.debugPrint(f"normal line, {detailList(word)}")
 
-                result = self.process_normal_line(word_eol[0])
+                quo_str = self.asm_quote_result(quoting_result)
+
+                result = self.process_normal_line(quo_str)
 
         else:
             if debug_input:
