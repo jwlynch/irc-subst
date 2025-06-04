@@ -34,6 +34,7 @@ class QuoteProcessor:
         return result
 
     def end_run(self):
+        debugTest = self.debugSectsContains("test")
         res_dict = {}
 
         # possible values for curr_quote_type:
@@ -53,6 +54,7 @@ class QuoteProcessor:
     def process_quoting(self, input_line):
         debugQuoteByChar = self.debugSectsContains("quoteschar")
         debugQuote = self.debugSectsContains("quotes")
+        debugTest = self.debugSectsContains("test")
 
         # this for-loop turns the input_line into a list of dicts,
         # one for each char in the input line, the last of which
