@@ -34,6 +34,7 @@ class QuoteProcessor:
         return result
 
     def end_run(self):
+        debugQuote = self.debugSectsContains("quotes")
         res_dict = {}
 
         # possible values for curr_quote_type:
@@ -41,8 +42,12 @@ class QuoteProcessor:
         in_double_quote = 3
 
         if self.curr_quote_type == in_plain_string:
+            if debugQuote:
+                self.debugPrint("TEST plain")
             res_dict['plainStr'] = self.collector_str
         elif self.curr_quote_type == in_double_quote:
+            if debugQuote:
+                self.debugPrint("TEST double")
             res_dict['doublequoStr'] = self.collector_str
 
         self.curr_quote_type = in_plain_string
@@ -103,6 +108,8 @@ class QuoteProcessor:
                     self.debugPrint(f"this char is {ch}, quoting")
             elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
+                    if debugQuote:
+                        self.debugPrint("backslash in doublequote")
                     # end of double quote
                     result.append(self.end_run())
                     self.collector_str = "" # since adding prev one to result
