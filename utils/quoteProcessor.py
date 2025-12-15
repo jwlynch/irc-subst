@@ -34,7 +34,6 @@ class QuoteProcessor:
         return result
 
     def end_run(self):
-        debugTest = self.debugSectsContains("test")
         res_dict = {}
 
         # possible values for curr_quote_type:
