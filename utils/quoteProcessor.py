@@ -100,12 +100,14 @@ class QuoteProcessor:
                 self.debugPrint(f"this char is {dispCh}, quoting type is {self.quote_type_str()}, backslashed is {str(self.next_ch_backslashed)}")
 
             if self.next_ch_backslashed:
+
+                if debugQuoteByChar:
+                    self.debugPrint(f"this char is {ch}, quoting")
+
                 # add the char, with a "escaped" attrib
                 result.append({"ch": ch, "escaped": True})
                 self.next_ch_backslashed = False
 
-                if debugQuoteByChar:
-                    self.debugPrint(f"this char is {ch}, quoting")
             elif self.curr_quote_type == in_double_quote:
                 if ch == '"':
                     if debugQuote:
