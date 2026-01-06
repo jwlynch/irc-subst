@@ -109,9 +109,12 @@ class QuoteProcessor:
                 self.next_ch_backslashed = False
 
             elif self.curr_quote_type == in_double_quote:
-                if ch == '"':
+                if ch == "\\":
                     if debugQuote:
                         self.debugPrint("backslash in doublequote")
+
+                    self.next_ch_backslashed = True
+                elif ch == '"':
                     # end of double quote
                     result.append(self.end_run())
                     self.collector_str = "" # since adding prev one to result
